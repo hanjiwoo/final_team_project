@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,11 +19,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="bg-blue-500">
-          <div className="text-3xl font-bold underline">?기가 헤더</div>
-          {children}
-          <div>여기가 푸터</div>
-        </div>
+        <Header />
+        <div className="text-blue-600">여기는 먹히나?</div>
+        <div>여기가 헤더</div>
+        {children}
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <Footer />
       </body>
     </html>
   );
