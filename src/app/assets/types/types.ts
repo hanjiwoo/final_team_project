@@ -12,3 +12,11 @@ export type typeOfShop = {
   연락처: string;
   주소: string;
 };
+
+export type typeOfThumbs = {
+  isLogin?: boolean;
+  uid?: number;
+  name?: string;
+  id: string;
+  shopId?: string;
+};
