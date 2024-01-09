@@ -4,6 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { typeOfShop } from "@/app/assets/types/types";
 import { getShop } from "@/redux/modules/detailShopSlice";
+import Ddabong from "./Ddabong";
 
 export default function ShopList() {
   const shops = useSelector((state: any) => state.shop);
@@ -11,7 +12,10 @@ export default function ShopList() {
   // console.log(shops, " 일단 레절트");
   const router = useRouter();
 
-  const moveDetailPageBtn = (phoneNum: string) => {
+  const moveDetailPageBtn = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    phoneNum: string
+  ) => {
     // console.log(router);
     router.push(`/detailpage/${phoneNum}`);
     const detailshop = shops.find((shop: typeOfShop) => {
@@ -49,12 +53,15 @@ export default function ShopList() {
               <div>{shop.업종}</div>
               <div>{shop.연락처}</div>
               <div>{shop.주소}</div>
-              <button
-                className="bg-green-200 w-[100px]"
-                onClick={() => moveDetailPageBtn(shop.연락처)}
-              >
-                상세페이지로
-              </button>
+              <div className="flex">
+                <button
+                  className="bg-green-200 w-[100px]"
+                  onClick={(e) => moveDetailPageBtn(e, shop.연락처)}
+                >
+                  상세페이지로
+                </button>
+                <Ddabong name="thumbup" id={shop.연락처} />
+              </div>
             </section>
           );
         })}
