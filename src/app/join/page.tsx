@@ -1,7 +1,7 @@
 "use client";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db, storage } from "../../firebase/firebase.config";
+import { auth, db, storage } from "../../shared/firebase";
 import dayjs from "dayjs";
 // import { useNavigate } from "react-router-dom";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
