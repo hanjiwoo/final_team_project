@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../../shared/firebase";
@@ -141,8 +142,6 @@ export default function Join() {
 			console.log("사용중임");
 			window.location.reload();
 			return false;
-		} else {
-			console.log("이메일 사용 가능");
 		}
 
 		// 닉네임 중복 확인
@@ -196,15 +195,10 @@ export default function Join() {
 	};
 
 	return (
-		<div>
-			<div
-				onClick={() => {
-					// navigate("/");
-				}}
-			/>
-			<div>
-				<h2 className="flex, justify-center">회원가입</h2>
-				<form>
+		<div className="flex justify-center items-center w-screen h-screen">
+			<div className="bg-red-400">
+				<h2 className="flex justify-center">회원가입</h2>
+				<form className="flex justify-center flex-col items-center">
 					<div>
 						<label>이메일</label>
 						<input
@@ -297,13 +291,9 @@ export default function Join() {
 						회원가입
 					</button>
 					<ToastContainer />
-					<button
-						onClick={() => {
-							// navigate("/login");
-						}}
-					>
+					<Link href="/login" className="cursor-pointer">
 						로그인하기
-					</button>
+					</Link>
 				</form>
 			</div>
 		</div>
