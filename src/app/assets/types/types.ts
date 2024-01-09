@@ -20,3 +20,21 @@ export type typeOfThumbs = {
   id: string;
   shopId?: string;
 };
+export type typeOfShare = {
+  address: string;
+  category: string;
+  id: string;
+  phone: string;
+  url: string;
+  shopName: string;
+  x: string;
+  y: string;
+};
+
+export type assessment = {
+  title: string;
+  one: string;
+  two: string;
+  three: string;
+  four: string;
+};

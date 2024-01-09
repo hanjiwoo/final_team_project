@@ -2,13 +2,15 @@
 import React, { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import useKakaoLoader from "./useKaKao";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getShare } from "@/redux/modules/shareSlice";
 
 export default function MapTest() {
   useKakaoLoader();
-  const [lat, setLat] = useState(37.450701);
-  const [lng, setLng] = useState(128.57049341667);
+  const [lat, setLat] = useState(37.57987028643817);
+  const [lng, setLng] = useState(126.97693905879149);
   const { 시군, 업소명, 주소 } = useSelector((state: any) => state.detailShop);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (window.kakao) {
@@ -23,6 +25,17 @@ export default function MapTest() {
           // console.log(_pagination, "페이지 어쩌구");
           setLng(+data[0].x);
           setLat(+data[0].y);
+          dispatch(getShare(data[0]));
+          // address_name: "경기 의정부시 의정부동 592-2";
+          // category_group_code: "FD6";
+          // category_group_name: "음식점";
+          // category_name: "음식점 > 한식 > 해장국";
+          // distance: "";
+          // id: "821269934";
+          // phone: "031-877-8882";
+          // place_name: "차가네해장국 의정부점";
+          // place_url: "http://place.map.kakao.com/821269934";
+          // road_address_name: "경기 의정부시 경의로 66";
         }
       });
     }
@@ -44,7 +57,7 @@ export default function MapTest() {
           width: "100%",
           height: "100%",
         }}
-        level={10} // 지도의 확대 레벨
+        level={7} // 지도의 확대 레벨
       >
         <MapMarker // 마커를 생성합니다
           position={{
