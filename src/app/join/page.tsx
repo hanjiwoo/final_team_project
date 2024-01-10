@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../../shared/firebase";
@@ -141,8 +142,6 @@ export default function Join() {
 			console.log("사용중임");
 			window.location.reload();
 			return false;
-		} else {
-			console.log("이메일 사용 가능");
 		}
 
 		// 닉네임 중복 확인
@@ -196,18 +195,25 @@ export default function Join() {
 	};
 
 	return (
-		<div>
-			<div
-				onClick={() => {
-					// navigate("/");
-				}}
-			/>
-			<div>
-				<h2 className="flex, justify-center">회원가입</h2>
-				<form>
-					<div>
-						<label>이메일</label>
+		<div className="flex justify-center items-center w-screen h-screen">
+			<div className="w-[360px]">
+				<div className="mb-[52px]">
+					<h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left">
+						회원가입
+					</h1>
+					<span>
+						따뜻한 마음을 모아 당신에게 드려요 :)
+						<br />
+						모두의 음식점, 모음
+					</span>
+				</div>
+				<form className="flex justify-center flex-col items-center mb-[40px] gap-[16px]">
+					<div className="flex flex-col w-full">
+						<label className="test-[14px] leading-20px text-[#999]">
+							이메일
+						</label>
 						<input
+							className="h-[48px] px-[16px] rounded-[8px] border-solid border border-gray-400"
 							type="email"
 							value={email}
 							name="email"
@@ -217,10 +223,17 @@ export default function Join() {
 							onBlur={handleBlur}
 						></input>
 					</div>
-					{emailError && <div>{emailError}</div>}
-					<div>
-						<label>비밀번호</label>
+					{emailError && (
+						<div className="text-[#FF8145] mt-[-18px] mb-[-19px] text-[14px] w-full">
+							{emailError}
+						</div>
+					)}
+					<div className="flex flex-col w-full">
+						<label className="test-[14px] leading-20px text-[#999]">
+							비밀번호
+						</label>
 						<input
+							className="h-[48px] px-[16px] rounded-[8px] border-solid border border-gray-400"
 							type="password"
 							value={password}
 							name="password"
@@ -230,10 +243,17 @@ export default function Join() {
 							onBlur={handleBlur}
 						></input>
 					</div>
-					{passwordError && <div>{passwordError}</div>}
-					<div>
-						<label>닉네임</label>
+					{passwordError && (
+						<div className="text-[#FF8145] mt-[-18px] mb-[-19px] text-[14px] w-full">
+							{passwordError}
+						</div>
+					)}
+					<div className="flex flex-col w-full">
+						<label className="test-[14px] leading-20px text-[#999]">
+							닉네임
+						</label>
 						<input
+							className="h-[48px] px-[16px] rounded-[8px] border-solid border border-gray-400"
 							type="text"
 							value={displayName}
 							name="displayName"
@@ -243,68 +263,79 @@ export default function Join() {
 							onBlur={handleBlur}
 						></input>
 					</div>
-					{/* 약관 동의 부분 */}
-					<div>
-						<label>약관 동의</label>
-						<div>
-							<input
-								type="checkbox"
-								name="all"
-								onChange={checkAll}
-								checked={checkList.length === 3 ? true : false}
-							/>
-							<div>전체동의</div>
+					{displayNameError && (
+						<div className="text-[#FF8145] mt-[-18px] mb-[-19px] text-[14px] w-full">
+							{displayNameError}
 						</div>
+					)}
+				</form>
+				{/* 약관 동의 부분 */}
+				<div className="flex flex-col w-full gap-[16px] mb-[32px]">
+					<label className="test-[16px] text-[#212121] font-[600]">
+						약관 동의
+					</label>
+					<div className="flex items-center">
+						<input
+							className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px]"
+							type="checkbox"
+							name="all"
+							onChange={checkAll}
+							checked={checkList.length === 3 ? true : false}
+						/>
+						<div>전체동의</div>
+					</div>
+					<div className="border border-gray-300"></div>
+					<div className="flex items-center">
+						<input
+							className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px] inclu"
+							type="checkbox"
+							name="age"
+							onChange={check}
+							checked={checkList.includes("age") ? true : false}
+						/>
 						<div>
-							<input
-								type="checkbox"
-								name="age"
-								onChange={check}
-								checked={checkList.includes("age") ? true : false}
-							/>
-							<div>
-								<span>(필수)</span> 만 14세 이상입니다
-							</div>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								name="terms"
-								onChange={check}
-								checked={checkList.includes("terms") ? true : false}
-							/>
-							<div>
-								<span>(필수)</span> 이용약관 동의
-							</div>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								name="collect"
-								onChange={check}
-								checked={checkList.includes("collect") ? true : false}
-							/>
-							<div>
-								<span>(필수)</span> 개인정보 수집 및 이용 동의
-							</div>
+							<span>(필수)</span> 만 14세 이상입니다
 						</div>
 					</div>
-					{displayNameError && <div>{displayNameError}</div>}
-					<button
-						onClick={handleClickSignUp}
-						className={buttonColor ? "text-green-500" : "text-slate-200"}
-					>
-						회원가입
-					</button>
-					<ToastContainer />
-					<button
-						onClick={() => {
-							// navigate("/login");
-						}}
-					>
-						로그인하기
-					</button>
-				</form>
+					<div className="flex items-center">
+						<input
+							className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px]"
+							type="checkbox"
+							name="terms"
+							onChange={check}
+							checked={checkList.includes("terms") ? true : false}
+						/>
+						<div>
+							<span>(필수)</span> 이용약관 동의
+						</div>
+					</div>
+					<div className="flex items-center">
+						<input
+							className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px]"
+							type="checkbox"
+							name="collect"
+							onChange={check}
+							checked={checkList.includes("collect") ? true : false}
+						/>
+						<div>
+							<span>(필수)</span> 개인정보 수집 및 이용 동의
+						</div>
+					</div>
+				</div>
+				<button
+					onClick={handleClickSignUp}
+					className={
+						buttonColor
+							? "text-green-500 flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145]"
+							: "text-slate-200 flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#999] bg-[#d6d6d6]"
+					}
+				>
+					회원가입
+				</button>
+				<ToastContainer />
+				<Link href="/login" className="cursor-pointer">
+					로그인하기
+				</Link>
 			</div>
 		</div>
 	);
