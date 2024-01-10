@@ -72,21 +72,21 @@ export default function SearchForm() {
     <div className="bg-red-100 w-[800px] h-[100px] flex justify-center items-center gap-5">
       {/* {shops[0].업종} */}
       <select name="sido" onChange={onchangeHandler} value={form.sido}>
-        <option id="none">시도을 선택합쇼</option>
+        <option id="none">광역시/도</option>
         <option>경기도</option>
         <option>서울특별시</option>
         <option>서울특별시</option>
         <option>서울특별시</option>
       </select>
       <select name="sigoon" onChange={onchangeHandler} value={form.sigoon}>
-        <option id="none">시군을 선택합쇼</option>
+        <option id="none">시/군/구</option>
         <option>의정부시</option>
-        <option>고양시</option>
+        <option>용산구</option>
         <option>고양시 일산동구</option>
         <option>고양시 일산서구</option>
       </select>
       <select name="upzong" onChange={onchangeHandler} value={form.upzong}>
-        <option id="none">업종을 선택합쇼</option>
+        <option id="none">업종</option>
         <option>한식_일반</option>
         <option>일식</option>
         <option>양식</option>
