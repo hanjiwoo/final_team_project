@@ -9,11 +9,11 @@ import ImagePage from "@/components/detail/ImagePage";
 export default function DetailPage() {
   return (
     <section className="flex flex-col  items-center">
-      <div className="bg-blue">디테일페이지야</div>
-      <div className="flex flex-col ">
-        <div className="flex flex-row justify-center items-center bg-green-300 w-[800px]">
-          <ImagePage /> <MapTest />
-        </div>
+      <MapTest />
+      <div className="bg-blue-300">디테일페이지야</div>
+      <div className="flex flex-col bg-red-500 ">
+        <ImagePage />
+
         <Shopinfo />
         <ShareBtn />
       </div>

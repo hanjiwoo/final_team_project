@@ -188,7 +188,7 @@ export default function Join() {
 
 			console.log("회원가입 완료");
 			alert(`${displayName}님 환영합니다`);
-			// navigate("/login");
+			window.location.href = "/login";
 		} catch (error) {
 			console.error("회원가입 실패", error);
 		}
@@ -326,7 +326,7 @@ export default function Join() {
 					onClick={handleClickSignUp}
 					className={
 						buttonColor
-							? "text-green-500 flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145]"
+							? "flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145]"
 							: "text-slate-200 flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#999] bg-[#d6d6d6]"
 					}
 				>

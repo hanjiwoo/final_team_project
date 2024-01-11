@@ -20,6 +20,7 @@ export default function MapHome() {
   const { 시군, 시도 } = shops[0];
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
+
   // const shopsRef = useRef<typeOfRef>({
   //   title: "",
   //   latitude: "",
@@ -40,18 +41,13 @@ export default function MapHome() {
   useEffect(() => {
     let geocoder = new window.kakao.maps.services.Geocoder();
 
-    geocoder.addressSearch(`${시도} ${시군}`, function (result, status) {
-      // console.log(result, "이거 레절트");
-      setLng(+result[0].x);
-      setLat(+result[0].y);
-    });
-
     const mappedArray = shops.map((shop: typeOfShop) => {
       let OBOB = {
         title: "",
         latitude: "",
         longitude: "",
       };
+
       geocoder.addressSearch(shop.주소, function (result, status) {
         OBOB.title = shop.업소명;
         OBOB.latitude = result[0].y;
@@ -62,6 +58,12 @@ export default function MapHome() {
     });
     // console.log(mappedArray, " 젭알나와줘 ㅜㅜ");
     setnewArray(mappedArray);
+
+    geocoder.addressSearch(`${시도} ${시군}`, function (result, status) {
+      // console.log(result, "이거 레절트");
+      setLng(+result[0].x);
+      setLat(+result[0].y);
+    });
   }, []);
   // console.log(newArray, "나오겠지?");
 
@@ -90,7 +92,7 @@ export default function MapHome() {
             width: "100%",
             height: "100%",
           }}
-          level={5} // 지도의 확대 레벨
+          level={7} // 지도의 확대 레벨
         >
           {newArray.map((shop: typeOfRef) => {
             return (

@@ -9,8 +9,28 @@ import MapTest from "./MapTest";
 
 export default function ImagePage() {
   return (
-    <div className="w-1/2 h=full">
-      <Image src={phica} alt="착한가게사진"></Image>
+    <div className="flex flex-row rounded-lg justify-center items-center bg-green-300 w-[800px] h-[600px] gap-5">
+      <div className="bg-yellow-300 w-[550px] h-[550px] overflow-hidden rounded-lg">
+        <Image className="w-full h-full" src={phica} alt="착한가게사진"></Image>
+      </div>
+
+      <div className="bg-blue-100 flex flex-col justify-center items-center gap-5">
+        <Image
+          className="w-[170px] h-[170px]"
+          src={phica}
+          alt="착한가게사진"
+        ></Image>
+        <Image
+          className="w-[170px] h-[170px]"
+          src={phica}
+          alt="착한가게사진"
+        ></Image>
+        <Image
+          className="w-[170px] h-[170px]"
+          src={phica}
+          alt="착한가게사진"
+        ></Image>
+      </div>
     </div>
   );
 }

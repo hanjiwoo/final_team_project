@@ -48,7 +48,7 @@ export default function DoneAssess() {
               <p>userid:{hoogi.uid}</p>
               <p>{hoogi.shopId}</p>
               <p>{hoogi.face}</p>
-              <p>{hoogi.id}</p>
+              {/*   <p>{hoogi.id}</p> */}
               <p>{hoogi.가격}</p>
               {hoogi.맛} {hoogi.서비스}
               <p>{hoogi.위생}</p>
