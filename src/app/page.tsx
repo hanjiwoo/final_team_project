@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center h-[100%] bg-blue-200 gap-10">
+    <div className="flex flex-col items-center h-[100%] bg-[#fffbeb] gap-10">
       <MainBanner />
       <SearchForm />
 

@@ -38,7 +38,7 @@ export default function Best() {
       <div className="flex flex-wrap -m-4">
         {bestList.map((item) => {
           return (
-            <div className="p-4 sm:w-1/2 lg:w-1/3">
+            <div className="p-4 sm:w-1/3 lg:w-1/3" key={item.id}>
               <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                 <Image
                   className="lg:h-72 md:h-48 w-full object-cover object-center"
