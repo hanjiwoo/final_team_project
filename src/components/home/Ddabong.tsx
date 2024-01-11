@@ -5,7 +5,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addThumb, deleteThumb, getThumbs } from "./Fns";
 import { typeOfThumbs } from "@/app/assets/types/types";
 import Image from "next/image";
-export default function Ddabong({ name, id }: { name: string; id: string }) {
+export default function Ddabong({
+  name,
+  shopId,
+}: {
+  name: string;
+  shopId: string;
+}) {
   const fakeUser = {
     isLogin: true,
     uid: 1,
@@ -13,7 +19,7 @@ export default function Ddabong({ name, id }: { name: string; id: string }) {
   };
   const { uid } = fakeUser;
   const { data: thumbs, isLoading } = useQuery({
-    queryKey: ["thumbs"],
+    queryKey: [`thumbs${shopId}`],
     queryFn: getThumbs,
   });
   // console.log(thumbs, "데이터 잘 받고 있나?");
@@ -24,11 +30,11 @@ export default function Ddabong({ name, id }: { name: string; id: string }) {
     //   await queryClient.invalidateQueries({ queryKey: ["thumbs"] });
     // },
     onMutate: async (newThumb) => {
-      await queryClient.cancelQueries({ queryKey: ["thumbs"] });
+      await queryClient.cancelQueries({ queryKey: [`thumbs${shopId}`] });
 
-      const previousThumbs = queryClient.getQueryData(["thumbs"]);
+      const previousThumbs = queryClient.getQueryData([`thumbs${shopId}`]);
 
-      queryClient.setQueryData(["thumbs"], (old: typeOfThumbs[]) => [
+      queryClient.setQueryData([`thumbs${shopId}`], (old: typeOfThumbs[]) => [
         ...old,
         newThumb,
       ]);
@@ -37,11 +43,11 @@ export default function Ddabong({ name, id }: { name: string; id: string }) {
     },
 
     onError: (err, newThumb, context) => {
-      queryClient.setQueryData(["thumbs"], context?.previousThumbs);
+      queryClient.setQueryData([`thumbs${shopId}`], context?.previousThumbs);
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["thumbs"] });
+      queryClient.invalidateQueries({ queryKey: [`thumbs${shopId}`] });
     },
   });
   const { mutate: mutateToDelete } = useMutation({
@@ -50,11 +56,11 @@ export default function Ddabong({ name, id }: { name: string; id: string }) {
     //   await queryClient.invalidateQueries({ queryKey: ["thumbs"] });
     // },
     onMutate: async (newThumb) => {
-      await queryClient.cancelQueries({ queryKey: ["thumbs"] });
+      await queryClient.cancelQueries({ queryKey: [`thumbs${shopId}`] });
 
-      const previousThumbs = queryClient.getQueryData(["thumbs"]);
+      const previousThumbs = queryClient.getQueryData([`thumbs${shopId}`]);
 
-      queryClient.setQueryData(["thumbs"], (old: typeOfThumbs[]) => [
+      queryClient.setQueryData([`thumbs${shopId}`], (old: typeOfThumbs[]) => [
         ...old,
         newThumb,
       ]);
@@ -63,18 +69,18 @@ export default function Ddabong({ name, id }: { name: string; id: string }) {
     },
 
     onError: (err, newThumb, context) => {
-      queryClient.setQueryData(["thumbs"], context?.previousThumbs);
+      queryClient.setQueryData([`thumbs${shopId}`], context?.previousThumbs);
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["thumbs"] });
+      queryClient.invalidateQueries({ queryKey: [`thumbs${shopId}`] });
     },
   });
   const filteredThunmbs = thumbs?.filter((thumb) => {
-    return thumb.shopId === id;
+    return thumb.shopId === shopId;
   });
   const filterdThumb = thumbs?.find((thumb) => {
-    return thumb.shopId === id && thumb.uid === fakeUser.uid;
+    return thumb.shopId === shopId && thumb.uid === fakeUser.uid;
   });
   const selectedId = filterdThumb?.id;
   const ThumbUpHandler = () => {
@@ -85,8 +91,8 @@ export default function Ddabong({ name, id }: { name: string; id: string }) {
       mutateToDelete(selectedId);
       console.log("삭제", "셀렉티드아이디", selectedId);
     } else {
-      mutateToAdd({ uid, id });
-      console.log("추가하기 되고 있니?", uid, id);
+      mutateToAdd({ uid, shopId });
+      console.log("추가하기 되고 있니?", uid, shopId);
     }
   };
   if (isLoading) {

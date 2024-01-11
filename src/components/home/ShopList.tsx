@@ -17,7 +17,7 @@ export default function ShopList() {
     phoneNum: string
   ) => {
     // console.log(router);
-    router.push(`/detailpage/${phoneNum}`);
+    router.push(`/detail/${phoneNum}`);
     const detailshop = shops.find((shop: typeOfShop) => {
       return shop.연락처 === phoneNum;
     });
@@ -60,7 +60,7 @@ export default function ShopList() {
                 >
                   상세페이지로
                 </button>
-                <Ddabong name="thumbup" id={shop.연락처} />
+                <Ddabong name="thumbup" shopId={shop.연락처} />
               </div>
             </section>
           );

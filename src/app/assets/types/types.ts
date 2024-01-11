@@ -20,3 +20,33 @@ export type typeOfThumbs = {
   id: string;
   shopId?: string;
 };
+export type typeOfShare = {
+  address: string;
+  category: string;
+  id: string;
+  phone: string;
+  url: string;
+  shopName: string;
+  x: string;
+  y: string;
+};
+
+export type assessment = {
+  title: string;
+  one: string;
+  two: string;
+  three: string;
+  four: string;
+};
+
+export type typeOfHoogi = {
+  맛?: string;
+  가격?: string;
+  위생?: string;
+  서비스?: string;
+  range?: string;
+  face?: string;
+  id?: string;
+  uid?: number;
+  shopId?: string | string[] | undefined;
+};

@@ -1,4 +1,3 @@
-"use client";
 import { typeOfThumbs } from "@/app/assets/types/types";
 import { db } from "@/shared/firebase";
 import {
@@ -23,11 +22,17 @@ export const getThumbs = async () => {
   return data;
 };
 
-export const addThumb = async ({ uid, id }: { uid: number; id: string }) => {
+export const addThumb = async ({
+  uid,
+  shopId,
+}: {
+  uid: number;
+  shopId: string;
+}) => {
   // console.log("추가하기 함수는 돼?");
   await addDoc(collection(db, "thumbs"), {
     uid,
-    shopId: id,
+    shopId,
     haha: "hihi",
   });
   // console.log(db, "이건 디비야");
