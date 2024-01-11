@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 
 export default function ListPage() {
@@ -13,7 +14,6 @@ export default function ListPage() {
   return (
     <>
       <h1>리스트 영역입니다.</h1>
-      {community}
     </>
   );
 }
