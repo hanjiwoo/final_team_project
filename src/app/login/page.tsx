@@ -12,6 +12,7 @@ import {
 // import { useNavigate } from "react-router-dom";
 import { auth, db, storage } from "../../shared/firebase";
 import axios from "axios";
+import { Router } from "next/router";
 
 export default function Login() {
 	const [email, setEmail] = useState<string>("");
@@ -20,6 +21,7 @@ export default function Login() {
 	const [emailError, setEmailError] = useState<string>("");
 	const [passwordError, setPasswordError] = useState<string>("");
 	const [displayNameError, setDisplayNameError] = useState<string>("");
+	const [loginStatus, setLoginStatus] = useState<boolean>(false);
 
 	// const auth = getAuth();
 	const user = auth.currentUser;
@@ -110,35 +112,61 @@ export default function Login() {
 				email,
 				password
 			);
-			console.log(userCredential);
+
+			// 성공적으로 로그인했을 때 사용자 정보 저장
+			const user = userCredential.user;
+
+			localStorage.setItem(
+				"user",
+				JSON.stringify({
+					uid: user.uid,
+					displayName: user.displayName,
+					email: user.email,
+					photoURL: user.photoURL,
+				})
+			);
+			setLoginStatus(true); // 로그인 상태를 true 값으로 저장
+
 			console.log("로그인완료");
-			alert(`${displayName}님 안녕하세요`);
-			// navigate("/");
+			console.log(loginStatus);
+			alert(`${user.displayName}님 안녕하세요`);
+			window.location.href = "/";
 		} catch (error) {
 			alert("로그인에 실패했습니다");
 			console.error(error);
 		}
 	};
+
 	// 구글 로그인
 	const signInWithGoogle = async () => {
 		const googleProvider = new GoogleAuthProvider();
 
-		signInWithPopup(auth, googleProvider)
-			.then((res) => {
-				const credential: any = GoogleAuthProvider.credentialFromResult(res);
-				const token = credential.accessToken;
-				const userName = res.user.displayName;
-				const email = res.user.email;
+		try {
+			const res = await signInWithPopup(auth, googleProvider);
 
-				// local storage에 token, username 저장해주기
-				console.log(token);
-				console.log(userName);
+			// Google 로그인 성공 시
+			const credential: any = GoogleAuthProvider.credentialFromResult(res);
+			const token = credential.accessToken;
+			const userName = res.user.displayName;
+			const email = res.user.email;
 
-				// navigate("/");
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+			// local storage에 token, username 저장
+			setLoginStatus(true); // 로그인 상태를 true 값으로 저장
+			localStorage.setItem(
+				"user",
+				JSON.stringify({
+					displayName: userName,
+					email: email,
+					accessToken: token,
+				})
+			);
+			console.log(loginStatus);
+			console.log("Google 로그인 성공");
+			alert(`${displayName}님 안녕하세요`);
+			window.location.href = "/";
+		} catch (error) {
+			console.error("Google 로그인 실패:", error);
+		}
 	};
 
 	const handleClickGoogle = async (event: FormEvent) => {
@@ -147,31 +175,31 @@ export default function Login() {
 	};
 
 	//카카오 로그인
-	const signInWithKakao = () => {
-		const kakaoProvider = new OAuthProvider("https://kauth.kakao.com");
+	// const signInWithKakao = () => {
+	// 	const kakaoProvider = new OAuthProvider("https://kauth.kakao.com");
 
-		signInWithPopup(auth, kakaoProvider)
-			.then((res) => {
-				const credential: any = OAuthProvider.credentialFromResult(res);
-				const token = credential.accessToken;
-				const userName = res.user.displayName;
-				const email = res.user.email;
+	// 	signInWithPopup(auth, kakaoProvider)
+	// 		.then((res) => {
+	// 			const credential: any = OAuthProvider.credentialFromResult(res);
+	// 			const token = credential.accessToken;
+	// 			const userName = res.user.displayName;
+	// 			const email = res.user.email;
 
-				// local storage에 token, username 저장해주기
-				console.log(token);
-				console.log(userName);
+	// 			// local storage에 token, username 저장해주기
+	// 			console.log(token);
+	// 			console.log(userName);
 
-				// navigate("/");
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
+	// 			// navigate("/");
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error(error);
+	// 		});
+	// };
 
-	const handleClickKakao = async (event: FormEvent) => {
-		event.preventDefault();
-		signInWithKakao();
-	};
+	// const handleClickKakao = async (event: FormEvent) => {
+	// 	event.preventDefault();
+	// 	signInWithKakao();
+	// };
 
 	return (
 		<div className="flex justify-center items-center w-screen h-screen">
@@ -230,7 +258,7 @@ export default function Login() {
 				)}
 				<button
 					onClick={handleClickSignIn}
-					className="text-green-500 flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145]"
+					className=" flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145]"
 				>
 					로그인
 				</button>
@@ -238,7 +266,7 @@ export default function Login() {
 					<label>소셜계정으로 로그인</label>
 					<div className="flex flex-col gap-[12px]">
 						<div
-							className="cursor-pointer text-green-500 flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FFF]"
+							className="cursor-pointer  flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FFF]"
 							onClick={handleClickGoogle}
 						>
 							구글 들어갈 자리
@@ -248,7 +276,7 @@ export default function Login() {
 							</div> */}
 						<Link
 							href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API}&redirect_uri=http://localhost:3000/login`}
-							className="text-green-500 flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FEE500]"
+							className=" flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FEE500]"
 						>
 							카카오로 로그인
 						</Link>
