@@ -47,10 +47,14 @@ export default function Mapinfo({
             // 최종 주소 변수-> 주소 정보를 해당 필드에 넣는다.
             // 선택한 주소로 입력 필드 업데이트
             const addrArray = result[0].address.address_name.split(" ");
-            // console.log("이건 맵인포3", addrArray[0].slice(0, 2), addrArray[1]);
+            // console.log(
+            //   "이건 맵인포3",
+            //   addrArray[0].substring(0, 2),
+            //   addrArray[1]
+            // );
             // current = addrArray;
-            console.log(addrArray, "쪼개진거");
-            console.log(shops[0], " 샵스 첫번째");
+            // console.log(addrArray, "쪼개진거");
+            // console.log(shops[0], " 샵스 첫번째");
             const filteredShops = shops.filter((shop: typeOfShop) => {
               // console.log("shop들 확인", shop);
               // if (
@@ -61,7 +65,12 @@ export default function Mapinfo({
               // ) {
               //   return;
               // }
-              return shop.시군 === addrArray[1] && shop.시도 === addrArray[0];
+              if (shop.시군 && addrArray[1] && addrArray[0] && shop.시도) {
+                return (
+                  shop.시군.substring(0, 2) === addrArray[1].substring(0, 2) &&
+                  shop.시도.substring(0, 2) === addrArray[0].substring(0, 2)
+                );
+              }
             });
             // console.log(filteredshops, "샵스");
             dispatch(getShops(filteredShops));
@@ -86,7 +95,7 @@ export default function Mapinfo({
 
   return (
     <>
-      <div className="w-[200px] h-[200px] bg-yellow-300">
+      {/*   <div className="w-[200px] h-[200px] bg-yellow-300">
         카카오맵???{" "}
         <Map
           // ref={mapRef.current}
@@ -112,7 +121,8 @@ export default function Mapinfo({
             }}
           />
         </Map>
-      </div>
+      </div> */}
+      <div className="text-red-500">검색완료</div>
     </>
   );
 }

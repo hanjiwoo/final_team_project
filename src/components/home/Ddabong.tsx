@@ -89,10 +89,10 @@ export default function Ddabong({
 
     if (filterdThumb) {
       mutateToDelete(selectedId);
-      console.log("삭제", "셀렉티드아이디", selectedId);
+      // console.log("삭제", "셀렉티드아이디", selectedId);
     } else {
       mutateToAdd({ uid, shopId });
-      console.log("추가하기 되고 있니?", uid, shopId);
+      // console.log("추가하기 되고 있니?", uid, shopId);
     }
   };
   if (isLoading) {

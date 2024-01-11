@@ -37,6 +37,7 @@ export type assessment = {
   two: string;
   three: string;
   four: string;
+  type: string;
 };
 
 export type typeOfHoogi = {

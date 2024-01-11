@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { addHoogi } from "./queryFns";
 type assessment = {
   title: string;
+  type: string;
   one: string;
   two: string;
   three: string;
@@ -13,31 +14,35 @@ type assessment = {
 };
 const assessmentList = [
   {
-    title: "가격",
-    one: "가격이 달라요",
-    two: "적당해요",
-    three: "저렴해요",
+    title: "가격은 어떤가요?",
+    type: "가격",
+    one: "👍 저렴해요",
+    two: "😎 괜찮아요",
+    three: "💳 가격이 달라요",
     four: "존마탱",
   },
   {
-    title: "맛",
-    one: "아쉬워요",
-    two: "적당해요",
-    three: "또갈래요",
+    title: "맛있었나요?",
+    type: "맛",
+    one: "😋 또 가고싶어요",
+    two: "🍽️ 괜찮아요",
+    three: "🤔 아쉬워요",
     four: "존마탱",
   },
   {
-    title: "서비스",
-    one: "아쉬워요",
-    two: "적당해요",
-    three: "친절해요",
+    title: "서비스는 좋았나요?",
+    type: "서비스",
+    one: "💖 친절해요",
+    two: "👨‍🍳 괜찮아요",
+    three: "😢 아쉬워요",
     four: "존마탱",
   },
   {
-    title: "위생",
-    one: "아쉬워요",
-    two: "적당해요",
-    three: "깨끗해요",
+    title: "위생은 청결했나요?",
+    type: "위생",
+    one: "✨ 깨끗해요",
+    two: "💦 괜찮아요",
+    three: "😨 아쉬워요",
     four: "존마탱",
   },
 ];
@@ -58,6 +63,7 @@ export default function Hoogi() {
     서비스: "",
     위생: "",
   });
+  // console.log(form);
   const { 맛, 가격, 서비스, 위생 } = form;
   const { id: shopId } = useParams();
   const queryClient = useQueryClient();
@@ -86,6 +92,7 @@ export default function Hoogi() {
     // console.log(e.target, "이모티콘");
   };
   const submitHandler = () => {
+    console.log(uid, shopId, 맛, 가격, 위생, 서비스, range, face);
     if (
       !맛 ||
       !가격 ||
@@ -110,7 +117,7 @@ export default function Hoogi() {
     // console.log(맛, 가격, 위생, 서비스, range, face);
   };
   return (
-    <div className="bg-blue-300 h-[300px] flex flex-col items-center mb-10">
+    <div className="bg-blue-300 h-[600px] flex flex-col items-center mb-10">
       <div className="bg-red-300  h-[50px] flex ">
         <h1>해당 음식점에 리뷰를 남겨주세요</h1>
         <div className="bg-yellow-300 h-12">
@@ -137,7 +144,13 @@ export default function Hoogi() {
           <option>👿</option>
         </select>
       </div>
-      <div className="flex flex-col  mb-32  bg-indigo-300">
+      <div className="flex flex-col  mb-32  bg-indigo-300 w-[800px]">
+        <section className="flex justify-between">
+          <h1 className="text-2xl">해당 매장의 #태그 리뷰를 확인해보세요 :)</h1>
+          <button className="bg-red-600 w-[100px] mt-5" onClick={submitHandler}>
+            제출하기
+          </button>
+        </section>
         {assessmentList.map((item: assessment) => {
           return (
             <React.Fragment key={item.title}>
@@ -145,12 +158,6 @@ export default function Hoogi() {
             </React.Fragment>
           );
         })}
-        {/* <AssessBtn />
-        
-        <AssessBtn /> */}{" "}
-        <button className="bg-red-600 w-[500px] mt-5" onClick={submitHandler}>
-          제출하기
-        </button>
       </div>{" "}
     </div>
   );
