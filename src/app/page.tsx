@@ -1,6 +1,7 @@
 import NowLocationBtn from "@/components/home/NowLocationBtn";
 import SearchForm from "@/components/home/SearchForm";
 import ShopList from "@/components/home/ShopList";
+import ShopList_map from "@/components/home/ShopList_map";
 import Image from "next/image";
 
 export default function Home() {
@@ -8,7 +9,7 @@ export default function Home() {
     <div className="flex flex-col items-center h-[95vh] bg-blue-200 gap-10">
       <SearchForm />
 
-      <ShopList />
+      <ShopList_map />
     </div>
   );
 }

@@ -3,14 +3,14 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 // import { typeOfShop } from "@/app/assets/types/types";
 import { useParams, useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import phica from "../../app/assets/images/피카츄.jpg";
 import { getShop } from "@/redux/modules/detailShopSlice";
 import MapTest from "./MapTest";
 
 export default function Shopinfo() {
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const { id } = useParams();
   const shop = useSelector((state: any) => state.detailShop);
   // console.log(shop, "이거 샵이양");
@@ -25,11 +25,41 @@ export default function Shopinfo() {
   //   dispatch(getShop(detailshop));
   // }, []);
   // console.log(detailshop);
+  useEffect(() => {
+    if (window && localStorage.getItem("upso")) {
+      const filteredshop = {
+        가격1: localStorage.getItem("money1"),
+        가격2:
+          localStorage.getItem("money2") === "null"
+            ? ""
+            : localStorage.getItem("money2"),
+        가격3:
+          localStorage.getItem("money3") === "null"
+            ? ""
+            : localStorage.getItem("money3"),
+        메뉴1: localStorage.getItem("menu1"),
+        메뉴2:
+          localStorage.getItem("menu2") === "null"
+            ? ""
+            : localStorage.getItem("menu2"),
+        메뉴3:
+          localStorage.getItem("menu3") === "null"
+            ? ""
+            : localStorage.getItem("menu3"),
+        시군: localStorage.getItem("sigoon"),
+        시도: localStorage.getItem("sido"),
+        업소명: localStorage.getItem("upso"),
+        업종: localStorage.getItem("upzong"),
+        연락처: localStorage.getItem("phoneNum"),
+        주소: localStorage.getItem("addr"),
+      };
+
+      dispatch(getShop(filteredshop));
+    }
+  }, []);
 
   return (
-    <div className="bg-blue-100  h-[600px] flex flex-col">
-      {/* <MapTest /> */}
-      <Image src={phica} alt="착한가게사진"></Image>
+    <div className="bg-blue-100  h-[200px] flex flex-col">
       <div>
         {shop.메뉴1}
         {shop.가격1}

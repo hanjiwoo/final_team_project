@@ -38,3 +38,15 @@ export type assessment = {
   three: string;
   four: string;
 };
+
+export type typeOfHoogi = {
+  맛?: string;
+  가격?: string;
+  위생?: string;
+  서비스?: string;
+  range?: string;
+  face?: string;
+  id?: string;
+  uid?: number;
+  shopId?: string | string[] | undefined;
+};

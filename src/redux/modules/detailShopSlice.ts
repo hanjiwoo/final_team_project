@@ -76,7 +76,7 @@ const detailshopSlice = createSlice({
         주소,
       } = action.payload;
       // console.log(action.payload);
-      /*    localStorage.setItem("money1", String(가격1));
+      localStorage.setItem("money1", String(가격1));
       localStorage.setItem("money2", String(가격2));
       localStorage.setItem("money3", String(가격3));
       localStorage.setItem("menu1", 메뉴1);
@@ -88,7 +88,7 @@ const detailshopSlice = createSlice({
       localStorage.setItem("upzong", 업종);
       localStorage.setItem("phoneNum", 연락처);
       localStorage.setItem("addr", 주소);
- */
+
       return action.payload;
     },
   },
