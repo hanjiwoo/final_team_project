@@ -2,13 +2,17 @@
 import React, { useState } from "react";
 import ShopList from "./ShopList";
 import MapHome from "./MapHome";
+import { useSelector } from "react-redux";
 
 export default function ShopList_map() {
   const [toggle, setToggle] = useState(true);
-
+  const shop = useSelector((state: any) => state.shop);
   const toggleHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
+    if (!shop[0]) {
+      return alert("검색부터 해주세요");
+    }
     if (e.currentTarget.id === "1") {
       setToggle(true);
     } else if (e.currentTarget.id === "2") {
@@ -17,7 +21,7 @@ export default function ShopList_map() {
   };
   return (
     <>
-      <div className="flex justify-center items-center gap-10">
+      <div className="flex justify-center items-center  gap-10">
         <button
           id="1"
           className="bg-black text-white"

@@ -6,27 +6,26 @@ import { useDispatch } from "react-redux";
 import { getShops } from "@/redux/modules/shopSlice";
 import { typeOfShop } from "@/app/assets/types/types";
 import NowLocationBtn from "./NowLocationBtn";
+import SigoonOptions from "./SigoonOptions";
 
 export default function SearchForm() {
   const dispatch = useDispatch();
   const [shops, setshops] = useState<typeOfShop[]>();
   const [form, setForm] = useState({ sido: "", sigoon: "", upzong: "" });
   const { sido, sigoon, upzong } = form;
+
   const onchangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.name === "upzong" && (!sido || !sigoon))
-      return alert("주소부터 정해주세요");
     const { name, value } = e.target;
     // console.log(name, value);
     setForm({ ...form, [name]: value });
-    // console.log(form);
+    // console.log(form, "타겟을 확인해 봅시다.");
   };
 
   const getGoodShop = async () => {
     const { data } = await axios.get(
       `https://api.odcloud.kr/api/3045247/v1/uddi:00389e44-9981-41c5-81b9-c31008cd0210?page=1&perPage=1000&serviceKey=${process.env.NEXT_PUBLIC_URL}`
     );
-    // console.log(data.data, "데이타다");
-    // setshops(data.data);
+
     return data.data;
   };
 
@@ -38,33 +37,34 @@ export default function SearchForm() {
     // setshops(data)
     // console.log(datas, "데이타스");
   }, []);
-  const onClickHandler = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      if (!sido || !sigoon) {
-        alert("검색 제대로하시라구요 예???!? ");
-        return setForm({ sido: "", sigoon: "", upzong: "" });
+  const onClickHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    if (!sido || !sigoon || !upzong) {
+      alert("검색 제대로하시라구요 예???!? ");
+      return setForm({ sido: "", sigoon: "", upzong: "" });
+    }
+    let filteredShops = shops?.filter((shop) => {
+      if (
+        shop.시군 &&
+        form.sigoon &&
+        shop.시도 &&
+        form.sido &&
+        form.upzong &&
+        shop.업종
+      ) {
+        return (
+          shop.시군.substring(0, 2) === form.sigoon.substring(0, 2) &&
+          shop.시도.substring(0, 2) === form.sido.substring(0, 2) &&
+          shop.업종.substring(0, 2) === form.upzong.substring(0, 2)
+        );
       }
-      let filteredShops = shops?.filter((shop) => {
-        if (form.upzong === "") {
-          // console.log(shop, "없을때 업종");
-          return shop.시군 === form.sigoon && shop.시도 === form.sido;
-        } else {
-          // console.log(shop, "이건 업종이 있을때");
-          return (
-            shop.시군 === form.sigoon &&
-            shop.시도 === form.sido &&
-            shop.업종 === form.upzong
-          );
-        }
-      });
-      // console.log("필터된 가게들", filteredShops);
-      dispatch(getShops(filteredShops));
-      // console.log(filteredShops, "필터 된 가게");
+    });
 
-      setForm({ sido: "", sigoon: "", upzong: "" });
-    },
-    [form.sigoon, form.upzong]
-  );
+    dispatch(getShops(filteredShops));
+    alert("검색완료");
+    // setForm({ sido: "", sigoon: "", upzong: "" });
+  };
 
   // console.log(shops, " 샵스");
   if (!shops) return <>로딩중...</>;
@@ -73,21 +73,36 @@ export default function SearchForm() {
       {/* {shops[0].업종} */}
       <select name="sido" onChange={onchangeHandler} value={form.sido}>
         <option id="none">광역시/도</option>
-        <option>경기도</option>
-        <option>서울특별시</option>
-        <option>서울특별시</option>
-        <option>서울특별시</option>
+
+        <option id="1">서울</option>
+        <option id="2">강원</option>
+        <option id="3">경기</option>
+        <option id="4">경상남</option>
+        <option id="5">경상북</option>
+        <option id="6">광주</option>
+        <option id="7">대구</option>
+        <option id="8">대전</option>
+        <option id="10">부산</option>
+        <option id="11">세종</option>
+        <option id="12">울산</option>
+        <option id="13">인천</option>
+        <option id="14">전라남</option>
+        <option id="15">전라북</option>
+        <option id="16">제주</option>
+        <option id="17">충청남</option>
+        <option id="18">충청북</option>
       </select>
-      <select name="sigoon" onChange={onchangeHandler} value={form.sigoon}>
-        <option id="none">시/군/구</option>
-        <option>의정부시</option>
-        <option>용산구</option>
-        <option>고양시 일산동구</option>
-        <option>고양시 일산서구</option>
-      </select>
+      {/* <select name="upzong" onChange={onchangeHandler} value={form.upzong}> */}
+      <SigoonOptions
+        name="sigoon"
+        onChange={onchangeHandler}
+        value={form.upzong}
+        sido={form.sido}
+      />
+      {/* </select> */}
       <select name="upzong" onChange={onchangeHandler} value={form.upzong}>
         <option id="none">업종</option>
-        <option>한식_일반</option>
+        <option>한식</option>
         <option>일식</option>
         <option>양식</option>
         <option>중식</option>

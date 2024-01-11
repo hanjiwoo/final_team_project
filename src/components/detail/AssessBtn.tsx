@@ -24,40 +24,40 @@ export default function AssessBtn({
     }>
   >;
 }) {
-  const { title, one, two, three } = item;
+  const { title, one, two, three, type } = item;
   const [activeId, setActiveId] = useState("");
   const onclickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     // if (e.currentTarget === e.target) return;
     //  setActiveHoogi(e.target.id)
     // console.log(e.currentTarget.innerHTML);
     setActiveId(e.currentTarget.id);
-    setForm({ ...form, [title]: e.currentTarget.innerHTML });
+    setForm({ ...form, [type]: e.currentTarget.innerHTML });
     // console.log(form, "폼 확인");
   };
   // console.log(item);
 
   return (
     <>
-      {<h2>{title}</h2>}
-      <div className="flex gap-10">
+      <h2>{title}</h2>
+      <div className="flex flex-col gap-2 items-center">
         <div
           id="1"
           onClick={onclickHandler}
-          className={`bg-${activeId === "1" ? "yellow" : "red"}-300`}
+          className={`bg-${activeId === "1" ? "yellow" : "red"}-300 w-11/12`}
         >
           {one}
         </div>{" "}
         <div
           id="2"
           onClick={onclickHandler}
-          className={`bg-${activeId === "2" ? "yellow" : "red"}-300`}
+          className={`bg-${activeId === "2" ? "yellow" : "red"}-300 w-11/12`}
         >
           {two}
         </div>{" "}
         <div
           id="3"
           onClick={onclickHandler}
-          className={`bg-${activeId === "3" ? "yellow" : "red"}-300`}
+          className={`bg-${activeId === "3" ? "yellow" : "red"}-300 w-11/12`}
         >
           {three}
         </div>

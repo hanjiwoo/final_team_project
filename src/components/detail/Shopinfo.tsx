@@ -59,23 +59,29 @@ export default function Shopinfo() {
   }, []);
 
   return (
-    <div className="bg-blue-100  h-[200px] flex flex-col">
-      <div>
-        {shop.메뉴1}
-        {shop.가격1}
+    <div className="bg-blue-100 gap-0.5 h-[200px] pl-[15px] flex flex-col justify-center">
+      <h1 className="text-4xl font-black">{shop.업소명}</h1>
+      <p>업종 {shop.업종}</p>
+      <div>위치 {shop.주소}</div>
+      <div>전화번호 {shop.연락처}</div>
+      <div className="flex">
+        주요메뉴
+        <section className="flex flex-col">
+          {" "}
+          <div>
+            {shop.메뉴1}
+            {shop.가격1}
+          </div>
+          <div>
+            {shop.메뉴2}
+            {shop.가격2}
+          </div>
+          <div>
+            {shop.메뉴3}
+            {shop.가격3}
+          </div>{" "}
+        </section>
       </div>
-      <div>
-        {shop.메뉴2}
-        {shop.가격2}
-      </div>
-      <div>
-        {shop.메뉴3}
-        {shop.가격3}
-      </div>
-      <div>{shop.업소명}</div>
-      <div>{shop.업종}</div>
-      <div>{shop.연락처}</div>
-      <div>{shop.주소}</div>
     </div>
   );
 }
