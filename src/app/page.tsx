@@ -11,8 +11,8 @@ export default function Home() {
       <MainBanner />
       <SearchForm />
 
-      <Best />
       <ShopList_map />
+      <Best />
     </div>
   );
 }
