@@ -69,7 +69,7 @@ export default function SearchForm() {
   // console.log(shops, " 샵스");
   if (!shops) return <>로딩중...</>;
   return (
-    <div className="bg-red-100 w-[800px] h-[100px] flex justify-center items-center gap-5">
+    <div className="bg-red-50 w-[800px] h-[100px] flex justify-center items-center gap-5 rounded-lg">
       {/* {shops[0].업종} */}
       <select name="sido" onChange={onchangeHandler} value={form.sido}>
         <option id="none">광역시/도</option>
@@ -96,7 +96,7 @@ export default function SearchForm() {
       <SigoonOptions
         name="sigoon"
         onChange={onchangeHandler}
-        value={form.upzong}
+        value={form.sigoon}
         sido={form.sido}
       />
       {/* </select> */}
@@ -107,7 +107,7 @@ export default function SearchForm() {
         <option>양식</option>
         <option>중식</option>
       </select>
-      <button className="bg-green-100" onClick={onClickHandler}>
+      <button className="bg-red-500 text-white" onClick={onClickHandler}>
         찾아보기
       </button>
       <NowLocationBtn shops={shops} />

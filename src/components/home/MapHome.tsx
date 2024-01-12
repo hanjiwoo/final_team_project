@@ -38,32 +38,33 @@ export default function MapHome() {
       this.longitude = longitude;
     }
   }
+
   useEffect(() => {
-    let geocoder = new window.kakao.maps.services.Geocoder();
-
-    const mappedArray = shops.map((shop: typeOfShop) => {
-      let OBOB = {
-        title: "",
-        latitude: "",
-        longitude: "",
-      };
-
-      geocoder.addressSearch(shop.주소, function (result, status) {
-        OBOB.title = shop.업소명;
-        OBOB.latitude = result[0].y;
-        OBOB.longitude = result[0].x;
+    if (window.kakao) {
+      let geocoder = new window.kakao.maps.services.Geocoder();
+      geocoder.addressSearch(`${시도} ${시군}`, function (result, status) {
+        // console.log(result, "이거 레절트");
+        setLng(+result[0].x);
+        setLat(+result[0].y);
       });
-      // console.log(OBOB, "여기서 찍히니?");
-      return OBOB;
-    });
-    // console.log(mappedArray, " 젭알나와줘 ㅜㅜ");
-    setnewArray(mappedArray);
+      const mappedArray = shops.map((shop: typeOfShop) => {
+        let OBOB = {
+          title: "",
+          latitude: "",
+          longitude: "",
+        };
 
-    geocoder.addressSearch(`${시도} ${시군}`, function (result, status) {
-      // console.log(result, "이거 레절트");
-      setLng(+result[0].x);
-      setLat(+result[0].y);
-    });
+        geocoder.addressSearch(shop.주소, function (result, status) {
+          OBOB.title = shop.업소명;
+          OBOB.latitude = result[0].y;
+          OBOB.longitude = result[0].x;
+        });
+        // console.log(OBOB, "여기서 찍히니?");
+        return OBOB;
+      });
+      // console.log(mappedArray, " 젭알나와줘 ㅜㅜ");
+      setnewArray(mappedArray);
+    }
   }, []);
   // console.log(newArray, "나오겠지?");
 

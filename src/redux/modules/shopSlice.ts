@@ -13,7 +13,22 @@ type typeOfShop = {
   연락처: string;
   주소: string;
 };
-const initialState: typeOfShop[] = [];
+const initialState: typeOfShop[] = [
+  {
+    가격1: 0,
+    가격2: 0,
+    가격3: 0,
+    메뉴1: "",
+    메뉴2: "",
+    메뉴3: "",
+    시군: "",
+    시도: "",
+    업소명: "",
+    업종: "",
+    연락처: "",
+    주소: "",
+  },
+];
 
 const shopSlice = createSlice({
   name: "shop",
