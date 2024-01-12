@@ -4,17 +4,18 @@ import Mapinfo from "../detail/Mapinfo";
 import { useRouter } from "next/navigation";
 import useKakaoLoader from "../detail/useKaKao";
 import { typeOfShop } from "@/app/assets/types/types";
+import { useDispatch } from "react-redux";
+import { getShops } from "@/redux/modules/shopSlice";
 
 export default function NowLocationBtn({ shops }: { shops: typeOfShop[] }) {
   const [latitude, setLatitude] = useState<number>(37.450701);
   const [longitude, setLongitude] = useState<number>(128.57049341667);
   const [toggle, setToggle] = useState(false);
+  const dispatch = useDispatch();
   useKakaoLoader();
   const router = useRouter();
   useEffect(() => {
-    // 브라우저가 Geolocation API를 지원하는지 확인
     if ("geolocation" in navigator) {
-      // 위치 정보를 가져오기
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setLatitude(position.coords.latitude);
@@ -24,13 +25,6 @@ export default function NowLocationBtn({ shops }: { shops: typeOfShop[] }) {
           console.error("Error getting location:", error);
         }
       );
-      // const watchID = navigator.geolocation.watchPosition((position) => {
-      //   console.log(
-      //     position.coords.latitude,
-      //     position.coords.longitude,
-      //     "위치위치"
-      //   );
-      // });
     } else {
       console.error("Geolocation is not supported by your browser");
     }
@@ -38,14 +32,41 @@ export default function NowLocationBtn({ shops }: { shops: typeOfShop[] }) {
 
   const findNowLoacation = () => {
     if (!window.kakao && !shops) return alert("잠시만용");
-    setToggle((prev: boolean) => {
-      return !prev;
-    });
+
+    if (window.kakao) {
+      const geocoder = new window.kakao.maps.services.Geocoder();
+      geocoder.coord2Address(
+        longitude,
+        latitude /* 128.57049341667,
+        37.450701, */,
+        function (result, status) {
+          if (status === window.kakao.maps.services.Status.OK) {
+            const addrArray = result[0].address.address_name.split(" ");
+
+            const filteredShops = shops.filter((shop: typeOfShop) => {
+              if (shop.시군 && addrArray[1] && addrArray[0] && shop.시도) {
+                return (
+                  shop.시군.substring(0, 2) === addrArray[1].substring(0, 2) &&
+                  shop.시도.substring(0, 2) === addrArray[0].substring(0, 2)
+                );
+              }
+            });
+            // console.log(filteredshops, "샵스");
+            dispatch(getShops(filteredShops));
+          } else {
+            console.log("지도 로딩 실패");
+          }
+        }
+      );
+    }
   };
 
   return (
     <>
-      <div>
+      <button className="bg-red-500 text-white" onClick={findNowLoacation}>
+        현재위치로 찾기
+      </button>{" "}
+      {/*  <div>
         <h2>Your Location:</h2>
         {latitude !== null && longitude !== null ? (
           <p>
@@ -54,13 +75,7 @@ export default function NowLocationBtn({ shops }: { shops: typeOfShop[] }) {
         ) : (
           <p>Loading...</p>
         )}
-      </div>
-      <button className="bg-black text-white" onClick={findNowLoacation}>
-        현재위치로 찾기
-      </button>
-      {toggle && (
-        <Mapinfo latitude={latitude} longitude={longitude} shops={shops} />
-      )}
+      </div> */}
     </>
   );
 }

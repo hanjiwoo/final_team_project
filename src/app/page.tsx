@@ -10,9 +10,8 @@ export default function Home() {
     <div className="flex flex-col items-center h-[100%] bg-[#fffbeb] gap-10">
       <MainBanner />
       <SearchForm />
-
-      <Best />
       <ShopList_map />
+      <Best />
     </div>
   );
 }

@@ -44,7 +44,7 @@ export default function MapTest() {
   return (
     <>
       {lat === 0 ? (
-        <div className="w-[340px] h-[340px] fixed">
+        <div className="w-[340px] h-[340px] fixed top-[100px] right-[0px] bg-yellow-300">
           지도가 로드되지 못했습니다.
         </div>
       ) : (
