@@ -26,7 +26,7 @@ export default function Join() {
 	// 체크리스트 전체 동의에 필요한 변수
 	const checkAll = (event: ChangeEvent<HTMLInputElement>) => {
 		event.target.checked
-			? setCheckList(["age", "terms", "collect"])
+			? setCheckList(["age", "terms", "collect", "choice"])
 			: setCheckList([]);
 	};
 	const check = (event: ChangeEvent<HTMLInputElement>) => {
@@ -280,7 +280,7 @@ export default function Join() {
 							type="checkbox"
 							name="all"
 							onChange={checkAll}
-							checked={checkList.length === 3 ? true : false}
+							checked={checkList.length === 4 ? true : false}
 						/>
 						<div>전체동의</div>
 					</div>
@@ -319,6 +319,18 @@ export default function Join() {
 						/>
 						<div>
 							<span>(필수)</span> 개인정보 수집 및 이용 동의
+						</div>
+					</div>
+					<div className="flex items-center">
+						<input
+							className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px]"
+							type="checkbox"
+							name="choice"
+							onChange={check}
+							checked={checkList.includes("choice") ? true : false}
+						/>
+						<div>
+							<span>(선택)</span> 마케팅 개인정보 제3자 제공 동의
 						</div>
 					</div>
 				</div>

@@ -31,19 +31,19 @@ import React, { useState } from "react";
 // import classNames from "classnames";
 import { auth } from "@/shared/firebase";
 
-// 로그인 상태 확인 테스트 버튼 함수
 const Navbar = () => {
 	const [menuToggle, setMenuToggle] = useState(false);
 
-	const checkLoginStatus = () => {
-		const userString = localStorage.getItem("user");
-		if (userString) {
-			const user = JSON.parse(userString);
-			alert(`${user.displayName}님은 현재 로그인 상태입니다.`);
-		} else {
-			console.log("로그인되어 있지 않습니다.");
-		}
-	};
+	// // 로그인 상태 확인 테스트 버튼 함수
+	// const checkLoginStatus = () => {
+	// 	const userString = localStorage.getItem("user");
+	// 	if (userString) {
+	// 		const user = JSON.parse(userString);
+	// 		alert(`${user.displayName}님은 현재 로그인 상태입니다.`);
+	// 	} else {
+	// 		console.log("로그인되어 있지 않습니다.");
+	// 	}
+	// };
 
 	// 로그아웃 버튼 함수
 	const handleSignOut = () => {
@@ -106,20 +106,27 @@ const Navbar = () => {
 					{/* 메뉴2 */}
 					<div className="hidden md:flex items-center space-x-1">
 						{localStorage.getItem("user") ? (
-							<a href="/" className="py-5 px-3" onClick={handleSignOut}>
-								로그아웃
-							</a>
+							<>
+								<a href="/mypage" className="py-5 px-3">
+									마이페이지
+								</a>
+								<a href="/" className="py-5 px-3" onClick={handleSignOut}>
+									로그아웃
+								</a>
+							</>
 						) : (
-							<a href="/login" className="py-5 px-3">
-								로그인
-							</a>
+							<>
+								<a href="/login" className="py-5 px-3">
+									로그인
+								</a>
+								<a
+									href="/join"
+									className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"
+								>
+									모-음 시작하기
+								</a>
+							</>
 						)}
-						<a
-							href="/join"
-							className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"
-						>
-							모-음 시작하기
-						</a>
 					</div>
 
 					{/* mobile menu */}

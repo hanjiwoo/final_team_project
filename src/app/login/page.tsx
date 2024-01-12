@@ -13,6 +13,8 @@ import {
 import { auth, db, storage } from "../../shared/firebase";
 import axios from "axios";
 import { Router } from "next/router";
+import Image from "next/image";
+import GoogleLogo from "../assets/images/icon/google.png";
 
 export default function Login() {
 	const [email, setEmail] = useState<string>("");
@@ -258,18 +260,37 @@ export default function Login() {
 				)}
 				<button
 					onClick={handleClickSignIn}
-					className=" flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145]"
+					className=" flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145] mb-[24px]"
 				>
 					로그인
 				</button>
 				<div className="flex flex-col">
-					<label>소셜계정으로 로그인</label>
+					<div>
+						<div className="flex justify-center text-[14px] font-[500] gap-[8px] text-[#999]">
+							아직 모음의 회원이 아니신가요?
+							<Link href="/join" className="text-[#FF8145] font-[600]">
+								회원가입
+							</Link>
+						</div>
+					</div>
+
+					<div className="gap-[16px] flex flex-justify items-center mb-[24px] mt-[36px]">
+						<div className="border-[1px] border-[#D6D6D6] w-[35%] my-[1%]" />
+						<span className="font-[500] text-[#999]">간편 로그인</span>
+						<div className="border-[1px] border-[#D6D6D6] w-[35%] my-[1%]" />
+					</div>
+
 					<div className="flex flex-col gap-[12px]">
 						<div
-							className="cursor-pointer  flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FFF]"
+							className="cursor-pointer  flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FFF] gap-[12px] border-solid border border-gray-400"
 							onClick={handleClickGoogle}
 						>
-							구글 들어갈 자리
+							<Image
+								src={GoogleLogo}
+								alt="googleLogo"
+								className="w-[20px] h-[20px]"
+							/>
+							구글로 시작하기
 						</div>
 						{/* <div className="cursor-pointer" onClick={handleClickKakao}>
 								카카오 들어갈 자리
@@ -282,10 +303,6 @@ export default function Login() {
 						</Link>
 					</div>
 				</div>
-
-				<Link href="/join" className="cursor-pointer">
-					회원가입으로 이동
-				</Link>
 			</div>
 		</div>
 	);
