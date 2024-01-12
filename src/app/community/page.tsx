@@ -1,19 +1,10 @@
-import React, { useState } from "react";
+"use client";
+import React from "react";
 
-export default function ListPage() {
-  const [community, setCommunity] = useState([
-    {
-      id: "",
-      title: "",
-      contents: "",
-      nickname: "",
-      createdOn: "",
-    },
-  ]);
+export default function listpage() {
   return (
     <>
       <h1>리스트 영역입니다.</h1>
-      {community}
     </>
   );
 }
