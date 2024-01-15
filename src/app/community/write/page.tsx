@@ -12,7 +12,10 @@ import { db } from "@/shared/firebase";
 interface Post {
   id: string;
   title: string;
+  profile: string;
   content: string;
+  createdAt: number;
+  nickname: string;
 }
 
 const WritePage: React.FC = () => {
