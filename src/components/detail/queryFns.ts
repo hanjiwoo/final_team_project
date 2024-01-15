@@ -25,8 +25,7 @@ export const addHoogi = async ({
   가격,
   위생,
   서비스,
-  range,
-  face,
+
   shopId,
 }: typeOfHoogi) => {
   await addDoc(collection(db, `hoogis${shopId}`), {
@@ -35,8 +34,6 @@ export const addHoogi = async ({
     가격,
     위생,
     서비스,
-    range,
-    face,
     shopId,
   });
 };

@@ -19,7 +19,7 @@ export default function DetailPage() {
       </div>
       <DoneAssess />
 
-      <Hoogi />
+      {/* <Hoogi /> */}
     </section>
   );
 }
