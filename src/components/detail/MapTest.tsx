@@ -57,7 +57,7 @@ export default function MapTest() {
           <div className="w-[310px] h-[310px] overflow-hidden rounded-lg">
             <Map
               // ref={mapRef.current}
-              className="bg-yellow-100" // 지도를 표시할 Container
+              className="bg-yellow-100 z-1" // 지도를 표시할 Container
               id="map"
               center={{
                 // 지도의 중심좌표
