@@ -9,49 +9,68 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState, ChangeEvent } from "react";
 import { db } from "@/shared/firebase";
-interface Post {
-  id: string;
-  title: string;
-  content: string;
-}
+import { Post } from "@/app/assets/types/types";
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 const WritePage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [newPost, setNewPost] = useState({ title: "", content: "" });
+  const [newPost, setNewPost] = useState({
+    title: "",
+    content: "",
+  });
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const postsCollection = collection(db, "posts");
-      const querySnapshot = await getDocs(postsCollection);
-      const postsData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Post[];
-      setPosts(postsData);
-    };
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     const postsCollection = collection(db, "posts");
+  //     const querySnapshot = await getDocs(postsCollection);
+  //     const postsData = querySnapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     })) as Post[];
+  //     setPosts(postsData);
+  //   };
 
-    fetchPosts();
-  }, []);
+  //   fetchPosts();
+  // }, []);
+
+  const addHoogi = async () => {
+    await addDoc(collection(db, "posts"), newPost);
+  };
+  const queryClient = useQueryClient();
+  const { mutate: mutateToAdd } = useMutation({
+    mutationFn: addHoogi,
+
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+  });
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setNewPost((prevPost) => ({ ...prevPost, [name]: value }));
+    // console.log(name, value);
+    setNewPost({ ...newPost, [name]: value });
+    // console.log(newPost);
   };
 
   const handleAddPost = async () => {
-    const postsCollection = collection(db, "posts");
-    await addDoc(postsCollection, newPost);
+    // const postsCollection = collection(db, "posts");
+    // await addDoc(postsCollection, newPost);
 
-    const updatedPosts = await getDocs(postsCollection);
-    const updatedPostsData = updatedPosts.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as Post[];
-    setPosts(updatedPostsData);
+    // const updatedPosts = await getDocs(postsCollection);
+    // const updatedPostsData = updatedPosts.docs.map((doc) => ({
+    //   id: doc.id,
+    //   ...doc.data(),
+    // })) as Post[];
+    // setPosts(updatedPostsData);
+    mutateToAdd();
 
-    setNewPost({ title: "", content: "" });
+    // setNewPost({ title: "", content: "" });
   };
 
   const handleUpdatePost = async (id: string, updatedPost: Partial<Post>) => {
@@ -106,7 +125,7 @@ const WritePage: React.FC = () => {
         <div>
           <h1>게시물 리스트</h1>
           <ul>
-            {posts.map((post) => (
+            {/* {posts.map((post) => (
               <li key={post.id}>
                 <strong>{post.title}</strong>
                 <p>{post.content}</p>
@@ -125,7 +144,7 @@ const WritePage: React.FC = () => {
                   삭제하기
                 </button>
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
       </div>
