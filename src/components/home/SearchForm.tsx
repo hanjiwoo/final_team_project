@@ -2,15 +2,18 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./home.css";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { getShops } from "@/redux/modules/shopSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getShops } from "@/redux/modules/shopsSlice";
 import { typeOfShop } from "@/app/assets/types/types";
 import NowLocationBtn from "./NowLocationBtn";
 import SigoonOptions from "./SigoonOptions";
+import { RootState } from "@/redux/config/configStore";
+import { getAllShops } from "@/redux/modules/allShops";
 
 export default function SearchForm() {
   const dispatch = useDispatch();
-  const [shops, setshops] = useState<typeOfShop[]>();
+  const shops = useSelector((state: RootState) => state.allShops);
+  // const [shops, setshops] = useState<typeOfShop[]>();
   const [form, setForm] = useState({ sido: "", sigoon: "", upzong: "" });
   const { sido, sigoon, upzong } = form;
 
@@ -31,7 +34,7 @@ export default function SearchForm() {
 
   useEffect(() => {
     let data = getGoodShop().then((res) => {
-      setshops(res);
+      dispatch(getAllShops(res));
       // console.log(res, "이거리스판스야");
     });
     // setshops(data)
@@ -60,7 +63,7 @@ export default function SearchForm() {
         );
       }
     });
-
+    if (!filteredShops[0]) return alert("검색결과가 없어요");
     dispatch(getShops(filteredShops));
     alert("검색완료");
     // setForm({ sido: "", sigoon: "", upzong: "" });
@@ -69,7 +72,7 @@ export default function SearchForm() {
   // console.log(shops, " 샵스");
   if (!shops) return <>로딩중...</>;
   return (
-    <div className="bg-red-100 w-[800px] h-[100px] flex justify-center items-center gap-5">
+    <div className="bg-red-50 w-[800px] h-[100px] flex justify-center items-center gap-5 rounded-lg">
       {/* {shops[0].업종} */}
       <select name="sido" onChange={onchangeHandler} value={form.sido}>
         <option id="none">광역시/도</option>
@@ -96,7 +99,7 @@ export default function SearchForm() {
       <SigoonOptions
         name="sigoon"
         onChange={onchangeHandler}
-        value={form.upzong}
+        value={form.sigoon}
         sido={form.sido}
       />
       {/* </select> */}
@@ -107,7 +110,7 @@ export default function SearchForm() {
         <option>양식</option>
         <option>중식</option>
       </select>
-      <button className="bg-green-100" onClick={onClickHandler}>
+      <button className="bg-red-500 text-white" onClick={onClickHandler}>
         찾아보기
       </button>
       <NowLocationBtn shops={shops} />

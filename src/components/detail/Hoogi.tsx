@@ -53,10 +53,14 @@ const fakeUser = {
   name: "han",
 };
 const { uid } = fakeUser;
-export default function Hoogi() {
-  const [range, setRange] = useState("0");
+export default function Hoogi({
+  setModal,
+}: {
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  // const [range, setRange] = useState("0");
   // const [activeId, setActiveId] = useState("");
-  const [face, setFace] = useState("");
+  // const [face, setFace] = useState("");
   const [form, setForm] = useState({
     맛: "",
     가격: "",
@@ -75,9 +79,9 @@ export default function Hoogi() {
     },
   });
 
-  const rangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRange(e.target.value);
-  };
+  // const rangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setRange(e.target.value);
+  // };
 
   // const onclickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
   //   // if (e.currentTarget === e.target) return;
@@ -85,34 +89,35 @@ export default function Hoogi() {
   //   // console.log(e.currentTarget.innerHTML);
   //   setActiveId(e.currentTarget.id);
   // };
-  const faceHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.innerHTML === "이모티콘") return alert("no");
+  // const faceHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   if (e.target.innerHTML === "이모티콘") return alert("no");
 
-    setFace(e.target.value);
-    // console.log(e.target, "이모티콘");
-  };
+  //   setFace(e.target.value);
+  //   // console.log(e.target, "이모티콘");
+  // };
   const submitHandler = () => {
-    console.log(uid, shopId, 맛, 가격, 위생, 서비스, range, face);
+    // console.log(uid, shopId, 맛, 가격, 위생, 서비스, range, face);
     if (
       !맛 ||
       !가격 ||
       !위생 ||
-      !서비스 ||
-      range === "0" ||
-      face === "이모티콘"
+      !서비스
+      // range === "0" ||
+      // face === "이모티콘"
     )
       return alert("후기 선택을 전부 해주세요");
 
-    mutateToAdd({ uid, shopId, 맛, 가격, 위생, 서비스, range, face });
-    setFace("");
+    mutateToAdd({ uid, shopId, 맛, 가격, 위생, 서비스 });
+    // setFace("");
     /* setForm({
       맛: "",
       가격: "",
       서비스: "",
       위생: "",
     }); */
-    setRange("0");
+    // setRange("0");
     alert("제출 완료");
+    setModal(false);
 
     // console.log(맛, 가격, 위생, 서비스, range, face);
   };
@@ -121,7 +126,7 @@ export default function Hoogi() {
       <div className="bg-red-300  h-[50px] flex ">
         <h1>해당 음식점에 리뷰를 남겨주세요</h1>
         <div className="bg-yellow-300 h-12">
-          <input
+          {/* <input
             className="w-64 bg-yellow-300 "
             type="range"
             value={range}
@@ -129,10 +134,10 @@ export default function Hoogi() {
             max={10}
             min={0}
             step={1}
-          />
+          /> */}
         </div>
-        <div>{range}점</div>
-        <select value={face} onChange={(e) => faceHandler(e)}>
+        {/* <div>{range}점</div> */}
+        {/* <select value={face} onChange={(e) => faceHandler(e)}>
           <option>이모티콘</option>
           <option>😍</option>
           <option>😀</option>
@@ -142,7 +147,7 @@ export default function Hoogi() {
           <option>😥</option>
           <option>🤒</option>
           <option>👿</option>
-        </select>
+        </select> */}
       </div>
       <div className="flex flex-col  mb-32  bg-indigo-300 w-[800px]">
         <section className="flex justify-between">

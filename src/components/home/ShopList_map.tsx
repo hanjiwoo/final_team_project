@@ -1,12 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import ShopList from "./ShopList";
-import MapHome from "./MapHome";
 import { useSelector } from "react-redux";
 
 export default function ShopList_map() {
   const [toggle, setToggle] = useState(true);
-  const shop = useSelector((state: any) => state.shop);
+  const shop = useSelector((state: any) => state.shops);
   const toggleHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -37,7 +35,6 @@ export default function ShopList_map() {
           지도보기
         </button>
       </div>
-      <div>{toggle ? <ShopList /> : <MapHome />}</div>
     </>
   );
 }
