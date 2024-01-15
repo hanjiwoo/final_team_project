@@ -78,28 +78,37 @@ const WritePage: React.FC = () => {
     <>
       <div className=" w-48 h-96 m-auto">
         <div>
-          <h2>게시물 작성</h2>
-          <input
-            className="border-2 border-black w-80 h-10"
-            type="text"
-            placeholder="제목을 입력해주세요"
-            name="title"
-            value={newPost.title}
-            onChange={handleInputChange}
-          />
-          <textarea
-            className="border-2 border-black w-96 h-96  "
-            placeholder="내용을 입력해주세요."
-            name="content"
-            value={newPost.content}
-            onChange={handleInputChange}
-          />
-          <button className="border-2 border-black" onClick={handleAddPost}>
-            등록하기
-          </button>
-          <button className="border-2 border-black">취소하기</button>
+          <h2>게시물 작성하기</h2>
         </div>
-        <div>
+
+        <form>
+          <div>
+            <input
+              className="border-2 border-black w-80 h-10"
+              type="text"
+              placeholder="제목을 입력해주세요"
+              name="title"
+              value={newPost.title}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div>
+            <textarea
+              className="border-2 border-black w-96 h-96  "
+              placeholder="내용을 입력해주세요."
+              name="content"
+              value={newPost.content}
+              onChange={handleInputChange}
+            />
+          </div>
+        </form>
+
+        <button className="border-2 border-black" onClick={handleAddPost}>
+          등록하기
+        </button>
+        <button className="border-2 border-black">취소하기</button>
+        {/* <div>
           <h1>게시물 리스트</h1>
           <ul>
             {posts.map((post) => (
@@ -123,7 +132,7 @@ const WritePage: React.FC = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </div>
     </>
   );
