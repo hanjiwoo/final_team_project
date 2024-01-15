@@ -8,10 +8,10 @@ import DoneAssess from "@/components/detail/DoneAssess";
 import ImagePage from "@/components/detail/ImagePage";
 export default function DetailPage() {
   return (
-    <section className="flex flex-col  items-center">
+    <section className="flex flex-col items-center p-[60px]">
       <MapTest />
-      <div className="bg-blue-300">디테일페이지야</div>
-      <div className="flex flex-col bg-red-500 ">
+      {/* <div className="bg-blue-300">디테일페이지야</div> */}
+      <div className="flex flex-col bg-orange-200 ">
         <ImagePage />
 
         <Shopinfo />
@@ -19,7 +19,7 @@ export default function DetailPage() {
       </div>
       <DoneAssess />
 
-      <Hoogi />
+      {/* <Hoogi /> */}
     </section>
   );
 }

@@ -15,7 +15,7 @@ type typeOfShop = {
 };
 const initialState: typeOfShop[] = [];
 
-const shopSlice = createSlice({
+const shopsSlice = createSlice({
   name: "shop",
   initialState,
   reducers: {
@@ -26,5 +26,5 @@ const shopSlice = createSlice({
   },
 });
 
-export const { getShops } = shopSlice.actions;
-export default shopSlice.reducer;
+export const { getShops } = shopsSlice.actions;
+export default shopsSlice.reducer;

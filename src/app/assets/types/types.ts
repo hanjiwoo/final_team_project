@@ -45,8 +45,6 @@ export type typeOfHoogi = {
   가격?: string;
   위생?: string;
   서비스?: string;
-  range?: string;
-  face?: string;
   id?: string;
   uid?: number;
   shopId?: string | string[] | undefined;

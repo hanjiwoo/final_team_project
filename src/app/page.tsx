@@ -1,18 +1,17 @@
 import Best from "@/components/home/Best";
+import GoodPrice from "@/components/home/GoodPrice";
 import MainBanner from "@/components/home/MainBanner";
-import NowLocationBtn from "@/components/home/NowLocationBtn";
 import SearchForm from "@/components/home/SearchForm";
-import ShopList_map from "@/components/home/ShopList_map";
-import Image from "next/image";
+import ShopList from "@/components/home/ShopList";
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center h-[100%] bg-[#fffbeb] gap-10">
       <MainBanner />
       <SearchForm />
-
+      <ShopList />
       <Best />
-      <ShopList_map />
+      <GoodPrice />
     </div>
   );
 }
