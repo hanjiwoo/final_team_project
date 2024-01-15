@@ -6,28 +6,41 @@ import { useQuery } from "@tanstack/react-query";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/shared/firebase";
 import { Post } from "../assets/types/types";
+import { nanoid } from "nanoid";
 export default function listpage() {
   const { data: posts, isLoading } = useQuery({
     queryKey: ["posts"],
     queryFn: () => {
-      const getPosts = async (shopId: string | string[]) => {
+      const getPosts = async () => {
         let data: Post[] = [];
-        const response = await getDocs(collection(db, `posts`));
+        const response = await getDocs(collection(db, "posts"));
+        // console.log(response, "하하");
         response.forEach((post) => {
           const postData = post.data();
-          // data.push({ ...postData, id: post.id });
+          // console.log(postData, "하하");
+          data.push({ ...postData, id: post.id });
         });
+
         return data;
       };
+
+      return getPosts();
     },
   });
 
+  if (isLoading) return <div>로딩중</div>;
   return (
     <>
       <div>
         <p>추천해요 목록 입니다.</p>
       </div>
-
+      {posts?.map((post) => {
+        return (
+          <div key={nanoid()}>
+            타이틀 : {post.title} 콘텐츠 : {post.content}
+          </div>
+        );
+      })}
       <div>
         <h1>제목입니다</h1>
         <p>내용입니다.</p>
