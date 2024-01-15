@@ -339,7 +339,7 @@ export default function SigoonOptions({
   }
   // console.log(sigoonRef, " 시군찍히나?");
   return (
-    <select multiple={true} name={name} onChange={onChange} value={[value]}>
+    <select name={name} onChange={onChange} value={value}>
       <option id="none">시/군/구</option>
       {sigoonRef.current?.map((item) => {
         return <option key={nanoid()}>{item}</option>;

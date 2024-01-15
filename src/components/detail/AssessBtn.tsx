@@ -31,7 +31,7 @@ export default function AssessBtn({
     //  setActiveHoogi(e.target.id)
     // console.log(e.currentTarget.innerHTML);
     setActiveId(e.currentTarget.id);
-    setForm({ ...form, [type]: e.currentTarget.innerHTML });
+    setForm({ ...form, [type]: e.currentTarget.id });
     // console.log(form, "폼 확인");
   };
   // console.log(item);
@@ -39,25 +39,25 @@ export default function AssessBtn({
   return (
     <>
       <h2>{title}</h2>
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex  gap-2 justify-center">
         <div
           id="1"
           onClick={onclickHandler}
-          className={`bg-${activeId === "1" ? "yellow" : "red"}-300 w-11/12`}
+          className={`bg-${activeId === "1" ? "yellow" : "red"}-300 w-1/4`}
         >
           {one}
         </div>{" "}
         <div
           id="2"
           onClick={onclickHandler}
-          className={`bg-${activeId === "2" ? "yellow" : "red"}-300 w-11/12`}
+          className={`bg-${activeId === "2" ? "yellow" : "red"}-300 w-1/4`}
         >
           {two}
         </div>{" "}
         <div
           id="3"
           onClick={onclickHandler}
-          className={`bg-${activeId === "3" ? "yellow" : "red"}-300 w-11/12`}
+          className={`bg-${activeId === "3" ? "yellow" : "red"}-300 w-1/4`}
         >
           {three}
         </div>
