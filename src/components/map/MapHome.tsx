@@ -6,6 +6,10 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useDispatch, useSelector } from "react-redux";
 import useKakaoLoader from "../detail/useKaKao";
+import SearchForm from "../home/SearchForm";
+import ColumnSlide from "./ColumnSlide";
+import { RootState } from "@/redux/config/configStore";
+import { getShop } from "@/redux/modules/detailShopSlice";
 
 type typeOfRef = {
   title: string;
@@ -15,18 +19,17 @@ type typeOfRef = {
 
 export default function MapHome() {
   useKakaoLoader();
-  const shops = useSelector((state: any) => state.shop);
+  const shops = useSelector((state: RootState) => state.shops);
   const router = useRouter();
   const { 시군, 시도 } = shops[0];
+  const [slide, setSlide] = useState(0);
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
-
-  // const shopsRef = useRef<typeOfRef>({
-  //   title: "",
-  //   latitude: "",
-  //   longitude: "",
-  // });
-  const [newArray, setnewArray] = useState<typeOfRef[]>([]);
+  const [render, setRender] = useState(false);
+  // const latRef = useRef(0);
+  // const lngRef = useRef(0);
+  const shopsRef = useRef<typeOfRef[]>([]);
+  // const [newArray, setnewArray] = useState<typeOfRef[]>([]);
   const dispatch = useDispatch();
   class NewShops {
     title: string;
@@ -46,6 +49,8 @@ export default function MapHome() {
         // console.log(result, "이거 레절트");
         setLng(+result[0].x);
         setLat(+result[0].y);
+        // latRef.current = Number(result[0].y);
+        // lngRef.current = Number(result[0].x);
       });
       const mappedArray = shops.map((shop: typeOfShop) => {
         let OBOB = {
@@ -63,9 +68,10 @@ export default function MapHome() {
         return OBOB;
       });
       // console.log(mappedArray, " 젭알나와줘 ㅜㅜ");
-      setnewArray(mappedArray);
+      // setnewArray(mappedArray);
+      shopsRef.current = mappedArray;
     }
-  }, []);
+  }, [shops]);
   // console.log(newArray, "나오겠지?");
 
   const moveToDetail = (title: string) => {
@@ -73,12 +79,49 @@ export default function MapHome() {
       return shop.업소명 === title;
     });
     // console.log(oneshop);
-    router.push(`/detail/${oneshop.연락처}`);
+    if (oneshop) {
+      dispatch(getShop(oneshop));
+      router.push(`/detail/${oneshop.연락처}`);
+    } else alert("존재하지 않아요");
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRender(!render);
+    }, 100);
+  }, []);
+
+  // const wheelHandler = (e: React.WheelEvent<HTMLDivElement>) => {
+  // e.preventDefault();
+  // console.log(e.clientY, "클라와이");
+  // console.log(e.deltaY, "델타와이");
+  // console.log(e.movementY, "무브먼트와이");
+
+  //   setSlide((prev) => {
+  //     if (
+  //       slide >= 0 ||
+  //       Math.ceil((shops.length / 4) * 1000) + slide - 1500 <= 0
+  //     )
+  //       return prev;
+  //     return prev + e.deltaY;
+  //   });
+  // };
+
+  const upHandler = () => {
+    if (slide >= 0) return;
+    setSlide(slide + 500);
+  };
+
+  const downHandler = () => {
+    if (Math.ceil((shops.length / 4) * 1000) + slide - 1500 <= 0) return;
+    setSlide(slide - 500);
   };
   return (
     <>
-      <div className="w-[600px] h-[600px] bg-yellow-300">
-        맵을받아보자규
+      <div className="w-screen h-screen bg-yellow-300">
+        <div className="bg-green-300 absolute top-[75px] left-[450px] z-10">
+          {/* <SearchForm /> */}
+        </div>
         <Map
           // ref={mapRef.current}
           className="bg-yellow-100" // 지도를 표시할 Container
@@ -93,9 +136,9 @@ export default function MapHome() {
             width: "100%",
             height: "100%",
           }}
-          level={7} // 지도의 확대 레벨
+          level={6} // 지도의 확대 레벨
         >
-          {newArray.map((shop: typeOfRef) => {
+          {shopsRef.current.map((shop: typeOfRef) => {
             return (
               <MapMarker
                 key={nanoid()}
@@ -126,6 +169,39 @@ export default function MapHome() {
             }}
           /> */}
         </Map>
+      </div>
+
+      <div className="absolute top-[75px] left-10 z-10 flex">
+        <div
+          // onWheel={(e) => wheelHandler(e)}
+          className={`bg-green-300 flex flex-col h-[900px] overflow-hidden `}
+        >
+          <div
+            style={{
+              backgroundColor: "green",
+              height: `${Math.ceil(shops.length / 4) * 1000}px`,
+              transform: `translate(0,${slide}px)`,
+              transition: "transform 0.5s",
+              display: "flex",
+            }}
+          >
+            <ColumnSlide />
+          </div>
+        </div>
+        <div className="flex flex-col justify-center gap-5">
+          <button
+            onClick={upHandler}
+            className=" bg-purple-300 rounded-full text-4xl hover:scale-110"
+          >
+            👆
+          </button>
+          <button
+            onClick={downHandler}
+            className="bg-purple-300 rounded-full text-4xl hover:scale-110"
+          >
+            👇
+          </button>
+        </div>
       </div>
     </>
   );

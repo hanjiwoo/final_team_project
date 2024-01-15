@@ -10,6 +10,7 @@ export default function MapTest() {
   useKakaoLoader();
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
+  const [render, setRender] = useState(false);
   const { 시군, 업소명, 주소 } = useSelector((state: any) => state.detailShop);
   const dispatch = useDispatch();
 
@@ -39,6 +40,10 @@ export default function MapTest() {
         }
       });
     }
+
+    setTimeout(() => {
+      setRender(!render);
+    }, 500);
   }, []);
 
   return (

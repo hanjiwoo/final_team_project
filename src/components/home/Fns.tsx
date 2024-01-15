@@ -27,7 +27,7 @@ export const addThumb = async ({
   shopId,
 }: {
   uid: number;
-  shopId: string;
+  shopId: string | string[];
 }) => {
   // console.log("추가하기 함수는 돼?");
   await addDoc(collection(db, "thumbs"), {

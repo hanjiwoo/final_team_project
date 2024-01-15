@@ -4,7 +4,7 @@ import { Map, MapMarker } from "react-kakao-maps-sdk";
 import useKakaoLoader from "./useKaKao";
 import { useDispatch, useSelector } from "react-redux";
 import { typeOfShop } from "@/app/assets/types/types";
-import { getShops } from "@/redux/modules/shopSlice";
+import { getShops } from "@/redux/modules/shopsSlice";
 
 // type typeOfCurrent = {
 //   current: string[];

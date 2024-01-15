@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import phica from "../../app/assets/images/피카츄.jpg";
 import { getShop } from "@/redux/modules/detailShopSlice";
 import MapTest from "./MapTest";
+import Ddabong from "../home/Ddabong";
 
 export default function Shopinfo() {
   const router = useRouter();
@@ -60,7 +61,11 @@ export default function Shopinfo() {
 
   return (
     <div className="bg-blue-100 gap-0.5 h-[200px] pl-[15px] flex flex-col justify-center">
-      <h1 className="text-4xl font-black">{shop.업소명}</h1>
+      <p className="flex">
+        {" "}
+        <h1 className="text-4xl font-black">{shop.업소명} </h1>
+        <Ddabong name="thumbup" shopId={id} type="normal" />
+      </p>
       <p>업종 {shop.업종}</p>
       <div>위치 {shop.주소}</div>
       <div>전화번호 {shop.연락처}</div>

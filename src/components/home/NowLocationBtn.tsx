@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import useKakaoLoader from "../detail/useKaKao";
 import { typeOfShop } from "@/app/assets/types/types";
 import { useDispatch } from "react-redux";
-import { getShops } from "@/redux/modules/shopSlice";
+import { getShops } from "@/redux/modules/shopsSlice";
 
 export default function NowLocationBtn({ shops }: { shops: typeOfShop[] }) {
   const [latitude, setLatitude] = useState<number>(37.450701);
