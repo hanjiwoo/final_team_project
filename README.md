@@ -53,6 +53,11 @@
 - React boilerplate: create-react-app
 
 #### 📌 사용 기술
+<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white"> <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=javascript&logoColor=white"> 
+<img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"> <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+<br />
+<img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"> <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black">
+<img src="https://img.shields.io/badge/yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white"> <img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black">
 - Next.js - 페이지의 초기 로딩 속도 향상, 검색 엔진 최적화(SEO), 코드 분할(Code splitting) 등의 성능 및 효율성을 제공
 - TypeScript - 예측 가능하고 안정적인 코드 작성, 강력한 개발 도구 지원, 효과적인 협업
 - Tailwind CSS - 사용자 정의 CSS 코드를 작성하지 않고도 HTML 요소의 스타일을 지정하는 데 사용할 수 있음
