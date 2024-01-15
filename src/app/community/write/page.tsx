@@ -9,32 +9,25 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState, ChangeEvent } from "react";
 import { db } from "@/shared/firebase";
-interface Post {
-  id: string;
-  title: string;
-  profile: string;
-  content: string;
-  createdAt: number;
-  nickname: string;
-}
+import { Post } from "@/app/assets/types/types";
 
 const WritePage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [newPost, setNewPost] = useState({ title: "", content: "" });
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const postsCollection = collection(db, "posts");
-      const querySnapshot = await getDocs(postsCollection);
-      const postsData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Post[];
-      setPosts(postsData);
-    };
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     const postsCollection = collection(db, "posts");
+  //     const querySnapshot = await getDocs(postsCollection);
+  //     const postsData = querySnapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     })) as Post[];
+  //     setPosts(postsData);
+  //   };
 
-    fetchPosts();
-  }, []);
+  //   fetchPosts();
+  // }, []);
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

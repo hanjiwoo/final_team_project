@@ -49,3 +49,12 @@ export type typeOfHoogi = {
   uid?: number;
   shopId?: string | string[] | undefined;
 };
+
+export interface Post {
+  id: string;
+  title: string;
+  profile: string;
+  content: string;
+  createdAt: number;
+  nickname: string;
+}
