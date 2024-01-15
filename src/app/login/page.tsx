@@ -15,8 +15,11 @@ import axios from "axios";
 import { Router } from "next/router";
 import Image from "next/image";
 import GoogleLogo from "../assets/images/icon/google.png";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+	const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API}&redirect_uri=http://localhost:3000/login&response_type=code`;
+
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [displayName, setDisplayName] = useState<string | null>(null);
@@ -27,6 +30,9 @@ export default function Login() {
 
 	// const auth = getAuth();
 	const user = auth.currentUser;
+
+	// 화면 이동을 위한 useRouter()
+	const router = useRouter();
 
 	useEffect(() => {
 		if (user !== null) {
@@ -42,13 +48,38 @@ export default function Login() {
 
 	const getToken = async (code: string | null) => {
 		try {
+			const userCredential = await signInWithEmailAndPassword(
+				auth,
+				email,
+				password
+			);
+
+			// 성공적으로 로그인했을 때 사용자 정보 저장
+			const user = userCredential.user;
+
+			localStorage.setItem(
+				"user",
+				JSON.stringify({
+					uid: user.uid,
+					displayName: user.displayName,
+					email: user.email,
+					photoURL: user.photoURL,
+				})
+			);
+			setLoginStatus(true); // 로그인 상태를 true 값으로 저장
+
+			console.log("로그인완료");
+			console.log(loginStatus);
+			alert(`${user.displayName}님 안녕하세요`);
+			window.location.href = "/";
+
 			const response = await axios({
 				url: `https://kauth.kakao.com/oauth/token`,
 				method: "post",
 				params: {
 					grant_type: "authorization_code",
 					client_id: process.env.NEXT_PUBLIC_KAKAO_REST_API,
-					redirect_uri: "http://localhost:3000/login", // 수정된 부분
+					redirect_uri: "http://localhost:3000/login",
 					code: code,
 				},
 			});
@@ -132,7 +163,7 @@ export default function Login() {
 			console.log("로그인완료");
 			console.log(loginStatus);
 			alert(`${user.displayName}님 안녕하세요`);
-			window.location.href = "/";
+			router.replace("/");
 		} catch (error) {
 			alert("로그인에 실패했습니다");
 			console.error(error);
@@ -165,7 +196,8 @@ export default function Login() {
 			console.log(loginStatus);
 			console.log("Google 로그인 성공");
 			alert(`${displayName}님 안녕하세요`);
-			window.location.href = "/";
+
+			router.replace("/");
 		} catch (error) {
 			console.error("Google 로그인 실패:", error);
 		}
@@ -295,12 +327,20 @@ export default function Login() {
 						{/* <div className="cursor-pointer" onClick={handleClickKakao}>
 								카카오 들어갈 자리
 							</div> */}
-						<Link
+						{/* <Link
 							href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API}&redirect_uri=http://localhost:3000/login`}
 							className=" flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FEE500]"
 						>
 							카카오로 로그인
-						</Link>
+						</Link> */}
+						<button
+							onClick={() => {
+								window.location.href = KAKAO_AUTH_URL;
+							}}
+							className=" flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FEE500]"
+						>
+							카카오로 로그인
+						</button>
 					</div>
 				</div>
 			</div>
