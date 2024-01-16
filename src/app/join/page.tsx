@@ -39,7 +39,7 @@ export default function Join() {
 
 	// 약관 동의 부분 토스티파이
 	const notify = () =>
-		toast.error("약관을 동의 하세여 동의 어 보감~!", {
+		toast.error("약관을 동의 하세여", {
 			transition: Slide,
 			position: "top-center",
 			autoClose: 5000,
@@ -78,6 +78,7 @@ export default function Join() {
 		if (name === "displayName") {
 			setDisplayName(value);
 		}
+		handleBlur(event);
 	};
 
 	const handleBlur = (event: ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +86,7 @@ export default function Join() {
 			target: { name },
 		} = event;
 
-		// 에러 메시지 초기화
+		// input 밑에 에러 메시지 초기화
 		if (name === "email") {
 			setEmailError("");
 		} else if (name === "password") {
@@ -219,7 +220,7 @@ export default function Join() {
 							name="email"
 							onChange={handleClickOnChange}
 							required
-							placeholder="example@zum.com"
+							placeholder="example@moeum.com"
 							onBlur={handleBlur}
 						></input>
 					</div>
@@ -345,9 +346,6 @@ export default function Join() {
 					회원가입
 				</button>
 				<ToastContainer />
-				<Link href="/login" className="cursor-pointer">
-					로그인하기
-				</Link>
 			</div>
 		</div>
 	);
