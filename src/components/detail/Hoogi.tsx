@@ -124,7 +124,7 @@ export default function Hoogi({
   return (
     <div className="bg-blue-300 h-[600px] flex flex-col items-center mb-10">
       <div className="bg-red-300  h-[50px] flex ">
-        <h1>해당 음식점에 리뷰를 남겨주세요</h1>
+        <h1>오늘 방문한 매장은 어떤가요?</h1>
         <div className="bg-yellow-300 h-12">
           {/* <input
             className="w-64 bg-yellow-300 "

@@ -110,7 +110,7 @@ export default function SearchForm() {
         <option>양식</option>
         <option>중식</option>
       </select>
-      <button className="bg-red-500 text-white" onClick={onClickHandler}>
+      <button className="bg-[#FF8145] text-white" onClick={onClickHandler}>
         찾아보기
       </button>
       <NowLocationBtn shops={shops} />

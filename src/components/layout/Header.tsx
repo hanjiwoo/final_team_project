@@ -36,13 +36,13 @@ const Navbar = () => {
 
   // // 로그인 상태 확인 테스트 버튼 함수
   // const checkLoginStatus = () => {
-  // 	const userString = localStorage.getItem("user");
-  // 	if (userString) {
-  // 		const user = JSON.parse(userString);
-  // 		alert(`${user.displayName}님은 현재 로그인 상태입니다.`);
-  // 	} else {
-  // 		console.log("로그인되어 있지 않습니다.");
-  // 	}
+  //   const userString = localStorage.getItem("user");
+  //   if (userString) {
+  //     const user = JSON.parse(userString);
+  //     alert(`${user.displayName}님은 현재 로그인 상태입니다.`);
+  //   } else {
+  //     console.log("로그인되어 있지 않습니다.");
+  //   }
   // };
 
   // 로그아웃 버튼 함수
@@ -61,14 +61,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-100">
+    <nav className="bg-gray-00 w-full">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between">
           {/* 메뉴 */}
           <div className="flex space-x-4">
             <div>
               <a href="/" className="flex items-center py-5 px-2 text-gray-700">
-                <svg
+                {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 mr-2 text-blue-400"
                   viewBox="0 0 20 20"
@@ -79,55 +79,65 @@ const Navbar = () => {
                     // d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z"
                     clipRule="evenodd"
                   />
-                </svg>
+                </svg> */}
                 <span className="font-bold">로고</span>
-              </a>
-            </div>
-            <div className="hidden md:flex items-center space-x-1">
-              <a
-                href="/about"
-                className="py-5 px-3 text-gray-700 hover:text-gray-900"
-              >
-                모음소개
-              </a>
-              <a
-                href="/community"
-                className="py-5 px-3 text-gray-700 hover:text-gray-900"
-              >
-                커뮤니티
               </a>
             </div>
           </div>
 
-          {/* 로그인 테스트 버튼 */}
-          {/* <button onClick={checkLoginStatus}>로그인 상태 테스트입니다</button>
-					<button onClick={handleSignOut}>로그아웃 테스트입니다</button> */}
+          {/* 로그인 테스트 버튼
+          <button onClick={checkLoginStatus}>로그인 상태 테스트입니다</button>
+          <button onClick={handleSignOut}>로그아웃 테스트입니다</button> */}
 
           {/* 메뉴2 */}
-          {/* 	<div className="hidden md:flex items-center space-x-1">
-						{localStorage.getItem("user") ? (
-							<>
-								<a href="/mypage" className="py-5 px-3">
-									마이페이지
-								</a>
-								<a href="/" className="py-5 px-3" onClick={handleSignOut}>
-									로그아웃
-								</a>
-							</>
-						) : (
-							<>
-								<a href="/login" className="py-5 px-3">
-									로그인
-								</a>
-								<a
-									href="/join"
-									className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"
-								>
-									모-음 시작하기
-								</a>
-							</>
-						)}
-					</div> */}
+          <div className="hidden md:flex items-center space-x-1">
+            <a
+              href="/about"
+              className="py-5 px-3 text-gray-700 hover:text-gray-400"
+            >
+              모음소개
+            </a>
+            <a
+              href="/community"
+              className="py-5 px-3 text-gray-700 hover:text-gray-400"
+            >
+              커뮤니티
+            </a>
+            {localStorage.getItem("user") ? (
+              <>
+                <a
+                  href="/mypage"
+                  className="py-5 px-3  text-gray-700 hover:text-gray-400"
+                >
+                  마이페이지
+                </a>
+                <a
+                  href="/"
+                  className="py-5 px-3  text-gray-700 hover:text-gray-400"
+                  onClick={handleSignOut}
+                >
+                  로그아웃
+                </a>
+              </>
+            ) : (
+              <>
+                <a
+                  href="/login"
+                  className="py-5 px-3 text-gray-700 hover:text-gray-400"
+                >
+                  로그인
+                </a>
+                <a
+                  href="/join"
+                  className="w-[100px] h-10 py-3 px-2 bg-[#FF8145] hover:bg-[#E5743E] rounded-lg transition duration-300 justify-center items-center gap-1 inline-flex"
+                >
+                  <div className="text-right text-white text-sm font-medium font-['Pretendard'] leading-tight">
+                    모-음 시작하기
+                  </div>
+                </a>
+              </>
+            )}
+          </div>
 
           {/* mobile menu */}
           <div className="md:hidden flex items-center">

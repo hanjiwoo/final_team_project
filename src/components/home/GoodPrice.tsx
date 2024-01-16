@@ -62,7 +62,7 @@ export default function GoodPrice() {
         전국의 착한 가격 매장 모-음
       </h1>
       <h3 className="text-lg text-gray-300 font-semibold">
-        따뜻한 마음들이 모인곳은 어디일까요?
+        따뜻한 마음들이 모인 곳은 어디일까요?
       </h3>
       <div className="flex justify-center gap-10">
         <button
