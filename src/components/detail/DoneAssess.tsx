@@ -80,7 +80,7 @@ export default function DoneAssess() {
         DoneHoogis.가격3 += 1;
         break;
       default:
-        console.log("Unknown 가격.");
+      // console.log("Unknown 가격.");
     }
     switch (hoogi.맛) {
       case "1":
@@ -93,7 +93,7 @@ export default function DoneAssess() {
         DoneHoogis.맛3 += 1;
         break;
       default:
-        console.log("Unknown 맛.");
+      // console.log("Unknown 맛.");
     }
     switch (hoogi.위생) {
       case "1":
@@ -106,7 +106,7 @@ export default function DoneAssess() {
         DoneHoogis.위생3 += 1;
         break;
       default:
-        console.log("Unknown 위생.");
+      // console.log("Unknown 위생.");
     }
     switch (hoogi.서비스) {
       case "1":
@@ -119,7 +119,7 @@ export default function DoneAssess() {
         DoneHoogis.서비스3 += 1;
         break;
       default:
-        console.log("Unknown 서비스.");
+      // console.log("Unknown 서비스.");
     }
   });
 
@@ -130,22 +130,26 @@ export default function DoneAssess() {
     <>
       {" "}
       <div className="bg-cyan-200 h-[600px] w-[900px] mb-[100px] flex flex-col justify-start items-center justify-start  ">
-        <div className="bg-pink-200 w-10/12 flex justify-between ">
+        <div className="bg-pink-200 w-10/12 flex justify-between items-center">
           <div>
-            {hoogis?.map((hoogi: typeOfHoogi) => {
-              hoogi.맛;
-              return (
-                <div key={nanoid()} className="flex">
-                  <>{hoogi.uid}님 후기 감사합니다.</>
-                  <button
-                    onClick={() => deleteHandler(hoogi.id)}
-                    className="bg-green-500 rounded-full"
-                  >
-                    삭제
-                  </button>
-                </div>
-              );
-            })}
+            {hoogis
+              ?.filter((hoogi) => {
+                return (hoogi.uid = fakeuser.uid);
+              })
+              .map((hoogi: typeOfHoogi) => {
+                hoogi.맛;
+                return (
+                  <div key={nanoid()} className="flex">
+                    <>{hoogi.uid}님 후기 감사합니다.</>
+                    <button
+                      onClick={() => deleteHandler(hoogi.id)}
+                      className="bg-green-500 rounded-full"
+                    >
+                      후기삭제
+                    </button>
+                  </div>
+                );
+              })}
           </div>
           <button
             onClick={modalOpenHandeler}
