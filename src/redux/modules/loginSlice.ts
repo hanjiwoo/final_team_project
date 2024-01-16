@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	isLogin: !!localStorage.getItem("accessToken"),
-	displayName: localStorage.getItem("displayName"),
-	uid: localStorage.getItem("uid"),
-	photoURL: localStorage.getItem("photoURL"),
-	email: localStorage.getItem("email"),
+	isLogin: Boolean(localStorage.getItem("accessToken")),
+	displayName: localStorage.getItem("displayName") || "",
+	uid: localStorage.getItem("uid") || "",
+	photoURL: localStorage.getItem("photoURL") || "",
+	email: localStorage.getItem("email") || "",
 };
 
 const loginSlice = createSlice({
@@ -24,11 +24,10 @@ const loginSlice = createSlice({
 			state.photoURL = photoURL;
 			state.email = email;
 		},
-		// logout: (state, action) => {
-		//   localStorage.clear();
+		logout: (state, action) => {
+			localStorage.clear();
+		},
 
-		//   return (state = {});
-		// },
 		updateNickname: (state, action) => {
 			localStorage.setItem("displayName", action.payload);
 			state.displayName = action.payload;
@@ -40,5 +39,6 @@ const loginSlice = createSlice({
 	},
 });
 
-export const { login, updateNickname, updatePhoto } = loginSlice.actions;
+export const { login, logout, updateNickname, updatePhoto } =
+	loginSlice.actions;
 export default loginSlice.reducer;

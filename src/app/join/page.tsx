@@ -220,7 +220,7 @@ export default function Join() {
 							name="email"
 							onChange={handleClickOnChange}
 							required
-							placeholder="example@zum.com"
+							placeholder="example@moeum.com"
 							onBlur={handleBlur}
 						></input>
 					</div>
