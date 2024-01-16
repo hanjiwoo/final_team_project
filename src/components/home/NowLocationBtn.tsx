@@ -4,16 +4,18 @@ import Mapinfo from "../detail/Mapinfo";
 import { useRouter } from "next/navigation";
 import useKakaoLoader from "../detail/useKaKao";
 import { typeOfShop } from "@/app/assets/types/types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getShops } from "@/redux/modules/shopsSlice";
+import { RootState } from "@/redux/config/configStore";
 
-export default function NowLocationBtn({ shops }: { shops: typeOfShop[] }) {
+export default function NowLocationBtn() {
+  const shops = useSelector((state: RootState) => state.allShops);
   const [latitude, setLatitude] = useState<number>(37.450701);
   const [longitude, setLongitude] = useState<number>(128.57049341667);
   const [toggle, setToggle] = useState(false);
   const dispatch = useDispatch();
   useKakaoLoader();
-  const router = useRouter();
+
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -63,8 +65,11 @@ export default function NowLocationBtn({ shops }: { shops: typeOfShop[] }) {
 
   return (
     <>
-      <button className="bg-red-500 text-white" onClick={findNowLoacation}>
-        현재위치로 찾기
+      <button
+        className="bg-orange-500 text-white font-black p-4 rounded-2xl"
+        onClick={findNowLoacation}
+      >
+        내 주변 모-음 검색하기
       </button>{" "}
       {/*  <div>
         <h2>Your Location:</h2>

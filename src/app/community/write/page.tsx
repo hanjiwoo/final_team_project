@@ -37,12 +37,12 @@ const WritePage: React.FC = () => {
   //   fetchPosts();
   // }, []);
 
-  const addHoogi = async () => {
+  const addPost = async () => {
     await addDoc(collection(db, "posts"), newPost);
   };
   const queryClient = useQueryClient();
   const { mutate: mutateToAdd } = useMutation({
-    mutationFn: addHoogi,
+    mutationFn: addPost,
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
