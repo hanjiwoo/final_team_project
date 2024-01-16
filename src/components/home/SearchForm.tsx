@@ -72,9 +72,14 @@ export default function SearchForm() {
   // console.log(shops, " 샵스");
   if (!shops) return <>로딩중...</>;
   return (
-    <div className="bg-red-50 w-[800px] h-[100px] flex justify-center items-center gap-5 rounded-lg">
+    <div className="bg-red-50 w-[800px] h-[100px] flex justify-center items-center gap-5 rounded-xl">
       {/* {shops[0].업종} */}
-      <select name="sido" onChange={onchangeHandler} value={form.sido}>
+      <select
+        name="sido"
+        onChange={onchangeHandler}
+        value={form.sido}
+        className="appearance-none h-[35px] w-[100px] border-[1px] border-black rounded-lg text-center"
+      >
         <option id="none">광역시/도</option>
 
         <option id="1">서울</option>
@@ -103,17 +108,28 @@ export default function SearchForm() {
         sido={form.sido}
       />
       {/* </select> */}
-      <select name="upzong" onChange={onchangeHandler} value={form.upzong}>
-        <option id="none">업종</option>
+      <select
+        name="upzong"
+        onChange={onchangeHandler}
+        value={form.upzong}
+        className="appearance-none  h-[35px] w-[100px] border-[1px] border-black rounded-lg text-center"
+      >
+        <option selected id="none">
+          업종
+        </option>
         <option>한식</option>
         <option>일식</option>
         <option>양식</option>
         <option>중식</option>
+        <option>기타</option>
       </select>
-      <button className="bg-red-500 text-white" onClick={onClickHandler}>
-        찾아보기
+      <button
+        className="bg-orange-500 text-white p-2 rounded-2xl"
+        onClick={onClickHandler}
+      >
+        검색하기
       </button>
-      <NowLocationBtn shops={shops} />
+      {/* <NowLocationBtn shops={shops} /> */}
     </div>
   );
 }
