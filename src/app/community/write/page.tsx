@@ -16,13 +16,25 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import Link from "next/link";
+import firebase from "firebase/compat/app";
 
 const WritePage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+
   const [newPost, setNewPost] = useState({
+    id: "",
     title: "",
     content: "",
+    profile: "",
+    nickname: "",
+    createdAt: "",
   });
+
+  interface AuthContextProps {
+    user: firebase.User | null;
+    signInWithGoogle: () => Promise<void>;
+    signOut: () => Promise<void>;
+  }
 
   // useEffect(() => {
   //   const fetchPosts = async () => {
@@ -100,59 +112,64 @@ const WritePage: React.FC = () => {
 
   return (
     <>
+      {/* 전체 컨테이너 */}
       <div className=" flex flex-col items-center justify-center w-[100%] h-[100%] m-[60px 420px]">
-        <div className="">
-          <h1 className="text-[30px] font-bold">게시물 작성하기</h1>
+        {/* gap주려고 묶음 */}
+        <div className="flex flex-col gap-[30px]">
+          {/* h1컨테이너 */}
+          <div className="mr-[45%]">
+            <h1 className="text-[30px] font-bold">게시글 작성하기</h1>
+          </div>
+
+          <form className="flex flex-col items-center justify-center gap-[50px]">
+            <div className="flex gap-[10px]">
+              <div className="flex">
+                <label className="">제목</label>
+                <p className="text-[#FF8145]">*</p>
+              </div>
+
+              <input
+                className="border-2 border-gray-[400] w-[972px] h-[48px] rounded-[10px] outline-none"
+                type="text"
+                placeholder="제목을 입력해주세요"
+                name="title"
+                value={newPost.title}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="flex gap-[10px]">
+              <div className="flex">
+                <label className="">내용</label>
+                <p className="text-[#FF8145]">*</p>
+              </div>
+
+              <textarea
+                className="border-2 border-gray-[400] w-[972px] h-[200px] resize-none rounded-[10px] outline-none"
+                placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
+                name="content"
+                value={newPost.content}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="flex gap-[25px] self-end flex-row-reverse">
+              <Link href={"/community"}>
+                <button
+                  className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                  onClick={handleAddPost}
+                >
+                  작성하기
+                </button>
+              </Link>
+              <Link href={"/community"}>
+                <button className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]">
+                  취소하기
+                </button>
+              </Link>
+            </div>
+          </form>
         </div>
-
-        <form className="flex flex-col items-center justify-center gap-[50px]">
-          <div className="flex gap-[10px]">
-            <div className="flex">
-              <label className="">제목</label>
-              <p className="text-[#FF8145]">*</p>
-            </div>
-
-            <input
-              className="border-2 border-gray-[400] w-[972px] h-[48px] rounded-[10px] outline-none"
-              type="text"
-              placeholder="제목을 입력해주세요"
-              name="title"
-              value={newPost.title}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="flex gap-[10px]">
-            <div className="flex">
-              <label className="">내용</label>
-              <p className="text-[#FF8145]">*</p>
-            </div>
-
-            <textarea
-              className="border-2 border-gray-[400] w-[972px] h-[200px] resize-none rounded-[10px] outline-none"
-              placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
-              name="content"
-              value={newPost.content}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="flex gap-[25px] self-end flex-row-reverse">
-            <Link href={"/community"}>
-              <button
-                className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-                onClick={handleAddPost}
-              >
-                등록하기
-              </button>
-            </Link>
-            <Link href={"/community"}>
-              <button className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]">
-                취소하기
-              </button>
-            </Link>
-          </div>
-        </form>
 
         {/* <div>
           <h1>게시물 리스트</h1>
