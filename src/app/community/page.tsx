@@ -43,7 +43,7 @@ export default function listpage() {
   return (
     <>
       {/* 전체 컨테이너 */}
-      <div className="flex  flex-col items-center jusfift-center w-[100%] h-[100%] gap-[20px]">
+      <div className="flex  flex-col items-center  w-[100%] h-[100%] gap-[20px]">
         <div>
           <h2 className="text-[30px] font-bold">이 달의 BEST 게시글 모-음</h2>
           <p className="text-gray-600">
@@ -53,23 +53,29 @@ export default function listpage() {
 
         {/* 인기순위 컨테이너 */}
         <div className="flex gap-[20px]">
-          <div>
-            <div className="border-2 w-[200px] h-[150px]">인기1위</div>
-            <p>게시글 제목</p>
-            <p>♥</p>
-          </div>
+          <Link className="hover:bg-[#E5743E]" href={"community/detail"}>
+            <div>
+              <div className="border-2 w-[200px] h-[150px]">인기1위</div>
+              <p>게시글 제목</p>
+              <p>♥</p>
+            </div>
+          </Link>
 
-          <div>
-            <div className="border-2 w-[200px] h-[150px]">인기2위</div>
-            <p>게시글 제목</p>
-            <p>♥</p>
-          </div>
+          <Link className="hover:bg-[#E5743E]" href={"community/detail"}>
+            <div>
+              <div className="border-2 w-[200px] h-[150px]">인기2위</div>
+              <p>게시글 제목</p>
+              <p>♥</p>
+            </div>
+          </Link>
 
-          <div>
-            <div className="border-2 w-[200px] h-[150px]">인기3위</div>
-            <p>게시글 제목</p>
-            <p>♥</p>
-          </div>
+          <Link className="hover:bg-[#E5743E]" href={"community/detail"}>
+            <div>
+              <div className="border-2 w-[200px] h-[150px]">인기3위</div>
+              <p>게시글 제목</p>
+              <p>♥</p>
+            </div>
+          </Link>
         </div>
 
         {/* 작성하기 버튼 */}
@@ -92,22 +98,25 @@ export default function listpage() {
                 className=" w-[100%] h-full flex flex-col justify-between "
                 key={nanoid()}
               >
+                {/* 제목 컨테이너 */}
                 <div className="text-[20px]  font-bold">
                   <h2>제목:{post.title}</h2>
                 </div>
 
+                {/* 내용 컨테이너 */}
                 <div>
                   <p>내용:{post.content}</p>
                 </div>
 
+                {/* 닉네임,시간 컨테이너 */}
                 <div className="flex gap-[10px]">
                   <Image
                     src={userIcon}
                     alt="profile"
                     className="w-[28px] h-[28px]"
                   />
-                  <p>이아름 바보{post.nickname}</p>
-                  <time>2024-01-16</time>
+                  <p>닉네임{post.nickname}</p>
+                  <time>시간 날짜</time>
                 </div>
               </div>
 
