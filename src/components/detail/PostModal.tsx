@@ -16,10 +16,13 @@ export default function PostModal({
      flex justify-center items-center"
       style={{ background: "rgba(0, 0, 0, 0.5)" }}
     >
-      <div className="w-[800px] h-[500px] bg-purple-400 flex flex-col items-end">
-        <button onClick={moveToBack} className="text-2xl">
-          ✖️
-        </button>
+      <div className="w-[600px] h-[800px] bg-purple-400 flex flex-col items-center">
+        <div className="flex justify-between w-full font-black">
+          <h1>오늘 방문한 매장은 어떤가요?</h1>
+          <button onClick={moveToBack} className="text-2xl">
+            ✖️
+          </button>
+        </div>
         <Hoogi setModal={setModal} />
       </div>
     </section>

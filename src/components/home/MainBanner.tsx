@@ -1,4 +1,5 @@
 import React from "react";
+import NowLocationBtn from "./NowLocationBtn";
 
 export default function MainBanner() {
   return (
@@ -9,6 +10,7 @@ export default function MainBanner() {
       <div className="text-4xl  font-extrabold text-gray-700 mb-12">
         모두의 음식점. 모-음
       </div>
+      <NowLocationBtn />
     </div>
   );
 }

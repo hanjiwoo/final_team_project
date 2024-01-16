@@ -92,7 +92,7 @@ export default function GoodPrice() {
           #양식
         </button>
       </div>
-      <section className="w-[1000px] h-[1000px] mb-[100px] bg-orange-300 grid grid-cols-4 gap-4">
+      <section className="w-8/10 h-[1000px] mb-[100px] bg-orange-300 grid grid-cols-4 gap-4">
         {searchedShops.map((shop: typeOfShop) => {
           return (
             <React.Fragment key={nanoid()}>

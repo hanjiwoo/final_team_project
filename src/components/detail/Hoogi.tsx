@@ -122,48 +122,26 @@ export default function Hoogi({
     // console.log(맛, 가격, 위생, 서비스, range, face);
   };
   return (
-    <div className="bg-blue-300 h-[600px] flex flex-col items-center mb-10">
+    <div className="bg-blue-300 h-full w-full flex flex-col items-center mb-10">
       <div className="bg-red-300  h-[50px] flex ">
-        <h1>오늘 방문한 매장은 어떤가요?</h1>
-        <div className="bg-yellow-300 h-12">
-          {/* <input
-            className="w-64 bg-yellow-300 "
-            type="range"
-            value={range}
-            onChange={rangeHandler}
-            max={10}
-            min={0}
-            step={1}
-          /> */}
-        </div>
-        {/* <div>{range}점</div> */}
-        {/* <select value={face} onChange={(e) => faceHandler(e)}>
-          <option>이모티콘</option>
-          <option>😍</option>
-          <option>😀</option>
-          <option>🙂</option>
-          <option>😐</option>
-          <option>😅</option>
-          <option>😥</option>
-          <option>🤒</option>
-          <option>👿</option>
-        </select> */}
+        <h1>해당 음식점에 리뷰를 남겨주세요</h1>
       </div>
-      <div className="flex flex-col  mb-32  bg-indigo-300 w-[800px]">
+      <div className="flex flex-col  mb-32  bg-indigo-300 w-full">
         <section className="flex justify-between">
           <h1 className="text-2xl">해당 매장의 #태그 리뷰를 확인해보세요 :)</h1>
-          <button className="bg-red-600 w-[100px] mt-5" onClick={submitHandler}>
-            제출하기
-          </button>
         </section>
+
         {assessmentList.map((item: assessment) => {
           return (
             <React.Fragment key={item.title}>
-              <AssessBtn item={item} form={form} setForm={setForm} />{" "}
+              <AssessBtn item={item} form={form} setForm={setForm} />
             </React.Fragment>
           );
         })}
-      </div>
+      </div>{" "}
+      <button className="bg-red-600 w-full mt-5" onClick={submitHandler}>
+        리뷰 등록하기
+      </button>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import SearchForm from "../home/SearchForm";
 import ColumnSlide from "./ColumnSlide";
 import { RootState } from "@/redux/config/configStore";
 import { getShop } from "@/redux/modules/detailShopSlice";
+import ShopCard from "../home/ShopCard";
 
 type typeOfRef = {
   title: string;
@@ -145,7 +146,11 @@ export default function MapHome() {
                 position={{ lat: +shop.latitude, lng: +shop.longitude }}
                 title={shop.title}
                 onClick={() => moveToDetail(shop.title)}
-              />
+              >
+                <div className="flex justify-center items-center w-[140px] p-[5px] m-[5px] font-black">
+                  {shop.title}
+                </div>
+              </MapMarker>
             );
           })}
           {/* <MapMarker
@@ -171,14 +176,13 @@ export default function MapHome() {
         </Map>
       </div>
 
-      <div className="absolute top-[75px] left-10 z-10 flex">
+      <div className="absolute top-[75px] w-1/4 left-10 z-10 flex">
         <div
           // onWheel={(e) => wheelHandler(e)}
-          className={`bg-green-300 flex flex-col h-[900px] overflow-hidden `}
+          className={`flex flex-col h-[900px]  overflow-hidden `}
         >
           <div
             style={{
-              backgroundColor: "green",
               height: `${Math.ceil(shops.length / 4) * 1000}px`,
               transform: `translate(0,${slide}px)`,
               transition: "transform 0.5s",
