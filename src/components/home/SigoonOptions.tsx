@@ -2,7 +2,7 @@
 import { nanoid } from "nanoid";
 import React, { useRef, useState } from "react";
 
-const 서울 = [
+const 서울시 = [
   "강남구",
   "강동구",
   "강북구",
@@ -29,7 +29,7 @@ const 서울 = [
   "중구",
   "중랑구",
 ];
-const 강원 = [
+const 강원도 = [
   "강릉시",
   "고성군",
   "동해시",
@@ -49,7 +49,7 @@ const 강원 = [
   "화천군",
   "횡성군",
 ];
-const 경기 = [
+const 경기도 = [
   "고양시",
   "과천시",
   "광명시",
@@ -81,7 +81,7 @@ const 경기 = [
   "하남시",
   "화성시",
 ];
-const 경상남 = [
+const 경상남도 = [
   "거제시",
   "거창군",
   "고성군",
@@ -101,7 +101,7 @@ const 경상남 = [
   "함양군",
   "합천군",
 ];
-const 경상북 = [
+const 경상북도 = [
   "경산시",
   "경주시",
   "고령군",
@@ -126,8 +126,8 @@ const 경상북 = [
   "칠곡군",
   "포항시",
 ];
-const 광주 = ["광산구", "남구", "동구", "북구", "서구"];
-const 대구 = [
+const 광주광역시 = ["광산구", "남구", "동구", "북구", "서구"];
+const 대구광역시 = [
   "남구",
   "달서구",
   "달성군",
@@ -137,8 +137,8 @@ const 대구 = [
   "수성구",
   "중구",
 ];
-const 대전 = ["대덕구", "동구", "서구", "유성구", "중구"];
-const 부산 = [
+const 대전광역시 = ["대덕구", "동구", "서구", "유성구", "중구"];
+const 부산광역시 = [
   "강서구",
   "금정구",
   "기장군",
@@ -156,7 +156,7 @@ const 부산 = [
   "중구",
   "해운대구",
 ];
-const 세종 = [
+const 세종시 = [
   "가람동",
   "고운동",
   "금남면",
@@ -186,8 +186,8 @@ const 세종 = [
   "합강동",
   "해밀동",
 ];
-const 울산 = ["남구", "동구", "북구", "울주군", "중구"];
-const 인천 = [
+const 울산광역시 = ["남구", "동구", "북구", "울주군", "중구"];
+const 인천광역시 = [
   "강화군",
   "계양구",
   "남동구",
@@ -199,7 +199,7 @@ const 인천 = [
   "옹진군",
   "중구",
 ];
-const 전라남 = [
+const 전라남도 = [
   "강진군",
   "고흥군",
   "곡성군",
@@ -223,7 +223,7 @@ const 전라남 = [
   "해남군",
   "화순군",
 ];
-const 전라북 = [
+const 전라북도 = [
   "고창군",
   "군산시",
   "김제시",
@@ -239,8 +239,8 @@ const 전라북 = [
   "정읍시",
   "진안군",
 ];
-const 제주 = ["서귀포시", "제주시"];
-const 충청남 = [
+const 제주도 = ["서귀포시", "제주시"];
+const 충청남도 = [
   "계룡시",
   "공주시",
   "금산군",
@@ -257,7 +257,7 @@ const 충청남 = [
   "태안군",
   "홍성군",
 ];
-const 충청북 = [
+const 충청북도 = [
   "괴산군",
   "단양군",
   "보은군",
@@ -285,56 +285,56 @@ export default function SigoonOptions({
   const [sigoon, setSigoon] = useState<string[]>([]);
   const sigoonRef = useRef<string[]>();
   switch (sido) {
-    case "경기":
-      sigoonRef.current = 경기;
+    case "경기도":
+      sigoonRef.current = 경기도;
       break;
-    case "서울":
-      sigoonRef.current = 서울;
+    case "서울시":
+      sigoonRef.current = 서울시;
       break;
-    case "강원":
-      sigoonRef.current = 강원;
+    case "강원도":
+      sigoonRef.current = 강원도;
       break;
-    case "경상남":
-      sigoonRef.current = 경상남;
+    case "경상남도":
+      sigoonRef.current = 경상남도;
       break;
-    case "경상북":
-      sigoonRef.current = 경상북;
+    case "경상북도":
+      sigoonRef.current = 경상북도;
       break;
-    case "광주":
-      sigoonRef.current = 광주;
+    case "광주광역시":
+      sigoonRef.current = 광주광역시;
       break;
-    case "대구":
-      sigoonRef.current = 대구;
+    case "대구광역시":
+      sigoonRef.current = 대구광역시;
       break;
-    case "대전":
-      sigoonRef.current = 대전;
+    case "대전광역시":
+      sigoonRef.current = 대전광역시;
       break;
-    case "부산":
-      sigoonRef.current = 부산;
+    case "부산광역시":
+      sigoonRef.current = 부산광역시;
       break;
-    case "세종":
-      sigoonRef.current = 세종;
+    case "세종시":
+      sigoonRef.current = 세종시;
       break;
-    case "울산":
-      sigoonRef.current = 울산;
+    case "울산광역시":
+      sigoonRef.current = 울산광역시;
       break;
-    case "인천":
-      sigoonRef.current = 인천;
+    case "인천광역시":
+      sigoonRef.current = 인천광역시;
       break;
-    case "전라남":
-      sigoonRef.current = 전라남;
+    case "전라남도":
+      sigoonRef.current = 전라남도;
       break;
-    case "전라북":
-      sigoonRef.current = 전라북;
+    case "전라북도":
+      sigoonRef.current = 전라북도;
       break;
-    case "제주":
-      sigoonRef.current = 제주;
+    case "제주도":
+      sigoonRef.current = 제주도;
       break;
-    case "충청남":
-      sigoonRef.current = 충청남;
+    case "충청남도":
+      sigoonRef.current = 충청남도;
       break;
-    case "충청북":
-      sigoonRef.current = 충청북;
+    case "충청북도":
+      sigoonRef.current = 충청북도;
       break;
   }
   // console.log(sigoonRef, " 시군찍히나?");
