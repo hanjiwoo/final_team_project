@@ -1,24 +1,12 @@
 "use client";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  updateDoc,
-} from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import React, { useEffect, useState, ChangeEvent } from "react";
 import { db } from "@/shared/firebase";
 import { Post } from "@/app/assets/types/types";
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-import firebase from "firebase/compat/app";
 
-const WritePage: React.FC = () => {
+export default function WritePage() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const [newPost, setNewPost] = useState({
@@ -27,32 +15,13 @@ const WritePage: React.FC = () => {
     content: "",
     profile: "",
     nickname: "",
-    createdAt: "",
+    createdAt: new Date(),
   });
-
-  interface AuthContextProps {
-    user: firebase.User | null;
-    signInWithGoogle: () => Promise<void>;
-    signOut: () => Promise<void>;
-  }
-
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     const postsCollection = collection(db, "posts");
-  //     const querySnapshot = await getDocs(postsCollection);
-  //     const postsData = querySnapshot.docs.map((doc) => ({
-  //       id: doc.id,
-  //       ...doc.data(),
-  //     })) as Post[];
-  //     setPosts(postsData);
-  //   };
-
-  //   fetchPosts();
-  // }, []);
 
   const addPost = async () => {
     await addDoc(collection(db, "posts"), newPost);
   };
+
   const queryClient = useQueryClient();
   const { mutate: mutateToAdd } = useMutation({
     mutationFn: addPost,
@@ -72,42 +41,18 @@ const WritePage: React.FC = () => {
   };
 
   const handleAddPost = async () => {
-    // const postsCollection = collection(db, "posts");
-    // await addDoc(postsCollection, newPost);
-
-    // const updatedPosts = await getDocs(postsCollection);
-    // const updatedPostsData = updatedPosts.docs.map((doc) => ({
-    //   id: doc.id,
-    //   ...doc.data(),
-    // })) as Post[];
-    // setPosts(updatedPostsData);
-    mutateToAdd();
-
-    // setNewPost({ title: "", content: "" });
+    const confirmResult = window.confirm("게시글 작성을 하시겠습니까?");
+    if (confirmResult) {
+      alert("작성이 완료되었습니다.");
+      mutateToAdd();
+    }
   };
-
-  const handleUpdatePost = async (id: string, updatedPost: Partial<Post>) => {
-    const postRef = doc(db, "posts", id);
-    await updateDoc(postRef, updatedPost);
-
-    const updatedPosts = await getDocs(collection(db, "posts"));
-    const updatedPostsData = updatedPosts.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as Post[];
-    setPosts(updatedPostsData);
-  };
-
-  const handleDeletePost = async (id: string) => {
-    const postRef = doc(db, "posts", id);
-    await deleteDoc(postRef);
-
-    const updatedPosts = await getDocs(collection(db, "posts"));
-    const updatedPostsData = updatedPosts.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as Post[];
-    setPosts(updatedPostsData);
+  const handleCancel = () => {
+    const confirmResult = window.confirm("작성을 취소하시겠습니까?");
+    if (confirmResult) {
+      // 작성을 취소할 때 수행할 동작 추가
+      // 예: 취소 후 어떤 페이지로 이동하는 등의 작업
+    }
   };
 
   return (
@@ -162,42 +107,19 @@ const WritePage: React.FC = () => {
                   작성하기
                 </button>
               </Link>
+
               <Link href={"/community"}>
-                <button className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]">
+                <button
+                  className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                  onClick={handleCancel}
+                >
                   취소하기
                 </button>
               </Link>
             </div>
           </form>
         </div>
-
-        {/* <div>
-          <h1>게시물 리스트</h1>
-          <ul>
-            {posts.map((post) => (
-              <li key={post.id}>
-                <strong>{post.title}</strong>
-                <p>{post.content}</p>
-                <button
-                  className="border-2 border-black"
-                  onClick={() =>
-                    handleUpdatePost(post.id, { title: "Updated Title" })
-                  }
-                >
-                  수정하기
-                </button>
-                <button
-                  className="border-2 border-black"
-                  onClick={() => handleDeletePost(post.id)}
-                >
-                  삭제하기
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div> */}
       </div>
     </>
   );
-};
-export default WritePage;
+}
