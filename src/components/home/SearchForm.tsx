@@ -114,9 +114,7 @@ export default function SearchForm() {
         value={form.upzong}
         className="appearance-none  h-[35px] w-[100px] border-[1px] border-black rounded-lg text-center"
       >
-        <option selected id="none">
-          업종
-        </option>
+        <option id="none">업종</option>
         <option>한식</option>
         <option>일식</option>
         <option>양식</option>
