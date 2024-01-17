@@ -71,19 +71,11 @@ const Navbar = () => {
   useEffect(() => {
     if (window && localStorage.getItem("uid")) {
       const originUser = {
-        isLogin:
-          typeof window === "undefined"
-            ? false
-            : Boolean(localStorage.getItem("uid")),
-        displayName:
-          typeof window === "undefined"
-            ? ""
-            : localStorage.getItem("displayName"),
-        uid: typeof window === "undefined" ? "" : localStorage.getItem("uid"),
-        photoURL:
-          typeof window === "undefined" ? "" : localStorage.getItem("photoURL"),
-        email:
-          typeof window === "undefined" ? "" : localStorage.getItem("email"),
+        isLogin: Boolean(localStorage.getItem("uid")),
+        displayName: localStorage.getItem("displayName"),
+        uid: localStorage.getItem("uid"),
+        photoURL: localStorage.getItem("photoURL"),
+        email: localStorage.getItem("email"),
       };
       dispatch(login(originUser));
     }

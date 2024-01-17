@@ -9,3 +9,9 @@ module.exports = {
     domains: ["lh3.googleusercontent.com"],
   },
 };
+
+module.exports = {
+  images: {
+    domains: ["firebasestorage.googleapis.com"],
+  },
+};

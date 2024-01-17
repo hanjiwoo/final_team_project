@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import profileImage from "../../assets/images/icon/profile.png";
 import cameraImage from "../../assets/images/icon/camera.png";
@@ -9,24 +9,25 @@ import { getAuth, updatePassword, updateProfile } from "firebase/auth";
 import { updateNickname, updatePhoto } from "@/redux/modules/loginSlice";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/shared/firebase";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function page() {
   const auth = getAuth();
   const user = useSelector((state: RootState) => state.login);
   const { displayName, email, uid, photoURL, isLogin } = user;
   const [ImageURL, setImageURL] = useState("");
-  const [imgFile, setImagFile] = useState<any>();
+  const [imgFile, setImagFile] = useState<File>();
   const [text, setText] = useState({ nickName: "", password: "" });
   const dispatch = useDispatch();
   // console.log(photoURL, ImageURL, displayName, "이게 어떻게 찍히길래");
-
+  const router = useRouter();
   const imgChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target.files, "이벤트");
-
     if (e.target.files) {
       const fileURL = URL.createObjectURL(e.target.files[0]);
-      // console.log(fileURL, "오케");
+      console.log(fileURL, "오케");
       setImageURL(fileURL);
+      setImagFile(e.target.files[0]);
     }
   };
   const textChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,26 +36,48 @@ export default function page() {
     // console.log(text);
   };
   const saveHandler = async () => {
+    if (!text.nickName || !text.password || !imgFile)
+      return alert("변경할 닉네임과 비밀번호 PHOTO를 정해주세요");
     if (auth.currentUser) {
+      const storageRef = ref(storage, `${auth.currentUser.uid}/profile`);
+      if (imgFile) {
+        await uploadBytes(storageRef, imgFile);
+      }
+      const downloadURL = await getDownloadURL(storageRef);
       await updateProfile(auth.currentUser, {
         displayName: text.nickName,
+        photoURL: downloadURL,
       })
         .then((res) => {
-          console.log(res);
+          alert(res);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          alert(err);
         });
+      await updatePassword(auth.currentUser, text.password)
+        .then((res) => {
+          alert(res);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+      dispatch(updateNickname(text.nickName));
+      dispatch(updatePhoto(downloadURL));
+      // console.log(downloadURL, "요거좀 궁금하다.");
 
-      // if (text.password !== "") {
-      //   await updatePassword(auth.currentUser, text.password)
-      //     .then(() => {})
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      // }
+      router.push("/mypage");
     }
   };
+  useEffect(() => {
+    // console.log(
+    //   "뒤",
+    //   photoURL,
+    //   ImageURL,
+    //   displayName,
+    //   uid,
+    //   "이게 어떻게 찍히길래"
+    // );
+  }, []);
   if (!isLogin) {
     return <div>로그인하고 오세요</div>;
   }
@@ -62,13 +85,13 @@ export default function page() {
     <>
       {/* <Image src={ImageURL} width={100} height={100} alt="zz" /> */}
       <div className="flex justify-center items-center mt-[60px] mb-[60px]">
-        <Image src={photoURL} width={100} height={100} alt="zz" />
+        {/* <Image src={photoURL} width={100} height={100} alt="zz" /> */}
         <div className="flex flex-col justify-center items-center w-[350px] h-[545px]">
-          <form>
+          <div>
             <label>
               <div className="w-[100px] h-[100px] overflow-hidden rounded-full">
                 <Image
-                  src={ImageURL ? ImageURL : profileImage}
+                  src={ImageURL ? ImageURL : photoURL}
                   alt="profile"
                   width={100}
                   height={100}
@@ -88,8 +111,8 @@ export default function page() {
                 onChange={(e) => imgChangeHandler(e)}
               />
             </label>
-          </form>
-          <form className="flex flex-col w-full mb-[40px] mt-[40px] gap-[16px]">
+          </div>
+          <div className="flex flex-col w-full mb-[40px] mt-[40px] gap-[16px]">
             <div className="flex flex-col w-full gap-[8px]">
               <label className="test-[14px] leading-20px text-[#999]">
                 이메일
@@ -124,20 +147,23 @@ export default function page() {
                 placeholder="비밀번호를 입력해주세요"
               ></input>
             </div>
-          </form>
-          <form className="w-full">
+          </div>
+          <div className="w-full">
             <button
               onClick={saveHandler}
               className=" flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145] mb-[36px]"
             >
               저장하기
             </button>
-          </form>
-          <form className="w-full">
-            <span className="text-neutral-400 text-sm font-medium leading-tight underline decoration-solid cursor-pointer">
+          </div>
+          <div className="w-full">
+            <Link
+              href={"/mypage/edit/delete"}
+              className="text-neutral-400 text-sm font-medium leading-tight underline decoration-solid cursor-pointer"
+            >
               탈퇴하기
-            </span>
-          </form>
+            </Link>
+          </div>
         </div>
       </div>
     </>
