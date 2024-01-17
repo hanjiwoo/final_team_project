@@ -9,6 +9,8 @@ import NowLocationBtn from "./NowLocationBtn";
 import SigoonOptions from "./SigoonOptions";
 import { RootState } from "@/redux/config/configStore";
 import { getAllShops } from "@/redux/modules/allShops";
+import Image from "next/image";
+import down from "../../app/assets/images/icon/down.png";
 
 export default function SearchForm() {
   const dispatch = useDispatch();
@@ -72,62 +74,68 @@ export default function SearchForm() {
   // console.log(shops, " 샵스");
   if (!shops) return <>로딩중...</>;
   return (
-    <div className="bg-red-50 w-[800px] h-[100px] flex justify-center items-center gap-5 rounded-xl">
-      {/* {shops[0].업종} */}
-      <select
-        name="sido"
-        onChange={onchangeHandler}
-        value={form.sido}
-        className="appearance-none h-[35px] w-[100px] border-[1px] border-black rounded-lg text-center"
-      >
-        <option id="none">광역시/도</option>
+    <div className="w-full flex justify-center items-center px-[100px] py-[40px]">
+      <div className="w-[1080px] h-[48px] flex justify-center items-center gap-[16px] rounded-xl">
+        {/* {shops[0].업종} */}
 
-        <option id="1">서울</option>
-        <option id="2">강원</option>
-        <option id="3">경기</option>
-        <option id="4">경상남</option>
-        <option id="5">경상북</option>
-        <option id="6">광주</option>
-        <option id="7">대구</option>
-        <option id="8">대전</option>
-        <option id="10">부산</option>
-        <option id="11">세종</option>
-        <option id="12">울산</option>
-        <option id="13">인천</option>
-        <option id="14">전라남</option>
-        <option id="15">전라북</option>
-        <option id="16">제주</option>
-        <option id="17">충청남</option>
-        <option id="18">충청북</option>
-      </select>
-      {/* <select name="upzong" onChange={onchangeHandler} value={form.upzong}> */}
-      <SigoonOptions
-        name="sigoon"
-        onChange={onchangeHandler}
-        value={form.sigoon}
-        sido={form.sido}
-      />
-      {/* </select> */}
-      <select
-        name="upzong"
-        onChange={onchangeHandler}
-        value={form.upzong}
-        className="appearance-none  h-[35px] w-[100px] border-[1px] border-black rounded-lg text-center"
-      >
-        <option id="none">업종</option>
-        <option>한식</option>
-        <option>일식</option>
-        <option>양식</option>
-        <option>중식</option>
-        <option>기타</option>
-      </select>
-      <button
-        className="bg-orange-500 text-white p-2 rounded-2xl"
-        onClick={onClickHandler}
-      >
-        검색하기
-      </button>
-      {/* <NowLocationBtn shops={shops} /> */}
+        <select
+          name="sido"
+          onChange={onchangeHandler}
+          value={form.sido}
+          className="appearance-none h-full border-[1px] border-[#7A7A7A] rounded-lg text-center w-[244px] text-[#999]"
+        >
+          <option id="none">광역시/도</option>
+
+          <option id="1">서울</option>
+          <option id="2">강원</option>
+          <option id="3">경기</option>
+          <option id="4">경상남</option>
+          <option id="5">경상북</option>
+          <option id="6">광주</option>
+          <option id="7">대구</option>
+          <option id="8">대전</option>
+          <option id="10">부산</option>
+          <option id="11">세종</option>
+          <option id="12">울산</option>
+          <option id="13">인천</option>
+          <option id="14">전라남</option>
+          <option id="15">전라북</option>
+          <option id="16">제주</option>
+          <option id="17">충청남</option>
+          <option id="18">충청북</option>
+        </select>
+
+        {/* <select name="upzong" onChange={onchangeHandler} value={form.upzong}> */}
+        <SigoonOptions
+          name="sigoon"
+          onChange={onchangeHandler}
+          value={form.sigoon}
+          sido={form.sido}
+        />
+        {/* </select> */}
+        <select
+          name="upzong"
+          onChange={onchangeHandler}
+          value={form.upzong}
+          className="appearance-none h-full border-[1px] border-[#7A7A7A] rounded-lg text-center w-[244px] text-[#999]"
+        >
+          <option selected id="none">
+            업종
+          </option>
+          <option>한식</option>
+          <option>일식</option>
+          <option>양식</option>
+          <option>중식</option>
+          <option>기타</option>
+        </select>
+        <button
+          className="bg-[#FF8145] text-[#fff] h-full py-[14px] px-[26px] rounded-[8px] font-[500]"
+          onClick={onClickHandler}
+        >
+          검색하기
+        </button>
+        {/* <NowLocationBtn shops={shops} /> */}
+      </div>
     </div>
   );
 }

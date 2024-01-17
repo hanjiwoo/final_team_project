@@ -55,6 +55,6 @@ export interface Post {
   title?: string;
   profile?: string;
   content?: string;
-  createdAt?: number;
   nickname?: string;
+  createdAt?: Date;
 }

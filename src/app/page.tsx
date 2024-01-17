@@ -5,13 +5,13 @@ import SearchForm from "@/components/home/SearchForm";
 import ShopList from "@/components/home/ShopList";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col items-center h-[100%] bg-[#fffbeb] gap-10">
-      <MainBanner />
-      <SearchForm />
-      <ShopList />
-      <Best />
-      <GoodPrice />
-    </div>
-  );
+	return (
+		<div className="flex flex-col items-center h-[100%] bg-[#fff]">
+			<MainBanner />
+			<SearchForm />
+			<ShopList />
+			<Best />
+			<GoodPrice />
+		</div>
+	);
 }

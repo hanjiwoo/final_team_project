@@ -343,9 +343,11 @@ export default function SigoonOptions({
       name={name}
       onChange={onChange}
       value={value}
-      className="appearance-none  h-[35px] w-[100px] border-[1px] border-black rounded-lg text-center"
+      className="appearance-none  h-full border-[1px] border-[#7A7A7A] rounded-lg text-center w-[244px] text-[#999]"
     >
-      <option id="none">시/군/구</option>
+      <option selected id="none">
+        시/군/구
+      </option>
       {sigoonRef.current?.map((item) => {
         return <option key={nanoid()}>{item}</option>;
       })}
