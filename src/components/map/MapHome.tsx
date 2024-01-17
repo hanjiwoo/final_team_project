@@ -11,6 +11,7 @@ import ColumnSlide from "./ColumnSlide";
 import { RootState } from "@/redux/config/configStore";
 import { getShop } from "@/redux/modules/detailShopSlice";
 import ShopCard from "../home/ShopCard";
+import Shopinfo from "../detail/Shopinfo";
 
 type typeOfRef = {
   title: string;
@@ -22,14 +23,20 @@ export default function MapHome() {
   useKakaoLoader();
   const shops = useSelector((state: RootState) => state.shops);
   const router = useRouter();
-  const { 시군, 시도 } = shops[0];
+  const mapCenterRef = useRef({ 시군: "", 시도: "" });
+  if (shops[0]) {
+    const { 시군, 시도 } = shops[0];
+    mapCenterRef.current = { 시군, 시도 };
+  }
   const [slide, setSlide] = useState(0);
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const [render, setRender] = useState(false);
+  const [infoToggle, setInfoToggle] = useState(false);
   // const latRef = useRef(0);
   // const lngRef = useRef(0);
   const shopsRef = useRef<typeOfRef[]>([]);
+  const shopInfoRef = useRef<typeOfShop>(shops[0]);
   // const [newArray, setnewArray] = useState<typeOfRef[]>([]);
   const dispatch = useDispatch();
   class NewShops {
@@ -44,15 +51,21 @@ export default function MapHome() {
   }
 
   useEffect(() => {
+    if (!shops[0]) {
+      router.push("/");
+    }
     if (window.kakao) {
       let geocoder = new window.kakao.maps.services.Geocoder();
-      geocoder.addressSearch(`${시도} ${시군}`, function (result, status) {
-        // console.log(result, "이거 레절트");
-        setLng(+result[0].x);
-        setLat(+result[0].y);
-        // latRef.current = Number(result[0].y);
-        // lngRef.current = Number(result[0].x);
-      });
+      geocoder.addressSearch(
+        `${mapCenterRef.current.시도} ${mapCenterRef.current.시군}`,
+        function (result, status) {
+          // console.log(result, "이거 레절트");
+          setLng(+result[0].x);
+          setLat(+result[0].y);
+          // latRef.current = Number(result[0].y);
+          // lngRef.current = Number(result[0].x);
+        }
+      );
       const mappedArray = shops.map((shop: typeOfShop) => {
         let OBOB = {
           title: "",
@@ -89,7 +102,7 @@ export default function MapHome() {
   useEffect(() => {
     setTimeout(() => {
       setRender(!render);
-    }, 100);
+    }, 300);
   }, []);
 
   // const wheelHandler = (e: React.WheelEvent<HTMLDivElement>) => {
@@ -117,6 +130,16 @@ export default function MapHome() {
     if (Math.ceil((shops.length / 4) * 1000) + slide - 1500 <= 0) return;
     setSlide(slide - 500);
   };
+
+  const openShopInfo = (title: string) => {
+    const foundShop = shops.find((shop: typeOfShop) => {
+      return shop.업소명 === title;
+    });
+    if (foundShop) {
+      shopInfoRef.current = foundShop;
+    }
+    setInfoToggle(true);
+  };
   return (
     <>
       <div className="w-screen h-screen bg-yellow-300">
@@ -124,6 +147,7 @@ export default function MapHome() {
           {/* <SearchForm /> */}
         </div>
         <Map
+          onClick={() => setInfoToggle(false)}
           // ref={mapRef.current}
           className="bg-yellow-100" // 지도를 표시할 Container
           id="map"
@@ -145,11 +169,21 @@ export default function MapHome() {
                 key={nanoid()}
                 position={{ lat: +shop.latitude, lng: +shop.longitude }}
                 title={shop.title}
-                onClick={() => moveToDetail(shop.title)}
+                onClick={() => openShopInfo(shop.title)}
               >
-                <div className="flex justify-center items-center w-[140px] p-[5px] m-[5px] font-black">
+                {/* <div className="flex justify-center items-center w-[140px] p-[5px] m-[5px] font-black">
                   {shop.title}
-                </div>
+                </div> */}
+                {infoToggle && shop.title === shopInfoRef.current.업소명 && (
+                  <>
+                    <ShopCard
+                      type="map"
+                      shops={shops}
+                      shop={shopInfoRef.current}
+                    />{" "}
+                  </>
+                )}
+                {/* <div>클릭하시면정보나옴</div> */}
               </MapMarker>
             );
           })}

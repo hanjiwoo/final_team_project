@@ -82,27 +82,27 @@ export default function SearchForm() {
           name="sido"
           onChange={onchangeHandler}
           value={form.sido}
-          className="appearance-none h-full border-[1px] border-[#7A7A7A] rounded-lg text-center w-[244px] text-[#999]"
+          className="h-full border-[1px] border-[#7A7A7A] rounded-lg text-center w-[244px] text-[#999] bg-[]"
         >
           <option id="none">광역시/도</option>
 
-          <option id="1">서울</option>
-          <option id="2">강원</option>
-          <option id="3">경기</option>
-          <option id="4">경상남</option>
-          <option id="5">경상북</option>
-          <option id="6">광주</option>
-          <option id="7">대구</option>
-          <option id="8">대전</option>
-          <option id="10">부산</option>
-          <option id="11">세종</option>
-          <option id="12">울산</option>
-          <option id="13">인천</option>
-          <option id="14">전라남</option>
-          <option id="15">전라북</option>
-          <option id="16">제주</option>
-          <option id="17">충청남</option>
-          <option id="18">충청북</option>
+          <option id="1">서울시</option>
+          <option id="10">부산광역시</option>
+          <option id="7">대구광역시</option>
+          <option id="13">인천광역시</option>
+          <option id="6">광주광역시</option>
+          <option id="8">대전광역시</option>
+          <option id="12">울산광역시</option>
+          <option id="11">세종시</option>
+          <option id="3">경기도</option>
+          <option id="2">강원도</option>
+          <option id="18">충청북도</option>
+          <option id="17">충청남도</option>
+          <option id="15">전라북도</option>
+          <option id="14">전라남도</option>
+          <option id="5">경상북도</option>
+          <option id="4">경상남도</option>
+          <option id="16">제주도</option>
         </select>
 
         {/* <select name="upzong" onChange={onchangeHandler} value={form.upzong}> */}
@@ -119,9 +119,7 @@ export default function SearchForm() {
           value={form.upzong}
           className="appearance-none h-full border-[1px] border-[#7A7A7A] rounded-lg text-center w-[244px] text-[#999]"
         >
-          <option selected id="none">
-            업종
-          </option>
+          <option id="none">업종</option>
           <option>한식</option>
           <option>일식</option>
           <option>양식</option>

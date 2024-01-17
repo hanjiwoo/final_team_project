@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import profile from "../../app/assets/images/icon/profile.png";
 const initialState = {
   isLogin: false,
   displayName: "",
   uid: "",
-  photoURL: "",
+  photoURL: profile,
   email: "",
 };
 
@@ -31,7 +31,7 @@ const loginSlice = createSlice({
       state.isLogin = false;
       state.displayName = "";
       state.uid = "";
-      state.photoURL = "";
+      state.photoURL = profile;
       state.email = "";
     },
 

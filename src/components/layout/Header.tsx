@@ -1,34 +1,6 @@
-// import React from "react";
-// import Link from "next/link";
-
-// export default function Header() {
-//   return (
-//     <header className="bg-gray-800 p-3 flex justify-start">
-//       <div className="text-gray-300 p-3">
-//         <Link href="/">로고</Link>
-//       </div>
-//       <div className="ml-auto flex">
-//         <Link href="/about" className="text-gray-300 p-3">
-//           모음소개
-//         </Link>
-//         <Link href="/community" className="text-gray-300 p-3">
-//           커뮤니티
-//         </Link>
-//         <Link href="/join" className="text-gray-300 p-3">
-//           회원가입
-//         </Link>
-//         <Link href="/login" className="text-gray-300 p-3">
-//           로그인
-//         </Link>
-//       </div>
-//     </header>
-//   );
-// }
-
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import classNames from "classnames";
 import { auth } from "@/shared/firebase";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -71,25 +43,17 @@ const Navbar = () => {
   useEffect(() => {
     if (window && localStorage.getItem("uid")) {
       const originUser = {
-        isLogin:
-          typeof window === "undefined"
-            ? false
-            : Boolean(localStorage.getItem("uid")),
-        displayName:
-          typeof window === "undefined"
-            ? ""
-            : localStorage.getItem("displayName"),
-        uid: typeof window === "undefined" ? "" : localStorage.getItem("uid"),
-        photoURL:
-          typeof window === "undefined" ? "" : localStorage.getItem("photoURL"),
-        email:
-          typeof window === "undefined" ? "" : localStorage.getItem("email"),
+        isLogin: Boolean(localStorage.getItem("uid")),
+        displayName: localStorage.getItem("displayName"),
+        uid: localStorage.getItem("uid"),
+        photoURL: localStorage.getItem("photoURL"),
+        email: localStorage.getItem("email"),
       };
       dispatch(login(originUser));
     }
   }, []);
   return (
-    <nav className="bg-gray-100">
+    <nav className="bg-gray-00 w-full">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between">
           {/* 메뉴 */}
@@ -99,62 +63,56 @@ const Navbar = () => {
                 href="/"
                 className="flex items-center py-5 px-2 text-gray-700"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2 text-blue-400"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    // d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z"
-                    clipRule="evenodd"
-                  />
-                </svg>
                 <span className="font-bold">로고</span>
-              </Link>
-            </div>
-            <div className="hidden md:flex items-center space-x-1">
-              <Link
-                href="/about"
-                className="py-5 px-3 text-gray-700 hover:text-gray-900"
-              >
-                모음소개
-              </Link>
-              <Link
-                href="/community"
-                className="py-5 px-3 text-gray-700 hover:text-gray-900"
-              >
-                커뮤니티
               </Link>
             </div>
           </div>
 
-          {/* 로그인 테스트 버튼 */}
-          {/* <button onClick={checkLoginStatus}>로그인 상태 테스트입니다</button>
-					<button onClick={handleSignOut}>로그아웃 테스트입니다</button> */}
-
           {/* 메뉴2 */}
           <div className="hidden md:flex items-center space-x-1">
+            <Link
+              href="/about"
+              className="py-5 px-3 text-gray-700 hover:text-gray-400"
+            >
+              모음소개
+            </Link>
+            <Link
+              href="/community"
+              className="py-5 px-3 text-gray-700 hover:text-gray-400"
+            >
+              커뮤니티
+            </Link>
             {uid ? (
               <>
-                <Link href="/mypage" className="py-5 px-3">
+                <Link
+                  href="/mypage"
+                  className="py-5 px-3 text-gray-700 hover:text-gray-400"
+                >
                   마이페이지
                 </Link>
-                <Link href="/" className="py-5 px-3" onClick={handleSignOut}>
+                <Link
+                  href="/"
+                  className="py-5 px-3 text-gray-700 hover:text-gray-400"
+                  onClick={handleSignOut}
+                >
                   로그아웃
                 </Link>
               </>
             ) : (
               <>
-                <Link href="/login" className="py-5 px-3">
+                <Link
+                  href="/login"
+                  className="py-5 px-3 text-gray-700 hover:text-gray-400"
+                >
                   로그인
                 </Link>
                 <Link
                   href="/join"
-                  className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"
+                  className="w-[100px] h-10 py-3 px-2 bg-[#FF8145] hover:bg-[#E5743E] rounded-lg transition duration-300 justify-center items-center gap-1 inline-flex"
                 >
-                  모-음 시작하기
+                  <div className="text-right text-white text-sm font-medium font-['Pretendard'] leading-tight">
+                    모-음 시작하기
+                  </div>
                 </Link>
               </>
             )}
