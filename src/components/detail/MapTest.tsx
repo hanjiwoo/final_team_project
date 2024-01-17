@@ -10,7 +10,6 @@ export default function MapTest() {
   useKakaoLoader();
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
-  const [render, setRender] = useState(false);
   const { 시군, 업소명, 주소 } = useSelector((state: any) => state.detailShop);
   const dispatch = useDispatch();
 
@@ -40,16 +39,12 @@ export default function MapTest() {
         }
       });
     }
-
-    setTimeout(() => {
-      setRender(!render);
-    }, 500);
   }, []);
 
   return (
-    <>
+    <div className="z-[100]">
       {lat === 0 ? (
-        <div className="w-[340px] h-[340px] fixed top-[100px] right-[0px] bg-yellow-300">
+        <div className="w-[340px] h-[340px] fixed">
           지도가 로드되지 못했습니다.
         </div>
       ) : (
@@ -57,7 +52,7 @@ export default function MapTest() {
           <div className="w-[310px] h-[310px] overflow-hidden rounded-lg">
             <Map
               // ref={mapRef.current}
-              className="bg-yellow-100 z-1" // 지도를 표시할 Container
+              className="bg-yellow-100" // 지도를 표시할 Container
               id="map"
               center={{
                 // 지도의 중심좌표
@@ -95,6 +90,6 @@ export default function MapTest() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
