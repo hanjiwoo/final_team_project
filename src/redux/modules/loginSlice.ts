@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isLogin: Boolean(localStorage.getItem("accessToken")),
-  displayName: localStorage.getItem("displayName") || "",
-  uid: localStorage.getItem("uid") || "",
-  photoURL: localStorage.getItem("photoURL") || "",
-  email: localStorage.getItem("email") || "",
+  isLogin: false,
+  displayName: "",
+  uid: "",
+  photoURL: "",
+  email: "",
 };
 
 const loginSlice = createSlice({
@@ -13,19 +13,26 @@ const loginSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      const { displayName, uid, photoURL, email } = action.payload;
+      const { uid, displayName, photoURL, email, email1 } = action.payload;
       localStorage.setItem("displayName", displayName);
       localStorage.setItem("uid", uid);
       localStorage.setItem("photoURL", photoURL);
-      localStorage.setItem("email", email);
+      email
+        ? localStorage.setItem("email", email)
+        : localStorage.setItem("email", email1);
       state.isLogin = true;
       state.displayName = displayName;
       state.uid = uid;
       state.photoURL = photoURL;
-      state.email = email;
+      email ? (state.email = email) : (state.email = email1);
     },
     logout: (state, action) => {
       localStorage.clear();
+      state.isLogin = false;
+      state.displayName = "";
+      state.uid = "";
+      state.photoURL = "";
+      state.email = "";
     },
 
     updateNickname: (state, action) => {

@@ -16,6 +16,8 @@ import { Router } from "next/router";
 import Image from "next/image";
 import GoogleLogo from "../assets/images/icon/google.png";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { login } from "@/redux/modules/loginSlice";
 
 export default function Login() {
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API}&redirect_uri=http://localhost:3000/login&response_type=code`;
@@ -27,7 +29,7 @@ export default function Login() {
   const [passwordError, setPasswordError] = useState<string>("");
   const [displayNameError, setDisplayNameError] = useState<string>("");
   const [loginStatus, setLoginStatus] = useState<boolean>(false);
-
+  const dispatch = useDispatch();
   // const auth = getAuth();
   const user = auth.currentUser;
 
@@ -89,7 +91,7 @@ export default function Login() {
       console.log(access_token);
     } catch (error) {
       // 오류 처리
-      console.error("Kakao 토큰 얻기 오류:", error);
+      //   console.error("Kakao 토큰 얻기 오류:", error);
     }
   };
 
@@ -145,10 +147,11 @@ export default function Login() {
         email,
         password
       );
-
+      //  console.log(userCredential.user)
       // 성공적으로 로그인했을 때 사용자 정보 저장
       const user = userCredential.user;
-
+      //
+      //   console.log(user, "유저를 찍어보아요");
       localStorage.setItem(
         "user",
         JSON.stringify({
@@ -159,7 +162,8 @@ export default function Login() {
         })
       );
       setLoginStatus(true); // 로그인 상태를 true 값으로 저장
-
+      const { uid, displayName, email: email1, photoURL } = user;
+      dispatch(login({ uid, displayName, email1, photoURL }));
       console.log("로그인완료");
       console.log(loginStatus);
       alert(`${user.displayName}님 안녕하세요`);
@@ -181,8 +185,8 @@ export default function Login() {
       const credential: any = GoogleAuthProvider.credentialFromResult(res);
       const token = credential.accessToken;
       const userName = res.user.displayName;
-      const email = res.user.email;
-
+      //   const email = res.user.email;
+      const { uid, email, displayName, photoURL } = res.user;
       // local storage에 token, username 저장
       setLoginStatus(true); // 로그인 상태를 true 값으로 저장
       localStorage.setItem(
@@ -193,8 +197,9 @@ export default function Login() {
           accessToken: token,
         })
       );
-      console.log(loginStatus);
-      console.log("Google 로그인 성공");
+      dispatch(login({ uid, email, displayName, photoURL }));
+      //   console.log(res, "요거 확인해봅시다.");
+      //   console.log("Google 로그인 성공");
       alert(`${displayName}님 안녕하세요`);
 
       router.replace("/");
