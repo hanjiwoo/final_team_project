@@ -1,30 +1,3 @@
-// import React from "react";
-// import Link from "next/link";
-
-// export default function Header() {
-//   return (
-//     <header className="bg-gray-800 p-3 flex justify-start">
-//       <div className="text-gray-300 p-3">
-//         <Link href="/">로고</Link>
-//       </div>
-//       <div className="ml-auto flex">
-//         <Link href="/about" className="text-gray-300 p-3">
-//           모음소개
-//         </Link>
-//         <Link href="/community" className="text-gray-300 p-3">
-//           커뮤니티
-//         </Link>
-//         <Link href="/join" className="text-gray-300 p-3">
-//           회원가입
-//         </Link>
-//         <Link href="/login" className="text-gray-300 p-3">
-//           로그인
-//         </Link>
-//       </div>
-//     </header>
-//   );
-// }
-
 "use client";
 
 import React, { useEffect, useState } from "react";
