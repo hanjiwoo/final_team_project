@@ -37,10 +37,9 @@ export default function Join() {
         );
   };
 
-<<<<<<< HEAD
   // 약관 동의 부분 토스티파이
   const notify = () =>
-    toast.error("약관을 동의 하세여 동의 어 보감~!", {
+    toast.error("약관을 동의 하세여", {
       transition: Slide,
       position: "top-center",
       autoClose: 5000,
@@ -51,21 +50,6 @@ export default function Join() {
       progress: undefined,
       theme: "colored",
     });
-=======
-	// 약관 동의 부분 토스티파이
-	const notify = () =>
-		toast.error("약관을 동의 하세여", {
-			transition: Slide,
-			position: "top-center",
-			autoClose: 5000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "colored",
-		});
->>>>>>> 7389c0ed56c392a4bfb40be9526a179315524ec9
 
   useEffect(() => {
     if (
@@ -81,7 +65,6 @@ export default function Join() {
     }
   }, [checkList]);
 
-<<<<<<< HEAD
   const handleClickOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
@@ -95,32 +78,15 @@ export default function Join() {
     if (name === "displayName") {
       setDisplayName(value);
     }
+    handleBlur(event);
   };
-=======
-	const handleClickOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const {
-			target: { name, value },
-		} = event;
-		if (name === "email") {
-			setEmail(value);
-		}
-		if (name === "password") {
-			setPassword(value);
-		}
-		if (name === "displayName") {
-			setDisplayName(value);
-		}
-		handleBlur(event);
-	};
->>>>>>> 7389c0ed56c392a4bfb40be9526a179315524ec9
 
   const handleBlur = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name },
     } = event;
 
-<<<<<<< HEAD
-    // 에러 메시지 초기화
+    // input 밑에 에러 메시지 초기화
     if (name === "email") {
       setEmailError("");
     } else if (name === "password") {
@@ -128,16 +94,6 @@ export default function Join() {
     } else if (name === "displayName") {
       setDisplayNameError("");
     }
-=======
-		// input 밑에 에러 메시지 초기화
-		if (name === "email") {
-			setEmailError("");
-		} else if (name === "password") {
-			setPasswordError("");
-		} else if (name === "displayName") {
-			setDisplayNameError("");
-		}
->>>>>>> 7389c0ed56c392a4bfb40be9526a179315524ec9
 
     // 이메일 형식이 아닌 경우
     const emailRegEx =
@@ -239,9 +195,8 @@ export default function Join() {
     }
   };
 
-<<<<<<< HEAD
   return (
-    <div className="flex justify-center items-center w-full h-screen">
+    <div className="flex justify-center items-center w-screen h-screen">
       <div className="w-[360px]">
         <div className="mb-[52px]">
           <h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left">
@@ -265,7 +220,7 @@ export default function Join() {
               name="email"
               onChange={handleClickOnChange}
               required
-              placeholder="example@zum.com"
+              placeholder="example@moeum.com"
               onBlur={handleBlur}
             ></input>
           </div>
@@ -391,166 +346,7 @@ export default function Join() {
           회원가입
         </button>
         <ToastContainer />
-        <Link href="/login" className="cursor-pointer">
-          로그인하기
-        </Link>
       </div>
     </div>
   );
-=======
-	return (
-		<div className="flex justify-center items-center w-screen h-screen">
-			<div className="w-[360px]">
-				<div className="mb-[52px]">
-					<h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left">
-						회원가입
-					</h1>
-					<span>
-						따뜻한 마음을 모아 당신에게 드려요 :)
-						<br />
-						모두의 음식점, 모음
-					</span>
-				</div>
-				<form className="flex justify-center flex-col items-center mb-[40px] gap-[16px]">
-					<div className="flex flex-col w-full">
-						<label className="test-[14px] leading-20px text-[#999]">
-							이메일
-						</label>
-						<input
-							className="h-[48px] px-[16px] rounded-[8px] border-solid border border-gray-400"
-							type="email"
-							value={email}
-							name="email"
-							onChange={handleClickOnChange}
-							required
-							placeholder="example@moeum.com"
-							onBlur={handleBlur}
-						></input>
-					</div>
-					{emailError && (
-						<div className="text-[#FF8145] mt-[-18px] mb-[-19px] text-[14px] w-full">
-							{emailError}
-						</div>
-					)}
-					<div className="flex flex-col w-full">
-						<label className="test-[14px] leading-20px text-[#999]">
-							비밀번호
-						</label>
-						<input
-							className="h-[48px] px-[16px] rounded-[8px] border-solid border border-gray-400"
-							type="password"
-							value={password}
-							name="password"
-							onChange={handleClickOnChange}
-							required
-							placeholder="영문 + 숫자 조합으로 6자 이상 입력해주세요 :)"
-							onBlur={handleBlur}
-						></input>
-					</div>
-					{passwordError && (
-						<div className="text-[#FF8145] mt-[-18px] mb-[-19px] text-[14px] w-full">
-							{passwordError}
-						</div>
-					)}
-					<div className="flex flex-col w-full">
-						<label className="test-[14px] leading-20px text-[#999]">
-							닉네임
-						</label>
-						<input
-							className="h-[48px] px-[16px] rounded-[8px] border-solid border border-gray-400"
-							type="text"
-							value={displayName}
-							name="displayName"
-							onChange={handleClickOnChange}
-							required
-							placeholder="2자 이상 10자 이하로 설정해주세요 :)"
-							onBlur={handleBlur}
-						></input>
-					</div>
-					{displayNameError && (
-						<div className="text-[#FF8145] mt-[-18px] mb-[-19px] text-[14px] w-full">
-							{displayNameError}
-						</div>
-					)}
-				</form>
-				{/* 약관 동의 부분 */}
-				<div className="flex flex-col w-full gap-[16px] mb-[32px]">
-					<label className="test-[16px] text-[#212121] font-[600]">
-						약관 동의
-					</label>
-					<div className="flex items-center">
-						<input
-							className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px]"
-							type="checkbox"
-							name="all"
-							onChange={checkAll}
-							checked={checkList.length === 4 ? true : false}
-						/>
-						<div>전체동의</div>
-					</div>
-					<div className="border border-gray-300"></div>
-					<div className="flex items-center">
-						<input
-							className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px] inclu"
-							type="checkbox"
-							name="age"
-							onChange={check}
-							checked={checkList.includes("age") ? true : false}
-						/>
-						<div>
-							<span>(필수)</span> 만 14세 이상입니다
-						</div>
-					</div>
-					<div className="flex items-center">
-						<input
-							className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px]"
-							type="checkbox"
-							name="terms"
-							onChange={check}
-							checked={checkList.includes("terms") ? true : false}
-						/>
-						<div>
-							<span>(필수)</span> 이용약관 동의
-						</div>
-					</div>
-					<div className="flex items-center">
-						<input
-							className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px]"
-							type="checkbox"
-							name="collect"
-							onChange={check}
-							checked={checkList.includes("collect") ? true : false}
-						/>
-						<div>
-							<span>(필수)</span> 개인정보 수집 및 이용 동의
-						</div>
-					</div>
-					<div className="flex items-center">
-						<input
-							className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px]"
-							type="checkbox"
-							name="choice"
-							onChange={check}
-							checked={checkList.includes("choice") ? true : false}
-						/>
-						<div>
-							<span>(선택)</span> 마케팅 개인정보 제3자 제공 동의
-						</div>
-					</div>
-				</div>
-				<button
-					onClick={handleClickSignUp}
-					className={
-						buttonColor
-							? "flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145]"
-							: "text-slate-200 flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#999] bg-[#d6d6d6]"
-					}
-				>
-					회원가입
-				</button>
-				<ToastContainer />
-			</div>
-		</div>
-	);
->>>>>>> 7389c0ed56c392a4bfb40be9526a179315524ec9
 }
