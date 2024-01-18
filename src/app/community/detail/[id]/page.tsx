@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import CuteHeart from "@/components/community/CuteHeart";
 
-export default function communityDetail() {
+export default function CommunityDetail() {
   const { uid, photoURL, displayName, isLogin } = useSelector(
     (state: RootState) => state.login
   );
@@ -71,7 +71,7 @@ export default function communityDetail() {
           <div className="flex gap-[10px] mr-[36%]">
             <Image
               className="w-[28px] h-[28px]"
-              src={foundPost?.profile ? foundPost.profile : userIcon}
+              src={userIcon}
               alt="profile"
               width={100}
               height={100}

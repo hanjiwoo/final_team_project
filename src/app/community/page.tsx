@@ -13,7 +13,7 @@ import CategoryBtn from "@/components/community/CategoryBtn";
 import { useRouter } from "next/navigation";
 import CuteHeart from "@/components/community/CuteHeart";
 
-export default function listpage() {
+export default function Listpage() {
   const [newPost, setNewPost] = useState<Post>({
     id: "",
     uid: "",
@@ -165,7 +165,7 @@ export default function listpage() {
                 {/* 닉네임,시간 컨테이너 */}
                 <div className="flex gap-[10px]">
                   <Image
-                    src={post.profile ? post.profile : userIcon}
+                    src={userIcon}
                     alt="profile"
                     className="w-[28px] h-[28px]"
                     width={100}
