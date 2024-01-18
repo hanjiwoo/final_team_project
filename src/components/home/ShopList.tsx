@@ -80,8 +80,8 @@ export default function ShopList() {
           >
             {shops.map((shop: typeOfShop) => {
               return (
-                <React.Fragment>
-                  <SwiperSlide key={nanoid()}>
+                <React.Fragment key={nanoid()}>
+                  <SwiperSlide>
                     <ShopCard shop={shop} shops={shops} />
                   </SwiperSlide>
                 </React.Fragment>
