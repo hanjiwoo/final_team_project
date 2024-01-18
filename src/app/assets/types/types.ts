@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export type typeOfShop = {
   가격1: number;
   가격2: number;
@@ -51,10 +53,29 @@ export type typeOfHoogi = {
 };
 
 export interface Post {
+  category?: string;
+  uid?: string;
   id: string;
   title?: string;
-  profile?: string;
+  profile?: StaticImageData;
   content?: string;
   nickname?: string;
-  createdAt?: Date;
+  createdAt?: number;
 }
+
+export type Daetgle = {
+  profile?: StaticImageData;
+  uid?: string;
+  nickName?: string;
+  content?: string;
+  postId?: string;
+  id: string;
+};
+
+export type typeOfHeart = {
+  isLogin?: boolean;
+  uid?: string;
+  name?: string;
+  id: string;
+  postId?: string;
+};
