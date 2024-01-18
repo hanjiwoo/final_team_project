@@ -129,6 +129,7 @@ export default function DoneAssess() {
     "w-full h-[48px] rounded-[8px] mt-1 flex justify-between items-center px-5 bg-[#FAFAFA]";
 
   const numberCSS = "text-[#FF8145]";
+  const numberCSS = "text-[#FF8145]";
 
   return (
     <>
@@ -150,28 +151,150 @@ export default function DoneAssess() {
             리뷰 작성하기
           </button>
         </div>
+        return (
+        <>
+          {" "}
+          <div className="w-full flex flex-col justify-center items-center">
+            <div className="w-full flex justify-between items-center mb-[36px]">
+              <span className="w-full text-[20px] font-semibold leading-[28px]">
+                해당 매장의 #태그 리뷰를 확인해보세요 :)
+              </span>
+              <button
+                onClick={modalOpenHandeler}
+                className="bg-[#FF8145] w-[156px] h-[40px] rounded-[8px] text-[14px] text-[#fff] flex justify-center items-center gap-[8px] px-[12px] py-[8px]"
+              >
+                <Image
+                  src={pencilIcon}
+                  alt="writeReview"
+                  className="w-[20px] h-[20px]"
+                />
+                리뷰 작성하기
+              </button>
+            </div>
 
-        <div className="mb-[16px]">
-          {hoogis
-            ?.filter((hoogi) => {
-              return (hoogi.uid = fakeuser.uid);
-            })
-            .map((hoogi: typeOfHoogi) => {
-              hoogi.맛;
-              return (
-                <div key={nanoid()} className="flex gap-[8px]">
-                  <>{hoogi.uid}님 후기 감사합니다.</>
-                  <button
-                    onClick={() => deleteHandler(hoogi.id)}
-                    className="text-[#FF8145] underline"
-                  >
-                    후기삭제
-                  </button>
+            <div className="mb-[16px]">
+              {hoogis
+                ?.filter((hoogi) => {
+                  return (hoogi.uid = fakeuser.uid);
+                })
+                .map((hoogi: typeOfHoogi) => {
+                  hoogi.맛;
+                  return (
+                    <div key={nanoid()} className="flex gap-[8px]">
+                      <>{hoogi.uid}님 후기 감사합니다.</>
+                      <button
+                        onClick={() => deleteHandler(hoogi.id)}
+                        className="text-[#FF8145] underline"
+                      >
+                        후기삭제
+                      </button>
+                    </div>
+                  );
+                })}
+            </div>
+            <div className="mb-[16px]">
+              {hoogis
+                ?.filter((hoogi) => {
+                  return (hoogi.uid = fakeuser.uid);
+                })
+                .map((hoogi: typeOfHoogi) => {
+                  hoogi.맛;
+                  return (
+                    <div key={nanoid()} className="flex gap-[8px]">
+                      <>{hoogi.uid}님 후기 감사합니다.</>
+                      <button
+                        onClick={() => deleteHandler(hoogi.id)}
+                        className="text-[#FF8145] underline"
+                      >
+                        후기삭제
+                      </button>
+                    </div>
+                  );
+                })}
+            </div>
+
+            <div className="w-full flex flex-col justify-center items-center gap-[32px] mb-[100px]">
+              <form className="w-full">
+                <h2 className="text-[16px] font-semibold leading-[24px] mb-[20px]">
+                  가격은 어떤가요?
+                </h2>
+                <div className="flex gap-[12px] flex-col">
+                  <div className={tagCSS}>
+                    <p>👍 저렴해요 </p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.가격1} </p>{" "}
+                  </div>
+                  <div className={tagCSS}>
+                    <p>😎 괜찮아요 </p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.가격2} </p>
+                  </div>
+                  <div className={tagCSS}>
+                    <p>💳 가격이 달라요 </p>
+                    <p className={numberCSS}>{DoneHoogis.가격3} </p>{" "}
+                  </div>
                 </div>
-              );
-            })}
-        </div>
-
+              </form>
+              <form className="w-full">
+                <h2 className="text-[16px] font-semibold leading-[24px]  mb-[20px]">
+                  맛있었나요?
+                </h2>
+                <div className="flex gap-[12px] flex-col">
+                  <div className={tagCSS}>
+                    <p>😋 또 가고싶어요</p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.맛1} </p>
+                  </div>
+                  <div className={tagCSS}>
+                    <p>🍽️ 괜찮아요 </p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.맛2} </p>{" "}
+                  </div>
+                  <div className={tagCSS}>
+                    <p>🤔 아쉬워요 </p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.맛3} </p>
+                  </div>
+                </div>
+              </form>
+              <form className="w-full">
+                <h2 className="text-[16px] font-semibold leading-[24px]  mb-[20px]">
+                  서비스는 좋았나요?
+                </h2>
+                <div className="flex gap-[12px] flex-col">
+                  <div className={tagCSS}>
+                    <p>💖 친절해요 </p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.서비스1}</p>{" "}
+                  </div>
+                  <div className={tagCSS}>
+                    <p>👨‍🍳 괜찮아요 </p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.서비스2}</p>
+                  </div>
+                  <div className={tagCSS}>
+                    <p>😢 아쉬워요 </p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.서비스3}</p>
+                  </div>
+                </div>
+              </form>
+              <form className="w-full">
+                <h2 className="text-[16px] font-semibold leading-[24px]  mb-[20px]">
+                  위생은 청결했나요?
+                </h2>
+                <div className="flex gap-[12px] flex-col">
+                  <div className={tagCSS}>
+                    <p>✨ 깨끗해요 </p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.위생1} </p>{" "}
+                  </div>
+                  <div className={tagCSS}>
+                    <p>💦 괜찮아요 </p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.위생2} </p>{" "}
+                  </div>
+                  <div className={tagCSS}>
+                    <p>😨 아쉬워요 </p>{" "}
+                    <p className={numberCSS}>{DoneHoogis.위생3} </p>{" "}
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          {modal && <PostModal setModal={setModal} />}
+        </>
+        );
         <div className="w-full flex flex-col justify-center items-center gap-[32px] mb-[100px]">
           <form className="w-full">
             <h2 className="text-[16px] font-semibold leading-[24px] mb-[20px]">

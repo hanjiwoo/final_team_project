@@ -15,8 +15,8 @@ export default function DeleteUser() {
 
     if (auth.currentUser) {
       deleteUser(auth.currentUser)
-        .then((res) => {
-          alert(res);
+        .then(() => {
+          alert("적용완료");
         })
         .catch((error) => {
           alert(error);

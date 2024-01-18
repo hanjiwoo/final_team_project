@@ -43,26 +43,21 @@ export default function page() {
       if (imgFile) {
         await uploadBytes(storageRef, imgFile);
       }
-      const downloadURL = await getDownloadURL(storageRef);
-      await updateProfile(auth.currentUser, {
-        displayName: text.nickName,
-        photoURL: downloadURL,
-      })
-        .then((res) => {
-          alert(res);
-        })
-        .catch((err) => {
-          alert(err);
+      try {
+        const downloadURL = await getDownloadURL(storageRef);
+        await updateProfile(auth.currentUser, {
+          displayName: text.nickName,
+          photoURL: downloadURL,
         });
-      await updatePassword(auth.currentUser, text.password)
-        .then((res) => {
-          alert(res);
-        })
-        .catch((err) => {
-          alert(err);
-        });
-      dispatch(updateNickname(text.nickName));
-      dispatch(updatePhoto(downloadURL));
+        await updatePassword(auth.currentUser, text.password);
+
+        dispatch(updateNickname(text.nickName));
+        dispatch(updatePhoto(downloadURL));
+        alert("적용완료");
+      } catch (error) {
+        alert(error);
+      }
+
       // console.log(downloadURL, "요거좀 궁금하다.");
 
       router.push("/mypage");
