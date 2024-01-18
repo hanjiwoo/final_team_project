@@ -124,7 +124,7 @@ export default function Hoogi({
 		// console.log(맛, 가격, 위생, 서비스, range, face);
 	};
 	return (
-		<div className="bg-[#fff] h-full w-full flex flex-col items-center justify-center mb-10 py-[32px] px-[32px] rounded-[16px]">
+		<div className="bg-[#fff] h-full w-full flex flex-col items-center justify-end mb-10 py-[32px] px-[32px] rounded-[16px]">
 			{/* <div className="bg-red-300  h-[50px] flex ">
 				<h1>해당 음식점에 리뷰를 남겨주세요</h1>
 			</div> */}

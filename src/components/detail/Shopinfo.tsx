@@ -11,6 +11,7 @@ import place from "../../app/assets/images/icon/place.png";
 import phone from "../../app/assets/images/icon/phone.png";
 import menu from "../../app/assets/images/icon/menu.png";
 import inquiry from "../../app/assets/images/icon/inquiry.png";
+import beforeHeart from "../../app/assets/images/icon/heart_off.png";
 
 export default function Shopinfo() {
 	const router = useRouter();
@@ -93,11 +94,15 @@ export default function Shopinfo() {
 		//     </div>
 		//   </div>
 		<div className="w-full flex-col items-center gap-8 mt-[60px]">
-			<div className="self-stretch justify-between items-center inline-flex mb-[32px]">
+			<div className="self-stretch justify-between items-center inline-flex mb-[32px] w-full cursor-pointer">
 				<div className="text-center text-neutral-800 text-3xl font-semibold font-['Pretendard'] leading-[32px]">
 					{shop.업소명}
 				</div>
-				<div className="w-8 h-8 px-[4.67px] py-1.5 justify-center items-center flex" />
+				<Image
+					src={beforeHeart}
+					alt="likeButtn"
+					className="w-[32px] h-[32px]"
+				/>
 			</div>
 			<div className="self-stretch flex-col justify-start items-start gap-4 flex">
 				<div className="justify-start items-start gap-6 inline-flex">

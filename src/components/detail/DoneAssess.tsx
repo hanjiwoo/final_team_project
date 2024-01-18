@@ -126,7 +126,7 @@ export default function DoneAssess() {
 	});
 
 	const tagCSS =
-		"w-full h-[48px] rounded-[8px] bg-white mt-1 flex justify-between items-center px-5 bg-[#FAFAFA]";
+		"w-full h-[48px] rounded-[8px] mt-1 flex justify-between items-center px-5 bg-[#FAFAFA]";
 
 	const numberCSS = "text-[#FF8145]";
 
