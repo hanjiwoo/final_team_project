@@ -80,14 +80,12 @@ export default function listpage() {
 
         {/* 작성하기 버튼 */}
         <div className="flex justify-end w-[50%]">
-          <Link href="community/write">
-            <button className=" flex justify-center items-center gap-[10px] rounded-[10px] w-[130px] h-[40px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]">
-              <div className="w-[20px] h-[20px]">
-                <Image src={writeImage} alt="write"></Image>
-              </div>
-              <p>작성하기</p>
-            </button>
-          </Link>
+          <button className=" flex justify-center items-center gap-[10px] rounded-[10px] w-[130px] h-[40px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]">
+            <div className="w-[20px] h-[20px]">
+              <Image src={writeImage} alt="write"></Image>
+            </div>
+            <p>작성하기</p>
+          </button>
         </div>
 
         {/* 게시글 전체 컨테이너 */}
