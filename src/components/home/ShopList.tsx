@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import place from "../../app/assets/images/icon/place.png";
 import map from "../../app/assets/images/icon/map.png";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar, Autoplay } from "swiper/modules";
 import SwiperCore from "swiper";
@@ -43,7 +42,7 @@ export default function ShopList() {
   SwiperCore.use([Navigation, Scrollbar, Autoplay]);
   return (
     <>
-      <div className="container  py-[40px] w-full relative">
+      <div className="container py-[40px] w-full relative">
         <div className="text-center mb-12">
           <h1 className="text-[28px] text-[#212121] font-semibold leading-[36px] mb-[12px]">
             내 주변의 모-음은 어디일까요?
@@ -67,28 +66,31 @@ export default function ShopList() {
             )}
           </div>
         </div>
-        <div className="swiper-container">
-          <Swiper
-            loop={true} // 슬라이드 루프
-            spaceBetween={50} // 슬라이스 사이 간격
-            slidesPerView={4} // 보여질 슬라이스 수
-            navigation={true} // prev, next button
-            autoplay={{
-              delay: 3500,
-              disableOnInteraction: false, // 사용자 상호작용시 슬라이더 일시 정지 비활성
-            }}
-          >
-            {shops.map((shop: typeOfShop) => {
-              return (
-                <React.Fragment>
-                  <SwiperSlide key={nanoid()}>
-                    <ShopCard shop={shop} shops={shops} />
-                  </SwiperSlide>
-                </React.Fragment>
-              );
-            })}
-          </Swiper>
+        <div className="">
+          <div className="swiper-container">
+            <Swiper
+              loop={true} // 슬라이드 루프
+              spaceBetween={50} // 슬라이스 사이 간격
+              slidesPerView={4} // 보여질 슬라이스 수
+              navigation={true} // prev, next button
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false, // 사용자 상호작용시 슬라이더 일시 정지 비활성
+              }}
+            >
+              {shops.map((shop: typeOfShop) => {
+                return (
+                  <React.Fragment key={nanoid()}>
+                    <SwiperSlide key={nanoid()}>
+                      <ShopCard shop={shop} shops={shops} />
+                    </SwiperSlide>
+                  </React.Fragment>
+                );
+              })}
+            </Swiper>
+          </div>
         </div>
+
         <section className="flex bg-blue-300 justify-around">
           {/* <button
 						className="bg-purple-300 rounded-full text-4xl hover:scale-110 absolute top-[200px] left-[-60px]"
