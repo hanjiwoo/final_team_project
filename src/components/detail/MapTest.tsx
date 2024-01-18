@@ -45,16 +45,16 @@ export default function MapTest() {
 	return (
 		<div className="z-[100] relative left-0 mt-[60px]">
 			{lat === 0 ? (
-				<div className="w-[240px] h-[240px] fixed">
+				<div className="w-[240px] h-[240px] fixed flex justify-center items-center border-[1px] border-[#D6D6D6] rounded-lg text-[#7A7A7A] bg-[#fff]">
 					지도가 로드되지 못했습니다.
 				</div>
 			) : (
-				<div className="fixed  ">
+				<div className="fixed">
 					<div className="flex  justify-center items-center rounded-lg">
 						<div className="w-[240px] h-[240px] overflow-hidden rounded-lg mb-[16px] border-[1px] border-[#D6D6D6]">
 							<Map
 								// ref={mapRef.current}
-								className="bg-yellow-100" // 지도를 표시할 Container
+
 								id="map"
 								center={{
 									// 지도의 중심좌표
