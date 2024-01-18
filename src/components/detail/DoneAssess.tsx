@@ -35,20 +35,24 @@ export default function DoneAssess() {
   const correctUser = hoogis?.find((hoogi) => {
     return (hoogi.uid = fakeuser.uid);
   });
+
   const { mutate: mutateToDelete } = useMutation({
     mutationFn: deleteHoogi,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [`hoogis${shopId}`] });
     },
   });
+
   const deleteHandler = (selectedId: string | undefined) => {
     mutateToDelete({ shopId, selectedId });
   };
+
   const router = useRouter();
   const modalOpenHandeler = () => {
     if (correctUser) return alert("이미 작성하셨어요");
     setModal(true);
   };
+
   if (isLoading) {
     return <>로딩중 ..</>;
   }
@@ -120,9 +124,12 @@ export default function DoneAssess() {
       // console.log("Unknown 서비스.");
     }
   });
+
   const tagCSS =
     "w-full h-[48px] rounded-[8px]  mt-1 flex justify-between items-center px-5 bg-[#FAFAFA]";
+
   const numberCSS = "text-[#FF8145]";
+
   return (
     <>
       {" "}
@@ -143,6 +150,7 @@ export default function DoneAssess() {
             리뷰 작성하기
           </button>
         </div>
+
         <div className="mb-[16px]">
           {hoogis
             ?.filter((hoogi) => {
@@ -163,6 +171,7 @@ export default function DoneAssess() {
               );
             })}
         </div>
+
         <div className="w-full flex flex-col justify-center items-center gap-[32px] mb-[100px]">
           <form className="w-full">
             <h2 className="text-[16px] font-semibold leading-[24px] mb-[20px]">

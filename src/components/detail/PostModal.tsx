@@ -1,5 +1,7 @@
 import React from "react";
 import Hoogi from "./Hoogi";
+import Image from "next/image";
+import closeBtn from "../../app/assets/images/icon/close_1.png";
 
 export default function PostModal({
 	setModal,
@@ -16,14 +18,17 @@ export default function PostModal({
      flex justify-center items-center"
 			style={{ background: "rgba(0, 0, 0, 0.5)" }}
 		>
-			<div className="w-[600px] h-[800px] bg-purple-400 flex flex-col items-center">
-				<div className="flex justify-between w-full font-black">
+			<div className="w-[600px] h-[800px] flex flex-col items-center">
+				<div className="flex justify-between w-full font-black relative top-[60px] px-[32px]">
 					<h1 className="text-[24px] leading-[32px] font-semibold text-[#212121]">
 						오늘 방문한 매장은 어떤가요?
 					</h1>
-					<button onClick={moveToBack} className="text-2xl">
-						✖️
-					</button>
+					<Image
+						src={closeBtn}
+						alt="close"
+						onClick={moveToBack}
+						className="text-2xl cursor-pointer w-[24px] h-[24px]"
+					/>
 				</div>
 				<Hoogi setModal={setModal} />
 			</div>

@@ -44,8 +44,8 @@ export default function AssessBtn({
 					<div
 						id="1"
 						onClick={onclickHandler}
-						className={`bg-${
-							activeId === "1" ? "[#FAFAFA]" : "[#fff]"
+						className={`text-${activeId === "1" ? "[#fff]" : "[#5C5C5C]"} bg-${
+							activeId === "1" ? "[#FF8145]" : "[#fff]"
 						} w-1/3 h-[48px] flex items-center px-[16px] rounded-[8px] border-[1px] border-[#D6D6D6]`}
 					>
 						{one}
@@ -53,8 +53,8 @@ export default function AssessBtn({
 					<div
 						id="2"
 						onClick={onclickHandler}
-						className={`bg-${
-							activeId === "2" ? "[#FAFAFA]" : "[#fff]"
+						className={`text-${activeId === "2" ? "[#fff]" : "[#5C5C5C]"} bg-${
+							activeId === "2" ? "[#FF8145]" : "[#fff]"
 						} w-1/3 h-[48px] flex items-center px-[16px] rounded-[8px] border-[1px] border-[#D6D6D6]`}
 					>
 						{two}
@@ -62,8 +62,8 @@ export default function AssessBtn({
 					<div
 						id="3"
 						onClick={onclickHandler}
-						className={`bg-${
-							activeId === "3" ? "[#FAFAFA]" : "[#fff]"
+						className={`text-${activeId === "3" ? "[#fff]" : "[#5C5C5C]"} bg-${
+							activeId === "3" ? "[#FF8145]" : "[#fff]"
 						} w-1/3 h-[48px] flex items-center px-[16px] rounded-[8px] border-[1px] border-[#D6D6D6]`}
 					>
 						{three}
