@@ -5,9 +5,11 @@ import { db } from "@/shared/firebase";
 import { Post } from "@/app/assets/types/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function WritePage() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const route = useRouter();
 
   const [newPost, setNewPost] = useState({
     id: "",
@@ -44,9 +46,11 @@ export default function WritePage() {
     const confirmResult = window.confirm("게시글 작성을 하시겠습니까?");
     if (confirmResult) {
       alert("작성이 완료되었습니다.");
+      route.push("/community");
       mutateToAdd();
     }
   };
+
   const handleCancel = () => {
     const confirmResult = window.confirm("작성을 취소하시겠습니까?");
     if (confirmResult) {
@@ -99,23 +103,19 @@ export default function WritePage() {
             </div>
 
             <div className="flex gap-[25px] self-end flex-row-reverse">
-              <Link href={"/community"}>
-                <button
-                  className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-                  onClick={handleAddPost}
-                >
-                  작성하기
-                </button>
-              </Link>
+              <button
+                className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                onClick={handleAddPost}
+              >
+                작성하기
+              </button>
 
-              <Link href={"/community"}>
-                <button
-                  className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-                  onClick={handleCancel}
-                >
-                  취소하기
-                </button>
-              </Link>
+              <button
+                className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                onClick={handleCancel}
+              >
+                취소하기
+              </button>
             </div>
           </form>
         </div>
