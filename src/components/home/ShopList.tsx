@@ -71,7 +71,7 @@ export default function ShopList() {
             <Swiper
               loop={true} // 슬라이드 루프
               spaceBetween={50} // 슬라이스 사이 간격
-              slidesPerView={4} // 보여질 슬라이스 수
+              slidesPerView={5} // 보여질 슬라이스 수
               navigation={true} // prev, next button
               autoplay={{
                 delay: 3500,

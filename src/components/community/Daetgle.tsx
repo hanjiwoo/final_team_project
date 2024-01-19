@@ -108,7 +108,7 @@ export default function Daetgle() {
               {" "}
               <Image
                 className="w-[28px] h-[28px]"
-                src={item.profile ? item.profile : userIcon}
+                src={userIcon}
                 alt="profile"
                 width={100}
                 height={100}
