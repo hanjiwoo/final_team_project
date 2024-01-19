@@ -1,16 +1,26 @@
 "use client";
-import { addDoc, collection } from "firebase/firestore";
-import React, { useEffect, useState, ChangeEvent } from "react";
-import { db } from "@/shared/firebase";
-import { Post } from "@/app/assets/types/types";
+import React, { ChangeEvent, useState } from "react";
+import CategoryBtn from "./CategoryBtn";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import CategoryBtn from "@/components/community/CategoryBtn";
-import { useSelector } from "react-redux";
+import { Post } from "@/app/assets/types/types";
 import { RootState } from "@/redux/config/configStore";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "@/shared/firebase";
 
-export default function WritePage() {
+export default function UpdateModal({
+  setToggleModal,
+  foundPost,
+}: {
+  setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
+  foundPost: Post | undefined;
+}) {
+  const backHandler = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if (e.target === e.currentTarget) {
+      setToggleModal(false);
+    }
+  };
   const [posts, setPosts] = useState<Post[]>([]);
   const route = useRouter();
   const { uid, displayName, isLogin, photoURL } = useSelector(
@@ -23,22 +33,11 @@ export default function WritePage() {
     content: "",
     profile: photoURL,
     nickname: displayName,
-    createdAt: Date.now(),
+    createdAt: 1004,
     category: "",
   });
 
-  const addPost = async () => {
-    await addDoc(collection(db, "posts"), newPost);
-  };
-
   const queryClient = useQueryClient();
-  const { mutate: mutateToAdd } = useMutation({
-    mutationFn: addPost,
-
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
-  });
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -48,31 +47,46 @@ export default function WritePage() {
     setNewPost({ ...newPost, [name]: value });
     // console.log(newPost);
   };
+  const updatePost = async () => {
+    await updateDoc(doc(db, "posts", `${foundPost?.id}`), {
+      title: newPost.title,
+      content: newPost.content,
+      category: newPost.category,
+    });
+  };
+  const { mutate: mutateToUpdate } = useMutation({
+    mutationFn: updatePost,
 
-  const handleAddPost = async () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+  });
+
+  const handleUpdatePost = async () => {
     if (!isLogin) return alert("로그인하셔야 게시글을 남기실수 있습니다.");
     if (!newPost.content || !newPost.title || !newPost.category)
       return alert("카테고리 타이틀 컨텐츠를 작성해 주세요");
-    const confirmResult = window.confirm("게시글 작성을 하시겠습니까?");
+    const confirmResult = window.confirm("게시글 수정을 하시겠습니까?");
     if (confirmResult) {
       alert("작성이 완료되었습니다.");
-      route.push("/community");
-      mutateToAdd();
+      setToggleModal(false);
+      mutateToUpdate();
     }
   };
 
   const handleCancel = () => {
-    const confirmResult = window.confirm("작성을 취소하시겠습니까?");
-    if (confirmResult) {
-      // 작성을 취소할 때 수행할 동작 추가
-      // 예: 취소 후 어떤 페이지로 이동하는 등의 작업
-    }
+    setToggleModal(false);
   };
 
   return (
-    <>
+    <section
+      onClick={(e) => backHandler(e)}
+      style={{ background: "rgba(0, 0, 0, 0.5)" }}
+      className="w-full h-full fixed top-0 left-0  flex justify-center items-center"
+    >
+      {/* <div className="bg-white w-1/2 h-1/2"></div> */}
       {/* 전체 컨테이너 */}
-      <div className=" flex flex-col items-center justify-center w-[100%] h-[100%] m-[60px 420px]">
+      <div className=" flex flex-col bg-white items-center justify-center p-10 m-[60px 420px]">
         {/* gap주려고 묶음 */}
         <div className="flex flex-col gap-[30px]">
           {/* h1컨테이너 */}
@@ -148,9 +162,9 @@ export default function WritePage() {
               <button
                 type="button"
                 className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-                onClick={handleAddPost}
+                onClick={handleUpdatePost}
               >
-                작성완료
+                수정완료
               </button>
 
               <button
@@ -164,6 +178,6 @@ export default function WritePage() {
           </form>
         </div>
       </div>
-    </>
+    </section>
   );
 }
