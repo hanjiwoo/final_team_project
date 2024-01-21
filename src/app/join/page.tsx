@@ -13,8 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Image from "next/image";
 import rightIcon from "../../app/assets/images/icon/right.png";
-import JoinModalAge from "@/components/join/JoinModalAge";
-import JoinModalUtilization from "@/components/join/JoinModalAge";
+import JoinModal from "@/components/join/JoinModal";
 
 export default function Join() {
 	// const navigate = useNavigate();
@@ -57,9 +56,11 @@ export default function Join() {
 
 	// 약관 모달창 오픈
 	// 만 14세 이상입니다
-	const [openModal, setOpenModal] = useState(false);
-	// 이용약관 동의
-	const [openModalUtilization, setOpenModalUtilization] = useState(false);
+	const [openModal, setOpenModal] = useState<number | null>(null);
+
+	const handleClickOpenModal = (id: number | null) => {
+		setOpenModal(id);
+	};
 
 	useEffect(() => {
 		if (
@@ -310,9 +311,12 @@ export default function Join() {
 								src={rightIcon}
 								alt="nextPage"
 								className="w-[18px] h-[18px] cursor-pointer"
-								onClick={() => setOpenModal(true)}
+								id="1"
+								onClick={() => handleClickOpenModal(1)}
 							/>
-							{openModal && <JoinModalAge setOpenModal={setOpenModal} />}
+							{openModal && (
+								<JoinModal setOpenModal={setOpenModal} id={openModal} />
+							)}
 						</div>
 					</div>
 					<div className="flex items-center">
@@ -329,9 +333,12 @@ export default function Join() {
 								src={rightIcon}
 								alt="nextPage"
 								className="w-[18px] h-[18px] cursor-pointer"
-								onClick={() => setOpenModal(true)}
+								id="2"
+								onClick={() => handleClickOpenModal(2)}
 							/>
-							{openModal && <JoinModalAge setOpenModal={setOpenModal} />}
+							{openModal && (
+								<JoinModal setOpenModal={setOpenModal} id={openModal} />
+							)}
 						</div>
 					</div>
 					<div className="flex items-center">
@@ -348,8 +355,12 @@ export default function Join() {
 								src={rightIcon}
 								alt="nextPage"
 								className="w-[18px] h-[18px] cursor-pointer"
-								onClick={() => setOpenModal(true)}
+								id="3"
+								onClick={() => handleClickOpenModal(3)}
 							/>
+							{openModal && (
+								<JoinModal setOpenModal={setOpenModal} id={openModal} />
+							)}
 						</div>
 					</div>
 					<div className="flex items-center">
@@ -366,8 +377,12 @@ export default function Join() {
 								src={rightIcon}
 								alt="nextPage"
 								className="w-[18px] h-[18px] cursor-pointer"
-								onClick={() => setOpenModal(true)}
+								id="4"
+								onClick={() => handleClickOpenModal(4)}
 							/>
+							{openModal && (
+								<JoinModal setOpenModal={setOpenModal} id={openModal} />
+							)}
 						</div>
 					</div>
 				</div>
