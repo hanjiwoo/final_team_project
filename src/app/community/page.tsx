@@ -98,7 +98,7 @@ export default function ListPage() {
             </div>
           </Link>
         </div>
-        <h2>실시간모음</h2>
+        <h2 className="text-[30px] font-bold">실시간모음</h2>
         <section className="flex items-center gap-10">
           <CategoryBtn
             text="전체모음"
@@ -132,7 +132,7 @@ export default function ListPage() {
           />
         </section>
         {/* 작성하기 버튼 */}
-        <div className="flex justify-end w-[50%] bg-yellow-100">
+        <div className="flex justify-end w-[50%]">
           <Link href="community/write">
             <button className=" flex justify-center items-center gap-[10px] rounded-[10px] w-[130px] h-[40px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]">
               <div className="w-[20px] h-[20px]">
@@ -146,10 +146,10 @@ export default function ListPage() {
         {/* 게시글 전체 컨테이너 */}
         {filteredPosts?.map((post) => {
           return (
-            <div key={nanoid()} className=" border-2 flex w-[50%] h-[170px] ">
+            <div key={nanoid()} className="  flex w-[50%] h-[170px] ">
               <div className=" w-[100%] h-full flex flex-col justify-between ">
-                {/* 제목 컨테이너 */}
-                <div className="text-[20px] border-2 border-black rounded-full font-bold w-1/5">
+                {/* 카테고리 */}
+                <div className="text-[20px] w-[110px] h-[30px] border-2  rounded-full bg-[#FF8145] border-[#FF8145] text-white text-center">
                   <h2>{post.category}</h2>
                 </div>
                 {/* 제목 컨테이너 */}
