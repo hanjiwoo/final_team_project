@@ -48,7 +48,7 @@ export default function CommunityDetail() {
       <div className="flex flex-col items-center w-[100%] h-[100%]">
         <div className="flex flex-col gap-[20px]">
           <div className=" mr-[29%]">
-            <h1 className="border-2 border-black rounded-full">
+            <h1 className="border-2 w-[100px] text-center rounded-[10px] bg-[#FF8145] text-white border-[#FF8145]">
               {foundPost?.category}
             </h1>
             <h2 className="text-[30px] font-bold">{foundPost?.title}</h2>
@@ -86,7 +86,7 @@ export default function CommunityDetail() {
           {/* 내용 컨테이너 */}
           <div className="flex flex-col gap-[20px]">
             <p>{foundPost?.content}</p>
-            <p className=" border-2 w-[600px] h-[300px]">next.js 사진</p>
+            <p className=" border-2 w-[600px] h-[300px]">사진</p>
           </div>
 
           {/* 공감해요 컨테이너 */}
