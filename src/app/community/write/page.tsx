@@ -1,7 +1,7 @@
 "use client";
 import { addDoc, collection } from "firebase/firestore";
 import React, { useEffect, useState, ChangeEvent } from "react";
-import { db } from "@/shared/firebase";
+import { db, storage } from "@/shared/firebase";
 import { Post } from "@/app/assets/types/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
@@ -9,9 +9,15 @@ import { useRouter } from "next/navigation";
 import CategoryBtn from "@/components/community/CategoryBtn";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
+import { StaticImageData } from "next/image";
+import { url } from "inspector";
+import { nanoid } from "nanoid";
+import { ref, uploadBytes } from "firebase/storage";
 
 export default function WritePage() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [urlFiles, setUrlFiles] = useState<string[]>();
+  const [imgFiles, setImgFiles] = useState<File[]>();
   const route = useRouter();
   const { uid, displayName, isLogin, photoURL } = useSelector(
     (state: RootState) => state.login
@@ -29,6 +35,13 @@ export default function WritePage() {
 
   const addPost = async () => {
     await addDoc(collection(db, "posts"), newPost);
+
+    if (imgFiles) {
+      for (let i = 0; i < imgFiles.length; i++) {
+        const storageRef = ref(storage, `${uid}/${newPost.createdAt}/${i}`);
+        await uploadBytes(storageRef, imgFiles[i]);
+      }
+    }
   };
 
   const queryClient = useQueryClient();
@@ -56,6 +69,7 @@ export default function WritePage() {
     const confirmResult = window.confirm("게시글 작성을 하시겠습니까?");
     if (confirmResult) {
       alert("작성이 완료되었습니다.");
+
       route.push("/community");
       mutateToAdd();
     }
@@ -69,6 +83,25 @@ export default function WritePage() {
     }
   };
 
+  const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log(e.target.files, "이거나 보자");
+    if (e.target.files) {
+      if (e.target.files?.length > 5) {
+        return alert("5개 까지 가능합니다");
+      }
+      e.target.files[0];
+      let arr = [];
+      let arr2 = [];
+      for (let i = 0; i < e.target.files.length; i++) {
+        arr.push(URL.createObjectURL(e.target.files[i]));
+        arr2.push(e.target.files[i]);
+      }
+      // console.log(arr, "배열에 잘들어감?");
+      setUrlFiles(arr);
+      setImgFiles(arr2);
+    }
+  };
+
   return (
     <>
       {/* 전체 컨테이너 */}
@@ -78,6 +111,23 @@ export default function WritePage() {
           {/* h1컨테이너 */}
           <div className="mr-[45%]">
             <h1 className="text-[30px] font-bold">게시글 작성하기</h1>
+          </div>
+          <div className="flex">
+            <h2>사진</h2>
+            <label>
+              <div className="bg-yellow-200 w-[100px] h-[100px]">
+                사진고르던가{" "}
+              </div>
+              <input
+                className="hidden"
+                type="file"
+                multiple
+                onChange={(e) => fileChangeHandler(e)}
+              />
+            </label>
+            {urlFiles?.map((file) => {
+              return <img key={nanoid()} width={200} height={200} src={file} />;
+            })}
           </div>
           <section className="flex items-center gap-10">
             <h2>카테고리</h2>

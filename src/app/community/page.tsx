@@ -5,15 +5,16 @@ import writeImage from "@/app/assets/images/icon/write_icon.png";
 import userIcon from "../assets/images/icon/userIcon.png";
 import { useQuery } from "@tanstack/react-query";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/shared/firebase";
+import { db, storage } from "@/shared/firebase";
 import { Post } from "../assets/types/types";
 import { nanoid } from "nanoid";
 import Link from "next/link";
 import CategoryBtn from "@/components/community/CategoryBtn";
 import { useRouter } from "next/navigation";
 import CuteHeart from "@/components/community/CuteHeart";
+import { getDownloadURL, ref } from "firebase/storage";
 
-export default function listpage() {
+export default function Listpage() {
   const [newPost, setNewPost] = useState<Post>({
     id: "",
     uid: "",
@@ -50,16 +51,34 @@ export default function listpage() {
   //   minute: "2-digit",
   //   second: "2-digit",
   // });
-  const filteredPosts = posts?.filter((post) => {
-    if (newPost.category === "" || newPost.category === "전체모음") {
-      return true;
-    }
-    return newPost.category === post.category;
-  });
+  const filteredPosts = posts
+    ?.filter((post) => {
+      if (newPost.category === "" || newPost.category === "전체모음") {
+        return true;
+      }
+      return newPost.category === post.category;
+    })
+    .sort((a, b) => {
+      if (a.createdAt && b.createdAt) {
+        return b.createdAt - a.createdAt;
+      }
+      return 1;
+    });
 
   const moveToDetail = (id: string) => {
     router.push(`/community/detail/${id}`);
   };
+  const imageGetFn = async (uid?: string, createdAt?: number) => {
+    // let arr=[]
+    // for(let i =0 ; i <5 ; i++){
+    const storageRef = ref(storage, `${uid}/${createdAt}/${0}`);
+    const DownUrl = await getDownloadURL(storageRef);
+    // arr.push(DownUrl)
+    // }
+    console.log(DownUrl, "다운이 된건가?");
+    return DownUrl;
+  };
+
   if (isLoading) return <div>로딩중</div>;
   return (
     <>
@@ -164,13 +183,15 @@ export default function listpage() {
 
                 {/* 닉네임,시간 컨테이너 */}
                 <div className="flex gap-[10px]">
-                  <Image
-                    src={post.profile ? post.profile : userIcon}
-                    alt="profile"
-                    className="w-[28px] h-[28px]"
-                    width={100}
-                    height={100}
-                  />
+                  {/* {post.profile && (
+                    <Image
+                      src={post.profile}
+                      alt="profile"
+                      className=""
+                      width={100}
+                      height={100}
+                    />
+                  )} */}
                   <p>{post.nickname}</p>
                   <time>
                     {post.createdAt &&
@@ -198,6 +219,10 @@ export default function listpage() {
               {/* 사진컨테이너 */}
               <div className=" ">
                 <p className="border-2 w-[150px] h-[150px]">사진</p>
+                <img
+                  src={`${() => imageGetFn(post.uid, post.createdAt)}`}
+                  alt="zz"
+                ></img>
                 <p>♥</p>
               </div>
             </div>

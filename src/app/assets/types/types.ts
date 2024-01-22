@@ -46,9 +46,10 @@ export type typeOfHoogi = {
   맛?: string;
   가격?: string;
   위생?: string;
+  displayName?: string;
   서비스?: string;
   id?: string;
-  uid?: number;
+  uid?: string;
   shopId?: string | string[] | undefined;
 };
 
@@ -64,7 +65,7 @@ export interface Post {
 }
 
 export type Daetgle = {
-  profile?: StaticImageData;
+  profile?: string;
   uid?: string;
   nickName?: string;
   content?: string;

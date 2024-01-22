@@ -20,7 +20,7 @@ export const getHoogis = async (shopId: string | string[]) => {
 
 export const addHoogi = async ({
   uid,
-
+  displayName,
   맛,
   가격,
   위생,
@@ -30,6 +30,7 @@ export const addHoogi = async ({
 }: typeOfHoogi) => {
   await addDoc(collection(db, `hoogis${shopId}`), {
     uid,
+    displayName,
     맛,
     가격,
     위생,

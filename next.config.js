@@ -6,6 +6,15 @@ module.exports = nextConfig;
 
 module.exports = {
   images: {
-    domains: ["lh3.googleusercontent.com", "firebasestorage.googleapis.com"],
+    domains: [
+      "lh3.googleusercontent.com",
+      "firebasestorage.googleapis.com",
+      "your-image-domain.com",
+    ],
   },
 };
+// module.exports = {
+//   images: {
+//     domains: ["your-image-domain.com"],
+//   },
+// };
