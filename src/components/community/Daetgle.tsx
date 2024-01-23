@@ -97,7 +97,7 @@ export default function Daetgle() {
       </div>
       {/* 대댓글 컨테이너 */}
       <div className="flex flex-col gap-[10px]">
-        <div className="flex">
+        <div className="flex ">
           <Image className="w-[28px] h-[28px]" src={userIcon} alt="profile" />
           <p>나는 타입스크립트다</p>
           <p>타입스크립트 어떤데~</p>

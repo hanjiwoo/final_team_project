@@ -71,97 +71,118 @@ export default function WritePage() {
 
   return (
     <>
-      {/* 전체 컨테이너 */}
-      <div className=" flex flex-col items-center justify-center w-[100%] h-[100%] m-[60px 420px]">
-        {/* gap주려고 묶음 */}
-        <div className="flex flex-col gap-[30px]">
+      <div className="flex justify-center items-center w-full">
+        {/* 전체 컨테이너 */}
+
+        <div className="flex px-[420px] py-[60px] flex-col items-start gap-[60px] self-stretch">
           {/* h1컨테이너 */}
-          <div className="mr-[45%]">
-            <h1 className="text-[30px] font-bold">게시글 작성하기</h1>
+          <div className="text-center text-[#212121] text-[28px] font-semibold leading-[36px]">
+            <h1>게시글 작성하기</h1>
           </div>
-          <section className="flex items-center gap-10">
-            <h2>카테고리</h2>
-            <CategoryBtn
-              text="전체모음"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="일상이야기"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="맛집추천"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="취미생활"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="문의하기"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-          </section>
-          <form className="flex flex-col items-center justify-center gap-[50px]">
-            <div className="flex gap-[10px]">
-              <div className="flex">
-                <label className="">제목</label>
-                <p className="text-[#FF8145]">*</p>
-              </div>
-
-              <input
-                className="border-2 border-gray-[400] w-[972px] h-[48px] rounded-[10px] outline-none"
-                type="text"
-                placeholder="제목을 입력해주세요"
-                name="title"
-                value={newPost.title}
-                onChange={handleInputChange}
-              />
+          {/* 사진 */}
+          <div className="flex flex-col items-end gap-[40px] self-stretch">
+            <div className="flex items-start gap-[40px] self-stretch">
+              <p className="text-[16px] font-semibold leading-[24px]">사진</p>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
             </div>
 
-            <div className="flex gap-[10px]">
-              <div className="flex">
-                <label className="">내용</label>
-                <p className="text-[#FF8145]">*</p>
+            <div className="flex flex-col items-end gap-[32px] self-stretch">
+              <section className="flex items-center gap-[40px] self-stretch">
+                <h2>카테고리</h2>
+                <CategoryBtn
+                  text="전체모음"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="일상이야기"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="맛집추천"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="취미생활"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="문의하기"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+              </section>
+
+              <div className="flex items-start gap-[40px] self-stretch">
+                <div className="flex">
+                  <label className="text-center text-[16px] text-[#212121] font-semibold leading-[24px]">
+                    제목
+                  </label>
+                  <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">
+                    *
+                  </p>
+                </div>
+
+                <input
+                  className="flex w-[972px] h-[48px] px-[16px] py-[8px] items-center gap-[4px] border-[1px] rounded-[8px] text-[#212121] outline-none text-[14px] font-medium leading-[20px]"
+                  type="text"
+                  placeholder="제목을 입력해주세요"
+                  name="title"
+                  value={newPost.title}
+                  onChange={handleInputChange}
+                />
               </div>
 
-              <textarea
-                className="border-2 border-gray-[400] w-[972px] h-[200px] resize-none rounded-[10px] outline-none"
-                placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
-                name="content"
-                value={newPost.content}
-                onChange={handleInputChange}
-              />
+              <div className="flex items-start gap-[40px] self-stretch">
+                <div className="flex">
+                  <label className="text-center text-[16px] text-[#212121] font-semibold leading-[24px]">
+                    내용
+                  </label>
+                  <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">
+                    *
+                  </p>
+                </div>
+
+                <textarea
+                  className=" resize-none flex flex-col w-[972px] h-[200px] p-[12px] items-start  justify-between gap-[4px] border-[1px] rounded-[8px] text-[#212121] outline-none text-[14px] font-medium leading-[20px]"
+                  placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
+                  name="content"
+                  value={newPost.content}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
 
-            <div className="flex gap-[25px] self-end flex-row-reverse">
+            <div className="flex justify-end items-start gap-[24px] ">
               <button
                 type="button"
-                className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-                onClick={handleAddPost}
-              >
-                작성완료
-              </button>
-
-              <button
-                type="button"
-                className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
                 onClick={handleCancel}
               >
                 취소하기
               </button>
+
+              <button
+                type="button"
+                className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                onClick={handleAddPost}
+              >
+                작성완료
+              </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </>
