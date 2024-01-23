@@ -145,14 +145,6 @@ export default function WritePage() {
           <div className="flex flex-col items-end gap-[40px] self-stretch">
             <div className="flex items-start gap-[40px] self-stretch">
               <p className="text-[16px] font-semibold leading-[24px]">사진</p>
-              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
-              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
-              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
-              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
-              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
-            </div>
-            <div className="flex items-start gap-[40px] self-stretch">
-              <p className="text-[16px] font-semibold leading-[24px]">사진</p>
               <label>
                 <Image
                   src={imgRegister}
@@ -184,7 +176,7 @@ export default function WritePage() {
                     />
                     <button
                       onClick={() => removeFromImages(file, index)}
-                      className="absolute top-1 right-1 bg-red-500 w-5"
+                      className="absolute top-[-5px] right-1 text-[#212121] w-[7px]"
                     >
                       x
                     </button>
