@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getThumbs } from "./Fns";
 import { typeOfShop } from "@/app/assets/types/types";
 import { nanoid } from "nanoid";
-import ShopCard from "./ShopCard";
+import ShopCard2 from "./ShopCard2";
 
 const photo1 = dummy;
 const photo2 = dummy;
@@ -78,9 +78,9 @@ export default function Best() {
 				</span>
 			</div>
 
-			<div className="flex justify-center items-center">
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-[24px]">
-					{/* {bestList.map((item) => {
+      <div className="flex justify-center items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-[24px]">
+          {/* {bestList.map((item) => {
 						return (
 							<div key={item.id}>
 								<div className="h-full rounded-lg overflow-hidden hover:scale-105 transition ease-in transition-property: all transition-duration: 0.5s w-[344px] h-[324px]">
@@ -105,15 +105,15 @@ export default function Best() {
 							</div>
 						);
 					})} */}
-					{top3Shops?.map((shop) => {
-						return (
-							<React.Fragment key={nanoid()}>
-								{shop && <ShopCard shop={shop} />}
-							</React.Fragment>
-						);
-					})}
-				</div>
-			</div>
-		</div>
-	);
+          {top3Shops?.map((shop) => {
+            return (
+              <React.Fragment key={nanoid()}>
+                {shop && <ShopCard2 shop={shop} />}
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 }

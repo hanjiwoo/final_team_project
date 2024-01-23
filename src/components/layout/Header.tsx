@@ -25,98 +25,100 @@ const Navbar = () => {
 		}
 	};
 
-	// 로그아웃 버튼 함수
-	const handleSignOut = () => {
-		// Firebase Authentication을 사용하여 로그아웃 수행
-		dispatch(logout("한지우가 다녀감 ㅋㅋ"));
-		auth
-			.signOut()
-			.then(() => {
-				// 로그아웃 성공 시 로컬 스토리지에서 사용자 정보 삭제
-				localStorage.removeItem("user");
-				alert("로그아웃 성공");
-			})
-			.catch((error) => {
-				console.error("로그아웃 실패:", error);
-			});
-	};
-	useEffect(() => {
-		if (window && localStorage.getItem("uid")) {
-			const originUser = {
-				isLogin: Boolean(localStorage.getItem("uid")),
-				displayName: localStorage.getItem("displayName"),
-				uid: localStorage.getItem("uid"),
-				photoURL: localStorage.getItem("photoURL"),
-				email: localStorage.getItem("email"),
-			};
-			dispatch(login(originUser));
-		}
-	}, []);
-	return (
-		<nav className="bg-gray-00 w-full">
-			<div className="max-w-6xl mx-auto px-4">
-				<div className="flex justify-between">
-					{/* 메뉴 */}
-					<div className="flex space-x-4">
-						<div>
-							<Link
-								href="/"
-								className="flex items-center py-5 px-2 text-gray-700"
-							>
-								<span className="font-bold">로고</span>
-							</Link>
-						</div>
-					</div>
+  // 로그아웃 버튼 함수
+  const handleSignOut = () => {
+    // Firebase Authentication을 사용하여 로그아웃 수행
+    dispatch(logout("한지우가 다녀감 ㅋㅋ"));
+    auth
+      .signOut()
+      .then(() => {
+        // 로그아웃 성공 시 로컬 스토리지에서 사용자 정보 삭제
+        localStorage.removeItem("user");
+        alert("로그아웃 성공");
+      })
+      .catch((error) => {
+        console.error("로그아웃 실패:", error);
+      });
+  };
+  useEffect(() => {
+    if (window && localStorage.getItem("uid")) {
+      const originUser = {
+        isLogin: Boolean(localStorage.getItem("uid")),
+        displayName: localStorage.getItem("displayName"),
+        uid: localStorage.getItem("uid"),
+        photoURL: localStorage.getItem("photoURL"),
+        email: localStorage.getItem("email"),
+      };
+      dispatch(login(originUser));
+    }
+  }, []);
 
-					{/* 메뉴2 */}
-					<div className="hidden md:flex items-center space-x-1">
-						<Link
-							href="/about"
-							className="py-5 px-3 text-gray-700 hover:text-gray-400"
-						>
-							모음소개
-						</Link>
-						<Link
-							href="/community"
-							className="py-5 px-3 text-gray-700 hover:text-gray-400"
-						>
-							커뮤니티
-						</Link>
-						{uid ? (
-							<>
-								<Link
-									href="/mypage"
-									className="py-5 px-3 text-gray-700 hover:text-gray-400"
-								>
-									마이페이지
-								</Link>
-								<Link
-									href="/"
-									className="py-5 px-3 text-gray-700 hover:text-gray-400"
-									onClick={handleSignOut}
-								>
-									로그아웃
-								</Link>
-							</>
-						) : (
-							<>
-								<Link
-									href="/login"
-									className="py-5 px-3 text-gray-700 hover:text-gray-400"
-								>
-									로그인
-								</Link>
-								<Link
-									href="/join"
-									className="w-[100px] h-10 py-3 px-2 bg-[#FF8145] hover:bg-[#E5743E] rounded-lg transition duration-300 justify-center items-center gap-1 inline-flex"
-								>
-									<div className="text-right text-white text-sm font-medium font-['Pretendard'] leading-tight">
-										모-음 시작하기
-									</div>
-								</Link>
-							</>
-						)}
-					</div>
+const buttonStyle = "py-5 px-3 text-gray-700 hover:text-gray-400"
+  return (
+    <nav className="bg-gray-00 w-full">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex justify-between">
+          {/* 메뉴 */}
+          <div className="flex space-x-4">
+            <div>
+              <Link
+                href="/"
+                className="flex items-center py-5 px-2 text-gray-700"
+              >
+                <span className="font-bold">로고</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* 메뉴2 */}
+          <div className="hidden md:flex items-center space-x-1">
+            <Link
+              href="/about"
+              className={buttonStyle}
+            >
+              모음소개
+            </Link>
+            <Link
+              href="/community"
+              className={buttonStyle}
+            >
+              커뮤니티
+            </Link>
+            {uid ? (
+              <>
+                <Link
+                  href="/mypage"
+                  className={buttonStyle}
+                >
+                  마이페이지
+                </Link>
+                <Link
+                  href="/"
+                  className={buttonStyle}
+                  onClick={handleSignOut}
+                >
+                  로그아웃
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className={buttonStyle}
+                >
+                  로그인
+                </Link>
+                <Link
+                  href="/join"
+                  className="w-[100px] h-10 py-3 px-2 bg-[#FF8145] hover:bg-[#E5743E] rounded-lg transition duration-300 justify-center items-center gap-1 inline-flex"
+                >
+                  <div className="text-right text-white text-sm font-medium font-['Pretendard'] leading-tight">
+                    모-음 시작하기
+                  </div>
+                </Link>
+              </>
+            )}
+          </div>
 
 					{/* mobile menu */}
 					<div className="md:hidden flex items-center">
