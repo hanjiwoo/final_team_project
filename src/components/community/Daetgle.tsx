@@ -81,7 +81,7 @@ export default function Daetgle() {
   if (isLoading) return <>로딩중</>;
   return (
     <>
-      <div className="flex justify-end gap-[20px]">
+      <div className="flex items-start gap-[12px] self-stretch">
         <input
           value={daetgle}
           onChange={(e) => onChangeHandler(e)}
@@ -96,36 +96,35 @@ export default function Daetgle() {
         </button>
       </div>
       {/* 대댓글 컨테이너 */}
-      <div className="flex flex-col gap-[10px]">
-        <div className="flex ">
-          <Image className="w-[28px] h-[28px]" src={userIcon} alt="profile" />
-          <p>나는 타입스크립트다</p>
-          <p>타입스크립트 어떤데~</p>
+      <div className="flex flex-col items-start self-stretch">
+        <div className="flex gap-[16px] ">
+          {daetgles?.map((item) => {
+            return (
+              <div className="flex" key={nanoid()}>
+                {" "}
+                <img
+                  className="w-[28px] h-[28px]"
+                  src={item.profile}
+                  alt="profile"
+                  width={100}
+                  height={100}
+                />
+                <div className="flex items-center gap-[16px]">
+                  <p>{item.nickName}</p>
+                  <p>{item.content}</p>{" "}
+                </div>
+                {uid === item.uid && (
+                  <button
+                    onClick={() => deleteHandler(item.id)}
+                    className="bg-black text-white"
+                  >
+                    삭제
+                  </button>
+                )}
+              </div>
+            );
+          })}
         </div>
-        {daetgles?.map((item) => {
-          return (
-            <div className="flex" key={nanoid()}>
-              {" "}
-              <img
-                className="w-[28px] h-[28px]"
-                src={item.profile}
-                alt="profile"
-                width={100}
-                height={100}
-              />
-              <p>{item.nickName}</p>
-              <p>{item.content}</p>{" "}
-              {uid === item.uid && (
-                <button
-                  onClick={() => deleteHandler(item.id)}
-                  className="bg-black text-white"
-                >
-                  삭제
-                </button>
-              )}
-            </div>
-          );
-        })}
       </div>
     </>
   );
