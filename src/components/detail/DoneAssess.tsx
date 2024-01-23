@@ -146,7 +146,7 @@ export default function DoneAssess() {
 					</span>
 					<button
 						onClick={modalOpenHandeler}
-						className="bg-[#FF8145] w-[156px] h-[40px] rounded-[8px] text-[14px] text-[#fff] flex justify-center items-center gap-[8px] px-[12px] py-[8px]"
+						className="bg-[#FF8145] w-[156px] h-[40px] rounded-[8px] text-[14px] text-[#fff] flex justify-center items-center gap-[8px] px-[12px] py-[8px] font-[Pretendard]"
 					>
 						<Image
 							src={pencilIcon}
