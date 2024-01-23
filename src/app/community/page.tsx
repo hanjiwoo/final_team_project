@@ -1,17 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import writeImage from "@/app/assets/images/icon/write_icon.png";
 import userIcon from "../assets/images/icon/userIcon.png";
 import { useQuery } from "@tanstack/react-query";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/shared/firebase";
+import { db, storage } from "@/shared/firebase";
 import { Post } from "../assets/types/types";
 import { nanoid } from "nanoid";
 import Link from "next/link";
 import CategoryBtn from "@/components/community/CategoryBtn";
 import { useRouter } from "next/navigation";
 import CuteHeart from "@/components/community/CuteHeart";
+import { getDownloadURL, ref } from "firebase/storage";
 
 export default function ListPage() {
   const [newPost, setNewPost] = useState<Post>({
@@ -19,11 +20,12 @@ export default function ListPage() {
     uid: "",
     title: "",
     content: "",
-    profile: userIcon,
+    profile: "",
     nickname: "",
     createdAt: 0,
     category: "",
   });
+  const [photoPlusArr, setPhotoPlusArr] = useState<Post[]>();
   const router = useRouter();
   const { data: posts, isLoading } = useQuery({
     queryKey: ["posts"],
@@ -53,6 +55,7 @@ export default function ListPage() {
   const moveToDetail = (id: string) => {
     router.push(`/community/detail/${id}`);
   };
+
   if (isLoading) return <div>로딩중</div>;
   return (
     <>
@@ -191,14 +194,14 @@ export default function ListPage() {
                         </div>
 
                         {/* 내용 컨테이너 */}
-                        <div className="text-[14px] font-medium leading-[20px] text-[#5C5C5C]">
+                        <div className="text-[14px] font-medium leading-[20px] text-[#5C5C5C] overflow-ellipsis w-32 line-clamp-3 ">
                           <p>{post.content}</p>
                         </div>
                       </div>
 
                       {/* 사진컨테이너 */}
                       <div className="w-[100px] h-[100px] bg-[#F1F1F1] rounded-[8px]">
-                        <p>사진</p>
+                        <img src={post.photos?.[0]} alt="되나?" />
                       </div>
                     </div>
                   </div>
@@ -206,6 +209,15 @@ export default function ListPage() {
                   <div className="flex w-[474.5px] items-center gap-[16px]">
                     {/* 닉네임,시간 컨테이너 */}
                     <div className="flex items-center gap-[8px]">
+                      {/* {post.profile ? (
+                        <Image
+                          src={post.profile}
+                          alt="profile"
+                          className="w-[14px] h-[14px] shrink-0"
+                          width={100}
+                          height={100}
+                        />
+                      ) : ( }
                       <Image
                         src={userIcon}
                         alt="profile"
@@ -213,6 +225,7 @@ export default function ListPage() {
                         width={100}
                         height={100}
                       />
+                      {/* )} */}
                       <p>{post.nickname}</p>
                     </div>
                     <time className="text-center text-[12px] font-medium leading-[18px] text-[#999999]">
