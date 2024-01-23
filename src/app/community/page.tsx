@@ -42,14 +42,7 @@ export default function ListPage() {
       return getPosts();
     },
   });
-  // const formattedDate = new Date(posts.createdAt).toLocaleDateString("ko", {
-  //   year: "2-digit",
-  //   month: "2-digit",
-  //   day: "2-digit",
-  //   hour: "2-digit",
-  //   minute: "2-digit",
-  //   second: "2-digit",
-  // });
+
   const filteredPosts = posts?.filter((post) => {
     if (newPost.category === "" || newPost.category === "전체모음") {
       return true;
@@ -249,8 +242,6 @@ export default function ListPage() {
           </div>
         </div>
       </div>
-
-      {/* img src={null ?? defaultUser} alt="프로필이미지" */}
     </>
   );
 }

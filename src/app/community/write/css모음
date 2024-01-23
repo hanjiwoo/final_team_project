@@ -1,0 +1,558 @@
+<!-- "use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import writeImage from "@/app/assets/images/icon/write_icon.png";
+import userIcon from "../assets/images/icon/userIcon.png";
+import { useQuery } from "@tanstack/react-query";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/shared/firebase";
+import { Post } from "../assets/types/types";
+import { nanoid } from "nanoid";
+import Link from "next/link";
+import CategoryBtn from "@/components/community/CategoryBtn";
+import { useRouter } from "next/navigation";
+import CuteHeart from "@/components/community/CuteHeart";
+
+export default function ListPage() {
+  const [newPost, setNewPost] = useState<Post>({
+    id: "",
+    uid: "",
+    title: "",
+    content: "",
+    profile: userIcon,
+    nickname: "",
+    createdAt: 0,
+    category: "",
+  });
+  const router = useRouter();
+  const { data: posts, isLoading } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => {
+      const getPosts = async () => {
+        let data: Post[] = [];
+        const response = await getDocs(collection(db, "posts"));
+        response.forEach((post) => {
+          const postData = post.data();
+          data.push({ ...postData, id: post.id });
+        });
+
+        return data;
+      };
+
+      return getPosts();
+    },
+  });
+
+  const filteredPosts = posts?.filter((post) => {
+    if (newPost.category === "" || newPost.category === "전체모음") {
+      return true;
+    }
+    return newPost.category === post.category;
+  });
+
+  const moveToDetail = (id: string) => {
+    router.push(`/community/detail/${id}`);
+  };
+  if (isLoading) return <div>로딩중</div>;
+  return (
+    <>
+      {/* 전체 컨테이너 */}
+      <div className="flex  flex-col items-center  w-full h-full gap-[20px] my-[60px]">
+        {/* 글 모음/ 인기순위 컨텐츠 */}
+        <div className="flex px-[420px] py-[60px] flex-col justify-center items-center gap-[60px] self-stretch">
+          <h2 className="text-[28px] text-[#212121] font-semibold leading-[36px]">
+            이 달의 BEST 게시글 모-음
+          </h2>
+          <p className="text-[18px] text-[#5C5C5C]font-medium leading-[26px]">
+            가장 인기 많았던 게시글을 확인해보세요!
+          </p>
+
+          {/* 인기순위 컨테이너 */}
+          <div className="flex justify-center gap-[24px] self-stretch">
+            <div className="flex flex-col items-start gap-[20px]">
+              <div className="flex flex-col items-start gap-[8px] self-stretch">
+                <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
+                  사진
+                </div>
+                <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
+                  카테고리
+                </p>
+                <p className="text-[16px] font-semibold leading-[24px] ">
+                  게시글 제목
+                </p>
+                <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start gap-[20px]">
+              <div className="flex flex-col items-start gap-[8px] self-stretch">
+                <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
+                  사진
+                </div>
+                <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
+                  카테고리
+                </p>
+                <p className="text-[16px] font-semibold leading-[24px] ">
+                  게시글 제목
+                </p>
+                <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start gap-[20px]">
+              <div className="flex flex-col items-start gap-[8px] self-stretch">
+                <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
+                  사진
+                </div>
+                <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
+                  카테고리
+                </p>
+                <p className="text-[16px] font-semibold leading-[24px] ">
+                  게시글 제목
+                </p>
+                <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col justify-center items-center gap-[60px] self-stretch px-[620px] py-[60px]">
+          <div className="flex flex-col justify-center items-center gap-[40px]">
+            <h2 className="text-[28px] text-[#212121] text-center font-semibold leading-[36px]">
+              실시간모음
+            </h2>
+            <div className="flex justify-center items-center gap-[16px]">
+              <section className="flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[4px] ">
+                <CategoryBtn
+                  text="전체모음"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="일상이야기"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="맛집추천"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="취미생활"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="문의하기"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+              </section>
+            </div>
+          </div>
+
+          {/* 작성하기 버튼 */}
+          <div className="flex flex-col w-full gap-[40px] self-stretch">
+            <div className="w-full flex justify-end ">
+              <Link href="community/write">
+                <button className=" flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[8px] rounded-[8px]   text-[white] bg-[#FF8145]">
+                  <div className="w-[20px] h-[20px]">
+                    <Image src={writeImage} alt="write"></Image>
+                  </div>
+                  <p className="text-[14px] leading-[20px] font-medium">
+                    작성하기
+                  </p>
+                </button>
+              </Link>
+            </div>
+
+            {/* 게시글 전체 컨테이너 */}
+            {filteredPosts?.map((post) => {
+              return (
+                <div key={nanoid()}>
+                  <div className="flex h-[132px] flex-col items-start gap-[8px] self-stretch">
+                    {/* 카테고리 */}
+                    <div className=" flex h-[24px] px-[8px] py-[4px] justify-center items-center gap-[4px] shrink-0 rounded-[100px] bg-[#F1F1F1] text-[#212121]">
+                      <h2>{post.category}</h2>
+                    </div>
+
+                    <div className="flex h-[100px] justify-between items-center shrink-0 self-stretch">
+                      {/* 제목 컨테이너 */}
+
+                      <div className="flex flex-col items-start gap-[12px]">
+                        <div className="text-[16px] text-center font-semibold leading-[24px] text-[#212121]">
+                          <p>{post.title}</p>
+                        </div>
+
+                        {/* 내용 컨테이너 */}
+                        <div className="text-[14px] font-medium leading-[20px] text-[#5C5C5C]">
+                          <p>{post.content}</p>
+                        </div>
+                      </div>
+
+                      {/* 사진컨테이너 */}
+                      <div className="w-[100px] h-[100px] bg-[#F1F1F1] rounded-[8px]">
+                        <p>사진</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex w-[474.5px] items-center gap-[16px]">
+                    {/* 닉네임,시간 컨테이너 */}
+                    <div className="flex items-center gap-[8px]">
+                      <Image
+                        src={userIcon}
+                        alt="profile"
+                        className="w-[14px] h-[14px] shrink-0"
+                        width={100}
+                        height={100}
+                      />
+                      <p>{post.nickname}</p>
+                    </div>
+                    <time className="text-center text-[12px] font-medium leading-[18px] text-[#999999]">
+                      {post.createdAt &&
+                        new Date(post.createdAt).toLocaleString("ko-KR", {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          second: "2-digit",
+                          hour12: false,
+                          timeZone: "Asia/Seoul",
+                        })}
+                    </time>
+                    <button
+                      onClick={() => moveToDetail(post.id)}
+                      className="bg-green-300"
+                    >
+                      상세페이지로
+                    </button>
+                    <CuteHeart type="small" postId={post.id} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+} -->
+리스트 페이지 모-음
+
+<!-- "use client";
+import { addDoc, collection } from "firebase/firestore";
+import React, { useEffect, useState, ChangeEvent } from "react";
+import { db } from "@/shared/firebase";
+import { Post } from "@/app/assets/types/types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import CategoryBtn from "@/components/community/CategoryBtn";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
+
+export default function WritePage() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const route = useRouter();
+  const { uid, displayName, isLogin, photoURL } = useSelector(
+    (state: RootState) => state.login
+  );
+  const [newPost, setNewPost] = useState<Post>({
+    id: "",
+    uid,
+    title: "",
+    content: "",
+    profile: photoURL,
+    nickname: displayName,
+    createdAt: Date.now(),
+    category: "",
+  });
+
+  const addPost = async () => {
+    await addDoc(collection(db, "posts"), newPost);
+  };
+
+  const queryClient = useQueryClient();
+  const { mutate: mutateToAdd } = useMutation({
+    mutationFn: addPost,
+
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+  });
+
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    // console.log(name, value);
+    setNewPost({ ...newPost, [name]: value });
+    // console.log(newPost);
+  };
+
+  const handleAddPost = async () => {
+    if (!isLogin) return alert("로그인하셔야 게시글을 남기실수 있습니다.");
+    if (!newPost.content || !newPost.title || !newPost.category)
+      return alert("카테고리 타이틀 컨텐츠를 작성해 주세요");
+    const confirmResult = window.confirm("게시글 작성을 하시겠습니까?");
+    if (confirmResult) {
+      alert("작성이 완료되었습니다.");
+      route.push("/community");
+      mutateToAdd();
+    }
+  };
+
+  const handleCancel = () => {
+    const confirmResult = window.confirm("작성을 취소하시겠습니까?");
+    if (confirmResult) {
+      // 작성을 취소할 때 수행할 동작 추가
+      // 예: 취소 후 어떤 페이지로 이동하는 등의 작업
+    }
+  };
+
+  return (
+    <>
+      <div className="flex justify-center items-center w-full">
+        {/* 전체 컨테이너 */}
+
+        <div className="flex px-[420px] py-[60px] flex-col items-start gap-[60px] self-stretch">
+          {/* h1컨테이너 */}
+          <div className="text-center text-[#212121] text-[28px] font-semibold leading-[36px]">
+            <h1>게시글 작성하기</h1>
+          </div>
+          {/* 사진 */}
+          <div className="flex flex-col items-end gap-[40px] self-stretch">
+            <div className="flex items-start gap-[40px] self-stretch">
+              <p className="text-[16px] font-semibold leading-[24px]">사진</p>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+            </div>
+
+            <div className="flex flex-col items-end gap-[32px] self-stretch">
+              <section className="flex items-center gap-[40px] self-stretch">
+                <h2>카테고리</h2>
+                <CategoryBtn
+                  text="전체모음"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="일상이야기"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="맛집추천"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="취미생활"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="문의하기"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+              </section>
+
+              <div className="flex items-start gap-[40px] self-stretch">
+                <div className="flex">
+                  <label className="text-center text-[16px] text-[#212121] font-semibold leading-[24px]">
+                    제목
+                  </label>
+                  <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">
+                    *
+                  </p>
+                </div>
+
+                <input
+                  className="flex w-[972px] h-[48px] px-[16px] py-[8px] items-center gap-[4px] border-[1px] rounded-[8px] text-[#212121] outline-none text-[14px] font-medium leading-[20px]"
+                  type="text"
+                  placeholder="제목을 입력해주세요"
+                  name="title"
+                  value={newPost.title}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="flex items-start gap-[40px] self-stretch">
+                <div className="flex">
+                  <label className="text-center text-[16px] text-[#212121] font-semibold leading-[24px]">
+                    내용
+                  </label>
+                  <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">
+                    *
+                  </p>
+                </div>
+
+                <textarea
+                  className=" resize-none flex flex-col w-[972px] h-[200px] p-[12px] items-start  justify-between gap-[4px] border-[1px] rounded-[8px] text-[#212121] outline-none text-[14px] font-medium leading-[20px]"
+                  placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
+                  name="content"
+                  value={newPost.content}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end items-start gap-[24px] ">
+              <button
+                type="button"
+                className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                onClick={handleCancel}
+              >
+                취소하기
+              </button>
+
+              <button
+                type="button"
+                className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                onClick={handleAddPost}
+              >
+                작성완료
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+ -->
+작성하기
+
+<!-- "use client";
+import React from "react";
+import userIcon from "../../../assets/images/icon/profile.png";
+import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/shared/firebase";
+import { Post } from "@/app/assets/types/types";
+import { useParams } from "next/navigation";
+import Daetgle from "@/components/community/Daetgle";
+import PostDeleteUpdateBtn from "@/components/community/PostDeleteUpdateBtn";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
+import CuteHeart from "@/components/community/CuteHeart";
+
+export default function CommunityDetail() {
+  const { uid, photoURL, displayName, isLogin } = useSelector(
+    (state: RootState) => state.login
+  );
+  const { data: posts, isLoading } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => {
+      const getPosts = async () => {
+        let data: Post[] = [];
+        const response = await getDocs(collection(db, "posts"));
+        // console.log(response, "하하");
+        response.forEach((post) => {
+          const postData = post.data();
+          // console.log(postData, "하하");
+          data.push({ ...postData, id: post.id });
+        });
+
+        return data;
+      };
+
+      return getPosts();
+    },
+  });
+  const { id } = useParams();
+  // console.log(pa);
+  const foundPost = posts?.find((post) => {
+    return post.id === id;
+  });
+  if (isLoading) return <>로딩중</>;
+  return (
+    <>
+      {/* 커뮤니티 디테일 전체 컨테이너 */}
+      <div className="flex flex-col items-center gap-[60px] self-stretch px-[620px] py-[60px] ">
+        <div className="flex flex-col items-start gap-[24px] self-stretch">
+          <div className="flex flex-col items-start gap-[12px] self-stretch">
+            <div className="flex h-[24px] px-[8px] py-[4px] justify-center items-center gap-[4px] text-[#212121] bg-[#F1F1F1] rounded-[100px]">
+              <h1>{foundPost?.category}</h1>
+            </div>
+            <div className="text-[20px] text-[#212121] font-semibold line-[28px]">
+              <h2>{foundPost?.title}</h2>
+            </div>
+          </div>
+          <div className="flex items-center gap-[8px] self-stretch text-[14px] text-[#999] font-medium line-[20px]">
+            <time>
+              {foundPost?.createdAt &&
+                new Date(foundPost.createdAt).toLocaleString("ko-KR", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                  hour12: false,
+                  timeZone: "Asia/Seoul",
+                })}
+            </time>
+          </div>
+
+          {/* 프로필 컨테이너 */}
+          <div className="flex items-center gap-[12px] self-stretch">
+            <div className="flex w-[40px] h-[40px] p-[8px] justify-center items-center rounded-[30px] bg-[#F1F1F1]">
+              <Image
+                className="w-[23px] h-[23px] shrink-0"
+                src={userIcon}
+                alt="profile"
+              />
+            </div>
+            <p>{foundPost?.nickname}</p>
+            {uid === foundPost?.uid && (
+              <PostDeleteUpdateBtn foundPost={foundPost} />
+            )}
+          </div>
+          <hr className="w-[700px]"></hr>
+
+          <div className="flex flex-col items-start gap-[16px] self-stretch">
+            {/* 내용 컨테이너 */}
+            <div className="text-[14px] text-[#5C5C5C] font-medium line-[20px]">
+              <p>{foundPost?.content}</p>
+            </div>
+            <div className="h-[320px] self-stretch rounded-[8px] bg-[#F1F1F1]">
+              <p>사진</p>
+            </div>
+          </div>
+        </div>
+
+        {/* 공감해요,댓글  컨테이너 */}
+        <div className="flex items-center gap-[16px]">
+          <CuteHeart type="normal" postId={foundPost?.id} />
+          <p>댓글 00</p>
+        </div>
+
+        <hr className="w-[700px]"></hr>
+
+        {/* 댓글작성,버튼 컨테이너*/}
+        <Daetgle />
+      </div>
+    </>
+  );
+} -->
+커뮤니티 디테일
