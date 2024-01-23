@@ -9,10 +9,11 @@ import { useRouter } from "next/navigation";
 import CategoryBtn from "@/components/community/CategoryBtn";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
-import { StaticImageData } from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { url } from "inspector";
 import { nanoid } from "nanoid";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import imgRegister from "../../../app/assets/images/imgRegister.png";
 
 export default function WritePage() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -27,23 +28,30 @@ export default function WritePage() {
     uid,
     title: "",
     content: "",
-    profile: photoURL,
+    profile: "",
     nickname: displayName,
     createdAt: Date.now(),
     category: "",
+    photos: [""],
   });
-
   const addPost = async () => {
-    await addDoc(collection(db, "posts"), newPost);
+    try {
+      if (imgFiles) {
+        let arr = [];
+        for (let i = 0; i < imgFiles.length; i++) {
+          const storageRef = ref(storage, `${uid}/${newPost.createdAt}/${i}`);
+          await uploadBytes(storageRef, imgFiles[i]);
+          const downloadURL = await getDownloadURL(storageRef);
+          // console.log(downloadURL);
+          arr.push(downloadURL);
+        }
 
-    if (imgFiles) {
-      for (let i = 0; i < imgFiles.length; i++) {
-        const storageRef = ref(storage, `${uid}/${newPost.createdAt}/${i}`);
-        await uploadBytes(storageRef, imgFiles[i]);
+        await addDoc(collection(db, "posts"), { ...newPost, photos: arr });
       }
+    } catch (error) {
+      console.error("Error adding post:", error);
     }
   };
-
   const queryClient = useQueryClient();
   const { mutate: mutateToAdd } = useMutation({
     mutationFn: addPost,
@@ -97,121 +105,187 @@ export default function WritePage() {
         arr2.push(e.target.files[i]);
       }
       // console.log(arr, "배열에 잘들어감?");
-      setUrlFiles(arr);
-      setImgFiles(arr2);
+      if (urlFiles) {
+        setUrlFiles([...urlFiles, ...arr]);
+      } else {
+        setUrlFiles(arr);
+      }
+      if (imgFiles) {
+        setImgFiles([...imgFiles, ...arr2]);
+      } else {
+        setImgFiles(arr2);
+      }
     }
   };
 
+  const removeFromImages = (file: string, index: number) => {
+    const filteredUrlFiles = urlFiles?.filter((item) => {
+      return item !== file;
+    });
+
+    setUrlFiles(filteredUrlFiles);
+    if (index) {
+      imgFiles?.splice(index, 1);
+      setImgFiles(imgFiles);
+    }
+
+    // console.log(filteredUrlFiles, index, imgFiles, " 요거보자");
+  };
   return (
     <>
-      {/* 전체 컨테이너 */}
-      <div className=" flex flex-col items-center justify-center w-[100%] h-[100%] m-[60px 420px]">
-        {/* gap주려고 묶음 */}
-        <div className="flex flex-col gap-[30px]">
+      <div className="flex justify-center items-center w-full">
+        {/* 전체 컨테이너 */}
+
+        <div className="flex px-[420px] py-[60px] flex-col items-start gap-[60px] self-stretch">
           {/* h1컨테이너 */}
-          <div className="mr-[45%]">
-            <h1 className="text-[30px] font-bold">게시글 작성하기</h1>
+          <div className="text-center text-[#212121] text-[28px] font-semibold leading-[36px]">
+            <h1>게시글 작성하기</h1>
           </div>
-          <div className="flex">
-            <h2>사진</h2>
-            <label>
-              <div className="bg-yellow-200 w-[100px] h-[100px]">
-                사진고르던가{" "}
-              </div>
-              <input
-                className="hidden"
-                type="file"
-                multiple
-                onChange={(e) => fileChangeHandler(e)}
-              />
-            </label>
-            {urlFiles?.map((file) => {
-              return <img key={nanoid()} width={200} height={200} src={file} />;
-            })}
-          </div>
-          <section className="flex items-center gap-10">
-            <h2>카테고리</h2>
-            <CategoryBtn
-              text="전체모음"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="일상이야기"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="맛집추천"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="취미생활"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="문의하기"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-          </section>
-          <form className="flex flex-col items-center justify-center gap-[50px]">
-            <div className="flex gap-[10px]">
-              <div className="flex">
-                <label className="">제목</label>
-                <p className="text-[#FF8145]">*</p>
-              </div>
+          {/* 사진 */}
+          <div className="flex flex-col items-end gap-[40px] self-stretch">
+            <div className="flex items-start gap-[40px] self-stretch">
+              <p className="text-[16px] font-semibold leading-[24px]">사진</p>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+              <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+            </div>
+            <div className="flex items-start gap-[40px] self-stretch">
+              <p className="text-[16px] font-semibold leading-[24px]">사진</p>
+              <label>
+                <Image
+                  src={imgRegister}
+                  width={148}
+                  height={148}
+                  alt="사진등록"
+                  className="cursor-pointer rounded-lg"
+                />
 
-              <input
-                className="border-2 border-gray-[400] w-[972px] h-[48px] rounded-[10px] outline-none"
-                type="text"
-                placeholder="제목을 입력해주세요"
-                name="title"
-                value={newPost.title}
-                onChange={handleInputChange}
-              />
+                <input
+                  className="hidden"
+                  type="file"
+                  multiple
+                  onChange={(e) => fileChangeHandler(e)}
+                />
+              </label>
+
+              {urlFiles?.map((file, index) => {
+                return (
+                  <div
+                    key={nanoid()}
+                    className="relative flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"
+                  >
+                    <img
+                      width={200}
+                      height={200}
+                      src={file}
+                      className="relative"
+                    />
+                    <button
+                      onClick={() => removeFromImages(file, index)}
+                      className="absolute top-1 right-1 bg-red-500 w-5"
+                    >
+                      x
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
-            <div className="flex gap-[10px]">
-              <div className="flex">
-                <label className="">내용</label>
-                <p className="text-[#FF8145]">*</p>
+            <div className="flex flex-col items-end gap-[32px] self-stretch">
+              <section className="flex items-center gap-[40px] self-stretch">
+                <h2>카테고리</h2>
+                <CategoryBtn
+                  text="전체모음"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="일상이야기"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="맛집추천"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="취미생활"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+                <CategoryBtn
+                  text="문의하기"
+                  type=""
+                  setNewPost={setNewPost}
+                  newPost={newPost}
+                />
+              </section>
+
+              <div className="flex items-start gap-[40px] self-stretch">
+                <div className="flex">
+                  <label className="text-center text-[16px] text-[#212121] font-semibold leading-[24px]">
+                    제목
+                  </label>
+                  <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">
+                    *
+                  </p>
+                </div>
+
+                <input
+                  className="flex w-[972px] h-[48px] px-[16px] py-[8px] items-center gap-[4px] border-[1px] rounded-[8px] text-[#212121] outline-none text-[14px] font-medium leading-[20px]"
+                  type="text"
+                  placeholder="제목을 입력해주세요"
+                  name="title"
+                  value={newPost.title}
+                  onChange={handleInputChange}
+                />
               </div>
 
-              <textarea
-                className="border-2 border-gray-[400] w-[972px] h-[200px] resize-none rounded-[10px] outline-none"
-                placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
-                name="content"
-                value={newPost.content}
-                onChange={handleInputChange}
-              />
+              <div className="flex items-start gap-[40px] self-stretch">
+                <div className="flex">
+                  <label className="text-center text-[16px] text-[#212121] font-semibold leading-[24px]">
+                    내용
+                  </label>
+                  <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">
+                    *
+                  </p>
+                </div>
+
+                <textarea
+                  className=" resize-none flex flex-col w-[972px] h-[200px] p-[12px] items-start  justify-between gap-[4px] border-[1px] rounded-[8px] text-[#212121] outline-none text-[14px] font-medium leading-[20px]"
+                  placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
+                  name="content"
+                  value={newPost.content}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
 
-            <div className="flex gap-[25px] self-end flex-row-reverse">
+            <div className="flex justify-end items-start gap-[24px] ">
               <button
                 type="button"
-                className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-                onClick={handleAddPost}
-              >
-                작성완료
-              </button>
-
-              <button
-                type="button"
-                className="rounded-[10px] w-[100px] h-[50px] border-2 border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
                 onClick={handleCancel}
               >
                 취소하기
               </button>
+
+              <button
+                type="button"
+                className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                onClick={handleAddPost}
+              >
+                작성완료
+              </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </>

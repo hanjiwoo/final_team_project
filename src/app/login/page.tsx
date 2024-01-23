@@ -241,7 +241,7 @@ export default function Login() {
 	// };
 
 	return (
-		<div className="flex justify-center items-center w-full h-screen">
+		<div className="flex justify-center items-center w-full my-[60px]">
 			<div className="w-[360px]">
 				<div className="mb-[52px]">
 					<h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left">

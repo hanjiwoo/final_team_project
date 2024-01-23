@@ -15,7 +15,7 @@ export default function ShopCard({
   type,
 }: {
   shop: typeOfShop;
-  shops: typeOfShop[];
+  shops?: typeOfShop[];
   type?: string;
 }) {
   const dispatch = useDispatch();
@@ -59,38 +59,35 @@ export default function ShopCard({
     }
   }, []);
   return (
-    <>
+    <button onClick={(e) => moveDetailPageBtn(e, shop.연락처)}>
       <section
-        className="flex flex-row w-[252px] bg-[#fff] rounded-lg justify-center items-center"
+        className="flex w-[252px] bg-[#fff] rounded-lg justify-center items-center"
         key={nanoid()}
       >
-        <div className="flex flex-col h-full border-opacity-60 rounded-lg ">
-          <div className="w-[252px] h-[252px] bg-[#F1F1F1] rounded-[12px] mb-[20px]" />{" "}
-          <section>
-            <div className="text-base font-medium text-[#212121] mb-1 flex text-xl">
-              {shop.업소명}
-            </div>{" "}
-            <div className="flex justify-between">
-              <button
-                className="hover:bg-orange-400 hover:text-white transition duration-300 ease-in whitespace-nowrap"
-                onClick={(e) => moveDetailPageBtn(e, shop.연락처)}
-              >
-                상세페이지로
-              </button>{" "}
-              <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
-            </div>
-            {/* <div className="flex justify-round gap-5"> */}
-            <div className="flex gap-1 text-[14px] text-[#5C5C5C] mb-1 items-center">
-              <Image src={spoon_fork} alt="위치" />
-              {shop.업종}
-            </div>
-            <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center">
-              <Image src={place} alt="스푼포크" className="w-[20px] h-[20px]" />
-              {addr.addrRoad} {addr.addrBuilding}
-            </div>
-          </section>
+        <div className="h-full border-opacity-60 rounded-lg ">
+          <div className="w-[252px] h-[252px] bg-[#F1F1F1] rounded-[12px] mb-[20px]" />
+          <div className="font-medium text-[#212121] mb-1 flex text-xl">
+            {shop.업소명}
+          </div>
+          <div className="flex justify-between">
+            <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
+          </div>
+          {/* <div className="flex justify-round gap-5"> */}
+          <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center">
+            <Image
+              src={spoon_fork}
+              alt="스푼포크"
+              className="w-[20px] h-[20px]"
+            />
+            {shop.업종}
+          </div>
+          <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center">
+            <Image src={place} alt="위치" className="w-[20px] h-[20px]" />
+            {addr.addrRoad} {addr.addrBuilding && addr.addrBuilding}
+          </div>
+          {/* </div> */}
         </div>
       </section>
-    </>
+    </button>
   );
 }

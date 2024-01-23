@@ -37,7 +37,7 @@ export default function DoneAssess() {
   // const fakeuser = { isLogin: true, uid: 1 };
   const { isLogin, uid } = useSelector((state: RootState) => state.login);
   const correctUser = hoogis?.find((hoogi) => {
-    return (hoogi.uid = uid);
+    return hoogi.uid === uid;
   });
 
   const { mutate: mutateToDelete } = useMutation({
@@ -54,6 +54,7 @@ export default function DoneAssess() {
   const router = useRouter();
   const modalOpenHandeler = () => {
     if (correctUser) return alert("이미 작성하셨어요");
+    if (!isLogin) return alert("로그인하셔야 합니다.");
     setModal(true);
   };
 
@@ -157,7 +158,7 @@ export default function DoneAssess() {
         </div>
 
         <div className="mb-[16px]">
-          {hoogis
+          {/* {hoogis
             ?.filter((hoogi) => {
               return (hoogi.uid = uid);
             })
@@ -174,7 +175,20 @@ export default function DoneAssess() {
                   </button>
                 </div>
               );
-            })}
+            })} */}
+          {correctUser ? (
+            <div className="flex gap-[8px]">
+              <>{correctUser?.displayName}님 후기 감사합니다.</>
+              <button
+                onClick={() => deleteHandler(correctUser?.id)}
+                className="text-[#FF8145] underline"
+              >
+                후기삭제
+              </button>
+            </div>
+          ) : (
+            <div>후기를 남겨주세요</div>
+          )}
         </div>
 
         <div className="w-full flex flex-col justify-center items-center gap-[32px] mb-[100px]">

@@ -17,7 +17,7 @@ export type typeOfShop = {
 
 export type typeOfThumbs = {
   isLogin?: boolean;
-  uid?: number;
+  uid?: string;
   name?: string;
   id: string;
   shopId?: string;
@@ -58,10 +58,11 @@ export interface Post {
   uid?: string;
   id: string;
   title?: string;
-  profile?: StaticImageData;
+  profile?: string;
   content?: string;
   nickname?: string;
   createdAt?: number;
+  photos?: string[];
 }
 
 export type Daetgle = {

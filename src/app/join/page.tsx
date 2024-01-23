@@ -11,6 +11,10 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { toast, ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Image from "next/image";
+import rightIcon from "../../app/assets/images/icon/right.png";
+import JoinModal from "@/components/join/JoinModal";
+
 export default function Join() {
 	// const navigate = useNavigate();
 
@@ -49,6 +53,14 @@ export default function Join() {
 			progress: undefined,
 			theme: "colored",
 		});
+
+	// 약관 모달창 오픈
+	// 만 14세 이상입니다
+	const [openModal, setOpenModal] = useState<number | null>(null);
+
+	const handleClickOpenModal = (id: number | null) => {
+		setOpenModal(id);
+	};
 
 	useEffect(() => {
 		if (
@@ -195,7 +207,7 @@ export default function Join() {
 	};
 
 	return (
-		<div className="flex justify-center items-center w-screen h-screen">
+		<div className="flex justify-center items-center w-full my-[60px]">
 			<div className="w-[360px]">
 				<div className="mb-[52px]">
 					<h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left">
@@ -293,8 +305,18 @@ export default function Join() {
 							onChange={check}
 							checked={checkList.includes("age") ? true : false}
 						/>
-						<div>
-							<span>(필수)</span> 만 14세 이상입니다
+						<div className="flex justify-between items-center w-full">
+							<span>(필수) 만 14세 이상입니다</span>
+							<Image
+								src={rightIcon}
+								alt="nextPage"
+								className="w-[18px] h-[18px] cursor-pointer"
+								id="1"
+								onClick={() => handleClickOpenModal(1)}
+							/>
+							{openModal && (
+								<JoinModal setOpenModal={setOpenModal} id={openModal} />
+							)}
 						</div>
 					</div>
 					<div className="flex items-center">
@@ -305,8 +327,18 @@ export default function Join() {
 							onChange={check}
 							checked={checkList.includes("terms") ? true : false}
 						/>
-						<div>
-							<span>(필수)</span> 이용약관 동의
+						<div className="flex justify-between items-center w-full">
+							<span>(필수) 이용약관 동의 </span>
+							<Image
+								src={rightIcon}
+								alt="nextPage"
+								className="w-[18px] h-[18px] cursor-pointer"
+								id="2"
+								onClick={() => handleClickOpenModal(2)}
+							/>
+							{openModal && (
+								<JoinModal setOpenModal={setOpenModal} id={openModal} />
+							)}
 						</div>
 					</div>
 					<div className="flex items-center">
@@ -317,8 +349,18 @@ export default function Join() {
 							onChange={check}
 							checked={checkList.includes("collect") ? true : false}
 						/>
-						<div>
-							<span>(필수)</span> 개인정보 수집 및 이용 동의
+						<div className="flex justify-between items-center w-full">
+							<span>(필수) 개인정보 수집 및 이용 동의 </span>
+							<Image
+								src={rightIcon}
+								alt="nextPage"
+								className="w-[18px] h-[18px] cursor-pointer"
+								id="3"
+								onClick={() => handleClickOpenModal(3)}
+							/>
+							{openModal && (
+								<JoinModal setOpenModal={setOpenModal} id={openModal} />
+							)}
 						</div>
 					</div>
 					<div className="flex items-center">
@@ -329,8 +371,18 @@ export default function Join() {
 							onChange={check}
 							checked={checkList.includes("choice") ? true : false}
 						/>
-						<div>
-							<span>(선택)</span> 마케팅 개인정보 제3자 제공 동의
+						<div className="flex justify-between items-center w-full">
+							<span>(선택) 마케팅 개인정보 제3자 제공 동의 </span>
+							<Image
+								src={rightIcon}
+								alt="nextPage"
+								className="w-[18px] h-[18px] cursor-pointer"
+								id="4"
+								onClick={() => handleClickOpenModal(4)}
+							/>
+							{openModal && (
+								<JoinModal setOpenModal={setOpenModal} id={openModal} />
+							)}
 						</div>
 					</div>
 				</div>

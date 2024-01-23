@@ -12,6 +12,7 @@ import PostDeleteUpdateBtn from "@/components/community/PostDeleteUpdateBtn";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import CuteHeart from "@/components/community/CuteHeart";
+import { nanoid } from "nanoid";
 
 export default function CommunityDetail() {
   const { uid, photoURL, displayName, isLogin } = useSelector(
@@ -48,7 +49,7 @@ export default function CommunityDetail() {
       <div className="flex flex-col items-center w-[100%] h-[100%]">
         <div className="flex flex-col gap-[20px]">
           <div className=" mr-[29%]">
-            <h1 className="border-2 border-black rounded-full">
+            <h1 className="border-2 w-[100px] text-center rounded-[10px] bg-[#FF8145] text-white border-[#FF8145]">
               {foundPost?.category}
             </h1>
             <h2 className="text-[30px] font-bold">{foundPost?.title}</h2>
@@ -72,19 +73,13 @@ export default function CommunityDetail() {
             {foundPost?.profile && (
               <Image
                 className="w-[28px] h-[28px]"
-                src={foundPost?.profile}
+                src={userIcon}
                 alt="profile"
                 width={100}
                 height={100}
               />
             )}
-            <Image
-              className="w-[28px] h-[28px]"
-              src={userIcon}
-              alt="profile"
-              width={100}
-              height={100}
-            />
+
             <p>{foundPost?.nickname}</p>
             {uid === foundPost?.uid && (
               <PostDeleteUpdateBtn foundPost={foundPost} />
@@ -95,7 +90,14 @@ export default function CommunityDetail() {
           {/* 내용 컨테이너 */}
           <div className="flex flex-col gap-[20px]">
             <p>{foundPost?.content}</p>
-            <p className=" border-2 w-[600px] h-[300px]">next.js 사진</p>
+            {/*이미지 컨테이너 */}
+            <p className=" border-2 w-[600px] h-[300px] flex">
+              {foundPost?.photos?.map((photo) => {
+                return (
+                  <img key={nanoid()} width={200} height={200} src={photo} />
+                );
+              })}
+            </p>
           </div>
 
           {/* 공감해요 컨테이너 */}

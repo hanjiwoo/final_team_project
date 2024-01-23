@@ -15,7 +15,7 @@ export default function ResultBar({
   const numberCSS = "text-[#FF8145]  ";
   const textCSS =
     "absolute px-5 w-full h-full flex items-center justify-between";
-
+  // console.log(number / numbers, "이거나 보자");
   const colorBarCSS = "absolute bg-pink-100 h-full w-1/3 ";
 
   return (
@@ -23,7 +23,11 @@ export default function ResultBar({
       {" "}
       <p
         className={`absolute bg-pink-100 h-full w-${
-          number === 0 ? "" : number / numbers === 1 ? "full" : number / numbers
+          number === 0
+            ? ""
+            : number / numbers === 1
+            ? "full"
+            : number + "/" + numbers
         }`}
       >
         {" "}
