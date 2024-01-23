@@ -106,9 +106,9 @@ export default function Daetgle() {
           return (
             <div className="flex" key={nanoid()}>
               {" "}
-              <Image
+              <img
                 className="w-[28px] h-[28px]"
-                src={userIcon}
+                src={item.profile}
                 alt="profile"
                 width={100}
                 height={100}

@@ -8,6 +8,9 @@ import { nanoid } from "nanoid";
 import PostModal from "./PostModal";
 import Image from "next/image";
 import pencilIcon from "../../app/assets/images/icon/write_icon.png";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
+import ResultBar from "./ResultBar";
 // import { type } from "os";
 // let DoneHoogis = {
 //   맛1: 0,
@@ -31,9 +34,10 @@ export default function DoneAssess() {
 		queryKey: [`hoogis${shopId}`],
 		queryFn: () => getHoogis(shopId),
 	});
-	const fakeuser = { isLogin: true, uid: 1 };
+	// const fakeuser = { isLogin: true, uid: 1 };
+	const { isLogin, uid } = useSelector((state: RootState) => state.login);
 	const correctUser = hoogis?.find((hoogi) => {
-		return (hoogi.uid = fakeuser.uid);
+		return hoogi.uid === uid;
 	});
 
 	const { mutate: mutateToDelete } = useMutation({
@@ -50,6 +54,7 @@ export default function DoneAssess() {
 	const router = useRouter();
 	const modalOpenHandeler = () => {
 		if (correctUser) return alert("이미 작성하셨어요");
+		if (!isLogin) return alert("로그인하셔야 합니다.");
 		setModal(true);
 	};
 
@@ -125,11 +130,12 @@ export default function DoneAssess() {
 		}
 	});
 
-	const tagCSS =
-		"w-full h-[48px] rounded-[8px]  mt-1 flex justify-between items-center px-5 bg-[#FAFAFA]";
-
-	const numberCSS = "text-[#FF8145]";
-
+	// const tagCSS =
+	//   "w-full h-[48px] rounded-[8px] mt-1 flex justify-between items-center  bg-[#FAFAFA] relative overflow-hidden ";
+	// const colorBarCSS = "absolute bg-pink-100 h-full w-1/2 ";
+	// const numberCSS = "text-[#FF8145]  ";
+	// const textCSS =
+	//   "absolute px-5 w-full h-full flex items-center justify-between";
 	return (
 		<>
 			{" "}
@@ -138,41 +144,51 @@ export default function DoneAssess() {
 					<span className="w-full text-[20px] font-semibold leading-[28px]">
 						해당 매장의 #태그 리뷰를 확인해보세요 :)
 					</span>
-					{/* 리뷰하기 버튼 현재 임의로 width 180px으로 설정했습니다 */}
-					<div
+					<button
 						onClick={modalOpenHandeler}
-						className="bg-[#FF8145] w-[180px] h-[40px] rounded-[8px] flex justify-center items-center gap-[8px] px-[12px] py-[8px] "
+						className="bg-[#FF8145] w-[156px] h-[40px] rounded-[8px] text-[14px] text-[#fff] flex justify-center items-center gap-[8px] px-[12px] py-[8px]"
 					>
 						<Image
 							src={pencilIcon}
 							alt="writeReview"
 							className="w-[20px] h-[20px]"
 						/>
-						<span className="text-[14px] text-[#fff] text-center leading-[20px]">
-							리뷰 작성하기
-						</span>
-					</div>
+						리뷰 작성하기
+					</button>
 				</div>
 
 				<div className="mb-[16px]">
-					{hoogis
-						?.filter((hoogi) => {
-							return (hoogi.uid = fakeuser.uid);
-						})
-						.map((hoogi: typeOfHoogi) => {
-							hoogi.맛;
-							return (
-								<div key={nanoid()} className="flex gap-[8px]">
-									<>{hoogi.uid}님 후기 감사합니다.</>
-									<button
-										onClick={() => deleteHandler(hoogi.id)}
-										className="text-[#FF8145] underline"
-									>
-										후기삭제
-									</button>
-								</div>
-							);
-						})}
+					{/* {hoogis
+            ?.filter((hoogi) => {
+              return (hoogi.uid = uid);
+            })
+            .map((hoogi: typeOfHoogi) => {
+              hoogi.맛;
+              return (
+                <div key={nanoid()} className="flex gap-[8px]">
+                  <>{hoogi.displayName}님 후기 감사합니다.</>
+                  <button
+                    onClick={() => deleteHandler(hoogi.id)}
+                    className="text-[#FF8145] underline"
+                  >
+                    후기삭제
+                  </button>
+                </div>
+              );
+            })} */}
+					{correctUser ? (
+						<div className="flex gap-[8px]">
+							<>{correctUser?.displayName}님 후기 감사합니다.</>
+							<button
+								onClick={() => deleteHandler(correctUser?.id)}
+								className="text-[#FF8145] underline"
+							>
+								후기삭제
+							</button>
+						</div>
+					) : (
+						<div>후기를 남겨주세요</div>
+					)}
 				</div>
 
 				<div className="w-full flex flex-col justify-center items-center gap-[32px] mb-[100px]">
@@ -181,18 +197,21 @@ export default function DoneAssess() {
 							가격은 어떤가요?
 						</h2>
 						<div className="flex gap-[12px] flex-col">
-							<div className={tagCSS}>
-								<p>👍 저렴해요 </p>{" "}
-								<p className={numberCSS}>{DoneHoogis.가격1} </p>{" "}
-							</div>
-							<div className={tagCSS}>
-								<p>😎 괜찮아요 </p>{" "}
-								<p className={numberCSS}>{DoneHoogis.가격2} </p>
-							</div>
-							<div className={tagCSS}>
-								<p>💳 가격이 달라요 </p>
-								<p className={numberCSS}>{DoneHoogis.가격3} </p>{" "}
-							</div>
+							<ResultBar
+								text="👍 저렴해요  "
+								number={DoneHoogis.가격1}
+								numbers={DoneHoogis.가격1 + DoneHoogis.가격2 + DoneHoogis.가격3}
+							/>
+							<ResultBar
+								text="😎 괜찮아요 "
+								number={DoneHoogis.가격2}
+								numbers={DoneHoogis.가격1 + DoneHoogis.가격2 + DoneHoogis.가격3}
+							/>
+							<ResultBar
+								text="💳 가격이 달라요  "
+								number={DoneHoogis.가격3}
+								numbers={DoneHoogis.가격1 + DoneHoogis.가격2 + DoneHoogis.가격3}
+							/>
 						</div>
 					</form>
 					<form className="w-full">
@@ -200,18 +219,21 @@ export default function DoneAssess() {
 							맛있었나요?
 						</h2>
 						<div className="flex gap-[12px] flex-col">
-							<div className={tagCSS}>
-								<p>😋 또 가고싶어요</p>{" "}
-								<p className={numberCSS}>{DoneHoogis.맛1} </p>
-							</div>
-							<div className={tagCSS}>
-								<p>🍽️ 괜찮아요 </p>{" "}
-								<p className={numberCSS}>{DoneHoogis.맛2} </p>{" "}
-							</div>
-							<div className={tagCSS}>
-								<p>🤔 아쉬워요 </p>{" "}
-								<p className={numberCSS}>{DoneHoogis.맛3} </p>
-							</div>
+							<ResultBar
+								text="😋 또 가고싶어요 "
+								number={DoneHoogis.맛1}
+								numbers={DoneHoogis.맛1 + DoneHoogis.맛2 + DoneHoogis.맛3}
+							/>
+							<ResultBar
+								text="🍽️ 괜찮아요 "
+								number={DoneHoogis.맛2}
+								numbers={DoneHoogis.맛1 + DoneHoogis.맛2 + DoneHoogis.맛3}
+							/>
+							<ResultBar
+								text="🤔 아쉬워요  "
+								number={DoneHoogis.맛3}
+								numbers={DoneHoogis.맛1 + DoneHoogis.맛2 + DoneHoogis.맛3}
+							/>
 						</div>
 					</form>
 					<form className="w-full">
@@ -219,18 +241,27 @@ export default function DoneAssess() {
 							서비스는 좋았나요?
 						</h2>
 						<div className="flex gap-[12px] flex-col">
-							<div className={tagCSS}>
-								<p>💖 친절해요 </p>{" "}
-								<p className={numberCSS}>{DoneHoogis.서비스1}</p>{" "}
-							</div>
-							<div className={tagCSS}>
-								<p>👨‍🍳 괜찮아요 </p>{" "}
-								<p className={numberCSS}>{DoneHoogis.서비스2}</p>
-							</div>
-							<div className={tagCSS}>
-								<p>😢 아쉬워요 </p>{" "}
-								<p className={numberCSS}>{DoneHoogis.서비스3}</p>
-							</div>
+							<ResultBar
+								text="💖 친절해요 "
+								number={DoneHoogis.서비스1}
+								numbers={
+									DoneHoogis.서비스1 + DoneHoogis.서비스2 + DoneHoogis.서비스3
+								}
+							/>
+							<ResultBar
+								text="👨‍🍳 괜찮아요"
+								number={DoneHoogis.서비스2}
+								numbers={
+									DoneHoogis.서비스1 + DoneHoogis.서비스2 + DoneHoogis.서비스3
+								}
+							/>
+							<ResultBar
+								text="😢 아쉬워요"
+								number={DoneHoogis.서비스3}
+								numbers={
+									DoneHoogis.서비스1 + DoneHoogis.서비스2 + DoneHoogis.서비스3
+								}
+							/>
 						</div>
 					</form>
 					<form className="w-full">
@@ -238,18 +269,21 @@ export default function DoneAssess() {
 							위생은 청결했나요?
 						</h2>
 						<div className="flex gap-[12px] flex-col">
-							<div className={tagCSS}>
-								<p>✨ 깨끗해요 </p>{" "}
-								<p className={numberCSS}>{DoneHoogis.위생1} </p>{" "}
-							</div>
-							<div className={tagCSS}>
-								<p>💦 괜찮아요 </p>{" "}
-								<p className={numberCSS}>{DoneHoogis.위생2} </p>{" "}
-							</div>
-							<div className={tagCSS}>
-								<p>😨 아쉬워요 </p>{" "}
-								<p className={numberCSS}>{DoneHoogis.위생3} </p>{" "}
-							</div>
+							<ResultBar
+								text="✨ 깨끗해요"
+								number={DoneHoogis.위생1}
+								numbers={DoneHoogis.위생1 + DoneHoogis.위생2 + DoneHoogis.위생3}
+							/>
+							<ResultBar
+								text="💦 괜찮아요"
+								number={DoneHoogis.위생2}
+								numbers={DoneHoogis.위생1 + DoneHoogis.위생2 + DoneHoogis.위생3}
+							/>
+							<ResultBar
+								text="😨 아쉬워요"
+								number={DoneHoogis.위생3}
+								numbers={DoneHoogis.위생1 + DoneHoogis.위생2 + DoneHoogis.위생3}
+							/>
 						</div>
 					</form>
 				</div>
