@@ -200,7 +200,7 @@ export default function Join() {
 
 			console.log("회원가입 완료");
 			alert(`${displayName}님 환영합니다`);
-			window.location.href = "/login";
+			window.location.href = "/login"; // router.replace & router.push 로 수정 필요!
 		} catch (error) {
 			console.error("회원가입 실패", error);
 		}
