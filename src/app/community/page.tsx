@@ -45,19 +45,12 @@ export default function ListPage() {
     },
   });
 
-  const filteredPosts = posts
-    ?.filter((post) => {
-      if (newPost.category === "" || newPost.category === "전체모음") {
-        return true;
-      }
-      return newPost.category === post.category;
-    })
-    .sort((a, b) => {
-      if (a.createdAt && b.createdAt) {
-        return b.createdAt - a.createdAt;
-      }
-      return 1;
-    });
+  const filteredPosts = posts?.filter((post) => {
+    if (newPost.category === "" || newPost.category === "전체모음") {
+      return true;
+    }
+    return newPost.category === post.category;
+  });
 
   const moveToDetail = (id: string) => {
     router.push(`/community/detail/${id}`);
@@ -201,7 +194,7 @@ export default function ListPage() {
                         </div>
 
                         {/* 내용 컨테이너 */}
-                        <div className="text-[14px] font-medium leading-[20px] text-[#5C5C5C]">
+                        <div className="text-[14px] font-medium leading-[20px] text-[#5C5C5C] overflow-ellipsis w-32 line-clamp-3 ">
                           <p>{post.content}</p>
                         </div>
                       </div>
@@ -224,7 +217,7 @@ export default function ListPage() {
                           width={100}
                           height={100}
                         />
-                      ) : ( */}
+                      ) : ( }
                       <Image
                         src={userIcon}
                         alt="profile"
@@ -262,8 +255,6 @@ export default function ListPage() {
           </div>
         </div>
       </div>
-
-      {/* img src={null ?? defaultUser} alt="프로필이미지" */}
     </>
   );
 }
