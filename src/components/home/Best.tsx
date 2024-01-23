@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getThumbs } from "./Fns";
 import { typeOfShop } from "@/app/assets/types/types";
 import { nanoid } from "nanoid";
-import ShopCard from "./ShopCard";
+import ShopCard2 from "./ShopCard2";
 
 const photo1 = dummy;
 const photo2 = dummy;
@@ -79,7 +79,7 @@ export default function Best() {
       </div>
 
       <div className="flex justify-center items-center">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 gap-[24px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-[24px]">
           {/* {bestList.map((item) => {
 						return (
 							<div key={item.id}>
@@ -108,7 +108,7 @@ export default function Best() {
           {top3Shops?.map((shop) => {
             return (
               <React.Fragment key={nanoid()}>
-                {shop && <ShopCard shop={shop} />}
+                {shop && <ShopCard2 shop={shop} />}
               </React.Fragment>
             );
           })}

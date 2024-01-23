@@ -52,6 +52,8 @@ const Navbar = () => {
       dispatch(login(originUser));
     }
   }, []);
+
+const buttonStyle = "py-5 px-3 text-gray-700 hover:text-gray-400"
   return (
     <nav className="bg-gray-00 w-full">
       <div className="max-w-6xl mx-auto px-4">
@@ -72,13 +74,13 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-1">
             <Link
               href="/about"
-              className="py-5 px-3 text-gray-700 hover:text-gray-400"
+              className={buttonStyle}
             >
               모음소개
             </Link>
             <Link
               href="/community"
-              className="py-5 px-3 text-gray-700 hover:text-gray-400"
+              className={buttonStyle}
             >
               커뮤니티
             </Link>
@@ -86,13 +88,13 @@ const Navbar = () => {
               <>
                 <Link
                   href="/mypage"
-                  className="py-5 px-3 text-gray-700 hover:text-gray-400"
+                  className={buttonStyle}
                 >
                   마이페이지
                 </Link>
                 <Link
                   href="/"
-                  className="py-5 px-3 text-gray-700 hover:text-gray-400"
+                  className={buttonStyle}
                   onClick={handleSignOut}
                 >
                   로그아웃
@@ -102,7 +104,7 @@ const Navbar = () => {
               <>
                 <Link
                   href="/login"
-                  className="py-5 px-3 text-gray-700 hover:text-gray-400"
+                  className={buttonStyle}
                 >
                   로그인
                 </Link>
