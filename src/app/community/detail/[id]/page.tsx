@@ -12,6 +12,7 @@ import PostDeleteUpdateBtn from "@/components/community/PostDeleteUpdateBtn";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import CuteHeart from "@/components/community/CuteHeart";
+import { nanoid } from "nanoid";
 
 export default function CommunityDetail() {
   const { uid, photoURL, displayName, isLogin } = useSelector(
@@ -96,6 +97,18 @@ export default function CommunityDetail() {
               <p>사진</p>
             </div>
           </div>
+        </div>
+        {/* 내용 컨테이너 */}
+        <div className="flex flex-col gap-[20px]">
+          <p>{foundPost?.content}</p>
+          {/*이미지 컨테이너 */}
+          <p className=" border-2 w-[600px] h-[300px] flex">
+            {foundPost?.photos?.map((photo) => {
+              return (
+                <img key={nanoid()} width={200} height={200} src={photo} />
+              );
+            })}
+          </p>
         </div>
 
         {/* 공감해요,댓글  컨테이너 */}

@@ -17,7 +17,7 @@ export type typeOfShop = {
 
 export type typeOfThumbs = {
   isLogin?: boolean;
-  uid?: number;
+  uid?: string;
   name?: string;
   id: string;
   shopId?: string;
@@ -46,9 +46,10 @@ export type typeOfHoogi = {
   맛?: string;
   가격?: string;
   위생?: string;
+  displayName?: string;
   서비스?: string;
   id?: string;
-  uid?: number;
+  uid?: string;
   shopId?: string | string[] | undefined;
 };
 
@@ -57,14 +58,15 @@ export interface Post {
   uid?: string;
   id: string;
   title?: string;
-  profile?: StaticImageData;
+  profile?: string;
   content?: string;
   nickname?: string;
   createdAt?: number;
+  photos?: string[];
 }
 
 export type Daetgle = {
-  profile?: StaticImageData;
+  profile?: string;
   uid?: string;
   nickName?: string;
   content?: string;

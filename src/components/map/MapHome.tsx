@@ -12,6 +12,7 @@ import { RootState } from "@/redux/config/configStore";
 import { getShop } from "@/redux/modules/detailShopSlice";
 import ShopCard from "../home/ShopCard";
 import Shopinfo from "../detail/Shopinfo";
+import ShopCard2 from "./ShopCard2";
 
 type typeOfRef = {
   title: string;
@@ -176,7 +177,7 @@ export default function MapHome() {
                 </div> */}
                 {infoToggle && shop.title === shopInfoRef.current.업소명 && (
                   <>
-                    <ShopCard
+                    <ShopCard2
                       type="map"
                       shops={shops}
                       shop={shopInfoRef.current}
@@ -213,7 +214,7 @@ export default function MapHome() {
       <div className="absolute top-[75px] w-1/4 left-10 z-10 flex">
         <div
           // onWheel={(e) => wheelHandler(e)}
-          className={`flex flex-col h-[900px]  overflow-hidden `}
+          className={`flex flex-col h-[900px]`}
         >
           <div
             style={{

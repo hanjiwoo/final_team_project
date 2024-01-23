@@ -1,7 +1,7 @@
 "use client";
 import { addDoc, collection } from "firebase/firestore";
 import React, { useEffect, useState, ChangeEvent } from "react";
-import { db } from "@/shared/firebase";
+import { db, storage } from "@/shared/firebase";
 import { Post } from "@/app/assets/types/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
@@ -9,9 +9,16 @@ import { useRouter } from "next/navigation";
 import CategoryBtn from "@/components/community/CategoryBtn";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
+import Image, { StaticImageData } from "next/image";
+import { url } from "inspector";
+import { nanoid } from "nanoid";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import imgRegister from "../../../app/assets/images/imgRegister.png";
 
 export default function WritePage() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [urlFiles, setUrlFiles] = useState<string[]>();
+  const [imgFiles, setImgFiles] = useState<File[]>();
   const route = useRouter();
   const { uid, displayName, isLogin, photoURL } = useSelector(
     (state: RootState) => state.login
@@ -21,16 +28,30 @@ export default function WritePage() {
     uid,
     title: "",
     content: "",
-    profile: photoURL,
+    profile: "",
     nickname: displayName,
     createdAt: Date.now(),
     category: "",
+    photos: [""],
   });
-
   const addPost = async () => {
-    await addDoc(collection(db, "posts"), newPost);
-  };
+    try {
+      if (imgFiles) {
+        let arr = [];
+        for (let i = 0; i < imgFiles.length; i++) {
+          const storageRef = ref(storage, `${uid}/${newPost.createdAt}/${i}`);
+          await uploadBytes(storageRef, imgFiles[i]);
+          const downloadURL = await getDownloadURL(storageRef);
+          // console.log(downloadURL);
+          arr.push(downloadURL);
+        }
 
+        await addDoc(collection(db, "posts"), { ...newPost, photos: arr });
+      }
+    } catch (error) {
+      console.error("Error adding post:", error);
+    }
+  };
   const queryClient = useQueryClient();
   const { mutate: mutateToAdd } = useMutation({
     mutationFn: addPost,
@@ -56,6 +77,7 @@ export default function WritePage() {
     const confirmResult = window.confirm("게시글 작성을 하시겠습니까?");
     if (confirmResult) {
       alert("작성이 완료되었습니다.");
+
       route.push("/community");
       mutateToAdd();
     }
@@ -69,6 +91,46 @@ export default function WritePage() {
     }
   };
 
+  const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log(e.target.files, "이거나 보자");
+    if (e.target.files) {
+      if (e.target.files?.length > 5) {
+        return alert("5개 까지 가능합니다");
+      }
+      e.target.files[0];
+      let arr = [];
+      let arr2 = [];
+      for (let i = 0; i < e.target.files.length; i++) {
+        arr.push(URL.createObjectURL(e.target.files[i]));
+        arr2.push(e.target.files[i]);
+      }
+      // console.log(arr, "배열에 잘들어감?");
+      if (urlFiles) {
+        setUrlFiles([...urlFiles, ...arr]);
+      } else {
+        setUrlFiles(arr);
+      }
+      if (imgFiles) {
+        setImgFiles([...imgFiles, ...arr2]);
+      } else {
+        setImgFiles(arr2);
+      }
+    }
+  };
+
+  const removeFromImages = (file: string, index: number) => {
+    const filteredUrlFiles = urlFiles?.filter((item) => {
+      return item !== file;
+    });
+
+    setUrlFiles(filteredUrlFiles);
+    if (index) {
+      imgFiles?.splice(index, 1);
+      setImgFiles(imgFiles);
+    }
+
+    // console.log(filteredUrlFiles, index, imgFiles, " 요거보자");
+  };
   return (
     <>
       <div className="flex justify-center items-center w-full">
@@ -88,6 +150,47 @@ export default function WritePage() {
               <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
               <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
               <div className="flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"></div>
+            </div>
+            <div className="flex items-start gap-[40px] self-stretch">
+              <p className="text-[16px] font-semibold leading-[24px]">사진</p>
+              <label>
+                <Image
+                  src={imgRegister}
+                  width={148}
+                  height={148}
+                  alt="사진등록"
+                  className="cursor-pointer rounded-lg"
+                />
+
+                <input
+                  className="hidden"
+                  type="file"
+                  multiple
+                  onChange={(e) => fileChangeHandler(e)}
+                />
+              </label>
+
+              {urlFiles?.map((file, index) => {
+                return (
+                  <div
+                    key={nanoid()}
+                    className="relative flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"
+                  >
+                    <img
+                      width={200}
+                      height={200}
+                      src={file}
+                      className="relative"
+                    />
+                    <button
+                      onClick={() => removeFromImages(file, index)}
+                      className="absolute top-1 right-1 bg-red-500 w-5"
+                    >
+                      x
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
             <div className="flex flex-col items-end gap-[32px] self-stretch">

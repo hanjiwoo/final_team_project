@@ -26,7 +26,7 @@ export const addThumb = async ({
   uid,
   shopId,
 }: {
-  uid: number;
+  uid: string;
   shopId: string | string[];
 }) => {
   // console.log("추가하기 함수는 돼?");
