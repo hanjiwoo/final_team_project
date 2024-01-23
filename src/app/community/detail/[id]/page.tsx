@@ -45,13 +45,17 @@ export default function CommunityDetail() {
   return (
     <>
       {/* 커뮤니티 디테일 전체 컨테이너 */}
-      <div className="flex flex-col items-center w-[100%] h-[100%]">
-        <div className="flex flex-col gap-[20px]">
-          <div className=" mr-[29%]">
-            <h1 className="border-2 w-[100px] text-center rounded-[10px] bg-[#FF8145] text-white border-[#FF8145]">
-              {foundPost?.category}
-            </h1>
-            <h2 className="text-[30px] font-bold">{foundPost?.title}</h2>
+      <div className="flex flex-col items-center gap-[60px] self-stretch px-[620px] py-[60px] ">
+        <div className="flex flex-col items-start gap-[24px] self-stretch">
+          <div className="flex flex-col items-start gap-[12px] self-stretch">
+            <div className="flex h-[24px] px-[8px] py-[4px] justify-center items-center gap-[4px] text-[#212121] bg-[#F1F1F1] rounded-[100px]">
+              <h1>{foundPost?.category}</h1>
+            </div>
+            <div className="text-[20px] text-[#212121] font-semibold line-[28px]">
+              <h2>{foundPost?.title}</h2>
+            </div>
+          </div>
+          <div className="flex items-center gap-[8px] self-stretch text-[14px] text-[#999] font-medium line-[20px]">
             <time>
               {foundPost?.createdAt &&
                 new Date(foundPost.createdAt).toLocaleString("ko-KR", {
@@ -68,14 +72,14 @@ export default function CommunityDetail() {
           </div>
 
           {/* 프로필 컨테이너 */}
-          <div className="flex gap-[10px] mr-[36%]">
-            <Image
-              className="w-[28px] h-[28px]"
-              src={userIcon}
-              alt="profile"
-              width={100}
-              height={100}
-            />
+          <div className="flex items-center gap-[12px] self-stretch">
+            <div className="flex w-[40px] h-[40px] p-[8px] justify-center items-center rounded-[30px] bg-[#F1F1F1]">
+              <Image
+                className="w-[23px] h-[23px] shrink-0"
+                src={userIcon}
+                alt="profile"
+              />
+            </div>
             <p>{foundPost?.nickname}</p>
             {uid === foundPost?.uid && (
               <PostDeleteUpdateBtn foundPost={foundPost} />
@@ -83,23 +87,27 @@ export default function CommunityDetail() {
           </div>
           <hr className="w-[700px]"></hr>
 
-          {/* 내용 컨테이너 */}
-          <div className="flex flex-col gap-[20px]">
-            <p>{foundPost?.content}</p>
-            <p className=" border-2 w-[600px] h-[300px]">사진</p>
+          <div className="flex flex-col items-start gap-[16px] self-stretch">
+            {/* 내용 컨테이너 */}
+            <div className="text-[14px] text-[#5C5C5C] font-medium line-[20px]">
+              <p>{foundPost?.content}</p>
+            </div>
+            <div className="h-[320px] self-stretch rounded-[8px] bg-[#F1F1F1]">
+              <p>사진</p>
+            </div>
           </div>
-
-          {/* 공감해요 컨테이너 */}
-          <div className="flex gap-[20px]">
-            <CuteHeart type="normal" postId={foundPost?.id} />
-            <p>댓글 00</p>
-          </div>
-
-          <hr className="w-[700px]"></hr>
-
-          {/* 댓글작성,버튼 컨테이너*/}
-          <Daetgle />
         </div>
+
+        {/* 공감해요,댓글  컨테이너 */}
+        <div className="flex items-center gap-[16px]">
+          <CuteHeart type="normal" postId={foundPost?.id} />
+          <p>댓글 00</p>
+        </div>
+
+        <hr className="w-[700px]"></hr>
+
+        {/* 댓글작성,버튼 컨테이너*/}
+        <Daetgle />
       </div>
     </>
   );
