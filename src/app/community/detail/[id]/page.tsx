@@ -97,8 +97,11 @@ export default function CommunityDetail() {
               <div className="flex gap-[10px]  h-[320px] self-stretch rounded-[8px]  ">
                 {foundPost?.photos?.map((photo) => {
                   return (
-                    <div className="border-2 w-[100px] h-[100px] ">
-                      <img key={nanoid()} src={photo} />
+                    <div
+                      key={nanoid()}
+                      className="border-2 w-[100px] h-[100px] "
+                    >
+                      <img src={photo} />
                     </div>
                   );
                 })}
