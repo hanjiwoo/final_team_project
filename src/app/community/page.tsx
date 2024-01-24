@@ -209,23 +209,6 @@ export default function ListPage() {
                   <div className="flex w-[474.5px] items-center gap-[16px]">
                     {/* 닉네임,시간 컨테이너 */}
                     <div className="flex items-center gap-[8px]">
-                      {/* {post.profile ? (
-                        <Image
-                          src={post.profile}
-                          alt="profile"
-                          className="w-[14px] h-[14px] shrink-0"
-                          width={100}
-                          height={100}
-                        />
-                      ) : ( }
-                      <Image
-                        src={userIcon}
-                        alt="profile"
-                        className="w-[14px] h-[14px] shrink-0"
-                        width={100}
-                        height={100}
-                      />
-                      {/* )} */}
                       <p>{post.nickname}</p>
                     </div>
                     <time className="text-center text-[12px] font-medium leading-[18px] text-[#999999]">
