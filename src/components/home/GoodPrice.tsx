@@ -7,20 +7,27 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ShopCard from "./ShopCard";
 import { nanoid } from "nanoid";
+import Image from "next/image";
+import money1 from "../../app/assets/images/icon/money_1.png";
+import money2 from "../../app/assets/images/icon/money_2.png";
+import korean from "../../app/assets/images/icon/korean_food.png";
+import japanese from "../../app/assets/images/icon/japanese_food.png";
+import chinese from "../../app/assets/images/icon/chinese_food.png";
+import american from "../../app/assets/images/icon/american_food.png";
 
 export default function GoodPrice() {
-	const shops = useSelector((state: RootState) => state.allShops);
-	const dispatch = useDispatch();
-	const [searchedShops, setSearchedShops] = useState<typeOfShop[]>([]);
-	function shuffleArray(array: typeOfShop[]) {
-		for (let i = array.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]];
-		}
-		return array;
-	}
-	const buttonClass =
-		"border-[1.5px] bg-[#fff] border-[#E1E1E1] w-[68px] h-[68px] rounded-full hover:scale-105 cursor-pointer";
+
+  const shops = useSelector((state: RootState) => state.allShops);
+  const dispatch = useDispatch();
+  const [searchedShops, setSearchedShops] = useState<typeOfShop[]>([]);
+  function shuffleArray(array: typeOfShop[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
 
 	const searchHandler = (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -57,6 +64,7 @@ export default function GoodPrice() {
 
 			setSearchedShops(randomArray);
 		}
+
 
 		// console.log(e.currentTarget.innerText.substring(1), "벨류나 한번 봅세");
 	};
@@ -133,4 +141,5 @@ export default function GoodPrice() {
 			</section>
 		</>
 	);
+
 }

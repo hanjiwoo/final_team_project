@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import dummy from "../../app/assets/images/fakeLogo.jpg";
-import Image from "next/image";
 import heart from "../../app/assets/images/icon/heart_off.png";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
@@ -78,6 +77,7 @@ export default function Best() {
 				</span>
 			</div>
 
+
 			<div className="flex justify-center items-center">
 				<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[24px]">
 					{/* {bestList.map((item) => {
@@ -116,4 +116,5 @@ export default function Best() {
 			</div>
 		</div>
 	);
+
 }
