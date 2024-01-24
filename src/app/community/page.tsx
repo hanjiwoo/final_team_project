@@ -182,9 +182,11 @@ export default function ListPage() {
             {/* 게시글 전체 컨테이너 */}
             {filteredPosts?.map((post) => {
               return (
+
                 <React.Fragment key={nanoid()}>
                   <PostCard post={post} />
                 </React.Fragment>
+
               );
             })}
           </div>
