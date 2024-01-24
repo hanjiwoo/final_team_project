@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import CuteHeart from "@/components/community/CuteHeart";
 import { getDownloadURL, ref } from "firebase/storage";
 import PostCard from "@/components/mypage/PostCard";
+import BestPost from "@/components/community/BestPost";
+import { getHearts } from "@/components/community/Fns";
 
 export default function ListPage() {
   const [newPost, setNewPost] = useState<Post>({
@@ -26,7 +28,7 @@ export default function ListPage() {
     createdAt: 0,
     category: "",
   });
-  const [photoPlusArr, setPhotoPlusArr] = useState<Post[]>();
+  const [top3Shops, setTop3Shops] = useState<(Post | undefined)[]>();
   const router = useRouter();
   const { data: posts, isLoading } = useQuery({
     queryKey: ["posts"],
@@ -45,7 +47,10 @@ export default function ListPage() {
       return getPosts();
     },
   });
-
+  const { data: hearts } = useQuery({
+    queryKey: [`hearts`],
+    queryFn: getHearts,
+  });
   const filteredPosts = posts?.filter((post) => {
     if (newPost.category === "" || newPost.category === "전체모음") {
       return true;
@@ -53,9 +58,30 @@ export default function ListPage() {
     return newPost.category === post.category;
   });
 
-  const moveToDetail = (id: string) => {
-    router.push(`/community/detail/${id}`);
-  };
+  useEffect(() => {
+    const uniqueArray = hearts?.map((item) => {
+      return item.postId;
+    });
+    // console.log(uniqueArray, "요거는?");
+    const countThumbs: Record<string, number> = {};
+    uniqueArray?.forEach((element) => {
+      const key = String(element);
+      countThumbs[key] = (countThumbs[key] || 0) + 1;
+    });
+    const entries = Object.entries(countThumbs);
+    const sortedEntries = entries.sort((a, b) => b[1] - a[1]);
+    const top3 = sortedEntries.slice(0, 3);
+    // console.log(top3, "탑3");
+    const foundTop3 = top3.map((postId) => {
+      return posts?.find((post) => {
+        return post.id === postId[0];
+      });
+    });
+    // console.log(foundTop3, "과연");
+    if (foundTop3 !== undefined) {
+      setTop3Shops(foundTop3);
+    }
+  }, [hearts]);
 
   if (isLoading) return <div>로딩중</div>;
   return (
@@ -75,50 +101,13 @@ export default function ListPage() {
 
           {/* 인기순위 컨테이너 */}
           <div className="flex justify-center gap-[24px] w-full">
-            <div className="flex flex-col items-start gap-[20px]">
-              <div className="flex flex-col items-start gap-[8px] self-stretch">
-                <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
-                  사진
-                </div>
-                <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
-                  카테고리
-                </p>
-                <p className="text-[16px] font-semibold leading-[24px] ">
-                  게시글 제목
-                </p>
-                <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-start gap-[20px]">
-              <div className="flex flex-col items-start gap-[8px] self-stretch">
-                <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
-                  사진
-                </div>
-                <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
-                  카테고리
-                </p>
-                <p className="text-[16px] font-semibold leading-[24px] ">
-                  게시글 제목
-                </p>
-                <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-start gap-[20px]">
-              <div className="flex flex-col items-start gap-[8px] self-stretch">
-                <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
-                  사진
-                </div>
-                <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
-                  카테고리
-                </p>
-                <p className="text-[16px] font-semibold leading-[24px] ">
-                  게시글 제목
-                </p>
-                <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
-              </div>
-            </div>
+            {top3Shops?.map((post) => {
+              return (
+                <React.Fragment key={nanoid()}>
+                  {post && <BestPost post={post} />}
+                </React.Fragment>
+              );
+            })}
           </div>
         </div>
 
@@ -182,11 +171,9 @@ export default function ListPage() {
             {/* 게시글 전체 컨테이너 */}
             {filteredPosts?.map((post) => {
               return (
-
                 <React.Fragment key={nanoid()}>
                   <PostCard post={post} />
                 </React.Fragment>
-
               );
             })}
           </div>
