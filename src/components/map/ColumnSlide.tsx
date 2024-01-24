@@ -12,7 +12,7 @@ export default function ColumnSlide() {
 
 	return (
 		<>
-			<div className="flex flex-col gap-[10px] my-[20px] h-full items-center overflow-scroll px-[20px]">
+			<div className="flex flex-col gap-[10px] my-[20px] h-full items-center overflow-scroll px-[20px] scrollbar-hide">
 				{shops.map((shop: typeOfShop) => {
 					return (
 						<React.Fragment key={nanoid()}>
