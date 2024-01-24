@@ -8,22 +8,22 @@ import { RootState } from "@/redux/config/configStore";
 import { login, logout } from "@/redux/modules/loginSlice";
 
 const Navbar = () => {
-  const [menuToggle, setMenuToggle] = useState(false);
-  const { isLogin, uid, email, photoURL } = useSelector(
-    (state: RootState) => state.login
-  );
-  // console.log(isLogin, uid, email, photoURL, " 일단 잘들어오냐?");
-  const dispatch = useDispatch();
-  // 로그인 상태 확인 테스트 버튼 함수
-  const checkLoginStatus = () => {
-    const userString = localStorage.getItem("user");
-    if (userString) {
-      const user = JSON.parse(userString);
-      alert(`${user.displayName}님은 현재 로그인 상태입니다.`);
-    } else {
-      console.log("로그인되어 있지 않습니다.");
-    }
-  };
+	const [menuToggle, setMenuToggle] = useState(false);
+	const { isLogin, uid, email, photoURL } = useSelector(
+		(state: RootState) => state.login
+	);
+	// console.log(isLogin, uid, email, photoURL, " 일단 잘들어오냐?");
+	const dispatch = useDispatch();
+	// 로그인 상태 확인 테스트 버튼 함수
+	const checkLoginStatus = () => {
+		const userString = localStorage.getItem("user");
+		if (userString) {
+			const user = JSON.parse(userString);
+			alert(`${user.displayName}님은 현재 로그인 상태입니다.`);
+		} else {
+			console.log("로그인되어 있지 않습니다.");
+		}
+	};
 
   // 로그아웃 버튼 함수
   const handleSignOut = () => {
@@ -52,6 +52,8 @@ const Navbar = () => {
       dispatch(login(originUser));
     }
   }, []);
+
+const buttonStyle = "py-5 px-3 text-gray-700 hover:text-gray-400"
   return (
     <nav className="bg-gray-00 w-full">
       <div className="max-w-6xl mx-auto px-4">
@@ -72,13 +74,13 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-1">
             <Link
               href="/about"
-              className="py-5 px-3 text-gray-700 hover:text-gray-400"
+              className={buttonStyle}
             >
               모음소개
             </Link>
             <Link
               href="/community"
-              className="py-5 px-3 text-gray-700 hover:text-gray-400"
+              className={buttonStyle}
             >
               커뮤니티
             </Link>
@@ -86,13 +88,13 @@ const Navbar = () => {
               <>
                 <Link
                   href="/mypage"
-                  className="py-5 px-3 text-gray-700 hover:text-gray-400"
+                  className={buttonStyle}
                 >
                   마이페이지
                 </Link>
                 <Link
                   href="/"
-                  className="py-5 px-3 text-gray-700 hover:text-gray-400"
+                  className={buttonStyle}
                   onClick={handleSignOut}
                 >
                   로그아웃
@@ -102,7 +104,7 @@ const Navbar = () => {
               <>
                 <Link
                   href="/login"
-                  className="py-5 px-3 text-gray-700 hover:text-gray-400"
+                  className={buttonStyle}
                 >
                   로그인
                 </Link>
@@ -118,59 +120,59 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* mobile menu */}
-          <div className="md:hidden flex items-center">
-            <button onClick={() => setMenuToggle(!menuToggle)}>
-              {menuToggle ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
+					{/* mobile menu */}
+					<div className="md:hidden flex items-center">
+						<button onClick={() => setMenuToggle(!menuToggle)}>
+							{menuToggle ? (
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								</svg>
+							) : (
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M4 6h16M4 12h16M4 18h16"
+									/>
+								</svg>
+							)}
+						</button>
+					</div>
+				</div>
+			</div>
 
-      {/* mobile menu items */}
-      <div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
-        <a href="/about" className="block py-2 px-4 text-sm hover:bg-gray-200">
-          모음소개
-        </a>
-        <a
-          href="/community"
-          className="block py-2 px-4 text-sm hover:bg-gray-200"
-        >
-          커뮤니티
-        </a>
-      </div>
-    </nav>
-  );
+			{/* mobile menu items */}
+			<div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
+				<a href="/about" className="block py-2 px-4 text-sm hover:bg-gray-200">
+					모음소개
+				</a>
+				<a
+					href="/community"
+					className="block py-2 px-4 text-sm hover:bg-gray-200"
+				>
+					커뮤니티
+				</a>
+			</div>
+		</nav>
+	);
 };
 
 export default Navbar;

@@ -10,8 +10,8 @@ import { RootState } from "@/redux/config/configStore";
 
 export default function NowLocationBtn() {
 	const shops = useSelector((state: RootState) => state.allShops);
-	const [latitude, setLatitude] = useState<number>(37.450701);
-	const [longitude, setLongitude] = useState<number>(128.57049341667);
+	const [latitude, setLatitude] = useState<number>(0);
+	const [longitude, setLongitude] = useState<number>(0);
 	const [toggle, setToggle] = useState(false);
 	const dispatch = useDispatch();
 	useKakaoLoader();

@@ -311,10 +311,12 @@ export default function Login() {
 						</div>
 					</div>
 
-					<div className="gap-[16px] flex flex-justify items-center mb-[24px] mt-[36px]">
-						<div className="border-[1px] border-[#D6D6D6] w-[35%] my-[1%]" />
-						<span className="font-[500] text-[#999]">간편 로그인</span>
-						<div className="border-[1px] border-[#D6D6D6] w-[35%] my-[1%]" />
+					<div className="w-full gap-[16px] flex flex-justify items-center mb-[24px] mt-[36px]">
+						<div className="border-[1px] border-[#D6D6D6] w-full my-[1%]" />
+						<span className="font-[500] text-[#999] w-[70%] text-center">
+							간편 로그인
+						</span>
+						<div className="border-[1px] border-[#D6D6D6] w-full my-[1%]" />
 					</div>
 
 					<div className="flex flex-col gap-[12px]">

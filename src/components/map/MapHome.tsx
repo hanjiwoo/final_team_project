@@ -13,6 +13,9 @@ import { getShop } from "@/redux/modules/detailShopSlice";
 import ShopCard from "../home/ShopCard";
 import Shopinfo from "../detail/Shopinfo";
 import ShopCard2 from "./ShopCard2";
+import Image from "next/image";
+import upButton from "../../app/assets/images/icon/up.png";
+import downButton from "../../app/assets/images/icon/down.png";
 
 type typeOfRef = {
   title: string;
@@ -213,36 +216,49 @@ export default function MapHome() {
         </Map>
       </div>
 
-      <div className="absolute top-[75px] w-1/4 left-10 z-10 flex">
+      <div className="absolute top-[64px] z-10 h-full flex items-center">
         <div
           // onWheel={(e) => wheelHandler(e)}
-          className={`flex flex-col h-[900px]`}
+          // className={`flex flex-col h-[900px]`}
+          className="flex flex-col  my-[30px]  h-full"
         >
-          <div
-            style={{
-              height: `${Math.ceil(shops.length / 4) * 1000}px`,
-              transform: `translate(0,${slide}px)`,
-              transition: "transform 0.5s",
-              display: "flex",
-            }}
-          >
-            <ColumnSlide />
-          </div>
+          {/* <div
+						style={{
+							height: `${Math.ceil(shops.length / 4) * 1000}px`,
+							transform: `translate(0,${slide}px)`,
+							transition: "transform 0.5s",
+							display: "flex",
+						}}
+					>
+					</div> */}
+          <ColumnSlide />
         </div>
-        <div className="flex flex-col justify-center gap-5">
-          <button
-            onClick={upHandler}
-            className=" bg-purple-300 rounded-full text-4xl hover:scale-110"
-          >
-            👆
-          </button>
-          <button
-            onClick={downHandler}
-            className="bg-purple-300 rounded-full text-4xl hover:scale-110"
-          >
-            👇
-          </button>
-        </div>
+        {/* <div className="flex flex-col justify-center gap-5 h-screen ml-[20px] ">
+					<button
+						onClick={upHandler}
+						className=" bg-purple-300 rounded-full text-4xl hover:scale-110"
+					>
+						👆
+					</button>
+					<Image
+						onClick={upHandler}
+						src={upButton}
+						alt="upButton"
+						className="w-[30px] h-[30px] cursor-pointer"
+					/>
+					<button
+						onClick={downHandler}
+						className="bg-purple-300 rounded-full text-4xl hover:scale-110"
+					>
+						👇
+					</button>
+					<Image
+						onClick={downHandler}
+						src={downButton}
+						alt="downButton"
+						className="w-[30px] h-[30px] cursor-pointer"
+					/>
+				</div> */}
       </div>
     </>
   );

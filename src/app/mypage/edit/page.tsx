@@ -12,7 +12,7 @@ import { storage } from "@/shared/firebase";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function page() {
+export default function Page() {
   const auth = getAuth();
   const user = useSelector((state: RootState) => state.login);
   const { displayName, email, uid, photoURL, isLogin } = user;

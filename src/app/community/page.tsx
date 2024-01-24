@@ -46,19 +46,12 @@ export default function ListPage() {
     },
   });
 
-  const filteredPosts = posts
-    ?.filter((post) => {
-      if (newPost.category === "" || newPost.category === "전체모음") {
-        return true;
-      }
-      return newPost.category === post.category;
-    })
-    .sort((a, b) => {
-      if (a.createdAt && b.createdAt) {
-        return b.createdAt - a.createdAt;
-      }
-      return 1;
-    });
+  const filteredPosts = posts?.filter((post) => {
+    if (newPost.category === "" || newPost.category === "전체모음") {
+      return true;
+    }
+    return newPost.category === post.category;
+  });
 
   const moveToDetail = (id: string) => {
     router.push(`/community/detail/${id}`);
@@ -70,16 +63,18 @@ export default function ListPage() {
       {/* 전체 컨테이너 */}
       <div className="flex  flex-col items-center  w-full h-full gap-[20px] my-[60px]">
         {/* 글 모음/ 인기순위 컨텐츠 */}
-        <div className="flex px-[420px] py-[60px] flex-col justify-center items-center gap-[60px] self-stretch">
-          <h2 className="text-[28px] text-[#212121] font-semibold leading-[36px]">
-            이 달의 BEST 게시글 모-음
-          </h2>
-          <p className="text-[18px] text-[#5C5C5C]font-medium leading-[26px]">
-            가장 인기 많았던 게시글을 확인해보세요!
-          </p>
+        <div className="flex py-[60px] flex-col justify-center items-center gap-[60px] self-stretch">
+          <section className="flex flex-col gap-[12px]">
+            <h1 className="text-[28px] text-[#212121] font-semibold leading-[36px]">
+              이 달의 BEST 게시글 모-음
+            </h1>
+            <h2 className="text-[18px] text-[#5C5C5C] leading-[26px]">
+              가장 인기 많았던 게시글을 확인해보세요!
+            </h2>
+          </section>
 
           {/* 인기순위 컨테이너 */}
-          <div className="flex justify-center gap-[24px] self-stretch">
+          <div className="flex justify-center gap-[24px] w-full">
             <div className="flex flex-col items-start gap-[20px]">
               <div className="flex flex-col items-start gap-[8px] self-stretch">
                 <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
