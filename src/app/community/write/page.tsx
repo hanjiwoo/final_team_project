@@ -36,8 +36,8 @@ export default function WritePage() {
   });
   const addPost = async () => {
     try {
+      let arr = [];
       if (imgFiles) {
-        let arr = [];
         for (let i = 0; i < imgFiles.length; i++) {
           const storageRef = ref(storage, `${uid}/${newPost.createdAt}/${i}`);
           await uploadBytes(storageRef, imgFiles[i]);
@@ -45,9 +45,8 @@ export default function WritePage() {
           // console.log(downloadURL);
           arr.push(downloadURL);
         }
-
-        await addDoc(collection(db, "posts"), { ...newPost, photos: arr });
       }
+      await addDoc(collection(db, "posts"), { ...newPost, photos: arr });
     } catch (error) {
       console.error("Error adding post:", error);
     }
@@ -158,6 +157,7 @@ export default function WritePage() {
                   className="hidden"
                   type="file"
                   multiple
+                  accept="image/*"
                   onChange={(e) => fileChangeHandler(e)}
                 />
               </label>
