@@ -79,13 +79,21 @@ export default function Page() {
   return (
     <>
       {/* <Image src={ImageURL} width={100} height={100} alt="zz" /> */}
-      <div className="flex justify-center items-center mt-[60px] mb-[60px]">
+      <div className="flex justify-center items-center my-[60px] px-[20px]">
         {/* <Image src={photoURL} width={100} height={100} alt="zz" /> */}
         <div className="flex flex-col justify-center items-center w-[350px] h-[545px]">
           <div>
             <label>
-              <div className="w-[100px] h-[100px] overflow-hidden rounded-full"></div>
-
+              <div className="w-[100px] h-[100px] overflow-hidden rounded-full">
+                {/* <Image
+									src={ImageURL ? ImageURL : photoURL}
+									alt="profile"
+									width={100}
+									height={100}
+									style={{ width: "100px" }}
+									className="w-[100px] h-[100px]"
+								/> */}
+              </div>
               <Image
                 src={cameraImage}
                 alt="profileImageEditButton"
@@ -101,7 +109,7 @@ export default function Page() {
           </div>
           <div className="flex flex-col w-full mb-[40px] mt-[40px] gap-[16px]">
             <div className="flex flex-col w-full gap-[8px]">
-              <label className="test-[14px] leading-20px text-[#999]">
+              <label className="text-[14px] leading-20px text-[#999]">
                 이메일
               </label>
               <div className="h-[48px] px-[16px] rounded-[8px] border-solid border border-[#C2C2C2] flex items-center bg-[#F1F1F1] text-[#C2C2C2]">
@@ -109,7 +117,7 @@ export default function Page() {
               </div>
             </div>
             <div className="flex flex-col w-full gap-[8px]">
-              <label className="test-[14px] leading-20px text-[#999]">
+              <label className="text-[14px] leading-20px text-[#999]">
                 닉네임
               </label>
               <input
@@ -122,7 +130,7 @@ export default function Page() {
               ></input>
             </div>
             <div className="flex flex-col w-full gap-[8px]">
-              <label className="test-[14px] leading-20px text-[#999]">
+              <label className="text-[14px] leading-20px text-[#999]">
                 비밀번호
               </label>
               <input
