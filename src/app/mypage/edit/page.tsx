@@ -84,10 +84,8 @@ export default function Page() {
         <div className="flex flex-col justify-center items-center w-[350px] h-[545px]">
           <div>
             <label>
-              <div className="w-[100px] h-[100px] overflow-hidden rounded-full">
-                {/* <Image
+              <div className="w-[100px] h-[100px] overflow-hidden rounded-full"></div>
 
-              </div>
               <Image
                 src={cameraImage}
                 alt="profileImageEditButton"

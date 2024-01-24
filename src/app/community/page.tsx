@@ -61,63 +61,62 @@ export default function ListPage() {
   return (
     <>
       {/* 전체 컨테이너 */}
-      <div className="flex  flex-col items-center  w-full h-full gap-[20px] my-[60px]">
-        {/* 글 모음/ 인기순위 컨텐츠 */}
-        <div className="flex py-[60px] flex-col justify-center items-center gap-[60px] self-stretch">
-          <section className="flex flex-col gap-[12px]">
-            <h1 className="text-[28px] text-[#212121] font-semibold leading-[36px]">
-              이 달의 BEST 게시글 모-음
-            </h1>
-            <h2 className="text-[18px] text-[#5C5C5C] leading-[26px]">
-              가장 인기 많았던 게시글을 확인해보세요!
-            </h2>
-          </section>
+      {/* <div className="flex  flex-col items-center  w-full h-full gap-[20px] my-[60px]"> */}
+      {/* 글 모음/ 인기순위 컨텐츠 */}
+      <div className="flex py-[60px] px-[620px] flex-col justify-center items-center gap-[60px] self-stretch">
+        <section className="flex flex-col gap-[12px]">
+          <h1 className="text-[28px] text-[#212121] font-semibold leading-[36px]">
+            이 달의 BEST 게시글 모-음
+          </h1>
+          <h2 className="text-[18px] text-[#5C5C5C] leading-[26px]">
+            가장 인기 많았던 게시글을 확인해보세요!
+          </h2>
+        </section>
 
-          {/* 인기순위 컨테이너 */}
-          <div className="flex justify-center gap-[24px] w-full">
-            <div className="flex flex-col items-start gap-[20px]">
-              <div className="flex flex-col items-start gap-[8px] self-stretch">
-                <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
-                  사진
-                </div>
-                <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
-                  카테고리
-                </p>
-                <p className="text-[16px] font-semibold leading-[24px] ">
-                  게시글 제목
-                </p>
-                <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
+        {/* 인기순위 컨테이너 */}
+        <div className="flex justify-center gap-[24px] w-full">
+          <div className="flex flex-col items-start gap-[20px]">
+            <div className="flex flex-col items-start gap-[8px] self-stretch">
+              <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
+                사진
               </div>
+              <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
+                카테고리
+              </p>
+              <p className="text-[16px] font-semibold leading-[24px] ">
+                게시글 제목
+              </p>
+              <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
             </div>
+          </div>
 
-            <div className="flex flex-col items-start gap-[20px]">
-              <div className="flex flex-col items-start gap-[8px] self-stretch">
-                <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
-                  사진
-                </div>
-                <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
-                  카테고리
-                </p>
-                <p className="text-[16px] font-semibold leading-[24px] ">
-                  게시글 제목
-                </p>
-                <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
+          <div className="flex flex-col items-start gap-[20px]">
+            <div className="flex flex-col items-start gap-[8px] self-stretch">
+              <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
+                사진
               </div>
+              <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
+                카테고리
+              </p>
+              <p className="text-[16px] font-semibold leading-[24px] ">
+                게시글 제목
+              </p>
+              <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
             </div>
+          </div>
 
-            <div className="flex flex-col items-start gap-[20px]">
-              <div className="flex flex-col items-start gap-[8px] self-stretch">
-                <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
-                  사진
-                </div>
-                <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
-                  카테고리
-                </p>
-                <p className="text-[16px] font-semibold leading-[24px] ">
-                  게시글 제목
-                </p>
-                <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
+          <div className="flex flex-col items-start gap-[20px]">
+            <div className="flex flex-col items-start gap-[8px] self-stretch">
+              <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
+                사진
               </div>
+              <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
+                카테고리
+              </p>
+              <p className="text-[16px] font-semibold leading-[24px] ">
+                게시글 제목
+              </p>
+              <p className="w-[20px] h-[20px] text-[#FF8145]">♥</p>
             </div>
           </div>
         </div>
@@ -182,18 +181,15 @@ export default function ListPage() {
             {/* 게시글 전체 컨테이너 */}
             {filteredPosts?.map((post) => {
               return (
-
                 <React.Fragment key={nanoid()}>
                   <PostCard post={post} />
                 </React.Fragment>
-
               );
             })}
           </div>
         </div>
       </div>
-
-      {/* img src={null ?? defaultUser} alt="프로필이미지" */}
+      {/* </div> */}
     </>
   );
 }
