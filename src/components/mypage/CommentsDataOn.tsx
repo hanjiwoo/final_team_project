@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CommentsDataOn() {
 	return (
-		<div className="flex justify-center items-center w-screen mt-[60px] mb-[60px]">
+		<div className="flex justify-center items-center w-screen my-[60px] px-[20px]">
 			<div className="w-[880px]">
 				<h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px]">
 					댓글 모음

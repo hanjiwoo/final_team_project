@@ -77,17 +77,44 @@ export default function Best() {
 				</span>
 			</div>
 
-      <div className="flex justify-center items-center">
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[24px]">
-          {top3Shops?.map((shop) => {
-            return (
-              <React.Fragment key={nanoid()}>
-                {shop && <ShopCard2 shop={shop} />}
-              </React.Fragment>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
+
+			<div className="flex justify-center items-center">
+				<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[24px]">
+					{/* {bestList.map((item) => {
+						return (
+							<div key={item.id}>
+								<div className="h-full rounded-lg overflow-hidden hover:scale-105 transition ease-in transition-property: all transition-duration: 0.5s w-[344px] h-[324px]">
+									<Image
+										className="w-[344px] h-[324px] object-cover object-center rounded-[12px] mb-[20px]"
+										src={item.photo}
+										alt="photo"
+									/>
+
+									<span className=" text-[16px] text-[#212121] leading-[24px] font-semibold">
+										{item.title}
+									</span>
+									<div className="mb-1 flex items-center gap-[4px] text-[#FF8145] text-[14px] leading-[20px]">
+										<Image
+											src={heart}
+											alt="like"
+											className="w-[20px] h-[20px]"
+										/>
+										{item.추천해요}
+									</div>
+								</div>
+							</div>
+						);
+					})} */}
+					{top3Shops?.map((shop) => {
+						return (
+							<React.Fragment key={nanoid()}>
+								{shop && <ShopCard2 shop={shop} />}
+							</React.Fragment>
+						);
+					})}
+				</div>
+			</div>
+		</div>
+	);
+
 }
