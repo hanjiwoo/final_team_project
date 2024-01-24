@@ -9,8 +9,8 @@ import { nanoid } from "nanoid";
 import Image from "next/image";
 import place from "../../app/assets/images/icon/place.png";
 import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
-import { useQuery } from "@tanstack/react-query";
 import { getHoogis } from "../detail/queryFns";
+import { useQuery } from "@tanstack/react-query";
 export default function ShopCard2({
   shop,
   shops,
@@ -28,6 +28,11 @@ export default function ShopCard2({
     event: React.MouseEvent<HTMLElement, MouseEvent>,
     phoneNum: string
   ) => {
+    // console.log(router);
+
+    // const detailshop = shops.find((shop: typeOfShop) => {
+    //   return shop.연락처 === phoneNum;
+    // });
     if (!shop?.연락처) return alert("상세페이지가 없는 매장입니다.");
     dispatch(getShop(shop));
     router.push(`/detail/${shop.연락처}`);
@@ -87,7 +92,6 @@ export default function ShopCard2({
 							)}
 						</div> */}
             <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
-            <p>후기 :{hoogis?.length}</p>
             {/* <div className="flex justify-round gap-5"> */}
             <div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
               <Image
@@ -97,6 +101,9 @@ export default function ShopCard2({
               />
               {shop.업종}
             </div>
+            <p className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
+              후기 :{hoogis?.length}
+            </p>
             <div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
               <Image src={place} alt="스푼포크" className="w-[20px] h-[20px]" />
               <span className="w-[250px] text-left block whitespace-nowrap truncate text-ellipsis">
