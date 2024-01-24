@@ -68,6 +68,7 @@ export default function GoodPrice() {
 	const buttonStyle = "flex flex-col items-center gap-[8px]";
 	const buttonClass =
 		"border-[1.5px] bg-[#fff] border-[#E1E1E1] w-[68px] h-[68px] justify-center items-center gap-1 inline-flex rounded-full hover:scale-105 hover:border-[#ff8145] cursor-pointer";
+
 	return (
 		<>
 			<div className="text-center mb-12">
@@ -78,8 +79,8 @@ export default function GoodPrice() {
 					따뜻한 마음들이 모인 곳은 어디일까요?
 				</span>
 			</div>
-			<div className="justify-center gap-10 mb-[60px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6">
-				<div className={buttonStyle}>
+			<div className=" gap-10 mb-[60px] grid grid-cols-3 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6">
+				<div className="flex flex-col items-center gap-[8px]">
 					<button
 						id="price"
 						className={buttonClass}
@@ -90,7 +91,7 @@ export default function GoodPrice() {
 					</button>
 					<span>#5000</span>
 				</div>
-				<div className={buttonStyle}>
+				<div className="flex flex-col items-center gap-[8px]">
 					<button
 						id="price"
 						className={buttonClass}
@@ -101,7 +102,7 @@ export default function GoodPrice() {
 					</button>
 					<span>#8000</span>
 				</div>
-				<div className={buttonStyle}>
+				<div className="flex flex-col items-center gap-[8px]">
 					<button
 						className={buttonClass}
 						value="한식"
@@ -111,7 +112,7 @@ export default function GoodPrice() {
 					</button>
 					<span>#한식</span>
 				</div>
-				<div className={buttonStyle}>
+				<div className="flex flex-col items-center gap-[8px]">
 					<button
 						className={buttonClass}
 						value="일식"
@@ -125,7 +126,7 @@ export default function GoodPrice() {
 					</button>
 					<span>#일식</span>
 				</div>
-				<div className={buttonStyle}>
+				<div className="flex flex-col items-center gap-[8px]">
 					<button
 						className={buttonClass}
 						value="중식"
@@ -139,7 +140,7 @@ export default function GoodPrice() {
 					</button>
 					<span>#중식</span>
 				</div>
-				<div className={buttonStyle}>
+				<div className="flex flex-col items-center gap-[8px]">
 					<button
 						className={buttonClass}
 						value="양식"
