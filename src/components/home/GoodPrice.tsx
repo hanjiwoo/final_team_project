@@ -86,7 +86,9 @@ export default function GoodPrice() {
             className={buttonClass}
             value="5000"
             onClick={(e) => searchHandler(e)}
-          ></button>
+          >
+            <Image className="w-8 h-8 relative" src={money1} alt="5000"></Image>
+          </button>
           <span>#5000</span>
         </div>
         <div className="flex flex-col items-center gap-[8px]">
@@ -95,7 +97,9 @@ export default function GoodPrice() {
             className={buttonClass}
             value="8000"
             onClick={(e) => searchHandler(e)}
-          ></button>
+          >
+            <Image className="w-8 h-8 relative" src={money2} alt="8000"></Image>
+          </button>
           <span>#8000</span>
         </div>
         <div className="flex flex-col items-center gap-[8px]">
@@ -103,7 +107,9 @@ export default function GoodPrice() {
             className={buttonClass}
             value="한식"
             onClick={(e) => searchHandler(e)}
-          ></button>
+          >
+            <Image className="w-8 h-8 relative" src={korean} alt="한식"></Image>
+          </button>
           <span>#한식</span>
         </div>
         <div className="flex flex-col items-center gap-[8px]">
@@ -111,7 +117,13 @@ export default function GoodPrice() {
             className={buttonClass}
             value="일식"
             onClick={(e) => searchHandler(e)}
-          ></button>
+          >
+            <Image
+              className="w-8 h-8 relative"
+              src={japanese}
+              alt="일식"
+            ></Image>
+          </button>
           <span>#일식</span>
         </div>
         <div className="flex flex-col items-center gap-[8px]">
@@ -119,7 +131,13 @@ export default function GoodPrice() {
             className={buttonClass}
             value="중식"
             onClick={(e) => searchHandler(e)}
-          ></button>
+          >
+            <Image
+              className="w-8 h-8 relative"
+              src={chinese}
+              alt="중식"
+            ></Image>
+          </button>
           <span>#중식</span>
         </div>
         <div className="flex flex-col items-center gap-[8px]">
@@ -127,7 +145,13 @@ export default function GoodPrice() {
             className={buttonClass}
             value="양식"
             onClick={(e) => searchHandler(e)}
-          ></button>
+          >
+            <Image
+              className="w-8 h-8 relative"
+              src={american}
+              alt="양식"
+            ></Image>
+          </button>
           <span>#양식</span>
         </div>
       </div>
