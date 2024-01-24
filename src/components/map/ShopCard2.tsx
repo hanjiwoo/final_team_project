@@ -66,11 +66,11 @@ export default function ShopCard2({
         key={nanoid()}
       >
         <div className="flex flex-row h-full border-opacity-60 rounded-lg ">
-          <div className="w-[252px] h-full bg-[#F1F1F1] rounded-[12px] mb-[20px]" />{" "}
+          <div className="w-[252px] h-full bg-[#F1F1F1] rounded-[12px] mb-[20px]" />
           <section>
-            <div className="text-base font-medium text-[#212121] mb-1 flex text-xl">
+            <div className="font-medium text-[#212121] mb-1 flex text-xl">
               {shop.업소명}
-            </div>{" "}
+            </div>
             <div className="flex justify-between">
               {type === "no" ? (
                 <></>
