@@ -1,8 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import pencilIcon from "../../app/assets/images/icon/pencilIcon.png";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
+import { useQuery } from "@tanstack/react-query";
+import { getThumbs } from "../home/Fns";
 
 export default function CommentsDataOff() {
   return (
@@ -11,7 +15,7 @@ export default function CommentsDataOff() {
         <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px]">
           댓글 모음
         </h1>
-        <form className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
+        <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
           <Image
             src={pencilIcon}
             alt="mainIcon"
@@ -22,7 +26,7 @@ export default function CommentsDataOff() {
             <br />
             댓글을 작성해주세요 :)
           </span>
-        </form>
+        </section>
       </div>
     </div>
   );
