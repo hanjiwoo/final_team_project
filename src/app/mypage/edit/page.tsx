@@ -85,14 +85,14 @@ export default function page() {
           <div>
             <label>
               <div className="w-[100px] h-[100px] overflow-hidden rounded-full">
-                <Image
+                {/* <Image
                   src={ImageURL ? ImageURL : photoURL}
                   alt="profile"
                   width={100}
                   height={100}
                   style={{ width: "100px" }}
                   className="w-[100px] h-[100px]"
-                />
+                /> */}
               </div>
               <Image
                 src={cameraImage}

@@ -9,6 +9,8 @@ import { nanoid } from "nanoid";
 import Image from "next/image";
 import place from "../../app/assets/images/icon/place.png";
 import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
+import { useQuery } from "@tanstack/react-query";
+import { getHoogis } from "../detail/queryFns";
 export default function ShopCard2({
   shop,
   shops,
@@ -26,15 +28,14 @@ export default function ShopCard2({
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     phoneNum: string
   ) => {
-    // console.log(router);
-
-    // const detailshop = shops.find((shop: typeOfShop) => {
-    //   return shop.연락처 === phoneNum;
-    // });
     if (!shop?.연락처) return alert("상세페이지가 없는 매장입니다.");
     dispatch(getShop(shop));
     router.push(`/detail/${shop.연락처}`);
   };
+  const { data: hoogis, isLoading } = useQuery({
+    queryKey: [`hoogis${shop.연락처}`],
+    queryFn: () => getHoogis(shop.연락처),
+  });
   useEffect(() => {
     if (window.kakao) {
       let geocoder = new window.kakao.maps.services.Geocoder();
@@ -82,6 +83,7 @@ export default function ShopCard2({
                 </button>
               )}
               <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
+              <p>후기 :{hoogis?.length}</p>
             </div>
             {/* <div className="flex justify-round gap-5"> */}
             <div className="flex gap-1 text-[14px] text-[#5C5C5C] mb-1 items-center">

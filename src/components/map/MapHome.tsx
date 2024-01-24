@@ -67,23 +67,25 @@ export default function MapHome() {
           // lngRef.current = Number(result[0].x);
         }
       );
-      const mappedArray = shops.map((shop: typeOfShop) => {
+      let mappedArray: {
+        title: string;
+        latitude: string;
+        longitude: string;
+      }[] = [];
+      for (let i = 0; i < shops.length; i++) {
         let OBOB = {
           title: "",
           latitude: "",
           longitude: "",
         };
-
-        geocoder.addressSearch(shop.주소, function (result, status) {
-          OBOB.title = shop.업소명;
+        geocoder.addressSearch(shops[i].주소, function (result, status) {
+          OBOB.title = shops[i].업소명;
           OBOB.latitude = result[0].y;
           OBOB.longitude = result[0].x;
         });
-        // console.log(OBOB, "여기서 찍히니?");
-        return OBOB;
-      });
-      // console.log(mappedArray, " 젭알나와줘 ㅜㅜ");
-      // setnewArray(mappedArray);
+        mappedArray.push(OBOB);
+      }
+
       shopsRef.current = mappedArray;
     }
   }, [shops]);
@@ -139,7 +141,7 @@ export default function MapHome() {
     if (foundShop) {
       shopInfoRef.current = foundShop;
     }
-    setInfoToggle(true);
+    setInfoToggle(!infoToggle);
   };
   return (
     <>
@@ -148,7 +150,7 @@ export default function MapHome() {
           {/* <SearchForm /> */}
         </div>
         <Map
-          onClick={() => setInfoToggle(false)}
+          onClick={() => setInfoToggle(!infoToggle)}
           // ref={mapRef.current}
           className="bg-yellow-100" // 지도를 표시할 Container
           id="map"
