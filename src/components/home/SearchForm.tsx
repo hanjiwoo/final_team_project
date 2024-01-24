@@ -40,7 +40,8 @@ export default function SearchForm() {
         return (
           shop.업종.slice(0, 2) !== "기타" &&
           shop.업종.slice(0, 2) !== "이미" &&
-          shop.업종.slice(0, 2) !== "목욕"
+          shop.업종.slice(0, 2) !== "목욕" &&
+          shop.업종.slice(0, 2) !== "세탁"
         );
       });
       dispatch(getAllShops(filteredRes));
@@ -130,7 +131,6 @@ export default function SearchForm() {
           <option>일식</option>
           <option>양식</option>
           <option>중식</option>
-          <option>기타</option>
         </select>
         <button
           className="bg-[#FF8145] text-[#fff] h-full py-[14px] px-[26px] rounded-[8px] font-[500]"
