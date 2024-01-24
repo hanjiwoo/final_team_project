@@ -9,6 +9,8 @@ import { nanoid } from "nanoid";
 import Image from "next/image";
 import place from "../../app/assets/images/icon/place.png";
 import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
+import { getHoogis } from "../detail/queryFns";
+import { useQuery } from "@tanstack/react-query";
 export default function ShopCard2({
 	shop,
 	shops,
@@ -35,6 +37,10 @@ export default function ShopCard2({
 		dispatch(getShop(shop));
 		router.push(`/detail/${shop.연락처}`);
 	};
+	const { data: hoogis, isLoading } = useQuery({
+		queryKey: [`hoogis${shop.연락처}`],
+		queryFn: () => getHoogis(shop.연락처),
+	});
 	useEffect(() => {
 		if (window.kakao) {
 			let geocoder = new window.kakao.maps.services.Geocoder();
@@ -95,6 +101,9 @@ export default function ShopCard2({
 							/>
 							{shop.업종}
 						</div>
+						<p className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
+							후기 :{hoogis?.length}
+						</p>
 						<div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
 							<Image src={place} alt="스푼포크" className="w-[20px] h-[20px]" />
 							<span className="w-[250px] text-left block whitespace-nowrap truncate text-ellipsis">
