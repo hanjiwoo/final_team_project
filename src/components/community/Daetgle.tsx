@@ -81,36 +81,40 @@ export default function Daetgle() {
   if (isLoading) return <>로딩중</>;
   return (
     <>
-      <div className="flex items-start gap-[12px] self-stretch">
+      <div className="flex h-[48px] justify-center items-center gap-[4px]">
         <input
           value={daetgle}
           onChange={(e) => onChangeHandler(e)}
-          className="border-2 border-gray-[400] w-[550px] h-[48px] rounded-[10px] outline-none"
+          className="border-[1px] border-gray-[400] w-[543px] h-[48px] rounded-[8px] outline-none"
           placeholder="댓글을 작성해주세요."
         />
-        <button
-          onClick={daetgleSubmitHandler}
-          className="w-[115px] h-[50px] border-2 rounded-[10px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-        >
-          댓글남기기
-        </button>
+        <div className="flex justify-center items-center gap-[4px] w-[93px] h-[48px]  rounded-[8px] bg-[#FF8145] hover:bg-[#E5743E] ">
+          <button
+            onClick={daetgleSubmitHandler}
+            className=" text-[14px] font-medium leading-[20px] w-[61px] h-[20px]  text-[#FFFFFF] "
+          >
+            댓글남기기
+          </button>
+        </div>
       </div>
       {/* 대댓글 컨테이너 */}
-      <div className="flex flex-col items-start self-stretch">
-        <div className="flex gap-[16px] ">
+      <div className="flex flex-col items-start gap-[24px] self-stretch ">
+        <div className="flex flex-col  self-stretch ">
           {daetgles?.map((item) => {
             return (
-              <div className="flex" key={nanoid()}>
-                {" "}
-                <img
-                  className="w-[28px] h-[28px]"
-                  src={item.profile}
-                  alt="profile"
-                  width={100}
-                  height={100}
-                />
-                <div className="flex items-center gap-[16px]">
-                  <p>{item.nickName}</p>
+              <div className="flex items-center gap-[16px] justify-between">
+                <div className="flex gap-[16px]" key={nanoid()}>
+                  {" "}
+                  <div className="flex items-center gap-[8px]">
+                    <img
+                      className="w-[32px] h-[32px] justify-center items-center"
+                      src={item.profile}
+                      alt="profile"
+                    />
+                    <div className="text-[12px] text-center font-medium leading-[18px] text-[#999]">
+                      <p>{item.nickName}</p>
+                    </div>
+                  </div>
                   <p>{item.content}</p>{" "}
                 </div>
                 {uid === item.uid && (

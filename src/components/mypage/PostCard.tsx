@@ -11,7 +11,10 @@ export default function PostCard({ post }: { post: Post }) {
     router.push(`/community/detail/${id}`);
   };
   return (
-    <div className="flex flex-col w-full items-end gap-[10px] self-stretch">
+    <div
+      className="flex flex-col w-full items-end gap-[10px] self-stretch"
+      onClick={() => moveToDetail(post.id)}
+    >
       <div className="flex h-[132px] flex-col items-start gap-[8px] self-stretch">
         {/* 카테고리 */}
         <div className=" flex h-[24px] px-[8px] py-[4px] justify-center items-center gap-[4px] shrink-0 rounded-[100px] bg-[#F1F1F1] text-[#212121]">
@@ -34,7 +37,11 @@ export default function PostCard({ post }: { post: Post }) {
 
           {/* 사진컨테이너 */}
           <div className="w-[100px] h-[100px] bg-[#F1F1F1] rounded-[8px]">
-            <img src={post.photos?.[0]} alt="사진" />
+            <img
+              className="w-[100px] h-[100px]"
+              src={post.photos?.[0]}
+              alt="사진"
+            />
           </div>
         </div>
       </div>
@@ -68,9 +75,9 @@ export default function PostCard({ post }: { post: Post }) {
           </time>
         </div>
 
-        <button onClick={() => moveToDetail(post.id)} className="bg-green-300">
+        {/* <button onClick={() => moveToDetail(post.id)} className="bg-green-300">
           상세페이지로
-        </button>
+        </button> */}
         <CuteHeart type="small" postId={post.id} />
       </div>
     </div>
