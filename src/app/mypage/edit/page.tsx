@@ -59,6 +59,7 @@ export default function Page() {
       }
 
       // console.log(downloadURL, "요거좀 궁금하다.");
+      // console.log(downloadURL, "요거좀 궁금하다.");
 
       router.push("/mypage");
     }

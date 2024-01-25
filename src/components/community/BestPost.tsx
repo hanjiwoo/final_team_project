@@ -16,11 +16,11 @@ export default function BestPost({ post }: { post: Post }) {
       className="flex flex-col items-start gap-[20px]"
     >
       <div className="flex flex-col items-start gap-[8px] self-stretch">
-        <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
+        <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px] border-2">
           <img
             src={post.photos?.[0]}
             alt="포스트 사진"
-            className="w-full h-full"
+            className="w-full h-full rounded-[12px] "
           />
         </div>
         <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">

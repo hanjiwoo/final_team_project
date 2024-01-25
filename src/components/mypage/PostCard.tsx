@@ -29,7 +29,7 @@ export default function PostCard({ post }: { post: Post }) {
             </div>
 
             {/* 내용 컨테이너 */}
-            <div className="text-[14px] font-medium leading-[20px] text-[#5C5C5C]">
+            <div className="text-[14px] font-medium leading-[20px] text-[#5C5C5C]  overflow-ellipsis w-32 line-clamp-3">
               <p>{post.content}</p>
             </div>
           </div>
@@ -53,7 +53,7 @@ export default function PostCard({ post }: { post: Post }) {
         </div>
       </div>
 
-      <div className="flex w-[474.5px] items-center gap-[16px]">
+      <div className="flex w-[680px] justify-between items-center self-stretch">
         {/* 닉네임,시간 컨테이너 */}
         <div className="flex items-center gap-[8px] w-[50px] h-[50px] ">
           {post.profile ? (

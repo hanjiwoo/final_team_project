@@ -1,6 +1,6 @@
 "use client";
-import HeartEmpty from "../../app/assets/images/HeartEmpty.png";
-import HeartFull from "../../app/assets/images/HeartFull.png";
+import HeartEmpty from "../../app/assets/images/icon/heart_off.png";
+import HeartFull from "../../app/assets/images/icon/heart_on.png";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addHeart, deleteHeart, getHearts } from "./Fns";
 import { typeOfHeart } from "@/app/assets/types/types";
@@ -119,14 +119,14 @@ export default function CuteHeart({
         >
           {filterdheart ? (
             <Image
-              className="w-full h-full"
+              className="w-[16px] h-[16px]"
               id="이미지"
               src={HeartFull}
               alt="빨간따봉"
             ></Image>
           ) : (
             <Image
-              className="w-full h-full"
+              className="w-[16px] h-[16px]"
               id="이미지"
               src={HeartEmpty}
               alt="빈따봉"
