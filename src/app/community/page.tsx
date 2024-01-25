@@ -16,6 +16,8 @@ import { getDownloadURL, ref } from "firebase/storage";
 import PostCard from "@/components/mypage/PostCard";
 import BestPost from "@/components/community/BestPost";
 import { getHearts } from "@/components/community/Fns";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
 
 export default function ListPage() {
   const [newPost, setNewPost] = useState<Post>({

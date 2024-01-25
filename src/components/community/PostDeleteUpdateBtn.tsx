@@ -33,10 +33,16 @@ export default function PostDeleteUpdateBtn({
 
   return (
     <>
-      <button className="bg-orange-500" onClick={() => setToggleModal(true)}>
+      <button
+        className="w-[50px] h-[40px] border-2 rounded-[10px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+        onClick={() => setToggleModal(true)}
+      >
         수정
       </button>
-      <button className="bg-purple-500" onClick={() => mutateToDelete()}>
+      <button
+        className="w-[50px] h-[40px] border-2 rounded-[10px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+        onClick={() => mutateToDelete()}
+      >
         삭제
       </button>
       {toggleModal && (

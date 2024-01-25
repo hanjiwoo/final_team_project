@@ -28,7 +28,7 @@ export default function WritePage() {
     uid,
     title: "",
     content: "",
-    profile: "",
+    profile: photoURL,
     nickname: displayName,
     createdAt: Date.now(),
     category: "",
@@ -256,6 +256,7 @@ export default function WritePage() {
                   name="content"
                   value={newPost.content}
                   onChange={handleInputChange}
+                  maxLength={30}
                 />
               </div>
             </div>

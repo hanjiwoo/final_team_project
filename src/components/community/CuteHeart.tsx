@@ -133,8 +133,11 @@ export default function CuteHeart({
             ></Image>
           )}
         </div>
-        <div className="text-red-500 text-sm text-center">
-          {filteredhearts?.length}
+        <div className="text-center text-[14px] font-medium leading-[20px]">
+          <p>공감해요</p>
+        </div>
+        <div className="text-[14px] font-medium leading-[20px]">
+          <p>{filteredhearts?.length}</p>
         </div>
       </div>
     </>
