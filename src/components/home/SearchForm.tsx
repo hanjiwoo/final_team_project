@@ -35,9 +35,15 @@ export default function SearchForm() {
   };
 
   useEffect(() => {
-    let data = getGoodShop().then((res) => {
-      dispatch(getAllShops(res));
-      // console.log(res, "이거리스판스야");
+    let data = getGoodShop().then((res: typeOfShop[]) => {
+      const filteredRes = res.filter((shop) => {
+        return (
+          shop.업종.slice(0, 2) !== "기타" &&
+          shop.업종.slice(0, 2) !== "이미" &&
+          shop.업종.slice(0, 2) !== "목욕"
+        );
+      });
+      dispatch(getAllShops(filteredRes));
     });
     // setshops(data)
     // console.log(datas, "데이타스");
