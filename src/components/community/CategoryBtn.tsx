@@ -27,7 +27,7 @@ export default function CategoryBtn({
       <button
         name="category"
         onClick={(e) => categorySubmit(e)}
-        className={`px-[12px] py-[8px] rounded-[100px] border-[1px] border-[#D6D6D6] ${
+        className={`flex h-[40px] justify-center items-center px-[12px] py-[8px] rounded-[100px] border-[1px] border-[#FF8145] ${
           newPost.category === text &&
           "bg-[#FF8145] text-[#FFFFFF] text-center text-[14px] font-medium leading-[20px] border-[#FF8145] "
         }`}

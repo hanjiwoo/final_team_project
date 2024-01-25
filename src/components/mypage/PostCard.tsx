@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import userIcon from "../../app/assets/images/icon/userIcon.png";
+import fakelogo from "../../app/assets/images/fakeLogo.jpg";
 import CuteHeart from "../community/CuteHeart";
 import { useRouter } from "next/navigation";
 import { Post } from "@/app/assets/types/types";
@@ -10,8 +11,9 @@ export default function PostCard({ post }: { post: Post }) {
   const moveToDetail = (id: string) => {
     router.push(`/community/detail/${id}`);
   };
+  // console.log(post.photos?.[0], " 이걸 찍어봅세");
   return (
-    <div>
+    <div className="cursor-pointer" onClick={() => moveToDetail(post.id)}>
       <div className="flex h-[132px] flex-col items-start gap-[8px] self-stretch">
         {/* 카테고리 */}
         <div className=" flex h-[24px] px-[8px] py-[4px] justify-center items-center gap-[4px] shrink-0 rounded-[100px] bg-[#F1F1F1] text-[#212121]">
@@ -27,39 +29,50 @@ export default function PostCard({ post }: { post: Post }) {
             </div>
 
             {/* 내용 컨테이너 */}
-            <div className="text-[14px] font-medium leading-[20px] text-[#5C5C5C]">
+            <div className="text-[14px] font-medium leading-[20px] text-[#5C5C5C]  overflow-ellipsis w-32 line-clamp-3">
               <p>{post.content}</p>
             </div>
           </div>
 
           {/* 사진컨테이너 */}
           <div className="w-[100px] h-[100px] bg-[#F1F1F1] rounded-[8px]">
-            <img src={post.photos?.[0]} alt="되나?" />
+            {post.photos?.[0] ? (
+              <img
+                src={post.photos?.[0]}
+                className="w-full h-full"
+                alt="되나?"
+              />
+            ) : (
+              <Image
+                className="w-full h-full shrink-0"
+                src={fakelogo}
+                alt="profile"
+              />
+            )}
           </div>
         </div>
       </div>
 
-      <div className="flex w-[474.5px] items-center gap-[16px]">
+      <div className="flex w-[680px] justify-between items-center self-stretch">
         {/* 닉네임,시간 컨테이너 */}
-        <div className="flex items-center gap-[8px]">
-          {/* {post.profile ? (
-          <Image
-            src={post.profile}
-            alt="profile"
-            className="w-[14px] h-[14px] shrink-0"
-            width={100}
-            height={100}
-          />
-        ) : ( */}
-          <Image
-            src={userIcon}
-            alt="profile"
-            className="w-[14px] h-[14px] shrink-0"
-            width={100}
-            height={100}
-          />
-          {/* )} */}
-          <p>{post.nickname}</p>
+        <div className="flex items-center gap-[8px] w-[50px] h-[50px] ">
+          {post.profile ? (
+            <img
+              src={post.profile}
+              className="w-full h-full rounded-full"
+              alt="사람 이미지"
+            />
+          ) : (
+            <Image
+              src={userIcon}
+              alt="profile"
+              className="w-full h-full shrink-0"
+              width={100}
+              height={100}
+            />
+          )}
+
+          {/* <p>{post.nickname}</p> */}
         </div>
         <time className="text-center text-[12px] font-medium leading-[18px] text-[#999999]">
           {post.createdAt &&
@@ -74,9 +87,7 @@ export default function PostCard({ post }: { post: Post }) {
               timeZone: "Asia/Seoul",
             })}
         </time>
-        <button onClick={() => moveToDetail(post.id)} className="bg-green-300">
-          상세페이지로
-        </button>
+
         <CuteHeart type="small" postId={post.id} />
       </div>
     </div>
