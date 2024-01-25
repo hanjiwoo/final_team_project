@@ -81,15 +81,15 @@ export default function SearchForm() {
   // console.log(shops, " 샵스");
   if (!shops) return <>로딩중...</>;
   return (
-    <div className="w-full flex justify-center items-center px-[100px] py-[40px]">
-      <div className="w-[1080px] h-[48px] flex justify-center items-center gap-[16px] rounded-xl">
+    <div className="w-full max-md:px-[20px] md:w-[712px] max-md:my-[24px] gap-[12px] md:flex lg:w-[712px] xl:w-[1080px] md:my-[40px]">
+      <div className="w-full h-[48px] flex gap-4 rounded-xl">
         {/* {shops[0].업종} */}
 
         <select
           name="sido"
           onChange={onchangeHandler}
           value={form.sido}
-          className="h-full border-[1px] border-[#7A7A7A] rounded-lg text-center w-[244px] text-[#999] bg-[]"
+          className="h-full w-full border-[1px] border-[#7A7A7A] rounded-lg text-center  text-[#999] py-[14px]"
         >
           <option id="none">광역시/도</option>
 
@@ -124,22 +124,25 @@ export default function SearchForm() {
           name="upzong"
           onChange={onchangeHandler}
           value={form.upzong}
-          className="h-full border-[1px] border-[#7A7A7A] rounded-lg text-center w-[244px] text-[#999]"
+          className="h-full w-full border-[1px] border-[#7A7A7A] rounded-lg text-center  text-[#999] py-[14px]"
         >
           <option id="none">업종</option>
           <option>한식</option>
           <option>일식</option>
           <option>양식</option>
           <option>중식</option>
+          <option>기타</option>
         </select>
+        {/* <NowLocationBtn shops={shops} /> */}
+      </div>
+      <section className="w-full flex justify-center items-center md:max-w-[110px]">
         <button
-          className="bg-[#FF8145] text-[#fff] h-full py-[14px] px-[26px] rounded-[8px] font-[500]"
+          className="bg-[#FF8145] text-[#fff] h-[48px] w-full py-[14px] px-[26px] rounded-[8px] font-[500] md:max-w-[110px] max-md:mt-[12px]"
           onClick={onClickHandler}
         >
           검색하기
         </button>
-        {/* <NowLocationBtn shops={shops} /> */}
-      </div>
+      </section>
     </div>
   );
 }
