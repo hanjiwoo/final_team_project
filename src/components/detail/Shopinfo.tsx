@@ -133,7 +133,7 @@ export default function Shopinfo() {
               위치
             </div>
           </div>
-          <div className="w-[287px] self-stretch text-zinc-600 text-base font-medium leading-normal">
+          <div className="w-[400px] self-stretch text-zinc-600 text-base font-medium leading-normal">
             {shop.주소}
           </div>
         </div>
