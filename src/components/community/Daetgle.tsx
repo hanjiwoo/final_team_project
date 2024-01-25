@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import message from "../../app/assets/images/icon/message.png";
+
 import userIcon from "../../app/assets/images/icon/userIcon.png";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -84,52 +85,55 @@ export default function Daetgle({ post }: { post: Post }) {
   return (
     <>
       {" "}
-      <div className="flex justify-start w-full items-center gap-[6px]">
+      <div className="flex justify-start  items-center gap-[6px]">
         <CuteHeart type="normal" postId={post?.id} />
-        <Image src={message} className="w-[40px]" alt="댓글" />
-        <p>댓글 :{daetgles?.length}</p>
+        <Image src={message} className="w-[20px] h-[20px]" alt="댓글" />
+        <div className="text-[#999] text-[14px] font-medium leading-[20px]">
+          <p>댓글{daetgles?.length}</p>
+        </div>
       </div>
-      <div className="flex items-start gap-[12px] self-stretch">
+      <div className="flex h-[48px] justify-center items-center gap-[4px]">
         <input
           value={daetgle}
           onChange={(e) => onChangeHandler(e)}
-          className="border-2 border-gray-[400] w-[550px] h-[48px] rounded-[10px] outline-none"
+          className="border-[1px] border-gray-[400] w-[543px] h-[48px] rounded-[8px] outline-none"
           placeholder="댓글을 작성해주세요."
         />
-        <button
-          onClick={daetgleSubmitHandler}
-          className="w-[115px] h-[50px] border-2 rounded-[10px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-        >
-          댓글남기기
-        </button>
+        <div className="flex justify-center items-center gap-[4px] w-[93px] h-[48px]  rounded-[8px] bg-[#FF8145] hover:bg-[#E5743E] ">
+          <button
+            onClick={daetgleSubmitHandler}
+            className=" text-[14px] font-medium leading-[20px] w-[61px] h-[20px]  text-[#FFFFFF] "
+          >
+            댓글남기기
+          </button>
+        </div>
       </div>
       {/* 대댓글 컨테이너 */}
-      <div className="flex flex-col items-start self-stretch">
-        <div className="flex gap-[16px] ">
+      <div className="flex flex-col items-start gap-[24px] self-stretch ">
+        <div className="flex flex-col  self-stretch ">
           {daetgles?.map((item) => {
             return (
-              <div
-                className="flex gap-5 items-center bg-pink-100"
-                key={nanoid()}
-              >
-                {" "}
-                {item.profile ? (
-                  <img
-                    className="w-[28px] h-[28px] rounded-full"
-                    src={item.profile}
-                    alt="profile"
-                    width={100}
-                    height={100}
-                  />
-                ) : (
-                  <Image
-                    className="w-[28px] h-[28px] rounded-full"
-                    src={userIcon}
-                    alt="빈유저"
-                  />
-                )}
-                <div className="flex items-center gap-[16px]">
-                  <p>{item.nickName}</p>
+              <div className="flex items-center gap-[16px] justify-between">
+                <div className="flex gap-[16px]" key={nanoid()}>
+                  {" "}
+                  <div className="flex items-center gap-[8px]">
+                    {item.profile ? (
+                      <img
+                        className="w-[32px] h-[32px] justify-center items-center"
+                        src={item.profile}
+                        alt="profile"
+                      />
+                    ) : (
+                      <Image
+                        className="w-[28px] h-[28px] rounded-full"
+                        src={userIcon}
+                        alt="빈유저"
+                      />
+                    )}
+                    <div className="text-[12px] text-center font-medium leading-[18px] text-[#999]">
+                      <p>{item.nickName}</p>
+                    </div>
+                  </div>
                   <p>{item.content}</p>{" "}
                 </div>
                 {uid === item.uid && (
