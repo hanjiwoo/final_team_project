@@ -14,8 +14,11 @@ export default function PostCard({ post }: { post: Post }) {
   // console.log(post.photos?.[0], " 이걸 찍어봅세");
   return (
     <>
-      <div className="cursor-pointer" onClick={() => moveToDetail(post.id)}>
-        <div className="flex h-[132px] flex-col items-start gap-[8px] self-stretch">
+      <div
+        className="cursor-pointer hover:bg-[#f1f1f1] rounded-[8px]"
+        onClick={() => moveToDetail(post.id)}
+      >
+        <div className="flex h-[132px] flex-col items-start gap-[8px] self-stretch ">
           {/* 카테고리 */}
           <div className=" flex h-[24px] px-[8px] py-[4px] justify-center items-center gap-[4px] shrink-0 rounded-[100px] bg-[#F1F1F1] text-[#212121]">
             <h2>{post.category}</h2>

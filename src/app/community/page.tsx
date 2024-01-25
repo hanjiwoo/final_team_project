@@ -19,7 +19,7 @@ import { getHearts } from "@/components/community/Fns";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 
-export default function ListPage({ post }: { post: Post }) {
+export default function ListPage() {
   const [newPost, setNewPost] = useState<Post>({
     id: "",
     uid: "",
@@ -108,10 +108,7 @@ export default function ListPage({ post }: { post: Post }) {
           </div>
 
           {/* 인기순위 컨테이너 */}
-          <div
-            className="flex justify-center items-center gap-[24px] self-stretch cursor-pointer"
-            onClick={() => moveToDetail(post.id)}
-          >
+          <div className="flex justify-center items-center gap-[24px] self-stretch cursor-pointer ">
             {top3Shops?.map((post) => {
               return (
                 <React.Fragment key={nanoid()}>
@@ -130,7 +127,7 @@ export default function ListPage({ post }: { post: Post }) {
               </h2>
 
               <div className="flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[4px]">
-                <section className="flex gap-[16px]">
+                <section className="flex gap-[16px] ">
                   <CategoryBtn
                     text="전체모음"
                     type=""
@@ -171,11 +168,11 @@ export default function ListPage({ post }: { post: Post }) {
             <div className="flex w-[680px] flex-col items-end gap-[40px] self-stretch">
               <div className="w-full flex justify-end ">
                 <Link href="community/write">
-                  <button className=" flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[8px] rounded-[8px]   text-[white] bg-[#FF8145]">
+                  <button className=" flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[8px] rounded-[8px]   text-[white] bg-[#FF8145] hover:bg-[#E5743E] ">
                     <div className="w-[20px] h-[20px]">
                       <Image src={writeImage} alt="write"></Image>
                     </div>
-                    <p className="text-[14px] leading-[20px] font-medium">
+                    <p className="text-[14px] leading-[20px] font-medium ">
                       작성하기
                     </p>
                   </button>
