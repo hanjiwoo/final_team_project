@@ -119,22 +119,25 @@ export default function CuteHeart({
         >
           {filterdheart ? (
             <Image
-              className="w-[16px] h-[16px]"
+              className="w-[20px] h-[20px]"
               id="이미지"
               src={HeartFull}
               alt="빨간따봉"
             ></Image>
           ) : (
             <Image
-              className="w-[16px] h-[16px]"
+              className="w-[20px] h-[20px]"
               id="이미지"
               src={HeartEmpty}
               alt="빈따봉"
             ></Image>
           )}
         </div>
-        <div className="text-red-500 text-sm text-center">
-          {filteredhearts?.length}
+        <div className="text-center text-[14px] font-medium leading-[20px]">
+          <p>공감해요</p>
+        </div>
+        <div className="text-[14px] font-medium leading-[20px]">
+          <p>{filteredhearts?.length}</p>
         </div>
       </div>
     </>

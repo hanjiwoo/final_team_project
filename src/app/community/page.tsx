@@ -16,8 +16,10 @@ import { getDownloadURL, ref } from "firebase/storage";
 import PostCard from "@/components/mypage/PostCard";
 import BestPost from "@/components/community/BestPost";
 import { getHearts } from "@/components/community/Fns";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
 
-export default function ListPage() {
+export default function ListPage({ post }: { post: Post }) {
   const [newPost, setNewPost] = useState<Post>({
     id: "",
     uid: "",
@@ -82,8 +84,12 @@ export default function ListPage() {
       setTop3Shops(foundTop3);
     }
   }, [hearts]);
+  const moveToDetail = (id: string) => {
+    router.push(`/community/detail/${id}`);
+  };
 
   if (isLoading) return <div>로딩중</div>;
+
   return (
     <>
       {/* 전체 컨테이너 */}
@@ -102,7 +108,10 @@ export default function ListPage() {
           </div>
 
           {/* 인기순위 컨테이너 */}
-          <div className="flex justify-center items-center gap-[24px] self-stretch">
+          <div
+            className="flex justify-center items-center gap-[24px] self-stretch cursor-pointer"
+            onClick={() => moveToDetail(post.id)}
+          >
             {top3Shops?.map((post) => {
               return (
                 <React.Fragment key={nanoid()}>

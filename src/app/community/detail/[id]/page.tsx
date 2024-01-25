@@ -75,13 +75,22 @@ export default function CommunityDetail() {
 
             {/* 프로필 컨테이너 */}
             <div className="flex items-center gap-[12px] self-stretch">
-              <div className="flex w-[40px] h-[40px] p-[8px] justify-center items-center rounded-[30px] bg-[#F1F1F1]">
-                <Image
-                  className="w-[23px] h-[23px] shrink-0"
-                  src={userIcon}
-                  alt="profile"
-                />
+              <div className="flex w-[40px] h-[40px]  justify-center items-center rounded-[30px] bg-[#F1F1F1]">
+                {foundPost?.profile ? (
+                  <img
+                    src={foundPost?.profile}
+                    className="w-full h-full rounded-full"
+                    alt="사람 이미지"
+                  />
+                ) : (
+                  <Image
+                    className="w-[23px] h-[23px] shrink-0"
+                    src={userIcon}
+                    alt="profile"
+                  />
+                )}
               </div>
+
               <p>{foundPost?.nickname}</p>
               {uid === foundPost?.uid && (
                 <PostDeleteUpdateBtn foundPost={foundPost} />
@@ -110,7 +119,7 @@ export default function CommunityDetail() {
             </div>
 
             {/* 공감해요,댓글  컨테이너 */}
-            <div className="flex items-center gap-[16px]">
+            {/* <div className="flex items-center gap-[16px]">
               <div className="flex items-center gap-[6px]">
                 <CuteHeart type="normal" postId={foundPost?.id} />
                 <div className="text-center text-[14px] font-medium leading-[20px]">
@@ -128,14 +137,13 @@ export default function CommunityDetail() {
                 <div className="text-[14px] text-[#999] font-medium leading-[20px] text-center">
                   <p>00</p>
                 </div>
-              </div>
-            </div>
+              </div> */}
+
+            <hr className="w-full"></hr>
+
+            {/* 댓글작성,버튼 컨테이너*/}
+            {foundPost && <Daetgle post={foundPost} />}
           </div>
-
-          <hr className="w-full"></hr>
-
-          {/* 댓글작성,버튼 컨테이너*/}
-          <Daetgle />
         </div>
       </div>
     </>

@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import userIcon from "../../app/assets/images/icon/profile.png";
+import message from "../../app/assets/images/icon/message.png";
+
+import userIcon from "../../app/assets/images/icon/userIcon.png";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   addDoc,
@@ -16,7 +18,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import { Daetgle, Post } from "@/app/assets/types/types";
 import { nanoid } from "nanoid";
-export default function Daetgle() {
+import CuteHeart from "./CuteHeart";
+export default function Daetgle({ post }: { post: Post }) {
   const { uid, photoURL, displayName, isLogin } = useSelector(
     (state: RootState) => state.login
   );
@@ -81,6 +84,14 @@ export default function Daetgle() {
   if (isLoading) return <>로딩중</>;
   return (
     <>
+      {" "}
+      <div className="flex justify-start  items-center gap-[6px]">
+        <CuteHeart type="normal" postId={post?.id} />
+        <Image src={message} className="w-[20px] h-[20px]" alt="댓글" />
+        <div className="text-[#999] text-[14px] font-medium leading-[20px]">
+          <p>댓글{daetgles?.length}</p>
+        </div>
+      </div>
       <div className="flex h-[48px] justify-center items-center gap-[4px]">
         <input
           value={daetgle}
@@ -106,11 +117,19 @@ export default function Daetgle() {
                 <div className="flex gap-[16px]" key={nanoid()}>
                   {" "}
                   <div className="flex items-center gap-[8px]">
-                    <img
-                      className="w-[32px] h-[32px] justify-center items-center"
-                      src={item.profile}
-                      alt="profile"
-                    />
+                    {item.profile ? (
+                      <img
+                        className="w-[32px] h-[32px] justify-center items-center"
+                        src={item.profile}
+                        alt="profile"
+                      />
+                    ) : (
+                      <Image
+                        className="w-[28px] h-[28px] rounded-full"
+                        src={userIcon}
+                        alt="빈유저"
+                      />
+                    )}
                     <div className="text-[12px] text-center font-medium leading-[18px] text-[#999]">
                       <p>{item.nickName}</p>
                     </div>
@@ -120,7 +139,7 @@ export default function Daetgle() {
                 {uid === item.uid && (
                   <button
                     onClick={() => deleteHandler(item.id)}
-                    className="bg-black text-white"
+                    className="w-[50px] h-[40px] border-2 rounded-[10px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
                   >
                     삭제
                   </button>
