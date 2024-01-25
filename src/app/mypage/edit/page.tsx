@@ -59,6 +59,7 @@ export default function Page() {
       }
 
       // console.log(downloadURL, "요거좀 궁금하다.");
+      // console.log(downloadURL, "요거좀 궁금하다.");
 
       router.push("/mypage");
     }
@@ -84,15 +85,20 @@ export default function Page() {
         <div className="flex flex-col justify-center items-center w-[350px] h-[545px]">
           <div>
             <label>
-              <div className="w-[100px] h-[100px] overflow-hidden rounded-full">
-                {/* <Image
-									src={ImageURL ? ImageURL : photoURL}
-									alt="profile"
-									width={100}
-									height={100}
-									style={{ width: "100px" }}
-									className="w-[100px] h-[100px]"
-								/> */}
+              <div className="w-[100px] h-[100px] overflow-hidden rounded-full cursor-pointer">
+                {isLogin ? (
+                  <img
+                    src={photoURL}
+                    className="w-full h-full rounded-full"
+                    alt="흐음"
+                  />
+                ) : (
+                  <Image
+                    src={profileImage}
+                    alt="more"
+                    className="w-full h-full"
+                  />
+                )}
               </div>
               <Image
                 src={cameraImage}
