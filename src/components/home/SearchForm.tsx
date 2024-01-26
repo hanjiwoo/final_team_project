@@ -11,6 +11,7 @@ import { RootState } from "@/redux/config/configStore";
 import { getAllShops } from "@/redux/modules/allShops";
 import Image from "next/image";
 import down from "../../app/assets/images/icon/down.png";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function SearchForm() {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ export default function SearchForm() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     if (!sido || !sigoon || !upzong) {
-      alert("검색 제대로하시라구요 예???!? ");
+      toast.error("시도 시군 업종을 선택해주세요");
       return setForm({ sido: "", sigoon: "", upzong: "" });
     }
     let filteredShops = shops?.filter((shop) => {
@@ -72,9 +73,9 @@ export default function SearchForm() {
         );
       }
     });
-    if (!filteredShops[0]) return alert("검색결과가 없어요");
+    if (!filteredShops[0]) return toast.warning("검색결과가 없어요");
     dispatch(getShops(filteredShops));
-    alert("검색완료");
+    toast.success("검색완료");
     // setForm({ sido: "", sigoon: "", upzong: "" });
   };
 
@@ -84,7 +85,6 @@ export default function SearchForm() {
     <div className="w-full max-md:px-[20px] md:w-[712px] max-md:my-[24px] gap-[12px] md:flex lg:w-[712px] xl:w-[1080px] md:my-[40px]">
       <div className="w-full h-[48px] flex gap-4 rounded-xl">
         {/* {shops[0].업종} */}
-
         <select
           name="sido"
           onChange={onchangeHandler}

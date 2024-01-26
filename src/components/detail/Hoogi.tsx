@@ -9,6 +9,7 @@ import pencilIcon from "../../app/assets/images/icon/write_icon.png";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import ShopCard2 from "../map/ShopCard2";
+import { toast } from "react-toastify";
 type assessment = {
   title: string;
   type: string;
@@ -114,7 +115,7 @@ export default function Hoogi({
       // range === "0" ||
       // face === "이모티콘"
     )
-      return alert("후기 선택을 전부 해주세요");
+      return toast.error("후기 선택을 전부 해주세요");
 
     mutateToAdd({ uid, displayName, shopId, 맛, 가격, 위생, 서비스 });
     // setFace("");
@@ -125,7 +126,7 @@ export default function Hoogi({
       위생: "",
     }); */
     // setRange("0");
-    alert("제출 완료");
+    toast.success("제출 완료");
     setModal(false);
 
     // console.log(맛, 가격, 위생, 서비스, range, face);
