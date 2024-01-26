@@ -46,9 +46,9 @@ export default function CommunityDetail() {
   return (
     <>
       {/* 커뮤니티 디테일 전체 컨테이너 */}
-      <div className="flex flex-col items-center gap-[60px] self-stretch px-[620px] py-[60px] ">
-        <div className="flex flex-col items-start gap-[32px] self-stretch">
-          <div className="flex flex-col items-start gap-[24px] self-stretch">
+      <div className="flex flex-col w-full items-center gap-[60px] self-stretch ">
+        <div className="flex flex-col gap-[32px] w-[680px] ">
+          <div className="flex flex-col items-start gap-[24px] self-stretch]">
             <div className="flex flex-col items-start gap-[12px] self-stretch">
               <div className="flex h-[24px] px-[8px] py-[4px] justify-center items-center gap-[4px] text-[#212121] bg-[#F1F1F1] rounded-[100px]">
                 <h1>{foundPost?.category}</h1>
@@ -90,6 +90,7 @@ export default function CommunityDetail() {
                   />
                 )}
               </div>
+
               <p>{foundPost?.nickname}</p>
               {uid === foundPost?.uid && (
                 <PostDeleteUpdateBtn foundPost={foundPost} />
@@ -102,14 +103,15 @@ export default function CommunityDetail() {
               <div className="text-[14px] text-[#5C5C5C] font-medium leading-[20px]  ">
                 <p>{foundPost?.content}</p>
               </div>
-              <div className="flex gap-[10px]  h-[320px] self-stretch rounded-[8px]  ">
+
+              <div className="flex flex-col justify-center items-center gap-[10px] w-[680px]  self-stretch rounded-[8px]  ">
                 {foundPost?.photos?.map((photo) => {
                   return (
                     <div
                       key={nanoid()}
-                      className="border-2 w-[100px] h-[100px] "
+                      className="border-2 w-[680px] h-[320px] "
                     >
-                      <img src={photo} />
+                      <img className="w-[680px] h-[320px] " src={photo} />
                     </div>
                   );
                 })}
@@ -135,15 +137,14 @@ export default function CommunityDetail() {
                 <div className="text-[14px] text-[#999] font-medium leading-[20px] text-center">
                   <p>00</p>
                 </div>
-              </div>
-            </div> */}
+              </div> */}
+
+            <hr className="w-full"></hr>
+
+            {/* 댓글작성,버튼 컨테이너*/}
+            {foundPost && <Daetgle post={foundPost} />}
           </div>
         </div>
-
-        <hr className="w-full"></hr>
-
-        {/* 댓글작성,버튼 컨테이너*/}
-        {foundPost && <Daetgle post={foundPost} />}
       </div>
     </>
   );

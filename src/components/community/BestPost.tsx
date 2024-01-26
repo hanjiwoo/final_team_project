@@ -15,7 +15,7 @@ export default function BestPost({ post }: { post: Post }) {
       onClick={moveToDetail}
       className="flex flex-col items-start gap-[20px]"
     >
-      <div className="flex flex-col items-start gap-[8px] self-stretch">
+      <div className="flex flex-col items-start gap-[8px] self-stretch hover:bg-[#f1f1f1]">
         <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px] border-2">
           <img
             src={post.photos?.[0]}
