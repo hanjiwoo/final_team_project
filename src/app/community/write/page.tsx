@@ -14,6 +14,7 @@ import { url } from "inspector";
 import { nanoid } from "nanoid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import imgRegister from "../../../app/assets/images/imgRegister.png";
+import { toast } from "react-toastify";
 
 export default function WritePage() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -70,12 +71,13 @@ export default function WritePage() {
   };
 
   const handleAddPost = async () => {
-    if (!isLogin) return alert("로그인하셔야 게시글을 남기실수 있습니다.");
+    if (!isLogin)
+      return toast.warning("로그인하셔야 게시글을 남기실수 있습니다.");
     if (!newPost.content || !newPost.title || !newPost.category)
-      return alert("카테고리 타이틀 컨텐츠를 작성해 주세요");
+      return toast.error("카테고리 타이틀 컨텐츠를 작성해 주세요");
     const confirmResult = window.confirm("게시글 작성을 하시겠습니까?");
     if (confirmResult) {
-      alert("작성이 완료되었습니다.");
+      toast.success("작성이 완료되었습니다.");
 
       route.push("/community");
       mutateToAdd();
@@ -83,18 +85,19 @@ export default function WritePage() {
   };
 
   const handleCancel = () => {
-    const confirmResult = window.confirm("작성을 취소하시겠습니까?");
-    if (confirmResult) {
-      // 작성을 취소할 때 수행할 동작 추가
-      // 예: 취소 후 어떤 페이지로 이동하는 등의 작업
-    }
+    route.push("/community");
   };
 
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(e.target.files, "이거나 보자");
     if (e.target.files) {
       if (e.target.files?.length > 5) {
-        return alert("5개 까지 가능합니다");
+        return toast.error("5개 까지 가능합니다");
+      }
+      if (urlFiles) {
+        if (urlFiles.length + e.target.files.length > 5) {
+          return toast.error("5개 까지 가능합니다.");
+        }
       }
       e.target.files[0];
       let arr = [];
@@ -103,7 +106,7 @@ export default function WritePage() {
         arr.push(URL.createObjectURL(e.target.files[i]));
         arr2.push(e.target.files[i]);
       }
-      // console.log(arr, "배열에 잘들어감?");
+
       if (urlFiles) {
         setUrlFiles([...urlFiles, ...arr]);
       } else {
@@ -188,12 +191,12 @@ export default function WritePage() {
             <div className="flex flex-col items-end gap-[32px] self-stretch">
               <section className="flex items-center gap-[40px] self-stretch">
                 <h2>카테고리</h2>
-                <CategoryBtn
+                {/* <CategoryBtn
                   text="전체모음"
                   type=""
                   setNewPost={setNewPost}
                   newPost={newPost}
-                />
+                /> */}
                 <CategoryBtn
                   text="일상이야기"
                   type=""

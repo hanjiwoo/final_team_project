@@ -113,8 +113,11 @@ export default function Daetgle({ post }: { post: Post }) {
         <div className="flex flex-col  self-stretch ">
           {daetgles?.map((item) => {
             return (
-              <div className="flex items-center gap-[16px] justify-between">
-                <div className="flex gap-[16px]" key={nanoid()}>
+              <div
+                key={nanoid()}
+                className="flex items-center gap-[16px] justify-between"
+              >
+                <div className="flex gap-[16px]">
                   {" "}
                   <div className="flex items-center gap-[8px]">
                     {item.profile ? (
