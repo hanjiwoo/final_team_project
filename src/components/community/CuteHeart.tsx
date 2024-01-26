@@ -129,7 +129,7 @@ export default function CuteHeart({
           )}
         </div>
         <div>
-          <p className="text-[14px] text-[#FF8145] leading-[20px]">
+          <p className="text-[16px] text-[#FF8145]">
             공감해요 {filteredhearts?.length}
           </p>
         </div>

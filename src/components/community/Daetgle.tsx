@@ -84,13 +84,19 @@ export default function Daetgle({ post }: { post: Post }) {
   if (isLoading) return <>로딩중</>;
   return (
     <>
-      <div className="flex justify-start w-full items-center gap-[6px]">
+      <div className="flex justify-start w-full items-center mb-[32px]">
         <CuteHeart type="normal" postId={post?.id} />
-        <Image src={message} className="w-[20px] h-[20px]" alt="댓글" />
-        <div className="text-[#999] text-[14px] font-medium leading-[20px]">
-          <p>댓글{daetgles?.length}</p>
+        <Image
+          src={message}
+          className="w-[18px] h-[18px] ml-[16px] mr-[6px]"
+          alt="댓글"
+        />
+        <div className="text-[#999] justify-start items-center gap-[4px] flex">
+          <div>댓글</div>
+          <div>{daetgles?.length}</div>
         </div>
       </div>
+      <hr className="w-full"></hr>
       <div className="flex w-full h-[48px] justify-center items-center gap-[12px] my-[32px]">
         <input
           value={daetgle}
@@ -101,43 +107,46 @@ export default function Daetgle({ post }: { post: Post }) {
 
         <button
           onClick={daetgleSubmitHandler}
-          className=" text-[14px] leading-[20px]  text-[#FFFFFF] py-[8px] px-[16px] rounded-[8px] bg-[#FF8145] hover:bg-[#E5743E] h-[48px] w-[120px]"
+          className=" text-[14px] leading-[20px] text-[#FFFFFF] py-[8px] px-[16px] rounded-[8px] bg-[#FF8145] hover:bg-[#E5743E] h-[48px] w-[120px]"
         >
           댓글남기기
         </button>
       </div>
+
       {/* 대댓글 컨테이너 */}
       <div className="flex w-full justify-center items-center gap-[24px]">
         <div className="flex flex-col w-full">
           {daetgles?.map((item) => {
             return (
-              <div className="flex items-center gap-[16px] justify-between w-full">
+              <div className="flex items-center justify-between w-full my-[12px]">
                 <div className="flex gap-[16px] items-center" key={nanoid()}>
                   <div className="flex items-center gap-[8px]">
                     {item.profile ? (
                       <img
-                        className="w-[32px] h-[32px] justify-center items-center"
+                        className="w-[32px] h-[32px] rounded-full"
                         src={item.profile}
                         alt="profile"
                       />
                     ) : (
                       <Image
-                        className="w-[28px] h-[28px] rounded-full"
+                        className="w-[32px] h-[32px] rounded-full"
                         src={userIcon}
                         alt="빈유저"
                       />
                     )}
-                    <div className="text-[12px] text-center font-medium leading-[18px] text-[#999]">
+                    <div className="text-[12px] text-center text-[#999]">
                       <p>{item.nickName}</p>
                     </div>
                   </div>
-                  <p>{item.content}</p>{" "}
+                  <div className="text-[14px] text-center text-[black]">
+                    <p>{item.content}</p>
+                  </div>
                 </div>
                 <div>
                   {uid === item.uid && (
                     <button
                       onClick={() => deleteHandler(item.id)}
-                      className="text-[16px] text-[#999999] hover:text-[#E5743E]"
+                      className="text-[14px] text-[#999999] hover:text-[#E5743E]"
                     >
                       삭제
                     </button>
