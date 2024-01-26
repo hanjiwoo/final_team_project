@@ -178,7 +178,7 @@ export default function ListPage() {
 						{/* 작성하기 버튼 */}
 
 						{/* 게시글 전체 컨테이너 */}
-						<div className="flex flex-col justify-center items-center gap-[32px] w-full">
+						<div className="flex flex-col justify-center items-center w-full">
 							{filteredPosts?.map((post) => {
 								return (
 									<React.Fragment key={nanoid()}>
