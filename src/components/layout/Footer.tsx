@@ -3,7 +3,7 @@ import "./layout.css";
 
 export default function Footer() {
 	return (
-		<div className="bg-[#fff] w-full flex justify-center items-center border-t-[1px] border-[##E1E1E1] py-[40px] px-[20px]">
+		<div className="bg-[#fff] w-full h-[224px] flex justify-center items-center border-t-[1px] border-[##E1E1E1] py-[40px] px-[20px]">
 			<div className="md:flex md:justify-between w-[1080px] items-center">
 				<section className="flex flex-col gap-[24px]">
 					<h2 className="text-[#7a7a7a] text-[16px] leading-[24px] font-semibold">
