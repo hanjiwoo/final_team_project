@@ -84,41 +84,38 @@ export default function Daetgle({ post }: { post: Post }) {
   if (isLoading) return <>로딩중</>;
   return (
     <>
-      {" "}
-      <div className="flex justify-start  items-center gap-[6px]">
+      <div className="flex justify-start w-full items-center gap-[6px]">
         <CuteHeart type="normal" postId={post?.id} />
         <Image src={message} className="w-[20px] h-[20px]" alt="댓글" />
         <div className="text-[#999] text-[14px] font-medium leading-[20px]">
           <p>댓글{daetgles?.length}</p>
         </div>
       </div>
-      <div className="flex h-[48px] justify-center items-center gap-[4px]">
+      <div className="flex w-full h-[48px] justify-center items-center gap-[12px] my-[32px]">
         <input
           value={daetgle}
           onChange={(e) => onChangeHandler(e)}
-          className="border-[1px] border-gray-[400] w-[543px] h-[48px] rounded-[8px] outline-none"
+          className="border-[1px] border-gray-[400] w-full h-[48px] rounded-[8px] outline-none px-[16px]"
           placeholder="댓글을 작성해주세요."
         />
-        <div className="flex justify-center items-center gap-[4px] w-[93px] h-[48px]  rounded-[8px] bg-[#FF8145] hover:bg-[#E5743E] ">
-          <button
-            onClick={daetgleSubmitHandler}
-            className=" text-[14px] font-medium leading-[20px] w-[61px] h-[20px]  text-[#FFFFFF] "
-          >
-            댓글남기기
-          </button>
-        </div>
+
+        <button
+          onClick={daetgleSubmitHandler}
+          className=" text-[14px] leading-[20px]  text-[#FFFFFF] py-[8px] px-[16px] rounded-[8px] bg-[#FF8145] hover:bg-[#E5743E] h-[48px] w-[120px]"
+        >
+          댓글남기기
+        </button>
       </div>
       {/* 대댓글 컨테이너 */}
-      <div className="flex flex-col items-start gap-[24px] self-stretch ">
-        <div className="flex flex-col  self-stretch ">
+      <div className="flex w-full justify-center items-center gap-[24px]">
+        <div className="flex flex-col w-full">
           {daetgles?.map((item) => {
             return (
               <div
                 key={nanoid()}
-                className="flex items-center gap-[16px] justify-between"
+                className="flex items-center gap-[16px] justify-between w-full"
               >
-                <div className="flex gap-[16px]">
-                  {" "}
+                <div className="flex gap-[16px] items-center">
                   <div className="flex items-center gap-[8px]">
                     {item.profile ? (
                       <img
@@ -139,14 +136,16 @@ export default function Daetgle({ post }: { post: Post }) {
                   </div>
                   <p>{item.content}</p>{" "}
                 </div>
-                {uid === item.uid && (
-                  <button
-                    onClick={() => deleteHandler(item.id)}
-                    className="w-[50px] h-[40px] border-2 rounded-[10px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-                  >
-                    삭제
-                  </button>
-                )}
+                <div>
+                  {uid === item.uid && (
+                    <button
+                      onClick={() => deleteHandler(item.id)}
+                      className="text-[16px] text-[#999999] hover:text-[#E5743E]"
+                    >
+                      삭제
+                    </button>
+                  )}
+                </div>
               </div>
             );
           })}
