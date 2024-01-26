@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import message from "../../app/assets/images/icon/message.png";
-
 import userIcon from "../../app/assets/images/icon/userIcon.png";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
