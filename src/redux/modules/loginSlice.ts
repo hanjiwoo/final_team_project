@@ -4,7 +4,7 @@ const initialState = {
   isLogin: false,
   displayName: "",
   uid: "",
-  photoURL: profile,
+  photoURL: "",
   email: "",
 };
 
@@ -31,7 +31,7 @@ const loginSlice = createSlice({
       state.isLogin = false;
       state.displayName = "";
       state.uid = "";
-      state.photoURL = profile;
+      state.photoURL = "";
       state.email = "";
     },
 

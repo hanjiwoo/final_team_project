@@ -3,34 +3,44 @@ import { Post } from "@/app/assets/types/types";
 import { useRouter } from "next/navigation";
 import React from "react";
 import CuteHeart from "./CuteHeart";
+import Image from "next/image";
+import fakelogo from "../../app/assets/images/fakeLogo.jpg";
 
 export default function BestPost({ post }: { post: Post }) {
-  const router = useRouter();
-  const moveToDetail = () => {
-    router.push(`/community/detail/${post.id}`);
-  };
+	const router = useRouter();
+	const moveToDetail = () => {
+		router.push(`/community/detail/${post.id}`);
+	};
 
-  return (
-    <div
-      onClick={moveToDetail}
-      className="flex flex-col items-start gap-[20px]"
-    >
-      <div className="flex flex-col items-start gap-[8px] self-stretch">
-        <div className="w-[344px] h-[252px] bg-gray-100 rounded-[12px]">
-          <img
-            src={post.photos?.[0]}
-            alt="포스트 사진"
-            className="w-full h-full"
-          />
-        </div>
-        <p className="flex h-[24px] py-[4px] px-[8px] justify-center items-center gap-[4px] rounded-[100px] text-[#212121] bg-gray-100">
-          {post.category}
-        </p>
-        <p className="text-[16px] font-semibold leading-[24px] ">
-          {post.title}
-        </p>
-        <CuteHeart type="small" postId={post.id} />
-      </div>
-    </div>
-  );
+	return (
+		<div onClick={moveToDetail} className="w-full">
+			<div className="flex flex-col gap-[8px]">
+				<div className="w-[344px] h-[252px] object-cover bg-cover flex justify-center items-center">
+					{post.photos?.[0] ? (
+						<img
+							src={post.photos?.[0]}
+							alt="bestImage"
+							className="w-full h-full object-cover bg-cover rounded-[12px]"
+						/>
+					) : (
+						<Image
+							className="w-full h-full object-cover bg-cover rounded-[12px]"
+							src={fakelogo}
+							alt="profile"
+						/>
+					)}
+				</div>
+				<div className="flex flex-col gap-[8px]">
+					<p className="text-[#212121] leading-[14px] py-[4px] px-[8px] bg-[#F1F1F1] rounded-[100px] text-[10px] flex justify-center items-center w-[60px]">
+						{post.category}
+					</p>
+
+					<p className="text-[16px] font-semibold leading-[24px] text-[#212121]">
+						{post.title}
+					</p>
+					<CuteHeart type="small" postId={post.id} />
+				</div>
+			</div>
+		</div>
+	);
 }

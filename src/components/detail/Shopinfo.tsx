@@ -96,7 +96,7 @@ export default function Shopinfo() {
     //   </div>
     <div className="w-full flex-col items-center gap-8 mt-[60px]">
       <div className="self-stretch justify-between items-center inline-flex mb-[32px] w-full cursor-pointer">
-        <div className="text-center text-neutral-800 text-3xl font-semibold font-['Pretendard'] leading-[32px]">
+        <div className="text-center text-neutral-800 text-3xl font-semibold leading-[32px]">
           {shop.업소명}
         </div>
         {/* <Image
@@ -114,11 +114,11 @@ export default function Shopinfo() {
               src={spoon}
               alt="숟가락"
             ></Image>
-            <div className="text-center text-neutral-800 text-base font-semibold font-['Pretendard'] leading-normal">
+            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">
               업종
             </div>
           </div>
-          <div className="text-center text-zinc-600 text-base font-medium font-['Pretendard'] leading-normal">
+          <div className="text-center text-zinc-600 text-base font-medium leading-normal">
             {shop.업종}
           </div>
         </div>
@@ -129,11 +129,11 @@ export default function Shopinfo() {
               src={place}
               alt="위치"
             ></Image>
-            <div className="text-center text-neutral-800 text-base font-semibold font-['Pretendard'] leading-normal">
+            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">
               위치
             </div>
           </div>
-          <div className="w-[287px] self-stretch text-zinc-600 text-base font-medium font-['Pretendard'] leading-normal">
+          <div className="w-[400px] self-stretch text-zinc-600 text-base font-medium leading-normal">
             {shop.주소}
           </div>
         </div>
@@ -144,11 +144,11 @@ export default function Shopinfo() {
               src={phone}
               alt="번호"
             ></Image>
-            <div className="text-center text-neutral-800 text-base font-semibold font-['Pretendard'] leading-normal">
+            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">
               전화번호
             </div>
           </div>
-          <div className="w-[263px] self-stretch text-zinc-600 text-base font-medium font-['Pretendard'] leading-normal">
+          <div className="w-[263px] self-stretch text-zinc-600 text-base font-medium leading-normal">
             {shop.연락처}
           </div>
         </div>
@@ -159,24 +159,24 @@ export default function Shopinfo() {
               src={menu}
               alt="메뉴"
             ></Image>
-            <div className="text-center text-neutral-800 text-base font-semibold font-['Pretendard'] leading-normal">
+            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">
               주요메뉴
             </div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-2 inline-flex">
             <div className="self-stretch justify-start items-start gap-2 inline-flex">
-              <div className="text-zinc-600 text-base font-medium font-['Pretendard'] leading-normal">
+              <div className="text-zinc-600 text-base font-medium leading-normal">
                 {shop.메뉴1}
               </div>
-              <div className="text-zinc-600 text-base font-medium font-['Pretendard'] leading-normal">
+              <div className="text-zinc-600 text-base font-medium leading-normal">
                 {shop.가격1}
               </div>
             </div>
             <div className="self-stretch justify-start items-start gap-2 inline-flex">
-              <div className="text-zinc-600 text-base font-medium font-['Pretendard'] leading-normal">
+              <div className="text-zinc-600 text-base font-medium leading-normal">
                 {shop.메뉴2}
               </div>
-              <div className="text-zinc-600 text-base font-medium font-['Pretendard'] leading-normal">
+              <div className="text-zinc-600 text-base font-medium leading-normal">
                 {shop.가격2}
               </div>
             </div>
@@ -189,11 +189,11 @@ export default function Shopinfo() {
               src={inquiry}
               alt="문의하기"
             ></Image>
-            <div className="text-center text-neutral-800 text-base font-semibold font-['Pretendard'] leading-normal">
+            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">
               문의하기
             </div>
           </div>
-          <div className="text-orange-400 text-base font-semibold font-['Pretendard'] leading-normal">
+          <div className="text-orange-400 text-base font-semibold leading-normal">
             폐업신고 및 가격변동
           </div>
         </div>
@@ -230,12 +230,12 @@ export default function Shopinfo() {
 //   <div className={`flex gap-${width} items-start`}>
 //     <div className="h-6 justify-start items-center gap-2 flex">
 //       <Image {...icon} alt={label} />
-//       <div className="ml-2 text-neutral-800 text-base font-semibold font-['Pretendard'] leading-normal">
+//       <div className="ml-2 text-neutral-800 text-base font-semibold leading-normal">
 //         {label}
 //       </div>
 //     </div>
 //     <div
-//       className={`self-stretch text-zinc-600 text-base font-medium font-['Pretendard'] leading-normal`}
+//       className={`self-stretch text-zinc-600 text-base font-medium leading-normal`}
 //     >
 //       {text}
 //     </div>
