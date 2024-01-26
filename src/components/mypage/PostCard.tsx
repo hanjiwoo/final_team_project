@@ -102,7 +102,9 @@ export default function PostCard({ post }: { post: Post }) {
 					</div>
 				</div>
 			</div>
-			<hr className="my-[32px]"></hr>
+			<div className="flex justify-center w-full">
+				<hr className="my-[32px] w-[680px]" />
+			</div>
 		</div>
 	);
 }
