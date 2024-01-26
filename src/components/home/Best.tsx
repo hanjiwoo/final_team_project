@@ -66,7 +66,7 @@ export default function Best() {
     if (foundTop3 !== undefined) {
       setTop3Shops(foundTop3);
     }
-  }, [thumbs]);
+  }, [thumbs, shops]);
   return (
     <div className="container px-5 py-40 mx-auto">
       {/* <div style={{ pointerEvents: "none", width: "400px", height: "300px" }}>
