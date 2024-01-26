@@ -3,6 +3,7 @@ import GoodPrice from "@/components/home/GoodPrice";
 import MainBanner from "@/components/home/MainBanner";
 import SearchForm from "@/components/home/SearchForm";
 import ShopList from "@/components/home/ShopList";
+import UpButton from "@/components/home/UpButton";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <ShopList />
       <Best />
       <GoodPrice />
+      <UpButton />
     </div>
   );
 }
