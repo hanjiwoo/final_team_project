@@ -9,6 +9,7 @@ import { nanoid } from "nanoid";
 import Image from "next/image";
 import place from "../../app/assets/images/icon/place.png";
 import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
+import { toast } from "react-toastify";
 export default function ShopCard({
   shop,
   shops,
@@ -31,7 +32,7 @@ export default function ShopCard({
     // const detailshop = shops.find((shop: typeOfShop) => {
     //   return shop.연락처 === phoneNum;
     // });
-    if (!shop?.연락처) return alert("상세페이지가 없는 매장입니다.");
+    if (!shop?.연락처) return toast.warning("상세페이지가 없는 매장입니다.");
     dispatch(getShop(shop));
     router.push(`/detail/${shop.연락처}`);
   };

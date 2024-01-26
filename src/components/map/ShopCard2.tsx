@@ -11,6 +11,7 @@ import place from "../../app/assets/images/icon/place.png";
 import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
 import { getHoogis } from "../detail/queryFns";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 export default function ShopCard2({
   shop,
   shops,
@@ -33,7 +34,7 @@ export default function ShopCard2({
     // const detailshop = shops.find((shop: typeOfShop) => {
     //   return shop.연락처 === phoneNum;
     // });
-    if (!shop?.연락처) return alert("상세페이지가 없는 매장입니다.");
+    if (!shop?.연락처) return toast.warning("상세페이지가 없는 매장입니다.");
     dispatch(getShop(shop));
     router.push(`/detail/${shop.연락처}`);
   };
