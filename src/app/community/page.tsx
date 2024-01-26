@@ -108,7 +108,7 @@ export default function ListPage() {
           </div>
 
           {/* 인기순위 컨테이너 */}
-          <div className="flex justify-center items-center gap-[24px] self-stretch cursor-pointer ">
+          <div className="flex justify-center items-center gap-[24px] self-stretch cursor-pointer">
             {top3Shops?.map((post) => {
               return (
                 <React.Fragment key={nanoid()}>
