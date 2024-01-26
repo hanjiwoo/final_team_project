@@ -119,14 +119,14 @@ export default function CuteHeart({
         >
           {filterdheart ? (
             <Image
-              className="w-[16px] h-[16px]"
+              className="w-[20px] h-[20px]"
               id="이미지"
               src={HeartFull}
               alt="빨간따봉"
             ></Image>
           ) : (
             <Image
-              className="w-[16px] h-[16px]"
+              className="w-[20px] h-[20px]"
               id="이미지"
               src={HeartEmpty}
               alt="빈따봉"
