@@ -8,46 +8,46 @@ import UpdateModal from "./UpdateModal";
 import { useRouter } from "next/navigation";
 
 export default function PostDeleteUpdateBtn({
-  foundPost,
+	foundPost,
 }: {
-  foundPost: Post | undefined;
+	foundPost: Post | undefined;
 }) {
-  const [toggleModal, setToggleModal] = useState(false);
-  const route = useRouter();
-  const deletePost = async () => {
-    const confirmedInfo = window.confirm("정말 삭제하시겠습까");
-    if (confirmedInfo) {
-      route.push("/community");
-      await deleteDoc(doc(db, "posts", `${foundPost?.id}`));
-    }
-  };
+	const [toggleModal, setToggleModal] = useState(false);
+	const route = useRouter();
+	const deletePost = async () => {
+		const confirmedInfo = window.confirm("정말 삭제하시겠습까");
+		if (confirmedInfo) {
+			route.push("/community");
+			await deleteDoc(doc(db, "posts", `${foundPost?.id}`));
+		}
+	};
 
-  const queryClient = useQueryClient();
-  const { mutate: mutateToDelete } = useMutation({
-    mutationFn: deletePost,
+	const queryClient = useQueryClient();
+	const { mutate: mutateToDelete } = useMutation({
+		mutationFn: deletePost,
 
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
-  });
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({ queryKey: ["posts"] });
+		},
+	});
 
-  return (
-    <>
-      <button
-        className="w-[50px] h-[40px] border-2 rounded-[10px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-        onClick={() => setToggleModal(true)}
-      >
-        수정
-      </button>
-      <button
-        className="w-[50px] h-[40px] border-2 rounded-[10px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
-        onClick={() => mutateToDelete()}
-      >
-        삭제
-      </button>
-      {toggleModal && (
-        <UpdateModal setToggleModal={setToggleModal} foundPost={foundPost} />
-      )}
-    </>
-  );
+	return (
+		<div className="flex gap-[16px]">
+			<button
+				className="text-[16px] text-[#999999] hover:text-[#E5743E]"
+				onClick={() => setToggleModal(true)}
+			>
+				수정
+			</button>
+			<button
+				className="text-[16px] text-[#999999] hover:text-[#E5743E]"
+				onClick={() => mutateToDelete()}
+			>
+				삭제
+			</button>
+			{toggleModal && (
+				<UpdateModal setToggleModal={setToggleModal} foundPost={foundPost} />
+			)}
+		</div>
+	);
 }
