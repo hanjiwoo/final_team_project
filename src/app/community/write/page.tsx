@@ -168,12 +168,7 @@ export default function WritePage() {
                     key={nanoid()}
                     className="relative flex w-[148px] h-[148px] p-[4px] flex-col justify-center items-center gap-[4px] border-[1px] rounded-[8px] border-[#C2C2C2] bg-[#F1F1F1]"
                   >
-                    <img
-                      width={200}
-                      height={200}
-                      src={file}
-                      className="relative"
-                    />
+                    <img src={file} className="relative w-[124px] h-[124px]" />
                     <button
                       onClick={() => removeFromImages(file, index)}
                       className="absolute top-[-5px] right-1 text-[#212121] w-[7px]"
