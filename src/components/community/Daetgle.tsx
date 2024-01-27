@@ -4,13 +4,7 @@ import React, { useState } from "react";
 import message from "../../app/assets/images/icon/message.png";
 import userIcon from "../../app/assets/images/icon/userIcon.png";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-} from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { db } from "@/shared/firebase";
 import { useParams } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -19,9 +13,7 @@ import { Daetgle, Post } from "@/app/assets/types/types";
 import { nanoid } from "nanoid";
 import CuteHeart from "./CuteHeart";
 export default function Daetgle({ post }: { post: Post }) {
-  const { uid, photoURL, displayName, isLogin } = useSelector(
-    (state: RootState) => state.login
-  );
+  const { uid, photoURL, displayName, isLogin } = useSelector((state: RootState) => state.login);
   const [daetgle, setDaetgle] = useState<string>();
   const { id } = useParams();
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +27,7 @@ export default function Daetgle({ post }: { post: Post }) {
       nickName: displayName,
       content: daetgle,
       postId: id,
-      id: "",
+      id: ""
     });
   };
   const deleteDaetgle = async (daetgleId: string) => {
@@ -55,7 +47,7 @@ export default function Daetgle({ post }: { post: Post }) {
       };
 
       return getDaetgles();
-    },
+    }
   });
   const queryClient = useQueryClient();
   const { mutate: mutateToAdd } = useMutation({
@@ -63,7 +55,7 @@ export default function Daetgle({ post }: { post: Post }) {
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [`daetgle${id}`] });
-    },
+    }
   });
 
   const daetgleSubmitHandler = () => {
@@ -74,7 +66,7 @@ export default function Daetgle({ post }: { post: Post }) {
     mutationFn: deleteDaetgle,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [`daetgle${id}`] });
-    },
+    }
   });
 
   const deleteHandler = (daetgleId: string) => {
@@ -85,11 +77,7 @@ export default function Daetgle({ post }: { post: Post }) {
     <>
       <div className="flex justify-start w-full items-center mb-[32px]">
         <CuteHeart type="normal" postId={post?.id} />
-        <Image
-          src={message}
-          className="w-[18px] h-[18px] ml-[16px] mr-[6px]"
-          alt="댓글"
-        />
+        <Image src={message} className="w-[18px] h-[18px] ml-[16px] mr-[6px]" alt="댓글" />
         <div className="text-[#999] justify-start items-center gap-[4px] flex">
           <div>댓글</div>
           <div>{daetgles?.length}</div>
@@ -117,21 +105,13 @@ export default function Daetgle({ post }: { post: Post }) {
         <div className="flex flex-col w-full">
           {daetgles?.map((item) => {
             return (
-              <div className="flex items-center justify-between w-full my-[12px]">
-                <div className="flex gap-[16px] items-center" key={nanoid()}>
+              <div className="flex gap-[16px] items-center" key={nanoid()}>
+                <div className="flex items-center justify-between w-full my-[12px]">
                   <div className="flex items-center gap-[8px]">
                     {item.profile ? (
-                      <img
-                        className="w-[32px] h-[32px] rounded-full"
-                        src={item.profile}
-                        alt="profile"
-                      />
+                      <img className="w-[32px] h-[32px] rounded-full" src={item.profile} alt="profile" />
                     ) : (
-                      <Image
-                        className="w-[32px] h-[32px] rounded-full"
-                        src={userIcon}
-                        alt="빈유저"
-                      />
+                      <Image className="w-[32px] h-[32px] rounded-full" src={userIcon} alt="빈유저" />
                     )}
                     <div className="text-[12px] text-center text-[#999]">
                       <p>{item.nickName}</p>

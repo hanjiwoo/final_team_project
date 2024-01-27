@@ -12,6 +12,7 @@ import { getAllShops } from "@/redux/modules/allShops";
 import Image from "next/image";
 import down from "../../app/assets/images/icon/down.png";
 import { ToastContainer, toast } from "react-toastify";
+import moeumLoading from "../../../src/app/assets/images/moeumLoading.gif";
 
 export default function SearchForm() {
   const dispatch = useDispatch();
@@ -50,22 +51,13 @@ export default function SearchForm() {
     // setshops(data)
     // console.log(datas, "데이타스");
   }, []);
-  const onClickHandler = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const onClickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (!sido || !sigoon || !upzong) {
       toast.error("시도 시군 업종을 선택해주세요");
       return setForm({ sido: "", sigoon: "", upzong: "" });
     }
     let filteredShops = shops?.filter((shop) => {
-      if (
-        shop.시군 &&
-        form.sigoon &&
-        shop.시도 &&
-        form.sido &&
-        form.upzong &&
-        shop.업종
-      ) {
+      if (shop.시군 && form.sigoon && shop.시도 && form.sido && form.upzong && shop.업종) {
         return (
           shop.시군.substring(0, 2) === form.sigoon.substring(0, 2) &&
           shop.시도.substring(0, 2) === form.sido.substring(0, 2) &&
@@ -80,7 +72,12 @@ export default function SearchForm() {
   };
 
   // console.log(shops, " 샵스");
-  if (!shops) return <>로딩중...</>;
+  if (!shops)
+    return (
+      <div className="flex justify-center items-center w-full h-full">
+        <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
+      </div>
+    );
   return (
     <div className="w-full max-md:px-[20px] md:w-[712px] max-md:my-[24px] gap-[12px] md:flex lg:w-[712px] xl:w-[1080px] md:my-[40px]">
       <div className="w-full h-[48px] flex gap-4 rounded-xl">
@@ -113,12 +110,7 @@ export default function SearchForm() {
         </select>
 
         {/* <select name="upzong" onChange={onchangeHandler} value={form.upzong}> */}
-        <SigoonOptions
-          name="sigoon"
-          onChange={onchangeHandler}
-          value={form.sigoon}
-          sido={form.sido}
-        />
+        <SigoonOptions name="sigoon" onChange={onchangeHandler} value={form.sigoon} sido={form.sido} />
         {/* </select> */}
         <select
           name="upzong"
