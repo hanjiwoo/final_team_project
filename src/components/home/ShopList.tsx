@@ -101,7 +101,7 @@ export default function ShopList() {
           {shops[0] && (
             <button
               onClick={moveToFullMap}
-              className="w-[52px] h-[52px] bg-[#ff8145] rounded-full shadow hover:scale-105 fixed bottom-[14px] right-[14px] z-[100]"
+              className="w-[52px] h-[52px] bg-[#ff8145] rounded-full shadow hover:scale-105 fixed bottom-[160px] right-[100px] z-[100]"
             >
               <Image
                 className="w-10 h-10 p-[2.50px] justify-center items-center inline-flex"

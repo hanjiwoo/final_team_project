@@ -4,7 +4,7 @@ import Image from 'next/image';
 import writeImage from '@/app/assets/images/icon/write_icon.png';
 import userIcon from '../assets/images/icon/userIcon.png';
 import { useQuery } from '@tanstack/react-query';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, limit, orderBy, query, startAfter } from 'firebase/firestore';
 import { db, storage } from '@/shared/firebase';
 import { Post } from '../assets/types/types';
 import { nanoid } from 'nanoid';
@@ -18,7 +18,7 @@ import BestPost from '@/components/community/BestPost';
 import { getHearts } from '@/components/community/Fns';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/config/configStore';
-import moeumLoding from '../assets/images/moeumLoding.gif';
+import moeumLoading from '../assets/images/moeumLoading.gif';
 
 export default function ListPage() {
   const [newPost, setNewPost] = useState<Post>({
@@ -31,6 +31,7 @@ export default function ListPage() {
     createdAt: 0,
     category: ''
   });
+
   const [top3Shops, setTop3Shops] = useState<(Post | undefined)[]>();
   const router = useRouter();
   const { data: posts, isLoading } = useQuery({
@@ -43,23 +44,32 @@ export default function ListPage() {
           const postData = post.data();
           data.push({ ...postData, id: post.id });
         });
-
+        // setPostArray(data);
         return data;
       };
 
       return getPosts();
     }
   });
+  const [postsArray, setPostArray] = useState<Post[] | undefined>(posts);
   const { data: hearts } = useQuery({
     queryKey: [`hearts`],
     queryFn: getHearts
   });
-  const filteredPosts = posts?.filter((post) => {
-    if (newPost.category === '' || newPost.category === '전체모음') {
-      return true;
-    }
-    return newPost.category === post.category;
-  });
+  const filteredPosts = postsArray
+    ?.filter((post) => {
+      if (newPost.category === '' || newPost.category === '전체모음') {
+        return true;
+      }
+      return newPost.category === post.category;
+    })
+    .sort((a, b) => {
+      if (a.createdAt && b.createdAt) {
+        return b.createdAt - a.createdAt;
+      }
+      return 1;
+    })
+    .slice(0, 5);
 
   useEffect(() => {
     const uniqueArray = hearts?.map((item) => {
@@ -85,14 +95,53 @@ export default function ListPage() {
       setTop3Shops(foundTop3);
     }
   }, [hearts]);
-  const moveToDetail = (id: string) => {
-    router.push(`/community/detail/${id}`);
+  let BtnArray: number[] = [];
+  if (posts?.length) {
+    for (let i = 1; i <= Math.ceil(posts?.length / 5); i++) {
+      BtnArray.push(i);
+    }
+    // console.log(BtnArray, "어레이");
+  }
+  const pagenationHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const BtnNumber = e.currentTarget.innerText;
+    if (BtnNumber === '1') {
+      let data2: Post[] = [];
+
+      const postRef = collection(db, 'posts');
+      const postQuery = query(
+        postRef,
+        orderBy('createdAt', 'desc'),
+
+        limit(5)
+      );
+      const snapshot = await getDocs(postQuery);
+
+      snapshot.forEach((doc) => {
+        data2.push({ ...doc.data(), id: doc.id });
+      });
+      setPostArray(data2);
+    } else {
+      let data2: Post[] = [];
+      const first = query(collection(db, 'posts'), orderBy('createdAt', 'desc'), limit(5 * (Number(BtnNumber) - 1)));
+      const documentSnapshots = await getDocs(first);
+
+      const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+
+      const postRef = collection(db, 'posts');
+      const postQuery = query(postRef, orderBy('createdAt', 'desc'), startAfter(lastVisible), limit(5));
+      const snapshot = await getDocs(postQuery);
+
+      snapshot.forEach((doc) => {
+        data2.push({ ...doc.data(), id: doc.id });
+      });
+      setPostArray(data2);
+    }
   };
 
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full h-full">
-        <Image src={moeumLoding} alt="loading" className="w-[300px] h-[300px]" />
+        <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
       </div>
     );
 
@@ -158,6 +207,19 @@ export default function ListPage() {
             </div>
           </div>
         </div>
+        <section className="flex gap-1 ">
+          {BtnArray.map((item) => {
+            return (
+              <button
+                key={nanoid()}
+                className=" flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[8px] rounded-[8px]   text-[white] bg-[#FF8145] hover:bg-[#E5743E] "
+                onClick={(e) => pagenationHandler(e)}
+              >
+                {item}
+              </button>
+            );
+          })}
+        </section>
       </div>
     </>
   );

@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/config/configStore';
 import CuteHeart from '@/components/community/CuteHeart';
 import { nanoid } from 'nanoid';
-import moeumLoding from '../../../assets/images/moeumLoding.gif';
+import moeumLoading from '../../../assets/images/moeumLoading.gif';
 
 export default function CommunityDetail() {
   const { uid, photoURL, displayName, isLogin } = useSelector((state: RootState) => state.login);
@@ -44,7 +44,7 @@ export default function CommunityDetail() {
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full h-full">
-        <Image src={moeumLoding} alt="loading" className="w-[300px] h-[300px]" />
+        <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
       </div>
     );
   return (
@@ -77,7 +77,7 @@ export default function CommunityDetail() {
           </div>
 
           {/* 프로필 컨테이너 */}
-          <div className="flex justify-between items-center w-full">
+          <div className="flex justify-between items-center w-full h-[40px] mt-[20px]">
             <div className="flex items-center gap-[12px] ">
               <div className="flex w-[40px] h-[40px]  justify-center items-center rounded-[30px] bg-[#F1F1F1]">
                 {foundPost?.profile ? (
@@ -99,7 +99,7 @@ export default function CommunityDetail() {
               <p>{foundPost?.content}</p>
             </div>
 
-            <div className="flex flex-col justify-center items-center gap-[10px] w-full rounded-[8px]  ">
+            <div className="flex flex-col justify-center items-center gap-[10px] w-full rounded-[8px] my-[24px] ">
               {foundPost?.photos?.map((photo) => {
                 return (
                   <div key={nanoid()} className="h-[320px] flex justify-center items-center mt-[16px]">
@@ -131,7 +131,7 @@ export default function CommunityDetail() {
                 </div>
               </div> */}
 
-          <hr className="w-full my-[32px]"></hr>
+          {/* <hr className="w-full my-[32px]"></hr> */}
 
           {/* 댓글작성,버튼 컨테이너*/}
           {foundPost && <Daetgle post={foundPost} />}

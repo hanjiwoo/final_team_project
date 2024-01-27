@@ -95,12 +95,12 @@ export default function UpdateModal({
           </div>
           <section className="flex items-center gap-10">
             <h2>카테고리</h2>
-            <CategoryBtn
+            {/* <CategoryBtn
               text="전체모음"
               type=""
               setNewPost={setNewPost}
               newPost={newPost}
-            />
+            /> */}
             <CategoryBtn
               text="일상이야기"
               type=""

@@ -6,12 +6,12 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import { login, logout } from "@/redux/modules/loginSlice";
+import Image from "next/image";
+import moeumLogo from "../../app/assets/images/moeumLogo.png";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
-  const { isLogin, uid, email, photoURL } = useSelector(
-    (state: RootState) => state.login
-  );
+  const { isLogin, uid, email, photoURL } = useSelector((state: RootState) => state.login);
   // console.log(isLogin, uid, email, photoURL, " 일단 잘들어오냐?");
   const dispatch = useDispatch();
   // 로그인 상태 확인 테스트 버튼 함수
@@ -47,7 +47,7 @@ const Navbar = () => {
         displayName: localStorage.getItem("displayName"),
         uid: localStorage.getItem("uid"),
         photoURL: localStorage.getItem("photoURL"),
-        email: localStorage.getItem("email"),
+        email: localStorage.getItem("email")
       };
       dispatch(login(originUser));
     }
@@ -61,11 +61,8 @@ const Navbar = () => {
           {/* 메뉴 */}
           <div className="flex space-x-4">
             <div>
-              <Link
-                href="/"
-                className="flex items-center py-5 px-2 text-gray-700"
-              >
-                <span className="font-bold">로고</span>
+              <Link href="/" className="flex items-center py-5 px-2 text-gray-700">
+                <Image src={moeumLogo} alt="logo" className="w-[72px] h-[24px]" />
               </Link>
             </div>
           </div>
@@ -115,12 +112,7 @@ const Navbar = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
                 <svg
@@ -130,12 +122,7 @@ const Navbar = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               )}
             </button>
@@ -148,10 +135,7 @@ const Navbar = () => {
         <a href="/about" className="block py-2 px-4 text-sm hover:bg-gray-200">
           모음소개
         </a>
-        <a
-          href="/community"
-          className="block py-2 px-4 text-sm hover:bg-gray-200"
-        >
+        <a href="/community" className="block py-2 px-4 text-sm hover:bg-gray-200">
           커뮤니티
         </a>
         <a href="/mypage" className="block py-2 px-4 text-sm hover:bg-gray-200">

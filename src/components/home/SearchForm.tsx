@@ -1,24 +1,24 @@
-'use client';
-import React, { useCallback, useEffect, useState } from 'react';
-import './home.css';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { getShops } from '@/redux/modules/shopsSlice';
-import { typeOfShop } from '@/app/assets/types/types';
-import NowLocationBtn from './NowLocationBtn';
-import SigoonOptions from './SigoonOptions';
-import { RootState } from '@/redux/config/configStore';
-import { getAllShops } from '@/redux/modules/allShops';
-import Image from 'next/image';
-import down from '../../app/assets/images/icon/down.png';
-import { ToastContainer, toast } from 'react-toastify';
-import moeumLoding from '../../../src/app/assets/images/moeumLoding.gif';
+"use client";
+import React, { useCallback, useEffect, useState } from "react";
+import "./home.css";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getShops } from "@/redux/modules/shopsSlice";
+import { typeOfShop } from "@/app/assets/types/types";
+import NowLocationBtn from "./NowLocationBtn";
+import SigoonOptions from "./SigoonOptions";
+import { RootState } from "@/redux/config/configStore";
+import { getAllShops } from "@/redux/modules/allShops";
+import Image from "next/image";
+import down from "../../app/assets/images/icon/down.png";
+import { ToastContainer, toast } from "react-toastify";
+import moeumLoading from "../../../src/app/assets/images/moeumLoading.gif";
 
 export default function SearchForm() {
   const dispatch = useDispatch();
   const shops = useSelector((state: RootState) => state.allShops);
   // const [shops, setshops] = useState<typeOfShop[]>();
-  const [form, setForm] = useState({ sido: '', sigoon: '', upzong: '' });
+  const [form, setForm] = useState({ sido: "", sigoon: "", upzong: "" });
   const { sido, sigoon, upzong } = form;
 
   const onchangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -40,10 +40,10 @@ export default function SearchForm() {
     let data = getGoodShop().then((res: typeOfShop[]) => {
       const filteredRes = res.filter((shop) => {
         return (
-          shop.업종.slice(0, 2) !== '기타' &&
-          shop.업종.slice(0, 2) !== '이미' &&
-          shop.업종.slice(0, 2) !== '목욕' &&
-          shop.업종.slice(0, 2) !== '세탁'
+          shop.업종.slice(0, 2) !== "기타" &&
+          shop.업종.slice(0, 2) !== "이미" &&
+          shop.업종.slice(0, 2) !== "목욕" &&
+          shop.업종.slice(0, 2) !== "세탁"
         );
       });
       dispatch(getAllShops(filteredRes));
@@ -53,8 +53,8 @@ export default function SearchForm() {
   }, []);
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (!sido || !sigoon || !upzong) {
-      toast.error('시도 시군 업종을 선택해주세요');
-      return setForm({ sido: '', sigoon: '', upzong: '' });
+      toast.error("시도 시군 업종을 선택해주세요");
+      return setForm({ sido: "", sigoon: "", upzong: "" });
     }
     let filteredShops = shops?.filter((shop) => {
       if (shop.시군 && form.sigoon && shop.시도 && form.sido && form.upzong && shop.업종) {
@@ -65,9 +65,9 @@ export default function SearchForm() {
         );
       }
     });
-    if (!filteredShops[0]) return toast.warning('검색결과가 없어요');
+    if (!filteredShops[0]) return toast.warning("검색결과가 없어요");
     dispatch(getShops(filteredShops));
-    toast.success('검색완료');
+    toast.success("검색완료");
     // setForm({ sido: "", sigoon: "", upzong: "" });
   };
 
@@ -75,7 +75,7 @@ export default function SearchForm() {
   if (!shops)
     return (
       <div className="flex justify-center items-center w-full h-full">
-        <Image src={moeumLoding} alt="loading" className="w-[300px] h-[300px]" />
+        <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
       </div>
     );
   return (
