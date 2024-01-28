@@ -14,16 +14,16 @@ import { url } from "inspector";
 import { nanoid } from "nanoid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import imgRegister from "../../../app/assets/images/imgRegister.png";
-import { toast } from "react-toastify";
+// 토스티 import
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function WritePage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [urlFiles, setUrlFiles] = useState<string[]>();
   const [imgFiles, setImgFiles] = useState<File[]>();
   const route = useRouter();
-  const { uid, displayName, isLogin, photoURL } = useSelector(
-    (state: RootState) => state.login
-  );
+  const { uid, displayName, isLogin, photoURL } = useSelector((state: RootState) => state.login);
   const [newPost, setNewPost] = useState<Post>({
     id: "",
     uid,
@@ -33,7 +33,7 @@ export default function WritePage() {
     nickname: displayName,
     createdAt: Date.now(),
     category: "",
-    photos: [""],
+    photos: [""]
   });
   const addPost = async () => {
     try {
@@ -58,12 +58,10 @@ export default function WritePage() {
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
+    }
   });
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     // console.log(name, value);
     setNewPost({ ...newPost, [name]: value });
@@ -72,12 +70,44 @@ export default function WritePage() {
 
   const handleAddPost = async () => {
     if (!isLogin)
-      return toast.warning("로그인하셔야 게시글을 남기실수 있습니다.");
+      return toast.error("로그인을 해주세요", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
+
     if (!newPost.content || !newPost.title || !newPost.category)
-      return toast.error("카테고리 타이틀 컨텐츠를 작성해 주세요");
+      // return toast.error("카테고리 타이틀 컨텐츠를 작성해 주세요");
+      return toast.error("카테고리 타이틀 콘텐츠를 작성해 주세요", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
     const confirmResult = window.confirm("게시글 작성을 하시겠습니까?");
     if (confirmResult) {
-      toast.success("작성이 완료되었습니다.");
+      toast.success("작성이 완료되었습니다", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
 
       route.push("/community");
       mutateToAdd();
@@ -92,11 +122,31 @@ export default function WritePage() {
     // console.log(e.target.files, "이거나 보자");
     if (e.target.files) {
       if (e.target.files?.length > 5) {
-        return toast.error("5개 까지 가능합니다");
+        return toast.error("5개 까지 가능합니다", {
+          transition: Slide,
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored"
+        });
       }
       if (urlFiles) {
         if (urlFiles.length + e.target.files.length > 5) {
-          return toast.error("5개 까지 가능합니다.");
+          return toast.error("5개 까지 가능합니다", {
+            transition: Slide,
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+          });
         }
       }
       e.target.files[0];
@@ -192,40 +242,16 @@ export default function WritePage() {
                   setNewPost={setNewPost}
                   newPost={newPost}
                 /> */}
-                <CategoryBtn
-                  text="일상이야기"
-                  type=""
-                  setNewPost={setNewPost}
-                  newPost={newPost}
-                />
-                <CategoryBtn
-                  text="맛집추천"
-                  type=""
-                  setNewPost={setNewPost}
-                  newPost={newPost}
-                />
-                <CategoryBtn
-                  text="취미생활"
-                  type=""
-                  setNewPost={setNewPost}
-                  newPost={newPost}
-                />
-                <CategoryBtn
-                  text="문의하기"
-                  type=""
-                  setNewPost={setNewPost}
-                  newPost={newPost}
-                />
+                <CategoryBtn text="일상이야기" type="" setNewPost={setNewPost} newPost={newPost} />
+                <CategoryBtn text="맛집추천" type="" setNewPost={setNewPost} newPost={newPost} />
+                <CategoryBtn text="취미생활" type="" setNewPost={setNewPost} newPost={newPost} />
+                <CategoryBtn text="문의하기" type="" setNewPost={setNewPost} newPost={newPost} />
               </section>
 
               <div className="flex items-start gap-[40px] self-stretch">
                 <div className="flex">
-                  <label className="text-center text-[16px] text-[#212121] font-semibold leading-[24px]">
-                    제목
-                  </label>
-                  <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">
-                    *
-                  </p>
+                  <label className="text-center text-[16px] text-[#212121] font-semibold leading-[24px]">제목</label>
+                  <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">*</p>
                 </div>
 
                 <input
@@ -240,12 +266,8 @@ export default function WritePage() {
 
               <div className="flex items-start gap-[40px] self-stretch">
                 <div className="flex">
-                  <label className="text-center text-[16px] text-[#212121] font-semibold leading-[24px]">
-                    내용
-                  </label>
-                  <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">
-                    *
-                  </p>
+                  <label className="text-center text-[16px] text-[#212121] font-semibold leading-[24px]">내용</label>
+                  <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">*</p>
                 </div>
 
                 <textarea
