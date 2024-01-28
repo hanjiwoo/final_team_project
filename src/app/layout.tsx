@@ -13,15 +13,11 @@ export const metadata: Metadata = {
   title: "모두의 음식점 | 모-음",
   description: "여인준, 이아름, 이상욱, 한지우",
   icons: {
-    icon: "/narang.jpg",
-  },
+    icon: "/Favicon_32_32.png"
+  }
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
