@@ -8,6 +8,8 @@ import { RootState } from "@/redux/config/configStore";
 import { login, logout } from "@/redux/modules/loginSlice";
 import Image from "next/image";
 import moeumLogo from "../../app/assets/images/moeumLogo.png";
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
@@ -34,7 +36,18 @@ const Navbar = () => {
       .then(() => {
         // 로그아웃 성공 시 로컬 스토리지에서 사용자 정보 삭제
         localStorage.removeItem("user");
-        alert("로그아웃 성공");
+        // alert("로그아웃 성공");
+        toast.success(`로그아웃 성공`, {
+          transition: Slide,
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored"
+        });
       })
       .catch((error) => {
         console.error("로그아웃 실패:", error);

@@ -12,6 +12,9 @@ import { RootState } from "@/redux/config/configStore";
 import { Daetgle, Post } from "@/app/assets/types/types";
 import { nanoid } from "nanoid";
 import CuteHeart from "./CuteHeart";
+// 토스티 import
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Daetgle({ post }: { post: Post }) {
   const { uid, photoURL, displayName, isLogin } = useSelector((state: RootState) => state.login);
   const [daetgle, setDaetgle] = useState<string>();
@@ -59,7 +62,18 @@ export default function Daetgle({ post }: { post: Post }) {
   });
 
   const daetgleSubmitHandler = () => {
-    if (!isLogin) return alert("로그인하고 오세요");
+    if (!isLogin)
+      return toast.error("로그인을 해주세요", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
     mutateToAdd();
   };
   const { mutate: mutateToDelete } = useMutation({

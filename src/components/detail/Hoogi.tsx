@@ -9,7 +9,9 @@ import pencilIcon from "../../app/assets/images/icon/write_icon.png";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import ShopCard2 from "../map/ShopCard2";
-import { toast } from "react-toastify";
+// 토스티 import
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 type assessment = {
   title: string;
   type: string;
@@ -25,7 +27,7 @@ const assessmentList = [
     one: "👍 저렴해요",
     two: "😎 괜찮아요",
     three: "💳 가격이 달라요",
-    four: "존마탱",
+    four: "존마탱"
   },
   {
     title: "맛있었나요?",
@@ -33,7 +35,7 @@ const assessmentList = [
     one: "😋 또 가고싶어요",
     two: "🍽️ 괜찮아요",
     three: "🤔 아쉬워요",
-    four: "존마탱",
+    four: "존마탱"
   },
   {
     title: "서비스는 좋았나요?",
@@ -41,7 +43,7 @@ const assessmentList = [
     one: "💖 친절해요",
     two: "👨‍🍳 괜찮아요",
     three: "😢 아쉬워요",
-    four: "존마탱",
+    four: "존마탱"
   },
   {
     title: "위생은 청결했나요?",
@@ -49,8 +51,8 @@ const assessmentList = [
     one: "✨ 깨끗해요",
     two: "💦 괜찮아요",
     three: "😨 아쉬워요",
-    four: "존마탱",
-  },
+    four: "존마탱"
+  }
 ];
 
 // const fakeUser = {
@@ -59,14 +61,8 @@ const assessmentList = [
 // 	name: "han",
 // };
 // const { uid } = fakeUser;
-export default function Hoogi({
-  setModal,
-}: {
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  const { isLogin, uid, displayName } = useSelector(
-    (state: RootState) => state.login
-  );
+export default function Hoogi({ setModal }: { setModal: React.Dispatch<React.SetStateAction<boolean>> }) {
+  const { isLogin, uid, displayName } = useSelector((state: RootState) => state.login);
   const shop = useSelector((state: RootState) => state.detailShop);
   // const [range, setRange] = useState("0");
   // const [activeId, setActiveId] = useState("");
@@ -75,7 +71,7 @@ export default function Hoogi({
     맛: "",
     가격: "",
     서비스: "",
-    위생: "",
+    위생: ""
   });
   // console.log(form);
   const { 맛, 가격, 서비스, 위생 } = form;
@@ -86,7 +82,7 @@ export default function Hoogi({
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [`hoogis${shopId}`] });
-    },
+    }
   });
 
   // const rangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,7 +111,18 @@ export default function Hoogi({
       // range === "0" ||
       // face === "이모티콘"
     )
-      return toast.error("후기 선택을 전부 해주세요");
+      // return toast.error("후기 선택을 전부 해주세요");
+      return toast.error("후기 선택을 전부 해주세요", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
 
     mutateToAdd({ uid, displayName, shopId, 맛, 가격, 위생, 서비스 });
     // setFace("");
@@ -132,8 +139,8 @@ export default function Hoogi({
     // console.log(맛, 가격, 위생, 서비스, range, face);
   };
   return (
-    <div className="bg-[#fff] h-full w-full flex flex-col items-center justify-center mb-10 py-[32px] px-[32px] rounded-[16px]">
-      <div className="bg-red-300 flex ">
+    <div className="bg-[#fff] h-full w-full flex flex-col items-center justify-center mb-10 p-[32px] rounded-[16px]">
+      <div className="mt-[32px] pointer-events-none">
         <ShopCard2 shop={shop} type="no" />
       </div>
       <div className="flex flex-col w-full gap-[32px]">
@@ -153,11 +160,7 @@ export default function Hoogi({
         className="bg-[#FF8145] w-full  h-[48px] mt-[32px] rounded-[8px] text-[14px] text-[#fff] leading-[20px] flex justify-center items-center gap-[12px] py-[8px] px-[16px]"
         onClick={submitHandler}
       >
-        <Image
-          src={pencilIcon}
-          alt="reviewWrite"
-          className="w-[20px] h-[20px]"
-        />
+        <Image src={pencilIcon} alt="reviewWrite" className="w-[20px] h-[20px]" />
         리뷰 등록하기
       </button>
     </div>

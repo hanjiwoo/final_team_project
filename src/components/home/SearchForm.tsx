@@ -11,7 +11,9 @@ import { RootState } from "@/redux/config/configStore";
 import { getAllShops } from "@/redux/modules/allShops";
 import Image from "next/image";
 import down from "../../app/assets/images/icon/down.png";
-import { ToastContainer, toast } from "react-toastify";
+// 토스티 import
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import moeumLoading from "../../../src/app/assets/images/moeumLoading.gif";
 
 export default function SearchForm() {
@@ -53,7 +55,18 @@ export default function SearchForm() {
   }, []);
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (!sido || !sigoon || !upzong) {
-      toast.error("시도 시군 업종을 선택해주세요");
+      // toast.error("시도 시군 업종을 선택해주세요");
+      toast.error("시도 시군 업종을 선택해주세요", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
       return setForm({ sido: "", sigoon: "", upzong: "" });
     }
     let filteredShops = shops?.filter((shop) => {

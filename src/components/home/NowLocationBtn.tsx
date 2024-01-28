@@ -7,7 +7,9 @@ import { typeOfShop } from "@/app/assets/types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { getShops } from "@/redux/modules/shopsSlice";
 import { RootState } from "@/redux/config/configStore";
-import { toast } from "react-toastify";
+// 토스티 import
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function NowLocationBtn() {
   const shops = useSelector((state: RootState) => state.allShops);
@@ -18,7 +20,18 @@ export default function NowLocationBtn() {
   useKakaoLoader();
 
   const findNowLoacation = () => {
-    if (!window.kakao && !shops) return toast.error("잠시만용");
+    if (!window.kakao && !shops)
+      return toast.error("잠시만 기다려주세요", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
 
     if (window.kakao) {
       const geocoder = new window.kakao.maps.services.Geocoder();
