@@ -1,17 +1,20 @@
-'use client';
-import Image from 'next/image';
-import React, { useState } from 'react';
-import message from '../../app/assets/images/icon/message.png';
-import userIcon from '../../app/assets/images/icon/userIcon.png';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
-import { db } from '@/shared/firebase';
-import { useParams } from 'next/navigation';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/config/configStore';
-import { Daetgle, Post } from '@/app/assets/types/types';
-import { nanoid } from 'nanoid';
-import CuteHeart from './CuteHeart';
+"use client";
+import Image from "next/image";
+import React, { useState } from "react";
+import message from "../../app/assets/images/icon/message.png";
+import userIcon from "../../app/assets/images/icon/userIcon.png";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { db } from "@/shared/firebase";
+import { useParams } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
+import { Daetgle, Post } from "@/app/assets/types/types";
+import { nanoid } from "nanoid";
+import CuteHeart from "./CuteHeart";
+// 토스티 import
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Daetgle({ post }: { post: Post }) {
   const { uid, photoURL, displayName, isLogin } = useSelector((state: RootState) => state.login);
   const [daetgle, setDaetgle] = useState<string>();
@@ -27,7 +30,7 @@ export default function Daetgle({ post }: { post: Post }) {
       nickName: displayName,
       content: daetgle,
       postId: id,
-      id: ''
+      id: ""
     });
   };
   const deleteDaetgle = async (daetgleId: string) => {
@@ -59,7 +62,18 @@ export default function Daetgle({ post }: { post: Post }) {
   });
 
   const daetgleSubmitHandler = () => {
-    if (!isLogin) return alert('로그인하고 오세요');
+    if (!isLogin)
+      return toast.error("로그인을 해주세요", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
     mutateToAdd();
   };
   const { mutate: mutateToDelete } = useMutation({
@@ -105,8 +119,8 @@ export default function Daetgle({ post }: { post: Post }) {
         <div className="flex flex-col w-full">
           {daetgles?.map((item) => {
             return (
-              <div className="flex items-center justify-between w-full my-[12px]">
-                <div className="flex gap-[16px] items-center" key={nanoid()}>
+              <div className="flex gap-[16px] items-center" key={nanoid()}>
+                <div className="flex items-center justify-between w-full my-[12px]">
                   <div className="flex items-center gap-[8px]">
                     {item.profile ? (
                       <img className="w-[32px] h-[32px] rounded-full" src={item.profile} alt="profile" />
