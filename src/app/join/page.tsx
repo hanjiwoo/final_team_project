@@ -40,7 +40,7 @@ export default function Join() {
   };
   // 약관 동의 부분 토스티파이
   const notify = () =>
-    toast.error("약관을 동의 하세여", {
+    toast.error("약관을 동의 해주세요", {
       transition: Slide,
       position: "top-center",
       autoClose: 5000,
@@ -63,10 +63,8 @@ export default function Join() {
   useEffect(() => {
     if (checkList.includes("age") && checkList.includes("terms") && checkList.includes("collect")) {
       setButtonColor(true);
-      console.log("여기는 진실");
     } else {
       setButtonColor(false);
-      console.log("여기는 거짓");
     }
   }, [checkList]);
 
@@ -140,9 +138,19 @@ export default function Join() {
     console.log("이거이거", emailSnapshot.empty);
 
     if (!emailSnapshot.empty) {
-      alert("이미 사용 중인 이메일입니다");
-      console.log("사용중임");
-      window.location.reload();
+      toast.error("이미 사용 중인 이메일입니다", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
+
+      // window.location.reload();
       return false;
     }
 
@@ -152,8 +160,18 @@ export default function Join() {
     const displayNameSnapshot = await getDocs(displayNameQuery);
 
     if (!displayNameSnapshot.empty) {
-      alert("이미 사용 중인 닉네임입니다");
-      window.location.reload();
+      toast.error("이미 사용 중인 닉네임입니다", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
+      // window.location.reload();
       return false;
     }
 

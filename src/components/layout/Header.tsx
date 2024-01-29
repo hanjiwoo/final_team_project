@@ -107,7 +107,7 @@ const Navbar = () => {
                   className="w-[100px] h-10 py-3 px-2 bg-[#FF8145] hover:bg-[#E5743E] rounded-lg transition duration-300 justify-center items-center gap-1 inline-flex"
                 >
                   <div className="text-right text-white text-sm font-medium font-['Pretendard'] leading-tight">
-                    모-음 시작하기
+                    모음 시작하기
                   </div>
                 </Link>
               </>
