@@ -38,7 +38,7 @@ export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shop
         if (result[0]) {
           setAddr({
             addrRoad: result[0].address_name,
-            addrBuilding: result[0].road_address.building_name
+            addrBuilding: result[0].road_address.building_name ? result[0].road_address.building_name : ""
           });
         }
       });

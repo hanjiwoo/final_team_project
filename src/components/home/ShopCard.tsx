@@ -11,23 +11,12 @@ import place from "../../app/assets/images/icon/place.png";
 import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
 import PhotoOfShop from "./PhotoOfShop";
 import { toast } from "react-toastify";
-export default function ShopCard({
-  shop,
-  shops,
-  type,
-}: {
-  shop: typeOfShop;
-  shops?: typeOfShop[];
-  type?: string;
-}) {
+export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shops?: typeOfShop[]; type?: string }) {
   const dispatch = useDispatch();
   // const shops = useSelector((state: any) => state.shops);
   const router = useRouter();
   const [addr, setAddr] = useState({ addrRoad: "", addrBuilding: "" });
-  const moveDetailPageBtn = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    phoneNum: string
-  ) => {
+  const moveDetailPageBtn = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, phoneNum: string) => {
     // console.log(router);
 
     // const detailshop = shops.find((shop: typeOfShop) => {
@@ -49,7 +38,7 @@ export default function ShopCard({
         if (result[0]) {
           setAddr({
             addrRoad: result[0].address_name,
-            addrBuilding: result[0].road_address.building_name,
+            addrBuilding: result[0].road_address ? result[0].road_address.building_name : ""
           });
         }
       });
@@ -62,26 +51,17 @@ export default function ShopCard({
   }, []);
   return (
     <button onClick={(e) => moveDetailPageBtn(e, shop.연락처)}>
-      <section
-        className="flex w-[252px] bg-[#fff] rounded-lg justify-center items-center"
-        key={nanoid()}
-      >
+      <section className="flex w-[252px] bg-[#fff] rounded-lg justify-center items-center" key={nanoid()}>
         <div className="h-full border-opacity-60 rounded-lg w-full">
           <PhotoOfShop shop={shop} />
 
-          <div className="font-medium text-[#212121] mb-1 flex text-xl">
-            {shop.업소명}
-          </div>
+          <div className="font-medium text-[#212121] mb-1 flex text-xl">{shop.업소명}</div>
           <div className="flex justify-between">
             <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
           </div>
           {/* <div className="flex justify-round gap-5"> */}
           <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center">
-            <Image
-              src={spoon_fork}
-              alt="스푼포크"
-              className="w-[20px] h-[20px]"
-            />
+            <Image src={spoon_fork} alt="스푼포크" className="w-[20px] h-[20px]" />
             {shop.업종}
           </div>
           <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center ">

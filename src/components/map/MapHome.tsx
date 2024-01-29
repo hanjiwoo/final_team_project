@@ -60,16 +60,13 @@ export default function MapHome() {
     }
     if (window.kakao) {
       let geocoder = new window.kakao.maps.services.Geocoder();
-      geocoder.addressSearch(
-        `${mapCenterRef.current.시도} ${mapCenterRef.current.시군}`,
-        function (result, status) {
-          // console.log(result, "이거 레절트");
-          setLng(+result[0].x);
-          setLat(+result[0].y);
-          // latRef.current = Number(result[0].y);
-          // lngRef.current = Number(result[0].x);
-        }
-      );
+      geocoder.addressSearch(`${mapCenterRef.current.시도} ${mapCenterRef.current.시군}`, function (result, status) {
+        // console.log(result, "이거 레절트");
+        setLng(+result[0].x);
+        setLat(+result[0].y);
+        // latRef.current = Number(result[0].y);
+        // lngRef.current = Number(result[0].x);
+      });
       let mappedArray: {
         title: string;
         latitude: string;
@@ -79,12 +76,14 @@ export default function MapHome() {
         let OBOB = {
           title: "",
           latitude: "",
-          longitude: "",
+          longitude: ""
         };
         geocoder.addressSearch(shops[i].주소, function (result, status) {
           OBOB.title = shops[i].업소명;
-          OBOB.latitude = result[0].y;
-          OBOB.longitude = result[0].x;
+          if (result[0]) {
+            OBOB.latitude = result[0].y;
+            OBOB.longitude = result[0].x;
+          }
         });
         mappedArray.push(OBOB);
       }
@@ -94,21 +93,21 @@ export default function MapHome() {
   }, [shops]);
   // console.log(newArray, "나오겠지?");
 
-  const moveToDetail = (title: string) => {
-    const oneshop = shops.find((shop: typeOfShop) => {
-      return shop.업소명 === title;
-    });
-    // console.log(oneshop);
-    if (oneshop) {
-      dispatch(getShop(oneshop));
-      router.push(`/detail/${oneshop.연락처}`);
-    } else alert("존재하지 않아요");
-  };
+  // const moveToDetail = (title: string) => {
+  //   const oneshop = shops.find((shop: typeOfShop) => {
+  //     return shop.업소명 === title;
+  //   });
+  //   // console.log(oneshop);
+  //   if (oneshop) {
+  //     dispatch(getShop(oneshop));
+  //     router.push(`/detail/${oneshop.연락처}`);
+  //   } else alert("존재하지 않아요");
+  // };
 
   useEffect(() => {
     setTimeout(() => {
       setRender(!render);
-    }, 300);
+    }, 800);
   }, []);
 
   // const wheelHandler = (e: React.WheelEvent<HTMLDivElement>) => {
@@ -149,9 +148,7 @@ export default function MapHome() {
   return (
     <>
       <div className="w-screen h-screen bg-yellow-300">
-        <div className="bg-green-300 absolute top-[75px] left-[450px] z-10">
-          {/* <SearchForm /> */}
-        </div>
+        <div className="bg-green-300 absolute top-[75px] left-[450px] z-10">{/* <SearchForm /> */}</div>
         <Map
           onClick={() => setInfoToggle(!infoToggle)}
           // ref={mapRef.current}
@@ -160,12 +157,12 @@ export default function MapHome() {
           center={{
             // 지도의 중심좌표
             lat,
-            lng,
+            lng
           }}
           style={{
             // 지도의 크기
             width: "100%",
-            height: "100%",
+            height: "100%"
           }}
           level={6} // 지도의 확대 레벨
         >
@@ -182,11 +179,7 @@ export default function MapHome() {
                 </div> */}
                 {infoToggle && shop.title === shopInfoRef.current.업소명 && (
                   <>
-                    <ShopCard2
-                      type="map"
-                      shops={shops}
-                      shop={shopInfoRef.current}
-                    />{" "}
+                    <ShopCard2 type="map" shops={shops} shop={shopInfoRef.current} />{" "}
                   </>
                 )}
                 {/* <div>클릭하시면정보나옴</div> */}
