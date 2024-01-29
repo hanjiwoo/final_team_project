@@ -12,6 +12,7 @@ import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
 import { getHoogis } from "../detail/queryFns";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import PhotoOfShop from "../home/PhotoOfShop";
 export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; shops?: typeOfShop[]; type?: string }) {
   const dispatch = useDispatch();
   // const shops = useSelector((state: any) => state.shops);
@@ -61,8 +62,11 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
         key={nanoid()}
         onClick={(e) => moveDetailPageBtn(e, shop.연락처)}
       >
-        <section className="w-[100px] h-[100px]">
-          <div className="w-full h-full bg-[#F1F1F1] rounded-[12px]" />
+        <section className="w-[100px] h-[100px] flex justify-center items-center rounded-[12px] overflow-hidden">
+          {/* <div className="w-full h-full bg-[#F1F1F1] rounded-[12px]" /> */}
+          <div className="flex justify-center items-center mt-[18px]">
+            <PhotoOfShop shop={shop} type="map" />
+          </div>
         </section>
         <section className="flex flex-row border-opacity-60 rounded-lg gap-[9px]">
           <div>

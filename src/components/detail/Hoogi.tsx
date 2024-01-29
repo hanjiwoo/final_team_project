@@ -140,7 +140,7 @@ export default function Hoogi({ setModal }: { setModal: React.Dispatch<React.Set
   };
   return (
     <div className="bg-[#fff] h-full w-full flex flex-col items-center justify-center mb-10 p-[32px] rounded-[16px]">
-      <div className="mt-[32px] pointer-events-none">
+      <div className="mt-[32px] pointer-events-none flex jutify-start w-full">
         <ShopCard2 shop={shop} type="no" />
       </div>
       <div className="flex flex-col w-full gap-[32px]">
