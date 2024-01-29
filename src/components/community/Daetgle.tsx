@@ -121,7 +121,7 @@ export default function Daetgle({ post }: { post: Post }) {
           {daetgles?.map((item) => {
             return (
               <div className="flex gap-[16px] items-center" key={nanoid()}>
-                <div className="flex items-center justify-between w-full my-[12px]">
+                <div className="flex items-center justify-start w-full my-[12px] gap-[16px]">
                   <div className="flex items-center gap-[8px]">
                     {item.profile ? (
                       <img className="w-[32px] h-[32px] rounded-full" src={item.profile} alt="profile" />
@@ -140,7 +140,7 @@ export default function Daetgle({ post }: { post: Post }) {
                   {uid === item.uid && (
                     <button
                       onClick={() => deleteHandler(item.id)}
-                      className="text-[14px] text-[#999999] hover:text-[#E5743E]"
+                      className="text-[14px] text-[#999999] hover:text-[#E5743E] w-[25px]"
                     >
                       삭제
                     </button>
