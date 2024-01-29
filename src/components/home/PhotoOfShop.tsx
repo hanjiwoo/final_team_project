@@ -1,8 +1,4 @@
 import { typeOfShop } from "@/app/assets/types/types";
-// import 한식 from "../../app/assets/images/icon/korean_food.png";
-// import 일식 from "../../app/assets/images/icon/japanese_food.png";
-// import 중식 from "../../app/assets/images/icon/chinese_food.png";
-// import 양식 from "../../app/assets/images/icon/american_food.png";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import 한식 from "../../app/assets/images/foodIcons/Korea.png";
@@ -37,7 +33,7 @@ export default function PhotoOfShop({ shop, type }: { shop: typeOfShop; type?: s
       <Image
         src={이미지}
         alt="음식사진"
-        className={`w-${type === "map" ? "[30px]" : "[80px]"} h-${type === "map" ? "[22px]" : "[72px]"}`}
+        className={`w-${type === "map" ? "[30px]" : "[60px]"} h-${type === "map" ? "[22px]" : "[72px]"}`}
       />
     </div>
   );
