@@ -58,6 +58,7 @@ export default function Daetgle({ post }: { post: Post }) {
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [`daetgle${id}`] });
+      setDaetgle("");
     }
   });
 
