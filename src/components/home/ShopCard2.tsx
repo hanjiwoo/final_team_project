@@ -10,23 +10,12 @@ import Image from "next/image";
 import place from "../../app/assets/images/icon/place.png";
 import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
 import { toast } from "react-toastify";
-export default function ShopCard({
-  shop,
-  shops,
-  type,
-}: {
-  shop: typeOfShop;
-  shops?: typeOfShop[];
-  type?: string;
-}) {
+export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shops?: typeOfShop[]; type?: string }) {
   const dispatch = useDispatch();
   // const shops = useSelector((state: any) => state.shops);
   const router = useRouter();
   const [addr, setAddr] = useState({ addrRoad: "", addrBuilding: "" });
-  const moveDetailPageBtn = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    phoneNum: string
-  ) => {
+  const moveDetailPageBtn = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, phoneNum: string) => {
     // console.log(router);
 
     // const detailshop = shops.find((shop: typeOfShop) => {
@@ -48,7 +37,7 @@ export default function ShopCard({
         if (result[0]) {
           setAddr({
             addrRoad: result[0].address_name,
-            addrBuilding: result[0].road_address.building_name,
+            addrBuilding: result[0].road_address.building_name ? result[0].road_address.building_name : ""
           });
         }
       });
@@ -61,15 +50,10 @@ export default function ShopCard({
   }, []);
   return (
     <button onClick={(e) => moveDetailPageBtn(e, shop.연락처)}>
-      <section
-        className="flex w-[344px] bg-[#fff] rounded-lg justify-center items-center"
-        key={nanoid()}
-      >
+      <section className="flex w-[344px] bg-[#fff] rounded-lg justify-center items-center" key={nanoid()}>
         <div className="h-full border-opacity-60 rounded-lg ">
           <div className="w-[344px] h-[252px] bg-[#F1F1F1] rounded-[12px] mb-[20px]" />
-          <div className="font-medium text-[#212121] mb-1 flex text-xl">
-            {shop.업소명}
-          </div>
+          <div className="font-medium text-[#212121] mb-1 flex text-xl">{shop.업소명}</div>
           <div className="flex justify-between">
             <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
           </div>
