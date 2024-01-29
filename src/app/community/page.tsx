@@ -1,45 +1,45 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import writeImage from '@/app/assets/images/icon/write_icon.png';
-import userIcon from '../assets/images/icon/userIcon.png';
-import { useQuery } from '@tanstack/react-query';
-import { collection, getDocs, limit, orderBy, query, startAfter } from 'firebase/firestore';
-import { db, storage } from '@/shared/firebase';
-import { Post } from '../assets/types/types';
-import { nanoid } from 'nanoid';
-import Link from 'next/link';
-import CategoryBtn from '@/components/community/CategoryBtn';
-import { useRouter } from 'next/navigation';
-import CuteHeart from '@/components/community/CuteHeart';
-import { getDownloadURL, ref } from 'firebase/storage';
-import PostCard from '@/components/mypage/PostCard';
-import BestPost from '@/components/community/BestPost';
-import { getHearts } from '@/components/community/Fns';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/config/configStore';
-import moeumLoading from '../assets/images/moeumLoading.gif';
+"use client";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import writeImage from "@/app/assets/images/icon/write_icon.png";
+import userIcon from "../assets/images/icon/userIcon.png";
+import { useQuery } from "@tanstack/react-query";
+import { collection, getDocs, limit, orderBy, query, startAfter } from "firebase/firestore";
+import { db, storage } from "@/shared/firebase";
+import { Post } from "../assets/types/types";
+import { nanoid } from "nanoid";
+import Link from "next/link";
+import CategoryBtn from "@/components/community/CategoryBtn";
+import { useRouter } from "next/navigation";
+import CuteHeart from "@/components/community/CuteHeart";
+import { getDownloadURL, ref } from "firebase/storage";
+import PostCard from "@/components/mypage/PostCard";
+import BestPost from "@/components/community/BestPost";
+import { getHearts } from "@/components/community/Fns";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
+import moeumLoading from "../assets/images/moeumLoading.gif";
 
 export default function ListPage() {
   const [newPost, setNewPost] = useState<Post>({
-    id: '',
-    uid: '',
-    title: '',
-    content: '',
-    profile: '',
-    nickname: '',
+    id: "",
+    uid: "",
+    title: "",
+    content: "",
+    profile: "",
+    nickname: "",
     createdAt: 0,
-    category: ''
+    category: ""
   });
 
   const [top3Shops, setTop3Shops] = useState<(Post | undefined)[]>();
   const router = useRouter();
   const { data: posts, isLoading } = useQuery({
-    queryKey: ['posts'],
+    queryKey: ["posts"],
     queryFn: () => {
       const getPosts = async () => {
         let data: Post[] = [];
-        const response = await getDocs(collection(db, 'posts'));
+        const response = await getDocs(collection(db, "posts"));
         response.forEach((post) => {
           const postData = post.data();
           data.push({ ...postData, id: post.id });
@@ -58,7 +58,7 @@ export default function ListPage() {
   });
   const filteredPosts = postsArray
     ?.filter((post) => {
-      if (newPost.category === '' || newPost.category === '전체모음') {
+      if (newPost.category === "" || newPost.category === "전체모음") {
         return true;
       }
       return newPost.category === post.category;
@@ -104,13 +104,13 @@ export default function ListPage() {
   }
   const pagenationHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const BtnNumber = e.currentTarget.innerText;
-    if (BtnNumber === '1') {
+    if (BtnNumber === "1") {
       let data2: Post[] = [];
 
-      const postRef = collection(db, 'posts');
+      const postRef = collection(db, "posts");
       const postQuery = query(
         postRef,
-        orderBy('createdAt', 'desc'),
+        orderBy("createdAt", "desc"),
 
         limit(5)
       );
@@ -122,13 +122,13 @@ export default function ListPage() {
       setPostArray(data2);
     } else {
       let data2: Post[] = [];
-      const first = query(collection(db, 'posts'), orderBy('createdAt', 'desc'), limit(5 * (Number(BtnNumber) - 1)));
+      const first = query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(5 * (Number(BtnNumber) - 1)));
       const documentSnapshots = await getDocs(first);
 
       const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
 
-      const postRef = collection(db, 'posts');
-      const postQuery = query(postRef, orderBy('createdAt', 'desc'), startAfter(lastVisible), limit(5));
+      const postRef = collection(db, "posts");
+      const postQuery = query(postRef, orderBy("createdAt", "desc"), startAfter(lastVisible), limit(5));
       const snapshot = await getDocs(postQuery);
 
       snapshot.forEach((doc) => {
@@ -148,7 +148,7 @@ export default function ListPage() {
   return (
     <>
       {/* 전체 컨테이너 */}
-      <div className="flex  flex-col items-center  w-full gap-[20px] ">
+      <div className="flex  flex-col items-center  w-full gap-[20px]">
         {/* 글 모음/ 인기순위 컨텐츠 */}
         <div className="flex w-full py-[60px] flex-col justify-center items-center gap-[60px] bg-[#FAFAFA]">
           <div className="flex flex-col gap-[12px] items-center">
@@ -159,14 +159,14 @@ export default function ListPage() {
           </div>
 
           {/* 인기순위 컨테이너 */}
-          <div className="flex justify-center items-center gap-[24px] cursor-pointer max-sm:overflow-x-scroll max-sm:w-[350px] max-sm:justify-start max-sm:scrollbar-hide">
+          <div className="flex justify-center items-center gap-[24px] cursor-pointer max-sm:overflow-x-scroll max-sm:w-[350px] max-sm:justify-start max-sm:scrollbar-hide max-md:overflow-x-scroll max-md:w-[350px] max-md:justify-start max-lg:overflow-x-scroll max-lg:w-[680px] max-lg:justify-start">
             {top3Shops?.map((post) => {
               return <React.Fragment key={nanoid()}>{post && <BestPost post={post} />}</React.Fragment>;
             })}
           </div>
         </div>
 
-        <div className="flex flex-col justify-center items-center gap-[60px] w-full py-[60px] px-[20px]">
+        <div className="flex flex-col justify-center items-center gap-[60px] w-full pt-[60px] px-[20px]">
           <div className="">
             <div className="flex flex-col justify-center items-center gap-[40px]">
               <h2 className="text-[28px] text-[#212121] text-center font-semibold leading-[36px]">실시간모음</h2>
@@ -212,7 +212,7 @@ export default function ListPage() {
             return (
               <button
                 key={nanoid()}
-                className=" flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[8px] rounded-[8px]   text-[white] bg-[#FF8145] hover:bg-[#E5743E] "
+                className="mb-[60px] flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[8px] rounded-[8px]   text-[white] bg-[#FF8145] hover:bg-[#E5743E] "
                 onClick={(e) => pagenationHandler(e)}
               >
                 {item}
