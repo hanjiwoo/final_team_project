@@ -276,7 +276,7 @@ export default function WritePage() {
                   name="content"
                   value={newPost.content}
                   onChange={handleInputChange}
-                  maxLength={30}
+                  // maxLength={30}
                 />
               </div>
             </div>
