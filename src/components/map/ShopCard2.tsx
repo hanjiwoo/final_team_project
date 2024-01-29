@@ -12,23 +12,13 @@ import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
 import { getHoogis } from "../detail/queryFns";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-export default function ShopCard2({
-  shop,
-  shops,
-  type,
-}: {
-  shop: typeOfShop;
-  shops?: typeOfShop[];
-  type?: string;
-}) {
+import PhotoOfShop from "../home/PhotoOfShop";
+export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; shops?: typeOfShop[]; type?: string }) {
   const dispatch = useDispatch();
   // const shops = useSelector((state: any) => state.shops);
   const router = useRouter();
   const [addr, setAddr] = useState({ addrRoad: "", addrBuilding: "" });
-  const moveDetailPageBtn = (
-    event: React.MouseEvent<HTMLElement, MouseEvent>,
-    phoneNum: string
-  ) => {
+  const moveDetailPageBtn = (event: React.MouseEvent<HTMLElement, MouseEvent>, phoneNum: string) => {
     // console.log(router);
 
     // const detailshop = shops.find((shop: typeOfShop) => {
@@ -40,7 +30,7 @@ export default function ShopCard2({
   };
   const { data: hoogis, isLoading } = useQuery({
     queryKey: [`hoogis${shop.연락처}`],
-    queryFn: () => getHoogis(shop.연락처),
+    queryFn: () => getHoogis(shop.연락처)
   });
   useEffect(() => {
     if (window.kakao) {
@@ -54,7 +44,7 @@ export default function ShopCard2({
         if (result[0]) {
           setAddr({
             addrRoad: result[0].address_name,
-            addrBuilding: result[0].road_address.building_name,
+            addrBuilding: result[0].road_address.building_name
           });
         }
       });
@@ -72,14 +62,15 @@ export default function ShopCard2({
         key={nanoid()}
         onClick={(e) => moveDetailPageBtn(e, shop.연락처)}
       >
-        <section className="w-[100px] h-[100px]">
-          <div className="w-full h-full bg-[#F1F1F1] rounded-[12px]" />
+        <section className="w-[100px] h-[100px] flex justify-center items-center rounded-[12px] overflow-hidden">
+          {/* <div className="w-full h-full bg-[#F1F1F1] rounded-[12px]" /> */}
+          <div className="flex justify-center items-center mt-[18px]">
+            <PhotoOfShop shop={shop} type="map" />
+          </div>
         </section>
         <section className="flex flex-row border-opacity-60 rounded-lg gap-[9px]">
           <div>
-            <div className="text-[18px] font-semibold text-[#212121] leadding-[26px]">
-              {shop.업소명}
-            </div>{" "}
+            <div className="text-[18px] font-semibold text-[#212121] leadding-[26px]">{shop.업소명}</div>{" "}
             {/* <div className="flex justify-between">
 							{type === "no" ? (
 								<></>
@@ -95,11 +86,7 @@ export default function ShopCard2({
             <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
             {/* <div className="flex justify-round gap-5"> */}
             <div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
-              <Image
-                src={spoon_fork}
-                alt="위치"
-                className=" w-[18px] h-[18px]"
-              />
+              <Image src={spoon_fork} alt="위치" className=" w-[18px] h-[18px]" />
               {shop.업종}
             </div>
             <p className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
