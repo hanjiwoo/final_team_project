@@ -107,7 +107,7 @@ export default function MapHome() {
   useEffect(() => {
     setTimeout(() => {
       setRender(!render);
-    }, 800);
+    }, 1000);
   }, []);
 
   // const wheelHandler = (e: React.WheelEvent<HTMLDivElement>) => {
@@ -143,7 +143,7 @@ export default function MapHome() {
     if (foundShop) {
       shopInfoRef.current = foundShop;
     }
-    setInfoToggle(!infoToggle);
+    setInfoToggle((prevInfoToggle) => !prevInfoToggle);
   };
   return (
     <>

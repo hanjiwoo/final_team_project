@@ -1,16 +1,17 @@
-'use client';
-import React, { useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import postIcon from '../../app/assets/images/icon/pencilIcon.png';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/config/configStore';
-import { useRouter } from 'next/navigation';
-import { getHearts } from '../community/Fns';
-import { useQuery } from '@tanstack/react-query';
-import { getPosts } from '../community/queryFn';
-import { nanoid } from 'nanoid';
-import PostCard from './PostCard';
+"use client";
+import React, { useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import postIcon from "../../app/assets/images/icon/pencilIcon.png";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
+import { useRouter } from "next/navigation";
+import { getHearts } from "../community/Fns";
+import { useQuery } from "@tanstack/react-query";
+import { getPosts } from "../community/queryFn";
+import { nanoid } from "nanoid";
+import PostCard from "./PostCard";
+import { toast } from "react-toastify";
 
 export default function PostDataOff() {
   const user = useSelector((state: RootState) => state.login);
@@ -30,7 +31,8 @@ export default function PostDataOff() {
 
   useEffect(() => {
     if (!user.isLogin) {
-      router.push('/');
+      toast.warning("로그인시 이용가능합니다.");
+      router.push("/");
     }
   }, []);
 
@@ -53,7 +55,7 @@ export default function PostDataOff() {
             if (post) {
               return (
                 <React.Fragment key={nanoid()}>
-                  <PostCard post={post} />{' '}
+                  <PostCard post={post} />{" "}
                 </React.Fragment>
               );
             }

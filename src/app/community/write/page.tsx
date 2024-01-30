@@ -58,6 +58,7 @@ export default function WritePage() {
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
+      route.push("/community");
     }
   });
 
@@ -109,7 +110,6 @@ export default function WritePage() {
         theme: "colored"
       });
 
-      route.push("/community");
       mutateToAdd();
     }
   };
@@ -121,8 +121,8 @@ export default function WritePage() {
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(e.target.files, "이거나 보자");
     if (e.target.files) {
-      if (e.target.files?.length > 5) {
-        return toast.error("5개 까지 가능합니다", {
+      if (e.target.files?.length > 3) {
+        return toast.error("3개 까지 가능합니다", {
           transition: Slide,
           position: "top-center",
           autoClose: 5000,
@@ -135,8 +135,8 @@ export default function WritePage() {
         });
       }
       if (urlFiles) {
-        if (urlFiles.length + e.target.files.length > 5) {
-          return toast.error("5개 까지 가능합니다", {
+        if (urlFiles.length + e.target.files.length > 3) {
+          return toast.error("3개 까지 가능합니다", {
             transition: Slide,
             position: "top-center",
             autoClose: 5000,
@@ -153,6 +153,9 @@ export default function WritePage() {
       let arr = [];
       let arr2 = [];
       for (let i = 0; i < e.target.files.length; i++) {
+        if (e.target.files[i].size > 1000000) {
+          return toast.error("파일 사이즈가 너무 큽니다.");
+        }
         arr.push(URL.createObjectURL(e.target.files[i]));
         arr2.push(e.target.files[i]);
       }
@@ -261,6 +264,7 @@ export default function WritePage() {
                   name="title"
                   value={newPost.title}
                   onChange={handleInputChange}
+                  maxLength={20}
                 />
               </div>
 
@@ -276,7 +280,7 @@ export default function WritePage() {
                   name="content"
                   value={newPost.content}
                   onChange={handleInputChange}
-                  // maxLength={30}
+                  maxLength={40}
                 />
               </div>
             </div>
