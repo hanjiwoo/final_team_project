@@ -222,9 +222,11 @@ export default function Join() {
   return (
     <div className="flex justify-center items-center w-full my-[60px]">
       <div className="w-[360px]">
-        <div className="mb-[52px]">
-          <h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left">회원가입</h1>
-          <span>
+        <div className="mb-[52px] flex flex-col gap-[16px]">
+          <h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left text-[#212121]">
+            회원가입
+          </h1>
+          <span className="text-[#5C5C5C] text-[18px] leading-[26px] font-semibold">
             따뜻한 마음을 모아 당신에게 드려요 :)
             <br />
             모두의 음식점, 모음
@@ -289,7 +291,7 @@ export default function Join() {
               onChange={checkAll}
               checked={checkList.length === 4 ? true : false}
             />
-            <div>전체동의</div>
+            <div className="text-[#5C5C5C]">전체동의</div>
           </div>
           <div className="border border-gray-300"></div>
           <div className="flex items-center">
@@ -301,7 +303,7 @@ export default function Join() {
               checked={checkList.includes("age") ? true : false}
             />
             <div className="flex justify-between items-center w-full">
-              <span>(필수) 만 14세 이상입니다</span>
+              <span className="text-[#5C5C5C]">(필수) 만 14세 이상입니다</span>
               <Image
                 src={rightIcon}
                 alt="nextPage"
@@ -321,7 +323,7 @@ export default function Join() {
               checked={checkList.includes("terms") ? true : false}
             />
             <div className="flex justify-between items-center w-full">
-              <span>(필수) 이용약관 동의 </span>
+              <span className="text-[#5C5C5C]">(필수) 이용약관 동의 </span>
               <Image
                 src={rightIcon}
                 alt="nextPage"
@@ -341,7 +343,7 @@ export default function Join() {
               checked={checkList.includes("collect") ? true : false}
             />
             <div className="flex justify-between items-center w-full">
-              <span>(필수) 개인정보 수집 및 이용 동의 </span>
+              <span className="text-[#5C5C5C]">(필수) 개인정보 수집 및 이용 동의 </span>
               <Image
                 src={rightIcon}
                 alt="nextPage"
@@ -361,7 +363,7 @@ export default function Join() {
               checked={checkList.includes("choice") ? true : false}
             />
             <div className="flex justify-between items-center w-full">
-              <span>(선택) 마케팅 개인정보 제3자 제공 동의 </span>
+              <span className="text-[#5C5C5C]">(선택) 마케팅 개인정보 제3자 제공 동의 </span>
               <Image
                 src={rightIcon}
                 alt="nextPage"

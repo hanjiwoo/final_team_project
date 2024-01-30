@@ -283,11 +283,13 @@ export default function Login() {
   // };
 
   return (
-    <div className="flex justify-center items-center w-full my-[60px]">
+    <div className="flex justify-center items-center w-full my-[60px] bg-[#fff]">
       <div className="w-[360px]">
-        <div className="mb-[52px]">
-          <h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left">로그인</h1>
-          <span>
+        <div className="mb-[52px] flex gap-[16px] flex-col">
+          <h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left text-[#212121]">
+            로그인
+          </h1>
+          <span className="text-[#5C5C5C] text-[18px] leading-[26px] font-semibold">
             따뜻한 마음을 모아 당신에게 드려요 :)
             <br />
             모두의 음식점, 모음

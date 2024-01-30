@@ -148,7 +148,7 @@ export default function ListPage() {
   return (
     <>
       {/* 전체 컨테이너 */}
-      <div className="flex  flex-col items-center  w-full gap-[20px]">
+      <div className="flex  flex-col items-center  w-full gap-[20px] bg-[#fff]">
         {/* 글 모음/ 인기순위 컨텐츠 */}
         <div className="flex w-full py-[60px] flex-col justify-center items-center gap-[60px] bg-[#FAFAFA]">
           <div className="flex flex-col gap-[12px] items-center">
@@ -166,7 +166,7 @@ export default function ListPage() {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center items-center gap-[60px] w-full pt-[60px] px-[20px]">
+        <div className="flex flex-col justify-center items-center gap-[60px] w-full pt-[60px] px-[20px] bg-[#fff]">
           <div className="">
             <div className="flex flex-col justify-center items-center gap-[40px]">
               <h2 className="text-[28px] text-[#212121] text-center font-semibold leading-[36px]">실시간모음</h2>
