@@ -40,7 +40,7 @@ export default function ShopList() {
       <div className="container py-[40px] w-full relative">
         <div className="text-center mb-12">
           <h1 className="text-[28px] text-[#212121] font-semibold leading-[36px] mb-[12px]">
-            내 주변의 모-음은 어디일까요?
+            내 주변의 모음은 어디일까요?
           </h1>
           <div className="mb-[60px]">
             {shops[0]?.시도 === "" ? (
@@ -48,11 +48,7 @@ export default function ShopList() {
             ) : (
               <div className="flex justify-center gap-2 font-[18px] leading-[26px]">
                 현재
-                <Image
-                  src={place}
-                  alt="위치마크"
-                  className="w-[24px] h-[24px]"
-                />
+                <Image src={place} alt="위치마크" className="w-[24px] h-[24px]" />
                 <p className="font-bold text-[18px] leading-[26px]">
                   {shops[0]?.시도} {shops[0]?.시군}
                 </p>
@@ -70,7 +66,7 @@ export default function ShopList() {
               navigation={true} // prev, next button
               autoplay={{
                 delay: 3500,
-                disableOnInteraction: false, // 사용자 상호작용시 슬라이더 일시 정지 비활성
+                disableOnInteraction: false // 사용자 상호작용시 슬라이더 일시 정지 비활성
               }}
             >
               {shops.map((shop: typeOfShop) => {

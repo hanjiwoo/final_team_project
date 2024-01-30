@@ -77,8 +77,8 @@ export default function NowLocationBtn() {
         className="bg-[#FF8145] text-white font-[500] py-[14px] px-[27px] rounded-[8px]"
         onClick={findNowLoacation}
       >
-        내 주변 모-음 검색하기
-      </button>{" "}
+        내 주변 모음 검색하기
+      </button>
       {/*  <div>
         <h2>Your Location:</h2>
         {latitude !== null && longitude !== null ? (
