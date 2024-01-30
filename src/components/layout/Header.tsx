@@ -68,7 +68,7 @@ const Navbar = () => {
 
   const buttonStyle = "py-5 px-3 text-gray-700 hover:text-gray-400";
   return (
-    <nav className="bg-gray-00 w-full">
+    <nav className="bg-gray-00 w-full bg-[#fff]">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between">
           {/* 메뉴 */}
@@ -107,7 +107,7 @@ const Navbar = () => {
                   className="w-[100px] h-10 py-3 px-2 bg-[#FF8145] hover:bg-[#E5743E] rounded-lg transition duration-300 justify-center items-center gap-1 inline-flex"
                 >
                   <div className="text-right text-white text-sm font-medium font-['Pretendard'] leading-tight">
-                    모음 시작하기
+                    시작하기
                   </div>
                 </Link>
               </>
