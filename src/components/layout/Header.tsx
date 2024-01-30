@@ -91,7 +91,7 @@ const Navbar = () => {
             {uid ? (
               <>
                 <Link href="/mypage" className={buttonStyle}>
-                  마이페이지
+                  마이모음
                 </Link>
                 <Link href="/" className={buttonStyle} onClick={handleSignOut}>
                   로그아웃
