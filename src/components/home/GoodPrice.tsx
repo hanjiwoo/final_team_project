@@ -27,19 +27,13 @@ export default function GoodPrice() {
     return array;
   }
 
-  const searchHandler = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const searchHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const textForSearch = e.currentTarget.value;
     if (e.currentTarget.id === "price") {
       // console.log(e.currentTarget.value, "벨류한번만 찍어봅세");
       const filterdShops = shops.filter((shop: typeOfShop) => {
         if (shop.가격1 && shop.가격2 && shop.가격3) {
-          return (
-            shop.가격1 <= +textForSearch ||
-            shop.가격2 <= +textForSearch ||
-            shop.가격3 <= +textForSearch
-          );
+          return shop.가격1 <= +textForSearch || shop.가격2 <= +textForSearch || shop.가격3 <= +textForSearch;
         }
         if (shop.가격1 && shop.가격2) {
           return shop.가격1 <= +textForSearch || shop.가격2 <= +textForSearch;
@@ -72,11 +66,7 @@ export default function GoodPrice() {
     const textForSearch = "5000";
     const filterdShops = shops.filter((shop: typeOfShop) => {
       if (shop.가격1 && shop.가격2 && shop.가격3) {
-        return (
-          shop.가격1 <= +textForSearch ||
-          shop.가격2 <= +textForSearch ||
-          shop.가격3 <= +textForSearch
-        );
+        return shop.가격1 <= +textForSearch || shop.가격2 <= +textForSearch || shop.가격3 <= +textForSearch;
       }
       if (shop.가격1 && shop.가격2) {
         return shop.가격1 <= +textForSearch || shop.가격2 <= +textForSearch;
@@ -93,84 +83,44 @@ export default function GoodPrice() {
     <>
       <div className="text-center mb-12">
         <h1 className="text-[28px] leading-[36px] text-[#212121] font-semibold mb-[12px]">
-          전국의 착한 가격 매장 모-음
+          전국의 착한 가격 매장 모음
         </h1>
-        <span className="text-[18px] leading-[20px] font-[#5c5c5c]">
-          따뜻한 마음들이 모인 곳은 어디일까요?
-        </span>
+        <span className="text-[18px] leading-[20px] font-[#5c5c5c]">따뜻한 마음들이 모인 곳은 어디일까요?</span>
       </div>
       <div className=" gap-10 mb-[60px] grid grid-cols-3 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6">
         <div className="flex flex-col items-center gap-[8px]">
-          <button
-            id="price"
-            className={buttonClass}
-            value="5000"
-            onClick={(e) => searchHandler(e)}
-          >
+          <button id="price" className={buttonClass} value="5000" onClick={(e) => searchHandler(e)}>
             <Image className="w-8 h-8 relative" src={money1} alt="5000"></Image>
           </button>
           <span>#5000</span>
         </div>
         <div className="flex flex-col items-center gap-[8px]">
-          <button
-            id="price"
-            className={buttonClass}
-            value="8000"
-            onClick={(e) => searchHandler(e)}
-          >
+          <button id="price" className={buttonClass} value="8000" onClick={(e) => searchHandler(e)}>
             <Image className="w-8 h-8 relative" src={money2} alt="8000"></Image>
           </button>
           <span>#8000</span>
         </div>
         <div className="flex flex-col items-center gap-[8px]">
-          <button
-            className={buttonClass}
-            value="한식"
-            onClick={(e) => searchHandler(e)}
-          >
+          <button className={buttonClass} value="한식" onClick={(e) => searchHandler(e)}>
             <Image className="w-8 h-8 relative" src={korean} alt="한식"></Image>
           </button>
           <span>#한식</span>
         </div>
         <div className="flex flex-col items-center gap-[8px]">
-          <button
-            className={buttonClass}
-            value="일식"
-            onClick={(e) => searchHandler(e)}
-          >
-            <Image
-              className="w-8 h-8 relative"
-              src={japanese}
-              alt="일식"
-            ></Image>
+          <button className={buttonClass} value="일식" onClick={(e) => searchHandler(e)}>
+            <Image className="w-8 h-8 relative" src={japanese} alt="일식"></Image>
           </button>
           <span>#일식</span>
         </div>
         <div className="flex flex-col items-center gap-[8px]">
-          <button
-            className={buttonClass}
-            value="중식"
-            onClick={(e) => searchHandler(e)}
-          >
-            <Image
-              className="w-8 h-8 relative"
-              src={chinese}
-              alt="중식"
-            ></Image>
+          <button className={buttonClass} value="중식" onClick={(e) => searchHandler(e)}>
+            <Image className="w-8 h-8 relative" src={chinese} alt="중식"></Image>
           </button>
           <span>#중식</span>
         </div>
         <div className="flex flex-col items-center gap-[8px]">
-          <button
-            className={buttonClass}
-            value="양식"
-            onClick={(e) => searchHandler(e)}
-          >
-            <Image
-              className="w-8 h-8 relative"
-              src={american}
-              alt="양식"
-            ></Image>
+          <button className={buttonClass} value="양식" onClick={(e) => searchHandler(e)}>
+            <Image className="w-8 h-8 relative" src={american} alt="양식"></Image>
           </button>
           <span>#양식</span>
         </div>

@@ -50,8 +50,8 @@ export default function CommunityDetail() {
   return (
     <>
       {/* 커뮤니티 디테일 전체 컨테이너 */}
-      <div className="flex flex-col w-full items-center gap-[60px]  my-[60px]">
-        <div className="flex flex-col gap-[12px]  justify-center w-[680px]">
+      <div className="flex flex-col w-full items-center gap-[60px]  my-[60px] px-[20px]">
+        <div className="flex flex-col gap-[12px]  justify-center w-[680px] max-md:w-full">
           <div className="flex flex-col gap-[8px]">
             <div className="flex flex-col gap-[12px] w-full justify-center">
               <p className="text-[#212121] leading-[14px] py-[4px] px-[8px] bg-[#F1F1F1] rounded-[100px] text-[10px] flex justify-center items-center w-[60px]">
