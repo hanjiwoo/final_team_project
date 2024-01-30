@@ -17,7 +17,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ["/OG_image.jpg"]
-  }
+  },
+  metadataBase: new URL("https://mo-eum.vercel.app")
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
