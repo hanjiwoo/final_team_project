@@ -82,18 +82,6 @@ export default function ShopList() {
           </div>
         </div>
         <section className="flex bg-blue-300 justify-around">
-          {/* <button
-                        className="bg-purple-300 rounded-full text-4xl hover:scale-110 absolute top-[200px] left-[-60px]"
-                        onClick={leftMove}
-                    >
-                        👈
-                    </button>
-                    <button
-                        className="bg-purple-300 rounded-full text-4xl hover:scale-110 absolute top-[200px] right-[-60px]"
-                        onClick={rigthMove}
-                    >
-                        👉
-                    </button> */}
           {shops[0] && (
             <button
               onClick={moveToFullMap}
