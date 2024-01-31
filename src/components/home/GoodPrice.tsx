@@ -81,7 +81,7 @@ export default function GoodPrice() {
   }, [shops]);
   return (
     <>
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 mt-[60px]">
         <h1 className="text-[28px] leading-[36px] text-[#212121] font-semibold mb-[12px]">
           전국의 착한 가격 매장 모음
         </h1>
@@ -125,7 +125,7 @@ export default function GoodPrice() {
           <span>#양식</span>
         </div>
       </div>
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[24px] mb-[80px]">
+      <section className="grid max-md:flex max-md:w-full max-md:overflow-x-scroll max-sm:scrollbar-hide md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[24px] mb-[80px] px-[20px]">
         {searchedShops.map((shop: typeOfShop) => {
           return (
             <React.Fragment key={nanoid()}>
