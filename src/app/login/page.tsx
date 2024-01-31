@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect, useRef } from "react";
 import {
   signInWithEmailAndPassword,
   getAuth,
@@ -18,6 +18,7 @@ import GoogleLogo from "../assets/images/icon/google.png";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/redux/modules/loginSlice";
+import { getProviders, signIn } from "next-auth/react";
 
 import { toast, ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -46,18 +47,18 @@ export default function Login() {
   }, [user]);
 
   // 카카오 로그인 부분 토스티파이
-  const notify = () =>
-    toast.error("카카오 로그인은 추후 지원 예정입니다", {
-      transition: Slide,
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored"
-    });
+  // const notify = () =>
+  //   toast.error("카카오 로그인은 추후 지원 예정입니다", {
+  //     transition: Slide,
+  //     position: "top-center",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "colored"
+  //   });
 
   // 카카오 로그인
   useEffect(() => {
@@ -282,6 +283,43 @@ export default function Login() {
   // 	signInWithKakao();
   // };
 
+  // 추가된 부분
+  const [providers, setProviders] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const res: any = await getProviders();
+      console.log(res);
+      setProviders(res);
+    })();
+  }, []);
+  // 추가된 부분
+
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  const handleSubmit = async () => {
+    // console.log(emailRef.current);
+    // console.log(passwordRef.current);
+    const result = await signIn("credentials", {
+      username: emailRef.current,
+      password: passwordRef.current,
+      redirect: true,
+      callbackUrl: "/"
+    });
+    console.log(result);
+  };
+
+  // 추가된 부분
+  const handleKakao = async () => {
+    const result = await signIn("kakao", {
+      redirect: true,
+      callbackUrl: "/"
+    });
+    console.log(`result는` + result);
+  };
+  // 추가된 부분
+
   return (
     <div className="flex justify-center items-center w-full my-[60px] bg-[#fff]">
       <div className="w-[360px]">
@@ -367,9 +405,10 @@ export default function Login() {
 							카카오로 로그인
 						</Link> */}
             <button
-              onClick={() => {
-                notify();
-              }}
+              // onClick={() => {
+              //   notify();
+              // }}
+              onClick={handleKakao}
               className=" flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FEE500]"
             >
               카카오로 로그인
