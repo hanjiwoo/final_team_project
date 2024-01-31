@@ -134,7 +134,9 @@ export default function ListPage() {
       setPostArray(data2);
     }
   };
-
+  useEffect(() => {
+    setPostArray(posts);
+  }, [posts]);
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full h-full">

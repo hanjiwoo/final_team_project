@@ -58,6 +58,7 @@ export default function WritePage() {
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
+      route.push("/community");
     }
   });
 
@@ -109,7 +110,6 @@ export default function WritePage() {
         theme: "colored"
       });
 
-      route.push("/community");
       mutateToAdd();
     }
   };
@@ -121,8 +121,8 @@ export default function WritePage() {
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(e.target.files, "이거나 보자");
     if (e.target.files) {
-      if (e.target.files?.length > 5) {
-        return toast.error("5개 까지 가능합니다", {
+      if (e.target.files?.length > 3) {
+        return toast.error("3개 까지 가능합니다", {
           transition: Slide,
           position: "top-center",
           autoClose: 3000,
@@ -135,8 +135,8 @@ export default function WritePage() {
         });
       }
       if (urlFiles) {
-        if (urlFiles.length + e.target.files.length > 5) {
-          return toast.error("5개 까지 가능합니다", {
+        if (urlFiles.length + e.target.files.length > 3) {
+          return toast.error("3개 까지 가능합니다", {
             transition: Slide,
             position: "top-center",
             autoClose: 3000,
@@ -153,6 +153,9 @@ export default function WritePage() {
       let arr = [];
       let arr2 = [];
       for (let i = 0; i < e.target.files.length; i++) {
+        if (e.target.files[i].size > 1000000) {
+          return toast.error("파일 사이즈가 너무 큽니다.");
+        }
         arr.push(URL.createObjectURL(e.target.files[i]));
         arr2.push(e.target.files[i]);
       }
@@ -267,8 +270,10 @@ export default function WritePage() {
                       name="title"
                       value={newPost.title}
                       onChange={handleInputChange}
+                         maxLength={20}
                     />
                   </div>
+
 
                   <div className="flex gap-[40px] w-full max-sm:gap-[15px]">
                     <div className="flex w-[90px]">
@@ -278,16 +283,18 @@ export default function WritePage() {
                       <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">*</p>
                     </div>
 
+
                     <textarea
                       className=" resize-none flex flex-col w-full h-[200px] p-[12px]  justify-between gap-[4px] border-[1px] rounded-[8px] text-[#212121] outline-none text-[14px] font-medium leading-[20px]"
                       placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
                       name="content"
                       value={newPost.content}
                       onChange={handleInputChange}
-                      // maxLength={30}
+                       maxLength={40}
                     />
                   </div>
                 </div>
+
 
                 <div className="flex justify-end gap-[24px] ">
                   <button
