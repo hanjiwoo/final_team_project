@@ -85,7 +85,7 @@ export default function WritePage() {
 
     if (!newPost.content || !newPost.title || !newPost.category)
       // return toast.error("카테고리 타이틀 컨텐츠를 작성해 주세요");
-      return toast.error("카테고리 타이틀 콘텐츠를 작성해 주세요", {
+      return toast.error("카테고리 제목 내용을 작성해 주세요", {
         transition: Slide,
         position: "top-center",
         autoClose: 3000,
@@ -270,10 +270,9 @@ export default function WritePage() {
                       name="title"
                       value={newPost.title}
                       onChange={handleInputChange}
-                         maxLength={20}
+                      maxLength={20}
                     />
                   </div>
-
 
                   <div className="flex gap-[40px] w-full max-sm:gap-[15px]">
                     <div className="flex w-[90px]">
@@ -283,18 +282,16 @@ export default function WritePage() {
                       <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">*</p>
                     </div>
 
-
                     <textarea
                       className=" resize-none flex flex-col w-full h-[200px] p-[12px]  justify-between gap-[4px] border-[1px] rounded-[8px] text-[#212121] outline-none text-[14px] font-medium leading-[20px]"
                       placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
                       name="content"
                       value={newPost.content}
                       onChange={handleInputChange}
-                       maxLength={40}
+                      maxLength={40}
                     />
                   </div>
                 </div>
-
 
                 <div className="flex justify-end gap-[24px] ">
                   <button
