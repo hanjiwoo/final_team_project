@@ -99,7 +99,7 @@ export default function CuteHeart({ postId, type }: { postId: string | undefined
       {/* <LikeButton $like={like.toString()} onClick={likeBTN}>
     좋아요 버튼
   </LikeButton> */}
-      <div className="flex items-center gap-[4px]">
+      <div className="flex items-center gap-[4px] max-sm:hidden">
         <div onClick={HeartUpHandler}>
           {filterdheart ? (
             <Image className="w-[20px] h-[20px]" id="이미지" src={HeartFull} alt="빨간따봉"></Image>

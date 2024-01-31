@@ -51,7 +51,7 @@ export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shop
   }, []);
   return (
     <button onClick={(e) => moveDetailPageBtn(e, shop.연락처)}>
-      <section className="flex w-[252px] bg-[#fff] rounded-lg justify-center items-center" key={nanoid()}>
+      <section className="flex w-[252px] bg-[#fff] rounded-lg justify-center items-center mx-[10px]" key={nanoid()}>
         <div className="h-full border-opacity-60 rounded-lg w-full">
           <PhotoOfShop shop={shop} />
 

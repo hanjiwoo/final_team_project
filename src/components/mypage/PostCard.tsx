@@ -13,9 +13,12 @@ export default function PostCard({ post }: { post: Post }) {
   };
   // console.log(post.photos?.[0], " 이걸 찍어봅세");
   return (
-    <div className="w-full">
-      <div className="w-full flex justify-center">
-        <div className="cursor-pointer w-[680px] rounded-[8px] " onClick={() => moveToDetail(post.id)}>
+    <div className="flex justify-center items-center flex-col mx-[20px]">
+      <div className="w-full">
+        <div
+          className="cursor-pointer w-full rounded-[8px] flex flex-col justify-center"
+          onClick={() => moveToDetail(post.id)}
+        >
           {/* 카테고리 */}
 
           <p className="text-[#212121] leading-[14px] py-[4px] px-[8px] bg-[#F1F1F1] rounded-[100px] text-[10px] flex justify-center items-center w-[60px]">
@@ -38,7 +41,7 @@ export default function PostCard({ post }: { post: Post }) {
               </div>
 
               {/* 사진컨테이너 */}
-              <div className="w-[100px] h-[100px] bg-[#F1F1F1] rounded-[8px]">
+              <div className="w-[100px] h-[100px] bg-[#F1F1F1] rounded-[8px] max-sm:hidden">
                 {post.photos?.[0] ? (
                   <img className="w-[100px] h-[100px]" src={post.photos?.[0]} alt="되나?" />
                 ) : (
@@ -78,9 +81,8 @@ export default function PostCard({ post }: { post: Post }) {
             <CuteHeart type="small" postId={post.id} />
           </div>
         </div>
-      </div>
-      <div className="flex justify-center w-full">
-        <hr className="my-[32px] w-[680px]" />
+
+        <hr className="my-[32px] w-full" />
       </div>
     </div>
   );

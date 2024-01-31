@@ -17,3 +17,21 @@
   display: block;
   object-fit: cover;
 }
+
+:root {
+  --swiper-theme-color: #c9c9c9 !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #fff;
+  opacity: 0.5;
+  padding: 15px 22px;
+  border-radius: 99px;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+}
