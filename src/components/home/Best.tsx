@@ -41,7 +41,7 @@ export default function Best() {
     }
   }, [thumbs, shops]);
   return (
-    <div className="container px-5 py-40 mx-auto">
+    <div className="container px-[20px] mx-auto">
       {/* <div style={{ pointerEvents: "none", width: "400px", height: "300px" }}>
         <Roadview
           position={{
@@ -57,16 +57,18 @@ export default function Best() {
           }}
         />
       </div> */}
-      <div className="text-center mb-12">
-        <h1 className="text-[28px] leading-[36px] text-[#212121] font-semibold mb-[12px]">이달의 Best 매장 모음</h1>
-        <span className="text-[18px] leading-[20px] font-[#5c5c5c]">인기 매장을 지금 바로 확인해보세요 :)</span>
-      </div>
+      <div className="my-[40px]">
+        <div className="text-center mb-12">
+          <h1 className="text-[28px] leading-[36px] text-[#212121] font-semibold mb-[12px]">이달의 Best 매장 모음</h1>
+          <span className="text-[18px] leading-[20px] font-[#5c5c5c]">인기 매장을 지금 바로 확인해보세요 :)</span>
+        </div>
 
-      <div className="flex justify-center items-center">
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[24px]">
-          {top3Shops?.map((shop) => {
-            return <React.Fragment key={nanoid()}>{shop && <ShopCard2 shop={shop} />}</React.Fragment>;
-          })}
+        <div className="flex justify-center items-center">
+          <div className="flex w-full gap-[24px] max-lg:overflow-x-scroll max-lg:justify-start max-lg:gap-[20px] justify-center max-sm:scrollbar-hide ">
+            {top3Shops?.map((shop) => {
+              return <React.Fragment key={nanoid()}>{shop && <ShopCard2 shop={shop} />}</React.Fragment>;
+            })}
+          </div>
         </div>
       </div>
     </div>
