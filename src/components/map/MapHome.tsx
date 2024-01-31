@@ -67,6 +67,7 @@ export default function MapHome() {
         // latRef.current = Number(result[0].y);
         // lngRef.current = Number(result[0].x);
       });
+
       let mappedArray: {
         title: string;
         latitude: string;
@@ -106,8 +107,10 @@ export default function MapHome() {
 
   useEffect(() => {
     setTimeout(() => {
-      setRender(!render);
-    }, 800);
+      setRender((prev) => {
+        return !prev;
+      });
+    }, 1000);
   }, []);
 
   // const wheelHandler = (e: React.WheelEvent<HTMLDivElement>) => {
@@ -143,7 +146,7 @@ export default function MapHome() {
     if (foundShop) {
       shopInfoRef.current = foundShop;
     }
-    setInfoToggle(!infoToggle);
+    setInfoToggle((prevInfoToggle) => !prevInfoToggle);
   };
   return (
     <>

@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
+import { toast } from "react-toastify";
 export default function CuteHeart({ postId, type }: { postId: string | undefined; type: string }) {
   const { isLogin, uid } = useSelector((state: RootState) => state.login);
   const [disable, setDisable] = useState(false);
@@ -79,7 +80,7 @@ export default function CuteHeart({ postId, type }: { postId: string | undefined
   const HeartUpHandler = () => {
     if (type === "small") return;
     if (disable) return;
-    if (!isLogin) return alert("로그인 후에 이용이 가능합니다.");
+    if (!isLogin) return toast.warning("로그인 후에 이용이 가능합니다.");
     // setLIke(!like);
 
     if (filterdheart) {

@@ -105,6 +105,7 @@ export default function Daetgle({ post }: { post: Post }) {
           onChange={(e) => onChangeHandler(e)}
           className="border-[1px] border-gray-[400] w-full h-[48px] rounded-[8px] outline-none px-[16px]"
           placeholder="댓글을 작성해주세요."
+          maxLength={20}
         />
 
         <button

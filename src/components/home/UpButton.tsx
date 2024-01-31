@@ -8,7 +8,7 @@ export default function UpButton() {
   const scrollToTop = () => {
     window.scroll({
       top: 0,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   };
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function UpButton() {
       }
     };
 
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
     window.addEventListener("scroll", handleShowButton);
     return () => {
       window.removeEventListener("scroll", handleShowButton);

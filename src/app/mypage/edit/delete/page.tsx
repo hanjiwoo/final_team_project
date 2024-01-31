@@ -1,6 +1,10 @@
 "use client";
+import { logout } from "@/redux/modules/loginSlice";
 import { deleteUser, getAuth } from "firebase/auth";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function DeleteUser() {
   const auth = getAuth();
@@ -8,8 +12,12 @@ export default function DeleteUser() {
   const checkHandeler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsCheck(e.target.checked);
   };
+
+  const dispatch = useDispatch();
+  const router = useRouter();
   const deleteUserHandler = () => {
-    if (!ischeck) return alert("유의사항을 확인해주세요");
+    if (!ischeck) return toast.error("유의사항을 확인해주세요");
+
     const result = window.confirm("정말 삭제하시겠습니까?");
     if (!result) return;
 
@@ -17,6 +25,9 @@ export default function DeleteUser() {
       deleteUser(auth.currentUser)
         .then(() => {
           alert("적용완료");
+
+          dispatch(logout("로그아웃"));
+          router.push("/");
         })
         .catch((error) => {
           alert(error);
