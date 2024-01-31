@@ -11,6 +11,10 @@ import moeumLogo from "../../app/assets/images/moeumLogo.png";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import community from "../../app/assets/images/menu/community.png";
+import map from "../../app/assets/images/menu/map.png";
+import about from "../../app/assets/images/menu/store.png";
+import my from "../../app/assets/images/menu/my.png";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
@@ -85,7 +89,7 @@ const Navbar = () => {
                   router.push("/");
                 }}
               >
-                <Image src={moeumLogo} alt="logo" className="w-[72px] h-[24px]" />
+                <Image src={moeumLogo} alt="logo" className="w-[72px] h-[24px] cursor-pointer" />
               </div>
             </div>
           </div>
@@ -177,18 +181,22 @@ const Navbar = () => {
 
       {/* mobile menu items */}
       <div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
-        <a href="/about" className="block py-2 px-4 text-sm hover:bg-gray-200">
-          모음소개
-        </a>
-        <a href="/map" className="block py-2 px-4 text-sm hover:bg-gray-200">
-          지도모음
-        </a>
-        <a href="/community" className="block py-2 px-4 text-sm hover:bg-gray-200">
-          커뮤니티
-        </a>
-        <a href="/mypage" className="block py-2 px-4 text-sm hover:bg-gray-200">
-          마이모음
-        </a>
+        <Link href="/about" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
+          <Image className="w-[24px] h-[24px]" src={about} alt="소개"></Image>
+          <div className="ml-2 text-[16px]">모음소개</div>
+        </Link>
+        <Link href="/map" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
+          <Image className="w-[24px] h-[24px]" src={map} alt="지도"></Image>
+          <div className="ml-2 text-[16px]">지도모음</div>
+        </Link>
+        <Link href="/community" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
+          <Image className="w-[24px] h-[24px]" src={community} alt="커뮤"></Image>
+          <div className="ml-2 text-[16px]">커뮤니티</div>
+        </Link>
+        <Link href="/mypage" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
+          <Image className="w-[24px] h-[24px]" src={my} alt="마이"></Image>
+          <div className="ml-2 text-[16px]">마이모음</div>
+        </Link>
       </div>
     </nav>
   );

@@ -73,11 +73,11 @@ export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shop
           </div>
           {/* <div className="flex justify-round gap-5"> */}
           <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center">
-            <Image src={spoon_fork} alt="스푼포크" className="w-[20px] h-[20px]" />
+            <Image src={spoon_fork} alt="스푼포크" className="w-[18px] h-[18px]" />
             {shop.업종}
           </div>
           <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center ">
-            <Image src={place} alt="위치" className="w-[20px] h-[20px]" />
+            <Image src={place} alt="위치" className="w-[18px] h-[18px]" />
             <span className="w-full text-left block whitespace-nowrap truncate text-ellipsis">{shop.주소}</span>
           </div>
           {/* </div> */}
