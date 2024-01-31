@@ -58,7 +58,7 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
   return (
     <>
       <section
-        className="flex gap-[20px] h-[148px] w-[440px] px-[20px] py-[24px] bg-[#fff] rounded-[16px] items-center hover:scale-[1.04] transition-transform ease duration-300 "
+        className="flex gap-[20px] h-[148px] w-[400px] max-sm:w-full p-[20px] bg-[#fff] rounded-[16px] items-center hover:scale-[1.04] transition-transform ease duration-300 "
         key={nanoid()}
         onClick={(e) => moveDetailPageBtn(e, shop.연락처)}
       >
