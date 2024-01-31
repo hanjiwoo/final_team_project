@@ -36,7 +36,7 @@ export default function DeleteUser() {
     if (auth.currentUser) {
       deleteUser(auth.currentUser)
         .then(() => {
-          alert("아쉽지만 다음에 다시 만나요!");
+          alert("회원탈퇴가 완료되었습니다.");
 
           dispatch(logout("로그아웃"));
           router.push("/");

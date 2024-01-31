@@ -11,7 +11,7 @@ export default function MainBanner() {
         <div className="text-[28px] font-[700] mb-[12px] max-sm:text-[15px] max-sm:leading-[20px]">
           따뜻한 마음들을 모아 당신에게 드려요 :)
         </div>
-        <div className="text-[40px] font-[700] mb-[32px]  max-sm:text-[28px] max-sm:leading-[20px]">
+        <div className="text-[40px] font-[700] mb-[32px] max-sm:text-[25px] max-sm:leading-[20px]">
           모두의 음식점, 모음
         </div>
         <NowLocationBtn />
