@@ -199,7 +199,9 @@ export default function ListPage() {
               {filteredPosts?.map((post) => {
                 return (
                   <React.Fragment key={nanoid()}>
-                    <PostCard post={post} />
+                    <div className="flex justify-center items-center">
+                      <PostCard post={post} />
+                    </div>
                   </React.Fragment>
                 );
               })}
