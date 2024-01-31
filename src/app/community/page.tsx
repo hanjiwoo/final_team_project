@@ -195,16 +195,18 @@ export default function ListPage() {
             {/* 작성하기 버튼 */}
 
             {/* 게시글 전체 컨테이너 */}
-            <div className="flex flex-col justify-center items-center w-full">
-              {filteredPosts?.map((post) => {
-                return (
-                  <React.Fragment key={nanoid()}>
-                    <div className="flex justify-center items-center">
-                      <PostCard post={post} />
-                    </div>
-                  </React.Fragment>
-                );
-              })}
+            <div className="flex flex-col justify-center items-center w-[680px] max-sm:w-[350px]">
+              <div className="w-full">
+                {filteredPosts?.map((post) => {
+                  return (
+                    <React.Fragment key={nanoid()}>
+                      <div className="flex justify-center items-center">
+                        <PostCard post={post} />
+                      </div>
+                    </React.Fragment>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

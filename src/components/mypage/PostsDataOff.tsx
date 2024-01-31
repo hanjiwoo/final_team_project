@@ -37,9 +37,9 @@ export default function PostDataOff() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center w-screen mt-[60px] mb-[60px]">
-      <div className="w-[880px] h-[568px]">
-        <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px] mx-[20px]">게시물 모음</h1>
+    <div className="flex justify-center items-center w-full my-[60px] px-[20px] max-sm:my-[32px] max-lg:my-[60px]">
+      <div className="w-[880px]">
+        <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px] ">게시물 모음</h1>
         {!myPosts && (
           <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
             <Image src={postIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
