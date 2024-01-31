@@ -56,7 +56,7 @@ export default function DoneAssess() {
   const router = useRouter();
   const modalOpenHandeler = () => {
     if (correctUser)
-      return toast.error("이미 작성하셨어요", {
+      return toast.error("이미 작성하셨어요.", {
         transition: Slide,
         position: "top-center",
         autoClose: 5000,
@@ -68,7 +68,7 @@ export default function DoneAssess() {
         theme: "colored"
       });
     if (!isLogin)
-      return toast.error("로그인하셔야 합니다", {
+      return toast.error("로그인 후 이용할 수 있어요.", {
         transition: Slide,
         position: "top-center",
         autoClose: 5000,
@@ -162,7 +162,6 @@ export default function DoneAssess() {
   //   "absolute px-5 w-full h-full flex items-center justify-between";
   return (
     <>
-      {" "}
       <div className="w-full flex flex-col justify-center items-center">
         <div className="w-full flex justify-between items-center mb-[36px]">
           <span className="w-full text-[20px] font-semibold leading-[28px]">
@@ -204,7 +203,7 @@ export default function DoneAssess() {
               </button>
             </div>
           ) : (
-            <div>후기를 남겨주세요</div>
+            <div>처음 방문하셨군요! 후기를 남겨주세요.</div>
           )}
         </div>
 
