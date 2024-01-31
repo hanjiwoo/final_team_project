@@ -40,7 +40,7 @@ export default function ShopList() {
       <div className="container py-[40px] w-full relative">
         <div className="text-center mb-12">
           <h1 className="text-[28px] text-[#212121] font-semibold leading-[36px] mb-[12px]">
-            내 주변의 모-음은 어디일까요?
+            내 주변의 모음은 어디일까요?
           </h1>
           <div className="mb-[60px]">
             {shops[0]?.시도 === "" ? (
@@ -48,11 +48,7 @@ export default function ShopList() {
             ) : (
               <div className="flex justify-center gap-2 font-[18px] leading-[26px]">
                 현재
-                <Image
-                  src={place}
-                  alt="위치마크"
-                  className="w-[24px] h-[24px]"
-                />
+                <Image src={place} alt="위치마크" className="w-[24px] h-[24px]" />
                 <p className="font-bold text-[18px] leading-[26px]">
                   {shops[0]?.시도} {shops[0]?.시군}
                 </p>
@@ -61,8 +57,8 @@ export default function ShopList() {
             )}
           </div>
         </div>
-        <div className="w-full flex justify-center">
-          <div className="swiper-container w-[1080px]">
+        <div className="w-full flex justify-center flex-col items-center">
+          <div className="swiper-container w-[1080px] max-sm:w-full max-sm:overflow-x-scroll max-sm:hidden ">
             <Swiper
               loop={true} // 슬라이드 루프
               spaceBetween={10} // 슬라이스 사이 간격
@@ -70,7 +66,7 @@ export default function ShopList() {
               navigation={true} // prev, next button
               autoplay={{
                 delay: 3500,
-                disableOnInteraction: false, // 사용자 상호작용시 슬라이더 일시 정지 비활성
+                disableOnInteraction: false // 사용자 상호작용시 슬라이더 일시 정지 비활성
               }}
             >
               {shops.map((shop: typeOfShop) => {
@@ -84,20 +80,15 @@ export default function ShopList() {
               })}
             </Swiper>
           </div>
+          <div className="w-full overflow-x-scroll max-sm:block sm:hidden px-[20px] scrollbar-hide ">
+            <div className="flex cursor-pointer">
+              {shops.map((shop: typeOfShop) => {
+                return <ShopCard key={nanoid()} shop={shop} shops={shops} />;
+              })}
+            </div>
+          </div>
         </div>
         <section className="flex bg-blue-300 justify-around">
-          {/* <button
-                        className="bg-purple-300 rounded-full text-4xl hover:scale-110 absolute top-[200px] left-[-60px]"
-                        onClick={leftMove}
-                    >
-                        👈
-                    </button>
-                    <button
-                        className="bg-purple-300 rounded-full text-4xl hover:scale-110 absolute top-[200px] right-[-60px]"
-                        onClick={rigthMove}
-                    >
-                        👉
-                    </button> */}
           {shops[0] && (
             <button
               onClick={moveToFullMap}

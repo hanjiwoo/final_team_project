@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import dummy from "../../app/assets/images/fakeLogo.jpg";
-import heart from "../../app/assets/images/icon/heart_off.png";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import { useQuery } from "@tanstack/react-query";
@@ -9,31 +7,6 @@ import { getThumbs } from "./Fns";
 import { typeOfShop } from "@/app/assets/types/types";
 import { nanoid } from "nanoid";
 import ShopCard2 from "./ShopCard2";
-import { Roadview } from "react-kakao-maps-sdk";
-
-const photo1 = dummy;
-const photo2 = dummy;
-const photo3 = dummy;
-export const bestList = [
-  {
-    id: "1",
-    title: "매장 이름",
-    photo: photo1,
-    추천해요: "여기는 따봉갯수"
-  },
-  {
-    id: "2",
-    title: "매장 이름",
-    photo: photo2,
-    추천해요: "여기는 따봉갯수"
-  },
-  {
-    id: "3",
-    title: "매장 이름",
-    photo: photo3,
-    추천해요: "여기는 따봉갯수"
-  }
-];
 
 export default function Best() {
   const shops = useSelector((state: RootState) => state.allShops);

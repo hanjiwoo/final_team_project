@@ -8,6 +8,7 @@ import { RootState } from "@/redux/config/configStore";
 import { login, logout } from "@/redux/modules/loginSlice";
 import Image from "next/image";
 import moeumLogo from "../../app/assets/images/moeumLogo.png";
+import { useRouter } from "next/navigation";
 import { toast, ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -48,7 +49,9 @@ const Navbar = () => {
           progress: undefined,
           theme: "colored"
         });
+        router.replace("/");
       })
+
       .catch((error) => {
         console.error("로그아웃 실패:", error);
       });
@@ -66,7 +69,9 @@ const Navbar = () => {
     }
   }, []);
 
-  const buttonStyle = "py-5 px-3 text-gray-700 hover:text-gray-400";
+  const router = useRouter();
+
+  const buttonStyle = "py-5 px-3 text-gray-700 hover:text-gray-400 cursor-pointer";
   return (
     <nav className="bg-gray-00 w-full bg-[#fff]">
       <div className="max-w-6xl mx-auto px-4">
@@ -74,42 +79,69 @@ const Navbar = () => {
           {/* 메뉴 */}
           <div className="flex space-x-4">
             <div>
-              <Link href="/" className="flex items-center py-5 px-2 text-gray-700">
+              <div
+                className="flex items-center py-5 px-2 text-gray-700"
+                onClick={() => {
+                  router.push("/");
+                }}
+              >
                 <Image src={moeumLogo} alt="logo" className="w-[72px] h-[24px]" />
-              </Link>
+              </div>
             </div>
           </div>
 
           {/* 메뉴2 */}
           <div className="hidden md:flex items-center space-x-1">
-            <Link href="/about" className={buttonStyle}>
+            <div
+              className={buttonStyle}
+              onClick={() => {
+                router.push("/about");
+              }}
+            >
               모음소개
-            </Link>
-            <Link href="/community" className={buttonStyle}>
+            </div>
+            <div
+              className={buttonStyle}
+              onClick={() => {
+                router.push("/community");
+              }}
+            >
               커뮤니티
-            </Link>
+            </div>
             {uid ? (
               <>
-                <Link href="/mypage" className={buttonStyle}>
-                  마이페이지
-                </Link>
-                <Link href="/" className={buttonStyle} onClick={handleSignOut}>
+                <div
+                  className={buttonStyle}
+                  onClick={() => {
+                    router.push("/mypage");
+                  }}
+                >
+                  마이모음
+                </div>
+                <div className={buttonStyle} onClick={handleSignOut}>
                   로그아웃
-                </Link>
+                </div>
               </>
             ) : (
               <>
-                <Link href="/login" className={buttonStyle}>
+                <div
+                  className={buttonStyle}
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                >
                   로그인
-                </Link>
-                <Link
-                  href="/join"
+                </div>
+                <div
+                  onClick={() => {
+                    router.push("/join");
+                  }}
                   className="w-[100px] h-10 py-3 px-2 bg-[#FF8145] hover:bg-[#E5743E] rounded-lg transition duration-300 justify-center items-center gap-1 inline-flex"
                 >
                   <div className="text-right text-white text-sm font-medium font-['Pretendard'] leading-tight">
                     시작하기
                   </div>
-                </Link>
+                </div>
               </>
             )}
           </div>
