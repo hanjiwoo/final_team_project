@@ -57,8 +57,8 @@ export default function ShopList() {
             )}
           </div>
         </div>
-        <div className="w-full flex justify-center">
-          <div className="swiper-container w-[1080px]">
+        <div className="w-full flex justify-center flex-col items-center">
+          <div className="swiper-container w-[1080px] max-sm:w-full max-sm:overflow-x-scroll max-sm:hidden ">
             <Swiper
               loop={true} // 슬라이드 루프
               spaceBetween={10} // 슬라이스 사이 간격
@@ -79,6 +79,13 @@ export default function ShopList() {
                 );
               })}
             </Swiper>
+          </div>
+          <div className="w-full overflow-x-scroll max-sm:block sm:hidden px-[20px] scrollbar-hide ">
+            <div className="flex cursor-pointer">
+              {shops.map((shop: typeOfShop) => {
+                return <ShopCard key={nanoid()} shop={shop} shops={shops} />;
+              })}
+            </div>
           </div>
         </div>
         <section className="flex bg-blue-300 justify-around">

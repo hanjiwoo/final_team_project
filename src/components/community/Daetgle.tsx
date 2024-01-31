@@ -129,11 +129,11 @@ export default function Daetgle({ post }: { post: Post }) {
                       <Image className="w-[32px] h-[32px] rounded-full" src={userIcon} alt="빈유저" />
                     )}
                     <div className="text-[12px] text-center text-[#999]">
-                      <p>{item.nickName}</p>
+                      <p className="w-[50px] text-left">{item.nickName}</p>
                     </div>
                   </div>
                   <div className="text-[14px] text-center text-[black]">
-                    <p>{item.content}</p>
+                    <p className="text-left">{item.content}</p>
                   </div>
                 </div>
                 <div>
