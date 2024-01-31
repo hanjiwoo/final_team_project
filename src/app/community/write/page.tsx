@@ -73,7 +73,7 @@ export default function WritePage() {
       return toast.error("로그인을 해주세요", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -87,7 +87,7 @@ export default function WritePage() {
       return toast.error("카테고리 타이틀 콘텐츠를 작성해 주세요", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -100,7 +100,7 @@ export default function WritePage() {
       toast.success("작성이 완료되었습니다", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -125,7 +125,7 @@ export default function WritePage() {
         return toast.error("5개 까지 가능합니다", {
           transition: Slide,
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -139,7 +139,7 @@ export default function WritePage() {
           return toast.error("5개 까지 가능합니다", {
             transition: Slide,
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

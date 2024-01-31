@@ -27,7 +27,7 @@ export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shop
       return toast.warning("상세페이지가 없는 식당입니다.", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

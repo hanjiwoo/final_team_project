@@ -115,7 +115,7 @@ export default function Hoogi({ setModal }: { setModal: React.Dispatch<React.Set
       return toast.error("후기를 모두 선택해주세요.", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -136,7 +136,7 @@ export default function Hoogi({ setModal }: { setModal: React.Dispatch<React.Set
     toast.success("리뷰가 등록되었어요.", {
       transition: Slide,
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

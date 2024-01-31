@@ -66,7 +66,7 @@ export default function UpdateModal({
       return toast.error("로그인하셔야 게시물을 남길 수 있습니다", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -78,7 +78,7 @@ export default function UpdateModal({
       return toast.error("카테고리 타이틀 컨텐츠를 작성해 주세요", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -91,7 +91,7 @@ export default function UpdateModal({
       toast.success("작성이 완료되었습니다", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

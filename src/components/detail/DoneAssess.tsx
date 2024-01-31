@@ -59,7 +59,7 @@ export default function DoneAssess() {
       return toast.error("이미 작성하셨어요.", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -71,7 +71,7 @@ export default function DoneAssess() {
       return toast.error("로그인 후 이용할 수 있어요.", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

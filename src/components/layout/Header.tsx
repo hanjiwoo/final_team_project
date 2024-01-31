@@ -40,7 +40,7 @@ const Navbar = () => {
         toast.success(`로그아웃 성공`, {
           transition: Slide,
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -148,11 +148,14 @@ const Navbar = () => {
         <a href="/about" className="block py-2 px-4 text-sm hover:bg-gray-200">
           모음소개
         </a>
+        <a href="/map" className="block py-2 px-4 text-sm hover:bg-gray-200">
+          지도모음
+        </a>
         <a href="/community" className="block py-2 px-4 text-sm hover:bg-gray-200">
           커뮤니티
         </a>
         <a href="/mypage" className="block py-2 px-4 text-sm hover:bg-gray-200">
-          마이페이지
+          마이모음
         </a>
       </div>
     </nav>

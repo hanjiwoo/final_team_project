@@ -67,7 +67,7 @@ export default function Daetgle({ post }: { post: Post }) {
       return toast.error("로그인을 해주세요", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
