@@ -12,10 +12,12 @@ export default function DeleteUser() {
   const checkHandeler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsCheck(e.target.checked);
   };
+
   const dispatch = useDispatch();
   const router = useRouter();
   const deleteUserHandler = () => {
     if (!ischeck) return toast.error("유의사항을 확인해주세요");
+
     const result = window.confirm("정말 삭제하시겠습니까?");
     if (!result) return;
 
@@ -23,8 +25,10 @@ export default function DeleteUser() {
       deleteUser(auth.currentUser)
         .then(() => {
           alert("적용완료");
+
           dispatch(logout("로그아웃"));
           router.push("/");
+
         })
         .catch((error) => {
           alert(error);
@@ -37,7 +41,9 @@ export default function DeleteUser() {
         <section className="flex gap-[16px] flex-col ">
           <h1 className="text-[#212121] text-[28px] font-semibold leading-[36px]">회원탈퇴</h1>
           <h3 className="text-[#5C5C5C] text-[18px] font-semibold leading-[26px]">
-            모-음을 떠나시나요? 아래의 내용을 확인해주세요
+
+            모음을 떠나시나요? 아래의 내용을 확인해주세요
+
           </h3>
         </section>
         <section className="rounded-[12px] border-2 border-[#D6D6D6] p-[24px] mb-[24px] mt-[52px]">

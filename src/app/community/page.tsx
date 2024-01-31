@@ -155,7 +155,7 @@ export default function ListPage() {
         <div className="flex w-full py-[60px] flex-col justify-center items-center gap-[60px] bg-[#FAFAFA]">
           <div className="flex flex-col gap-[12px] items-center">
             <section>
-              <h1 className="text-[28px] text-[#212121] font-semibold leading-[36px]">이 달의 BEST 게시글 모-음</h1>
+              <h1 className="text-[28px] text-[#212121] font-semibold leading-[36px]">이 달의 BEST 게시글 모음</h1>
               <h2 className="text-[18px] text-[#5C5C5C] leading-[26px]">가장 인기 많았던 게시글을 확인해보세요!</h2>
             </section>
           </div>
