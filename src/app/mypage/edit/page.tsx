@@ -11,6 +11,8 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/shared/firebase";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Page() {
   const auth = getAuth();
@@ -37,7 +39,17 @@ export default function Page() {
   };
   const saveHandler = async () => {
     if (!text.nickName || !text.password || !imgFile)
-      return alert("변경할 닉네임과 비밀번호 PHOTO를 정해주세요");
+      return toast.error("변경할 닉네임과 비밀번호 PHOTO를 정해주세요.", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
     if (auth.currentUser) {
       const storageRef = ref(storage, `${auth.currentUser.uid}/profile`);
       if (imgFile) {
@@ -47,7 +59,7 @@ export default function Page() {
         const downloadURL = await getDownloadURL(storageRef);
         await updateProfile(auth.currentUser, {
           displayName: text.nickName,
-          photoURL: downloadURL,
+          photoURL: downloadURL
         });
         await updatePassword(auth.currentUser, text.password);
 
@@ -75,7 +87,7 @@ export default function Page() {
     // );
   }, []);
   if (!isLogin) {
-    return <div>로그인하고 오세요</div>;
+    return <div>로그인을 해주세요.</div>;
   }
   return (
     <>
@@ -87,17 +99,9 @@ export default function Page() {
             <label>
               <div className="w-[100px] h-[100px] overflow-hidden rounded-full cursor-pointer">
                 {isLogin ? (
-                  <img
-                    src={photoURL}
-                    className="w-full h-full rounded-full"
-                    alt="흐음"
-                  />
+                  <img src={photoURL} className="w-full h-full rounded-full" alt="흐음" />
                 ) : (
-                  <Image
-                    src={profileImage}
-                    alt="more"
-                    className="w-full h-full"
-                  />
+                  <Image src={profileImage} alt="more" className="w-full h-full" />
                 )}
               </div>
               <Image
@@ -105,27 +109,18 @@ export default function Page() {
                 alt="profileImageEditButton"
                 className="w-[32px] h-[32px] relative top-[-30px] right-[-70px] cursor-pointer"
               />
-              <input
-                className="hidden"
-                type="file"
-                accept="image/*"
-                onChange={(e) => imgChangeHandler(e)}
-              />
+              <input className="hidden" type="file" accept="image/*" onChange={(e) => imgChangeHandler(e)} />
             </label>
           </div>
           <div className="flex flex-col w-full mb-[40px] mt-[40px] gap-[16px]">
             <div className="flex flex-col w-full gap-[8px]">
-              <label className="text-[14px] leading-20px text-[#999]">
-                이메일
-              </label>
+              <label className="text-[14px] leading-20px text-[#999]">이메일</label>
               <div className="h-[48px] px-[16px] rounded-[8px] border-solid border border-[#C2C2C2] flex items-center bg-[#F1F1F1] text-[#C2C2C2]">
                 example@moeum.com
               </div>
             </div>
             <div className="flex flex-col w-full gap-[8px]">
-              <label className="text-[14px] leading-20px text-[#999]">
-                닉네임
-              </label>
+              <label className="text-[14px] leading-20px text-[#999]">닉네임</label>
               <input
                 onChange={(e) => textChangeHandler(e)}
                 className="h-[48px] px-[16px] rounded-[8px] border-solid border border-[#C2C2C2]"
@@ -136,9 +131,7 @@ export default function Page() {
               ></input>
             </div>
             <div className="flex flex-col w-full gap-[8px]">
-              <label className="text-[14px] leading-20px text-[#999]">
-                비밀번호
-              </label>
+              <label className="text-[14px] leading-20px text-[#999]">비밀번호</label>
               <input
                 onChange={(e) => textChangeHandler(e)}
                 className="h-[48px] px-[16px] rounded-[8px] border-solid border border-[#C2C2C2]"
