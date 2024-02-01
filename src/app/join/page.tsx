@@ -43,7 +43,7 @@ export default function Join() {
     toast.error("약관을 동의 해주세요", {
       transition: Slide,
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -141,7 +141,7 @@ export default function Join() {
       toast.error("이미 사용 중인 이메일입니다", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -163,7 +163,7 @@ export default function Join() {
       toast.error("이미 사용 중인 닉네임입니다", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -206,7 +206,7 @@ export default function Join() {
       toast.success(`${displayName}님 환영합니다`, {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

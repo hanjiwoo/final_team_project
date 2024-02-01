@@ -10,7 +10,8 @@ import Image from "next/image";
 import place from "../../app/assets/images/icon/place.png";
 import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
 import PhotoOfShop from "./PhotoOfShop";
-import { toast } from "react-toastify";
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shops?: typeOfShop[]; type?: string }) {
   const dispatch = useDispatch();
   // const shops = useSelector((state: any) => state.shops);
@@ -22,7 +23,18 @@ export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shop
     // const detailshop = shops.find((shop: typeOfShop) => {
     //   return shop.연락처 === phoneNum;
     // });
-    if (!shop?.연락처) return toast.warning("상세페이지가 없는 매장입니다.");
+    if (!shop?.연락처)
+      return toast.warning("상세페이지가 없는 식당입니다.", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
     dispatch(getShop(shop));
     router.push(`/detail/${shop.연락처}`);
   };
@@ -57,15 +69,15 @@ export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shop
 
           <div className="font-medium text-[#212121] mb-1 flex text-xl">{shop.업소명}</div>
           <div className="flex justify-between">
-            <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
+            {/* <Ddabong name="thumbup" shopId={shop.연락처} type="small" /> */}
           </div>
           {/* <div className="flex justify-round gap-5"> */}
           <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center">
-            <Image src={spoon_fork} alt="스푼포크" className="w-[20px] h-[20px]" />
+            <Image src={spoon_fork} alt="스푼포크" className="w-[18px] h-[18px]" />
             {shop.업종}
           </div>
           <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center ">
-            <Image src={place} alt="위치" className="w-[20px] h-[20px]" />
+            <Image src={place} alt="위치" className="w-[18px] h-[18px]" />
             <span className="w-full text-left block whitespace-nowrap truncate text-ellipsis">{shop.주소}</span>
           </div>
           {/* </div> */}

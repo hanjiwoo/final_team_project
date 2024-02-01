@@ -58,7 +58,7 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
   return (
     <>
       <section
-        className="flex gap-[20px] h-[148px] w-[400px] max-sm:w-full p-[20px] bg-[#fff] rounded-[16px] items-center hover:scale-[1.04] transition-transform ease duration-300 "
+        className="flex gap-[20px] h-[148px] w-[400px] max-sm:w-full p-[20px] bg-[#fff] rounded-[16px] items-center hover:scale-[1.04] transition-transform ease duration-300"
         key={nanoid()}
         onClick={(e) => moveDetailPageBtn(e, shop.연락처)}
       >
@@ -83,15 +83,15 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
 								</button>
 							)}
 						</div> */}
-            <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
+            {/* <Ddabong name="thumbup" shopId={shop.연락처} type="small" /> */}
             {/* <div className="flex justify-round gap-5"> */}
             <div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
               <Image src={spoon_fork} alt="위치" className=" w-[18px] h-[18px]" />
               {shop.업종}
             </div>
-            <p className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
+            {/* <p className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
               후기 :{hoogis?.length}
-            </p>
+            </p> */}
             <div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
               <Image src={place} alt="스푼포크" className="w-[20px] h-[20px]" />
               <span className="w-[250px] text-left block whitespace-nowrap truncate text-ellipsis">{shop.주소}</span>

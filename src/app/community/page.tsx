@@ -11,13 +11,10 @@ import { nanoid } from "nanoid";
 import Link from "next/link";
 import CategoryBtn from "@/components/community/CategoryBtn";
 import { useRouter } from "next/navigation";
-import CuteHeart from "@/components/community/CuteHeart";
 import { getDownloadURL, ref } from "firebase/storage";
 import PostCard from "@/components/mypage/PostCard";
 import BestPost from "@/components/community/BestPost";
 import { getHearts } from "@/components/community/Fns";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/config/configStore";
 import moeumLoading from "../assets/images/moeumLoading.gif";
 
 export default function ListPage() {
