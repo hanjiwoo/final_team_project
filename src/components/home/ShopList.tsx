@@ -88,7 +88,7 @@ export default function ShopList() {
             </div>
           </div>
         </div>
-        <section className="flex bg-blue-300 justify-around">
+        <section className="flex bg-blue-300 justify-around max-md:hidden">
           {shops[0] && (
             <button
               onClick={moveToFullMap}
