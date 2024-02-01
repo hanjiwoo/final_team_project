@@ -24,7 +24,7 @@ export default function NowLocationBtn() {
       return toast.error("잠시만 기다려주세요", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

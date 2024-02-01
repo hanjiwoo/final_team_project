@@ -97,7 +97,7 @@ export default function AboutPage() {
           </div>
           <button
             onClick={() => {
-              router.push("/join");
+              router.push("/login");
             }}
             className="bg-[#FF8145] py-[8px] px-[16px] rounded-[8px] text-[#fff] text-[14px] w-[160px] h-[48px] leading-[20px] max-sm:w-[140px] max-sm:h-[40px] max-sm:px-[12px] hover:bg-[#E5743E]"
           >

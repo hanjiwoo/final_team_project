@@ -51,7 +51,7 @@ export default function Login() {
   //   toast.error("카카오 로그인은 추후 지원 예정입니다", {
   //     transition: Slide,
   //     position: "top-center",
-  //     autoClose: 5000,
+  //     autoClose: 3000,
   //     hideProgressBar: false,
   //     closeOnClick: true,
   //     pauseOnHover: true,
@@ -138,7 +138,7 @@ export default function Login() {
     const isEmailValid = emailRegEx.test(email);
 
     if (!isEmailValid) {
-      setEmailError("유효하지 않은 이메일 형식입니다");
+      setEmailError("유효하지 않은 이메일 형식입니다.");
       return false;
     }
 
@@ -146,7 +146,7 @@ export default function Login() {
     const isPasswordValid = password.length >= 5;
 
     if (!isPasswordValid) {
-      setPasswordError("비밀번호는 6자 이상 사용해야 합니다");
+      setPasswordError("비밀번호는 6자 이상 사용해야 합니다.");
 
       return false;
     }
@@ -180,7 +180,7 @@ export default function Login() {
       toast.success(`${user.displayName}님 안녕하세요`, {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -193,7 +193,7 @@ export default function Login() {
       toast.error("로그인에 실패했습니다", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -236,7 +236,7 @@ export default function Login() {
       toast.success(`${displayName}님 안녕하세요`, {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
