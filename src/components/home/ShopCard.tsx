@@ -69,7 +69,7 @@ export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shop
 
           <div className="font-medium text-[#212121] mb-1 flex text-xl">{shop.업소명}</div>
           <div className="flex justify-between">
-            <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
+            {/* <Ddabong name="thumbup" shopId={shop.연락처} type="small" /> */}
           </div>
           {/* <div className="flex justify-round gap-5"> */}
           <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center">

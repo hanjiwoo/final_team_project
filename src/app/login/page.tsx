@@ -51,7 +51,7 @@ export default function Login() {
   //   toast.error("카카오 로그인은 추후 지원 예정입니다", {
   //     transition: Slide,
   //     position: "top-center",
-  //     autoClose: 5000,
+  //     autoClose: 3000,
   //     hideProgressBar: false,
   //     closeOnClick: true,
   //     pauseOnHover: true,
