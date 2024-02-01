@@ -112,10 +112,10 @@ export default function Hoogi({ setModal }: { setModal: React.Dispatch<React.Set
       // face === "이모티콘"
     )
       // return toast.error("후기 선택을 전부 해주세요");
-      return toast.error("후기 선택을 전부 해주세요", {
+      return toast.error("후기를 모두 선택해주세요.", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -133,7 +133,17 @@ export default function Hoogi({ setModal }: { setModal: React.Dispatch<React.Set
       위생: "",
     }); */
     // setRange("0");
-    toast.success("제출 완료");
+    toast.success("리뷰가 등록되었어요.", {
+      transition: Slide,
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored"
+    });
     setModal(false);
 
     // console.log(맛, 가격, 위생, 서비스, range, face);
@@ -155,7 +165,7 @@ export default function Hoogi({ setModal }: { setModal: React.Dispatch<React.Set
             </React.Fragment>
           );
         })}
-      </div>{" "}
+      </div>
       <button
         className="bg-[#FF8145] w-full  h-[48px] mt-[32px] rounded-[8px] text-[14px] text-[#fff] leading-[20px] flex justify-center items-center gap-[12px] py-[8px] px-[16px]"
         onClick={submitHandler}

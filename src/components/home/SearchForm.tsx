@@ -56,10 +56,10 @@ export default function SearchForm() {
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (!sido || !sigoon || !upzong) {
       // toast.error("시도 시군 업종을 선택해주세요");
-      toast.error("시도 시군 업종을 선택해주세요", {
+      toast.error("모든 옵션을 선택해주세요.", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -78,9 +78,30 @@ export default function SearchForm() {
         );
       }
     });
-    if (!filteredShops[0]) return toast.warning("검색결과가 없어요");
+    if (!filteredShops[0])
+      return toast.warning("검색결과가 없어요.", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
     dispatch(getShops(filteredShops));
-    toast.success("검색완료");
+    toast.success("내 주변 모음을 알려드릴게요.", {
+      transition: Slide,
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored"
+    });
     // setForm({ sido: "", sigoon: "", upzong: "" });
   };
 
