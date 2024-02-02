@@ -181,57 +181,59 @@ const Navbar = () => {
       </div>
 
       {/* mobile menu items */}
-      <div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
-        <div className="flex h-[80px] justify-between items-center px-[20px] py-[17px] border-[#D6D6D6] mb-[8px]">
-          <div className="flex justify-center items-center gap-[12px]">
-            {isLogin ? (
-              <>
-                <img
-                  src={photoURL}
-                  className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px] rounded-full"
-                  alt="프로필사진"
-                />
-                <span className="text-[18px] leading-[36px]">{displayName}</span>
-                {/* <span className="text-[18px] leading-[36px]">님의 모음</span> */}
-              </>
-            ) : (
-              <>
-                <Image src={profileImage} alt="more" className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px]" />
-                <div className="text-[18px] leading-[36px]">로그인 후 이용해 주세요.</div>
-                <div
-                  className=""
-                  onClick={() => {
-                    router.push("/login");
-                  }}
-                >
-                  <Image src={right} alt="more" className="w-[24px] h-[24px] max-sm:w-[24px] max-sm:h-[24px]" />
-                </div>
-              </>
-            )}
+      <div className="absolute z-[100] bg-[#fff] w-full">
+        <div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
+          <div className="flex h-[80px] justify-between items-center px-[20px] py-[17px] border-[#D6D6D6] mb-[8px]">
+            <div className="flex justify-center items-center gap-[12px]">
+              {isLogin ? (
+                <>
+                  <img
+                    src={photoURL}
+                    className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px] rounded-full"
+                    alt="프로필사진"
+                  />
+                  <span className="text-[18px] leading-[36px]">{displayName}</span>
+                  {/* <span className="text-[18px] leading-[36px]">님의 모음</span> */}
+                </>
+              ) : (
+                <>
+                  <Image src={profileImage} alt="more" className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px]" />
+                  <div className="text-[18px] leading-[36px]">로그인 후 이용해 주세요.</div>
+                  <div
+                    className=""
+                    onClick={() => {
+                      router.push("/login");
+                    }}
+                  >
+                    <Image src={right} alt="more" className="w-[24px] h-[24px] max-sm:w-[24px] max-sm:h-[24px]" />
+                  </div>
+                </>
+              )}
+            </div>
           </div>
+          <Link href="/about" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+            <Image className="w-[24px] h-[24px]" src={about} alt="소개"></Image>
+            <div className="ml-2 text-[16px]">모음소개</div>
+          </Link>
+          <Link href="/map" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+            <Image className="w-[24px] h-[24px]" src={map} alt="지도"></Image>
+            <div className="ml-2 text-[16px]">지도모음</div>
+          </Link>
+          <Link href="/community" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+            <Image className="w-[24px] h-[24px]" src={community} alt="커뮤"></Image>
+            <div className="ml-2 text-[16px]">커뮤니티</div>
+          </Link>
+          {uid ? (
+            <>
+              <Link href="/mypage" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+                <Image className="w-[24px] h-[24px]" src={my} alt="마이"></Image>
+                <div className="ml-2 text-[16px]">마이모음</div>
+              </Link>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
-        <Link href="/about" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
-          <Image className="w-[24px] h-[24px]" src={about} alt="소개"></Image>
-          <div className="ml-2 text-[16px]">모음소개</div>
-        </Link>
-        <Link href="/map" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
-          <Image className="w-[24px] h-[24px]" src={map} alt="지도"></Image>
-          <div className="ml-2 text-[16px]">지도모음</div>
-        </Link>
-        <Link href="/community" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
-          <Image className="w-[24px] h-[24px]" src={community} alt="커뮤"></Image>
-          <div className="ml-2 text-[16px]">커뮤니티</div>
-        </Link>
-        {uid ? (
-          <>
-            <Link href="/mypage" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
-              <Image className="w-[24px] h-[24px]" src={my} alt="마이"></Image>
-              <div className="ml-2 text-[16px]">마이모음</div>
-            </Link>
-          </>
-        ) : (
-          <></>
-        )}
       </div>
     </nav>
   );
