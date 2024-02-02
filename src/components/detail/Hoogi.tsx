@@ -149,30 +149,34 @@ export default function Hoogi({ setModal }: { setModal: React.Dispatch<React.Set
     // console.log(맛, 가격, 위생, 서비스, range, face);
   };
   return (
-    <div className="bg-[#fff] h-full w-full flex flex-col items-center justify-center mb-10 p-[32px] rounded-[16px]">
-      <div className="mt-[32px] pointer-events-none flex jutify-start w-full">
-        <ShopCard2 shop={shop} type="no" />
-      </div>
-      <div className="flex flex-col w-full gap-[32px]">
-        {/* <section className="flex justify-between">
+    <div className="w-full">
+      <div className="w-full">
+        <div className="pointer-events-none flex jutify-start w-full">
+          <ShopCard2 shop={shop} type="no" />
+        </div>
+        <div className="flex flex-col w-full gap-[32px]">
+          {/* <section className="flex justify-between">
 					<h1 className="text-2xl">해당 매장의 #태그 리뷰를 확인해보세요 :)</h1>
 				</section> */}
 
-        {assessmentList.map((item: assessment) => {
-          return (
-            <React.Fragment key={item.title}>
-              <AssessBtn item={item} form={form} setForm={setForm} />
-            </React.Fragment>
-          );
-        })}
+          {assessmentList.map((item: assessment) => {
+            return (
+              <React.Fragment key={item.title}>
+                <AssessBtn item={item} form={form} setForm={setForm} />
+              </React.Fragment>
+            );
+          })}
+        </div>
+        <div>
+          <button
+            className="bg-[#FF8145] w-full  h-[48px] mt-[32px] rounded-[8px] text-[14px] text-[#fff] leading-[20px] flex justify-center items-center gap-[12px] py-[8px] px-[16px]"
+            onClick={submitHandler}
+          >
+            <Image src={pencilIcon} alt="reviewWrite" className="w-[20px] h-[20px]" />
+            리뷰 등록하기
+          </button>
+        </div>
       </div>
-      <button
-        className="bg-[#FF8145] w-full  h-[48px] mt-[32px] rounded-[8px] text-[14px] text-[#fff] leading-[20px] flex justify-center items-center gap-[12px] py-[8px] px-[16px]"
-        onClick={submitHandler}
-      >
-        <Image src={pencilIcon} alt="reviewWrite" className="w-[20px] h-[20px]" />
-        리뷰 등록하기
-      </button>
     </div>
   );
 }

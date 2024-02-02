@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import { toast } from "react-toastify";
+
 export default function CuteHeart({ postId, type }: { postId: string | undefined; type: string }) {
   const { isLogin, uid } = useSelector((state: RootState) => state.login);
   const [disable, setDisable] = useState(false);
@@ -92,7 +93,7 @@ export default function CuteHeart({ postId, type }: { postId: string | undefined
     }
   };
   if (isLoading) {
-    return <>로딩중...</>;
+    return <>로딩중</>;
   }
   return (
     <>

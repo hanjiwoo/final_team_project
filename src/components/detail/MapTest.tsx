@@ -44,7 +44,7 @@ export default function MapTest() {
   }, [shop]);
 
   return (
-    <div className="z-[100] relative left-0 mt-[60px]">
+    <div className="z-[100] relative left-0 mt-[60px] max-lg:hidden">
       {lat === 0 ? (
         <div className="w-[240px] h-[240px] fixed flex justify-center items-center border-[1px] border-[#D6D6D6] rounded-lg text-[#7A7A7A] bg-[#fff]">
           지도가 로드되지 못했습니다.

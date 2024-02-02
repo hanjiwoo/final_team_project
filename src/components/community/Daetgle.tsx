@@ -14,6 +14,7 @@ import { nanoid } from "nanoid";
 import CuteHeart from "./CuteHeart";
 // 토스티 import
 import { toast, ToastContainer, Slide } from "react-toastify";
+import moeumLoading from "../../app/assets/images/moeumLoading.gif";
 import "react-toastify/dist/ReactToastify.css";
 import DaetgleCard from "./DaetgleCard";
 export default function Daetgle({ post }: { post: Post }) {
@@ -99,7 +100,12 @@ export default function Daetgle({ post }: { post: Post }) {
   const deleteHandler = (daetgleId: string) => {
     mutateToDelete(daetgleId);
   };
-  if (isLoading) return <>로딩중</>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center w-full h-full">
+        <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
+      </div>
+    );
   return (
     <>
       <div className="flex justify-start w-full items-center mb-[32px]">
