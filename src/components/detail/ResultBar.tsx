@@ -5,7 +5,7 @@ export default function ResultBar({ text, number, numbers }: { text: string; num
     "w-full h-[48px] rounded-[8px] mt-1 flex justify-between items-center bg-[#FAFAFA] relative overflow-hidden ";
 
   const numberCSS = "text-[#FF8145]  ";
-  const textCSS = "absolute px-5 w-full h-full flex items-center justify-between";
+  const textCSS = " px-5 w-full  flex items-center justify-between";
   // console.log(number / numbers, "이거나 보자");
   const colorBarCSS = "absolute bg-pink-100 h-full w-1/3 ";
 
