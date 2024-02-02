@@ -33,14 +33,14 @@ export default function AssessBtn({
   return (
     <>
       <form className="flex flex-col w-full gap-[20px]">
-        <h2>{title}</h2>
-        <div className="flex  gap-2 justify-center w-full">
+        <h2 className="text-[16px] leading-[24px] font-semibold">{title}</h2>
+        <div className="flex gap-2 justify-center w-full max-sm:flex-col">
           <div
             id="1"
             onClick={onclickHandler}
             className={`text-${activeId === "1" ? "[#5C5C5C]" : "[#5C5C5C]"} bg-${
               activeId === "1" ? "[#FFF2EC]" : "[#fff]"
-            } w-1/3 h-[48px] flex items-center px-[16px] rounded-[8px] border-[1px] border-[#D6D6D6]`}
+            } w-1/3 h-[48px] flex items-center px-[16px] rounded-[8px] border-[1px] border-[#D6D6D6] text-[14px] leading-[20px] max-sm:leading-[16px] max-sm:w-full`}
           >
             {one}
           </div>
@@ -49,7 +49,7 @@ export default function AssessBtn({
             onClick={onclickHandler}
             className={`text-${activeId === "2" ? "[#5C5C5C]" : "[#5C5C5C]"} bg-${
               activeId === "2" ? "[#FFF2EC]" : "[#fff]"
-            } w-1/3 h-[48px] flex items-center px-[16px] rounded-[8px] border-[1px] border-[#D6D6D6]`}
+            } w-1/3 h-[48px] flex items-center px-[16px] rounded-[8px] border-[1px] border-[#D6D6D6] text-[14px] leading-[20px] max-sm:leading-[16px] max-sm:w-full`}
           >
             {two}
           </div>
@@ -58,7 +58,7 @@ export default function AssessBtn({
             onClick={onclickHandler}
             className={`text-${activeId === "3" ? "[#5C5C5C]" : "[#5C5C5C]"} bg-${
               activeId === "3" ? "[#FFF2EC] " : "[#fff]"
-            } w-1/3 h-[48px] flex items-center px-[16px] rounded-[8px] border-[1px] border-[#D6D6D6]`}
+            } w-1/3 h-[48px] flex items-center px-[16px] rounded-[8px] border-[1px] border-[#D6D6D6] text-[14px] leading-[20px] max-sm:leading-[16px] max-sm:w-full`}
           >
             {three}
           </div>

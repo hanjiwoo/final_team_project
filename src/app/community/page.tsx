@@ -166,7 +166,7 @@ export default function ListPage() {
         </div>
 
         <div className="flex flex-col justify-center items-center gap-[60px] w-full pt-[60px] px-[20px] bg-[#fff]">
-          <div className="">
+          <div>
             <div className="flex flex-col justify-center items-center gap-[40px]">
               <h2 className="text-[28px] text-[#212121] text-center font-semibold leading-[36px]">실시간모음</h2>
               <section className="grid max-sm:grid-cols-3 sm:grid-cols-5 gap-[16px] w-full">
