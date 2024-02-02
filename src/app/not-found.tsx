@@ -35,7 +35,7 @@ export default function NotFound() {
           </div>
 
           <button
-            className="w-[160px] h-[48px] rounded-[8px] text-white bg-[#FF8145]"
+            className="w-[160px] h-[48px] rounded-[8px] text-white bg-[#FF8145] hover:bg-[#E5743E]"
             onClick={() => {
               router.push("/");
             }}
