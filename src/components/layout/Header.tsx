@@ -180,23 +180,25 @@ const Navbar = () => {
       </div>
 
       {/* mobile menu items */}
-      <div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
-        <Link href="/about" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
-          <Image className="w-[24px] h-[24px]" src={about} alt="소개"></Image>
-          <div className="ml-2 text-[16px]">모음소개</div>
-        </Link>
-        <Link href="/map" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
-          <Image className="w-[24px] h-[24px]" src={map} alt="지도"></Image>
-          <div className="ml-2 text-[16px]">지도모음</div>
-        </Link>
-        <Link href="/community" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
-          <Image className="w-[24px] h-[24px]" src={community} alt="커뮤"></Image>
-          <div className="ml-2 text-[16px]">커뮤니티</div>
-        </Link>
-        <Link href="/mypage" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
-          <Image className="w-[24px] h-[24px]" src={my} alt="마이"></Image>
-          <div className="ml-2 text-[16px]">마이모음</div>
-        </Link>
+      <div className="absolute z-[100] bg-[#fff] w-full">
+        <div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
+          <Link href="/about" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
+            <Image className="w-[24px] h-[24px]" src={about} alt="소개"></Image>
+            <div className="ml-2 text-[16px]">모음소개</div>
+          </Link>
+          <Link href="/map" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
+            <Image className="w-[24px] h-[24px]" src={map} alt="지도"></Image>
+            <div className="ml-2 text-[16px]">지도모음</div>
+          </Link>
+          <Link href="/community" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
+            <Image className="w-[24px] h-[24px]" src={community} alt="커뮤"></Image>
+            <div className="ml-2 text-[16px]">커뮤니티</div>
+          </Link>
+          <Link href="/mypage" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-gray-200">
+            <Image className="w-[24px] h-[24px]" src={my} alt="마이"></Image>
+            <div className="ml-2 text-[16px]">마이모음</div>
+          </Link>
+        </div>
       </div>
     </nav>
   );
