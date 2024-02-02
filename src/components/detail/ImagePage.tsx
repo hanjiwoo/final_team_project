@@ -56,28 +56,30 @@ export default function ImagePage() {
     //   </div>
     // </div>
 
-    <div className="w-[720px] h-[530px] justify-center items-start gap-4 inline-flex rounded-lg overflow-hidden">
-      {/* <div className="w-[530px] h-[530px] relative bg-zinc-100 rounded-xl" /> */}
-      <div style={{ pointerEvents: "auto", width: "100%", height: "100%" }}>
-        <Roadview
-          position={{
-            // 지도의 중심좌표
-            lat,
-            lng,
-            radius: 50
-          }}
-          style={{
-            // 지도의 크기
-            width: "100%",
-            height: "100%"
-          }}
-        />
-      </div>
-      {/* <div className="w-[170px] self-stretch flex-col justify-start items-center gap-4 inline-flex">
+    <div className="w-full flex justify-center items-center">
+      <div className="w-[720px] h-[530px] justify-center items-center gap-4 rounded-lg overflow-hidden max-sm:w-full max-sm:h-[360px]">
+        {/* <div className="w-[530px] h-[530px] relative bg-zinc-100 rounded-xl" /> */}
+        <div style={{ pointerEvents: "auto", width: "100%", height: "100%" }}>
+          <Roadview
+            position={{
+              // 지도의 중심좌표
+              lat,
+              lng,
+              radius: 50
+            }}
+            style={{
+              // 지도의 크기
+              width: "100%",
+              height: "100%"
+            }}
+          />
+        </div>
+        {/* <div className="w-[170px] self-stretch flex-col justify-start items-center gap-4 inline-flex">
         <div className="w-[170px] h-[170px] relative bg-zinc-100 rounded-xl" />
         <div className="w-[170px] h-[170px] relative bg-zinc-100 rounded-xl" />
         <div className="w-[170px] h-[170px] relative bg-zinc-100 rounded-xl" />
       </div> */}
+      </div>
     </div>
   );
 }
