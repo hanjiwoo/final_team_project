@@ -72,6 +72,7 @@ export type Daetgle = {
   content?: string;
   postId?: string;
   id: string;
+  createdAt?: number;
 };
 
 export type typeOfHeart = {

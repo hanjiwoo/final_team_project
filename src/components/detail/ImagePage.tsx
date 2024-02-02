@@ -10,13 +10,14 @@ import MapTest from "./MapTest";
 import { getShare } from "@/redux/modules/shareSlice";
 import { Roadview } from "react-kakao-maps-sdk";
 import moeumLoading from "../../app/assets/images/moeumLoading.gif";
+import { nanoid } from "nanoid";
 
 export default function ImagePage() {
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
-  const { 시군, 업소명, 주소 } = useSelector((state: any) => state.detailShop);
+  const shop = useSelector((state: any) => state.detailShop);
   const dispatch = useDispatch();
-
+  const { 시군, 업소명, 주소 } = shop;
   useEffect(() => {
     if (window.kakao) {
       const ps = new window.kakao.maps.services.Places();
@@ -29,7 +30,7 @@ export default function ImagePage() {
         }
       });
     }
-  }, []);
+  }, [shop]);
 
   return (
     // <div className="flex flex-row rounded-lg justify-center items-center bg-green-300 w-[720px] h-[530px] gap-5">
@@ -60,6 +61,7 @@ export default function ImagePage() {
       {/* <div className="w-[530px] h-[530px] relative bg-zinc-100 rounded-xl" /> */}
       <div style={{ pointerEvents: "auto", width: "100%", height: "100%" }}>
         <Roadview
+          panoId={1}
           position={{
             // 지도의 중심좌표
             lat,

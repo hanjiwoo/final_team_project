@@ -18,7 +18,7 @@ export default function Page() {
   };
   return (
     <>
-      <div className="flex justify-center items-center">
+      {/* <div className="flex justify-center items-center">
         <button
           className="flex justify-center w-[100px] rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145]"
           onClick={handleClickDataChange}
@@ -26,7 +26,8 @@ export default function Page() {
           data
         </button>
       </div>
-      <div>{dataOn ? <CommentsDataOn /> : <CommentsDataOff />}</div>;
+      <div>{dataOn ? <CommentsDataOn /> : <></>}</div>; */}
+      <CommentsDataOff />
     </>
   );
 }

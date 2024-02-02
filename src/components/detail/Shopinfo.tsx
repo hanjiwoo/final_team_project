@@ -13,56 +13,75 @@ import menu from "../../app/assets/images/icon/menu.png";
 import inquiry from "../../app/assets/images/icon/inquiry.png";
 import beforeHeart from "../../app/assets/images/icon/heart_off.png";
 import Ddabong from "../home/Ddabong";
+import { useQuery } from "@tanstack/react-query";
+import { typeOfShop } from "@/app/assets/types/types";
+import { getGoodShop } from "../home/QueryFn";
+import { getAllShops } from "@/redux/modules/allShops";
+import { RootState } from "@/redux/config/configStore";
 
 export default function Shopinfo() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const shop = useSelector((state: any) => state.detailShop);
-  // console.log(shop, "이거 샵이양");
-  // const dispatch = useDispatch();
-  // console.log(shops);
+  // const shop = useSelector((state: RootState) => state.detailShop);
 
-  // useEffect(() => {
-  //   const detailshop = shops.find((shop: typeOfShop) => {
-  //     return shop.연락처 === id;
-  //   });
-
-  //   dispatch(getShop(detailshop));
-  // }, []);
-  // console.log(detailshop);
-  useEffect(() => {
-    if (window && localStorage.getItem("upso")) {
-      const filteredshop = {
-        가격1: localStorage.getItem("money1"),
-        가격2:
-          localStorage.getItem("money2") === "null"
-            ? ""
-            : localStorage.getItem("money2"),
-        가격3:
-          localStorage.getItem("money3") === "null"
-            ? ""
-            : localStorage.getItem("money3"),
-        메뉴1: localStorage.getItem("menu1"),
-        메뉴2:
-          localStorage.getItem("menu2") === "null"
-            ? ""
-            : localStorage.getItem("menu2"),
-        메뉴3:
-          localStorage.getItem("menu3") === "null"
-            ? ""
-            : localStorage.getItem("menu3"),
-        시군: localStorage.getItem("sigoon"),
-        시도: localStorage.getItem("sido"),
-        업소명: localStorage.getItem("upso"),
-        업종: localStorage.getItem("upzong"),
-        연락처: localStorage.getItem("phoneNum"),
-        주소: localStorage.getItem("addr"),
-      };
-
-      dispatch(getShop(filteredshop));
+  const { data: shops, isLoading } = useQuery({
+    queryKey: ["allshops"],
+    queryFn: () => {
+      return getGoodShop().then((res: typeOfShop[]) => {
+        const filteredRes = res.filter((shop) => {
+          return (
+            shop.업종.slice(0, 2) !== "기타" &&
+            shop.업종.slice(0, 2) !== "이미" &&
+            shop.업종.slice(0, 2) !== "목욕" &&
+            shop.업종.slice(0, 2) !== "세탁"
+          );
+        });
+        dispatch(getAllShops(filteredRes));
+        return filteredRes;
+      });
     }
-  }, []);
+  });
+  const shop = shops?.find((shop) => {
+    return shop.연락처 === id;
+  });
+  useEffect(() => {
+    if (shop) {
+      dispatch(getShop(shop));
+    }
+  }, [shop]);
+  // useEffect(() => {
+  //   if (window && localStorage.getItem("upso")) {
+  //     const filteredshop = {
+  //       가격1: localStorage.getItem("money1"),
+  //       가격2:
+  //         localStorage.getItem("money2") === "null"
+  //           ? ""
+  //           : localStorage.getItem("money2"),
+  //       가격3:
+  //         localStorage.getItem("money3") === "null"
+  //           ? ""
+  //           : localStorage.getItem("money3"),
+  //       메뉴1: localStorage.getItem("menu1"),
+  //       메뉴2:
+  //         localStorage.getItem("menu2") === "null"
+  //           ? ""
+  //           : localStorage.getItem("menu2"),
+  //       메뉴3:
+  //         localStorage.getItem("menu3") === "null"
+  //           ? ""
+  //           : localStorage.getItem("menu3"),
+  //       시군: localStorage.getItem("sigoon"),
+  //       시도: localStorage.getItem("sido"),
+  //       업소명: localStorage.getItem("upso"),
+  //       업종: localStorage.getItem("upzong"),
+  //       연락처: localStorage.getItem("phoneNum"),
+  //       주소: localStorage.getItem("addr"),
+  //     };
+
+  //     dispatch(getShop(filteredshop));
+  //   }
+  // }, []);
 
   return (
     // <div className="bg-blue-100 w-[720px] h-[280px] flex-col justify-start items-start gap-8 inline-flex">
@@ -96,9 +115,7 @@ export default function Shopinfo() {
     //   </div>
     <div className="w-full flex-col items-center gap-8 mt-[60px]">
       <div className="self-stretch justify-between items-center inline-flex mb-[32px] w-full cursor-pointer">
-        <div className="text-center text-neutral-800 text-3xl font-semibold leading-[32px]">
-          {shop.업소명}
-        </div>
+        <div className="text-center text-neutral-800 text-3xl font-semibold leading-[32px]">{shop?.업소명}</div>
         {/* <Image
 					src={beforeHeart}
 					alt="likeButtn"
@@ -109,93 +126,49 @@ export default function Shopinfo() {
       <div className="self-stretch flex-col justify-start items-start gap-4 flex">
         <div className="justify-start items-start gap-6 inline-flex">
           <div className="h-6 justify-start items-center gap-2 flex">
-            <Image
-              className="w-6 h-6 p-1 justify-center items-start gap-1 flex"
-              src={spoon}
-              alt="숟가락"
-            ></Image>
-            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">
-              업종
-            </div>
+            <Image className="w-6 h-6 p-1 justify-center items-start gap-1 flex" src={spoon} alt="숟가락"></Image>
+            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">업종</div>
           </div>
-          <div className="text-center text-zinc-600 text-base font-medium leading-normal">
-            {shop.업종}
-          </div>
+          <div className="text-center text-zinc-600 text-base font-medium leading-normal">{shop?.업종}</div>
         </div>
         <div className="self-stretch justify-start items-start gap-[24px] inline-flex">
           <div className="h-6 justify-start items-center gap-2 flex">
-            <Image
-              className="w-6 h-6 p-1 justify-center items-start gap-1 flex"
-              src={place}
-              alt="위치"
-            ></Image>
-            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">
-              위치
-            </div>
+            <Image className="w-6 h-6 p-1 justify-center items-start gap-1 flex" src={place} alt="위치"></Image>
+            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">위치</div>
           </div>
-          <div className="w-[400px] self-stretch text-zinc-600 text-base font-medium leading-normal">
-            {shop.주소}
-          </div>
+          <div className="w-[400px] self-stretch text-zinc-600 text-base font-medium leading-normal">{shop?.주소}</div>
         </div>
         <div className="self-stretch justify-start items-start gap-6 inline-flex">
           <div className="justify-start items-center gap-2 flex">
-            <Image
-              className="w-6 h-6 p-1 justify-center items-start gap-1 flex"
-              src={phone}
-              alt="번호"
-            ></Image>
-            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">
-              전화번호
-            </div>
+            <Image className="w-6 h-6 p-1 justify-center items-start gap-1 flex" src={phone} alt="번호"></Image>
+            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">전화번호</div>
           </div>
           <div className="w-[263px] self-stretch text-zinc-600 text-base font-medium leading-normal">
-            {shop.연락처}
+            {shop?.연락처}
           </div>
         </div>
         <div className="self-stretch justify-start items-start gap-6 inline-flex">
           <div className="justify-start items-center gap-2 flex">
-            <Image
-              className="w-6 h-6 p-1 justify-center items-start gap-1 flex"
-              src={menu}
-              alt="메뉴"
-            ></Image>
-            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">
-              주요메뉴
-            </div>
+            <Image className="w-6 h-6 p-1 justify-center items-start gap-1 flex" src={menu} alt="메뉴"></Image>
+            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">주요메뉴</div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-2 inline-flex">
             <div className="self-stretch justify-start items-start gap-2 inline-flex">
-              <div className="text-zinc-600 text-base font-medium leading-normal">
-                {shop.메뉴1}
-              </div>
-              <div className="text-zinc-600 text-base font-medium leading-normal">
-                {shop.가격1}
-              </div>
+              <div className="text-zinc-600 text-base font-medium leading-normal">{shop?.메뉴1}</div>
+              <div className="text-zinc-600 text-base font-medium leading-normal">{shop?.가격1}</div>
             </div>
             <div className="self-stretch justify-start items-start gap-2 inline-flex">
-              <div className="text-zinc-600 text-base font-medium leading-normal">
-                {shop.메뉴2}
-              </div>
-              <div className="text-zinc-600 text-base font-medium leading-normal">
-                {shop.가격2}
-              </div>
+              <div className="text-zinc-600 text-base font-medium leading-normal">{shop?.메뉴2}</div>
+              <div className="text-zinc-600 text-base font-medium leading-normal">{shop?.가격2}</div>
             </div>
           </div>
         </div>
         <div className="self-stretch justify-start items-start gap-6 inline-flex">
           <div className="justify-start items-center gap-2 flex">
-            <Image
-              className="w-6 h-6 p-1 justify-center items-start gap-1 flex"
-              src={inquiry}
-              alt="문의하기"
-            ></Image>
-            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">
-              문의하기
-            </div>
+            <Image className="w-6 h-6 p-1 justify-center items-start gap-1 flex" src={inquiry} alt="문의하기"></Image>
+            <div className="text-center text-neutral-800 text-base font-semibold leading-normal">문의하기</div>
           </div>
-          <div className="text-orange-400 text-base font-semibold leading-normal">
-            폐업신고 및 가격변동
-          </div>
+          <div className="text-orange-400 text-base font-semibold leading-normal">폐업신고 및 가격변동</div>
         </div>
       </div>
     </div>
