@@ -29,13 +29,11 @@ export default function PostDataOff() {
     return post.uid === uid;
   });
 
-  useEffect(() => {
-    if (!user.isLogin) {
-      toast.warning("로그인시 이용가능합니다.");
-      router.push("/");
-    }
-  }, []);
-
+  useEffect(() => {}, []);
+  if (!user.isLogin) {
+    toast.warning("로그인시 이용가능합니다.");
+    return <>로그인 하셔야 합니다.</>;
+  }
   return (
     <div className="flex justify-center items-center w-full my-[60px] px-[20px] max-sm:my-[32px] max-lg:my-[60px]">
       <div className="w-[880px]">
