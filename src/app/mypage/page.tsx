@@ -79,7 +79,7 @@ export default function Mypage() {
             ) : (
               <Image src={profileImage} alt="more" className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px]" />
             )}
-            <span className="text-[20px] leading-[36px] text-[#212121] max-sm:text-[14px]">모두의 음식점</span>
+            <span className="text-[20px] leading-[36px] text-[#212121] max-sm:text-[14px]">{displayName}</span>
           </div>
           <div
             className="w-[auto] h-[48px] text-[#fff] bg-[#FF8145] pt-[8px] pr-[16px] pb-[8px] pl-[16px] text-[14px] font-medium rounded-[8px] leading-[20px] cursor-pointer flex justify-center items-center"

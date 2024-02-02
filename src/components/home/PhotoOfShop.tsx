@@ -52,7 +52,7 @@ export default function PhotoOfShop({ shop, type }: { shop: typeOfShop; type?: s
         type === "best" ? "[344px]" : "[252px]"
       } h-[252px] flex justify-center items-center bg-[#FFF2EC] rounded-[12px] mb-[20px] overflow-hidden`}
     >
-      {foundIMG.src ? (
+      {foundIMG?.src ? (
         <img src={foundIMG.src} className="h-full w-full" />
       ) : (
         <Image

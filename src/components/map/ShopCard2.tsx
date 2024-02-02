@@ -70,7 +70,7 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
         </section>
         <section className="flex flex-row border-opacity-60 rounded-lg gap-[9px]">
           <div>
-            <div className="text-[18px] font-semibold text-[#212121] leadding-[26px]">{shop.업소명}</div>{" "}
+            <div className="text-[18px] font-semibold text-[#212121] leadding-[26px]">{shop.업소명}</div>
             {/* <div className="flex justify-between">
 							{type === "no" ? (
 								<></>
