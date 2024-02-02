@@ -8,12 +8,19 @@ import { RootState } from "@/redux/config/configStore";
 import { login, logout } from "@/redux/modules/loginSlice";
 import Image from "next/image";
 import moeumLogo from "../../app/assets/images/moeumLogo.png";
+import { useRouter } from "next/navigation";
 import { toast, ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import community from "../../app/assets/images/menu/community.png";
+import map from "../../app/assets/images/menu/map.png";
+import about from "../../app/assets/images/menu/store.png";
+import my from "../../app/assets/images/menu/my.png";
+import profileImage from "../../app/assets/images/icon/profile.png";
+import right from "../../app/assets/images/icon/right.png";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
-  const { isLogin, uid, email, photoURL } = useSelector((state: RootState) => state.login);
+  const { isLogin, uid, email, photoURL, displayName } = useSelector((state: RootState) => state.login);
   // console.log(isLogin, uid, email, photoURL, " 일단 잘들어오냐?");
   const dispatch = useDispatch();
   // 로그인 상태 확인 테스트 버튼 함수
@@ -40,7 +47,7 @@ const Navbar = () => {
         toast.success(`로그아웃 성공`, {
           transition: Slide,
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -48,7 +55,9 @@ const Navbar = () => {
           progress: undefined,
           theme: "colored"
         });
+        router.replace("/");
       })
+
       .catch((error) => {
         console.error("로그아웃 실패:", error);
       });
@@ -66,50 +75,78 @@ const Navbar = () => {
     }
   }, []);
 
-  const buttonStyle = "py-5 px-3 text-gray-700 hover:text-gray-400";
+  const router = useRouter();
+  const buttonStyle = "py-5 px-3 text-gray-700 hover:text-gray-400 cursor-pointer";
   return (
-    <nav className="bg-gray-00 w-full">
+    <nav className="bg-gray-00 w-full bg-[#fff]">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between">
           {/* 메뉴 */}
           <div className="flex space-x-4">
             <div>
-              <Link href="/" className="flex items-center py-5 px-2 text-gray-700">
-                <Image src={moeumLogo} alt="logo" className="w-[72px] h-[24px]" />
-              </Link>
+              <div
+                className="flex items-center py-5 px-2 text-gray-700"
+                onClick={() => {
+                  router.push("/");
+                }}
+              >
+                <Image src={moeumLogo} alt="logo" className="w-[72px] h-[24px] cursor-pointer" />
+              </div>
             </div>
           </div>
 
           {/* 메뉴2 */}
           <div className="hidden md:flex items-center space-x-1">
-            <Link href="/about" className={buttonStyle}>
+            <div
+              className={buttonStyle}
+              onClick={() => {
+                router.push("/about");
+              }}
+            >
               모음소개
-            </Link>
-            <Link href="/community" className={buttonStyle}>
+            </div>
+            <div
+              className={buttonStyle}
+              onClick={() => {
+                router.push("/community");
+              }}
+            >
               커뮤니티
-            </Link>
+            </div>
             {uid ? (
               <>
-                <Link href="/mypage" className={buttonStyle}>
-                  마이페이지
-                </Link>
-                <Link href="/" className={buttonStyle} onClick={handleSignOut}>
+                <div
+                  className={buttonStyle}
+                  onClick={() => {
+                    router.push("/mypage");
+                  }}
+                >
+                  마이모음
+                </div>
+                <div className={buttonStyle} onClick={handleSignOut}>
                   로그아웃
-                </Link>
+                </div>
               </>
             ) : (
               <>
-                <Link href="/login" className={buttonStyle}>
+                <div
+                  className={buttonStyle}
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                >
                   로그인
-                </Link>
-                <Link
-                  href="/join"
+                </div>
+                <div
+                  onClick={() => {
+                    router.push("/join");
+                  }}
                   className="w-[100px] h-10 py-3 px-2 bg-[#FF8145] hover:bg-[#E5743E] rounded-lg transition duration-300 justify-center items-center gap-1 inline-flex"
                 >
                   <div className="text-right text-white text-sm font-medium font-['Pretendard'] leading-tight">
-                    모-음 시작하기
+                    시작하기
                   </div>
-                </Link>
+                </div>
               </>
             )}
           </div>
@@ -144,16 +181,59 @@ const Navbar = () => {
       </div>
 
       {/* mobile menu items */}
-      <div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
-        <a href="/about" className="block py-2 px-4 text-sm hover:bg-gray-200">
-          모음소개
-        </a>
-        <a href="/community" className="block py-2 px-4 text-sm hover:bg-gray-200">
-          커뮤니티
-        </a>
-        <a href="/mypage" className="block py-2 px-4 text-sm hover:bg-gray-200">
-          마이페이지
-        </a>
+      <div className="absolute z-[100] bg-[#fff] w-full">
+        <div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
+          <div className="flex h-[80px] justify-between items-center px-[20px] py-[17px] border-[#D6D6D6] mb-[8px]">
+            <div className="flex justify-center items-center gap-[12px]">
+              {isLogin ? (
+                <>
+                  <img
+                    src={photoURL}
+                    className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px] rounded-full"
+                    alt="프로필사진"
+                  />
+                  <span className="text-[18px] leading-[36px]">{displayName}</span>
+                  {/* <span className="text-[18px] leading-[36px]">님의 모음</span> */}
+                </>
+              ) : (
+                <>
+                  <Image src={profileImage} alt="more" className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px]" />
+                  <div className="text-[18px] leading-[36px]">로그인 후 이용해 주세요.</div>
+                  <div
+                    className=""
+                    onClick={() => {
+                      router.push("/login");
+                    }}
+                  >
+                    <Image src={right} alt="more" className="w-[24px] h-[24px] max-sm:w-[24px] max-sm:h-[24px]" />
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+          <Link href="/about" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+            <Image className="w-[24px] h-[24px]" src={about} alt="소개"></Image>
+            <div className="ml-2 text-[16px]">모음소개</div>
+          </Link>
+          <Link href="/map" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+            <Image className="w-[24px] h-[24px]" src={map} alt="지도"></Image>
+            <div className="ml-2 text-[16px]">지도모음</div>
+          </Link>
+          <Link href="/community" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+            <Image className="w-[24px] h-[24px]" src={community} alt="커뮤"></Image>
+            <div className="ml-2 text-[16px]">커뮤니티</div>
+          </Link>
+          {uid ? (
+            <>
+              <Link href="/mypage" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+                <Image className="w-[24px] h-[24px]" src={my} alt="마이"></Image>
+                <div className="ml-2 text-[16px]">마이모음</div>
+              </Link>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </nav>
   );

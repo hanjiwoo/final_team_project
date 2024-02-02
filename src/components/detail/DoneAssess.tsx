@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import ResultBar from "./ResultBar";
 import { toast, ToastContainer, Slide } from "react-toastify";
+import moeumLoading from "../../app/assets/images/moeumLoading.gif";
 import "react-toastify/dist/ReactToastify.css";
 // import { type } from "os";
 // let DoneHoogis = {
@@ -56,10 +57,10 @@ export default function DoneAssess() {
   const router = useRouter();
   const modalOpenHandeler = () => {
     if (correctUser)
-      return toast.error("이미 작성하셨어요", {
+      return toast.error("이미 작성하셨어요.", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -68,10 +69,10 @@ export default function DoneAssess() {
         theme: "colored"
       });
     if (!isLogin)
-      return toast.error("로그인하셔야 합니다", {
+      return toast.error("로그인 후 이용할 수 있어요.", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -83,7 +84,11 @@ export default function DoneAssess() {
   };
 
   if (isLoading) {
-    return <>로딩중 ..</>;
+    return (
+      <div className="flex justify-center items-center w-full h-full">
+        <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
+      </div>
+    );
   }
   let DoneHoogis = {
     맛1: 0,
@@ -162,15 +167,25 @@ export default function DoneAssess() {
   //   "absolute px-5 w-full h-full flex items-center justify-between";
   return (
     <>
-      {" "}
       <div className="w-full flex flex-col justify-center items-center">
-        <div className="w-full flex justify-between items-center mb-[36px]">
+        <div className="w-full flex justify-between items-center mb-[36px] max-sm:mb-0">
           <span className="w-full text-[20px] font-semibold leading-[28px]">
             해당 매장의 #태그 리뷰를 확인해보세요 :)
           </span>
+          <div className="max-sm:hidden">
+            <button
+              onClick={modalOpenHandeler}
+              className="bg-[#FF8145] w-[156px] h-[40px] rounded-[8px] text-[14px] text-[#fff] flex justify-center items-center gap-[8px] px-[12px] py-[8px] font-[Pretendard]"
+            >
+              <Image src={pencilIcon} alt="writeReview" className="w-[20px] h-[20px]" />
+              리뷰 작성하기
+            </button>
+          </div>
+        </div>
+        <div className="max-sm:block sm:hidden w-full my-[20px]">
           <button
             onClick={modalOpenHandeler}
-            className="bg-[#FF8145] w-[156px] h-[40px] rounded-[8px] text-[14px] text-[#fff] flex justify-center items-center gap-[8px] px-[12px] py-[8px] font-[Pretendard]"
+            className="bg-[#FF8145] w-full h-[40px] rounded-[8px] text-[14px] text-[#fff] flex justify-center items-center gap-[8px] px-[12px] py-[8px] font-[Pretendard]"
           >
             <Image src={pencilIcon} alt="writeReview" className="w-[20px] h-[20px]" />
             리뷰 작성하기
@@ -204,7 +219,7 @@ export default function DoneAssess() {
               </button>
             </div>
           ) : (
-            <div>후기를 남겨주세요</div>
+            <div>처음 방문하셨군요! 후기를 남겨주세요.</div>
           )}
         </div>
 

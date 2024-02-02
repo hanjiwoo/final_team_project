@@ -11,13 +11,10 @@ import { nanoid } from "nanoid";
 import Link from "next/link";
 import CategoryBtn from "@/components/community/CategoryBtn";
 import { useRouter } from "next/navigation";
-import CuteHeart from "@/components/community/CuteHeart";
 import { getDownloadURL, ref } from "firebase/storage";
 import PostCard from "@/components/mypage/PostCard";
 import BestPost from "@/components/community/BestPost";
 import { getHearts } from "@/components/community/Fns";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/config/configStore";
 import moeumLoading from "../assets/images/moeumLoading.gif";
 
 export default function ListPage() {
@@ -137,7 +134,9 @@ export default function ListPage() {
       setPostArray(data2);
     }
   };
-
+  useEffect(() => {
+    setPostArray(posts);
+  }, [posts]);
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full h-full">
@@ -148,12 +147,12 @@ export default function ListPage() {
   return (
     <>
       {/* 전체 컨테이너 */}
-      <div className="flex  flex-col items-center  w-full gap-[20px]">
+      <div className="flex  flex-col items-center  w-full gap-[20px] bg-[#fff]">
         {/* 글 모음/ 인기순위 컨텐츠 */}
         <div className="flex w-full py-[60px] flex-col justify-center items-center gap-[60px] bg-[#FAFAFA]">
           <div className="flex flex-col gap-[12px] items-center">
             <section>
-              <h1 className="text-[28px] text-[#212121] font-semibold leading-[36px]">이 달의 BEST 게시글 모-음</h1>
+              <h1 className="text-[28px] text-[#212121] font-semibold leading-[36px]">이 달의 BEST 게시글 모음</h1>
               <h2 className="text-[18px] text-[#5C5C5C] leading-[26px]">가장 인기 많았던 게시글을 확인해보세요!</h2>
             </section>
           </div>
@@ -166,8 +165,8 @@ export default function ListPage() {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center items-center gap-[60px] w-full pt-[60px] px-[20px]">
-          <div className="">
+        <div className="flex flex-col justify-center items-center gap-[60px] w-full pt-[60px] px-[20px] bg-[#fff]">
+          <div>
             <div className="flex flex-col justify-center items-center gap-[40px]">
               <h2 className="text-[28px] text-[#212121] text-center font-semibold leading-[36px]">실시간모음</h2>
               <section className="grid max-sm:grid-cols-3 sm:grid-cols-5 gap-[16px] w-full">
@@ -196,14 +195,18 @@ export default function ListPage() {
             {/* 작성하기 버튼 */}
 
             {/* 게시글 전체 컨테이너 */}
-            <div className="flex flex-col justify-center items-center w-full">
-              {filteredPosts?.map((post) => {
-                return (
-                  <React.Fragment key={nanoid()}>
-                    <PostCard post={post} />
-                  </React.Fragment>
-                );
-              })}
+            <div className="flex flex-col justify-center items-center w-[680px] max-sm:w-[350px]">
+              <div className="w-full">
+                {filteredPosts?.map((post) => {
+                  return (
+                    <React.Fragment key={nanoid()}>
+                      <div className="flex justify-center items-center">
+                        <PostCard post={post} />
+                      </div>
+                    </React.Fragment>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

@@ -8,10 +8,13 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/shared/firebase";
+// 토스티 import
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function UpdateModal({
   setToggleModal,
-  foundPost,
+  foundPost
 }: {
   setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
   foundPost: Post | undefined;
@@ -23,9 +26,7 @@ export default function UpdateModal({
   };
   const [posts, setPosts] = useState<Post[]>([]);
   const route = useRouter();
-  const { uid, displayName, isLogin, photoURL } = useSelector(
-    (state: RootState) => state.login
-  );
+  const { uid, displayName, isLogin, photoURL } = useSelector((state: RootState) => state.login);
   const [newPost, setNewPost] = useState<Post>({
     id: "",
     uid,
@@ -34,14 +35,12 @@ export default function UpdateModal({
     profile: photoURL,
     nickname: displayName,
     createdAt: 1004,
-    category: "",
+    category: ""
   });
 
   const queryClient = useQueryClient();
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     // console.log(name, value);
     setNewPost({ ...newPost, [name]: value });
@@ -51,7 +50,7 @@ export default function UpdateModal({
     await updateDoc(doc(db, "posts", `${foundPost?.id}`), {
       title: newPost.title,
       content: newPost.content,
-      category: newPost.category,
+      category: newPost.category
     });
   };
   const { mutate: mutateToUpdate } = useMutation({
@@ -59,16 +58,47 @@ export default function UpdateModal({
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
+    }
   });
 
   const handleUpdatePost = async () => {
-    if (!isLogin) return alert("로그인하셔야 게시글을 남기실수 있습니다.");
+    if (!isLogin)
+      return toast.error("로그인하셔야 게시물을 남길 수 있습니다", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
     if (!newPost.content || !newPost.title || !newPost.category)
-      return alert("카테고리 타이틀 컨텐츠를 작성해 주세요");
+      return toast.error("카테고리 타이틀 컨텐츠를 작성해 주세요", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
     const confirmResult = window.confirm("게시글 수정을 하시겠습니까?");
     if (confirmResult) {
-      alert("작성이 완료되었습니다.");
+      toast.success("작성이 완료되었습니다", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
       setToggleModal(false);
       mutateToUpdate();
     }
@@ -101,30 +131,10 @@ export default function UpdateModal({
               setNewPost={setNewPost}
               newPost={newPost}
             /> */}
-            <CategoryBtn
-              text="일상이야기"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="맛집추천"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="취미생활"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
-            <CategoryBtn
-              text="문의하기"
-              type=""
-              setNewPost={setNewPost}
-              newPost={newPost}
-            />
+            <CategoryBtn text="일상이야기" type="" setNewPost={setNewPost} newPost={newPost} />
+            <CategoryBtn text="맛집추천" type="" setNewPost={setNewPost} newPost={newPost} />
+            <CategoryBtn text="취미생활" type="" setNewPost={setNewPost} newPost={newPost} />
+            <CategoryBtn text="문의하기" type="" setNewPost={setNewPost} newPost={newPost} />
           </section>
           <form className="flex flex-col items-center justify-center gap-[50px]">
             <div className="flex gap-[10px]">

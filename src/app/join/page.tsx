@@ -40,10 +40,10 @@ export default function Join() {
   };
   // 약관 동의 부분 토스티파이
   const notify = () =>
-    toast.error("약관을 동의 하세여", {
+    toast.error("약관을 동의 해주세요", {
       transition: Slide,
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -63,10 +63,8 @@ export default function Join() {
   useEffect(() => {
     if (checkList.includes("age") && checkList.includes("terms") && checkList.includes("collect")) {
       setButtonColor(true);
-      console.log("여기는 진실");
     } else {
       setButtonColor(false);
-      console.log("여기는 거짓");
     }
   }, [checkList]);
 
@@ -140,9 +138,19 @@ export default function Join() {
     console.log("이거이거", emailSnapshot.empty);
 
     if (!emailSnapshot.empty) {
-      alert("이미 사용 중인 이메일입니다");
-      console.log("사용중임");
-      window.location.reload();
+      toast.error("이미 사용 중인 이메일입니다", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
+
+      // window.location.reload();
       return false;
     }
 
@@ -152,8 +160,18 @@ export default function Join() {
     const displayNameSnapshot = await getDocs(displayNameQuery);
 
     if (!displayNameSnapshot.empty) {
-      alert("이미 사용 중인 닉네임입니다");
-      window.location.reload();
+      toast.error("이미 사용 중인 닉네임입니다", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
+      // window.location.reload();
       return false;
     }
 
@@ -188,7 +206,7 @@ export default function Join() {
       toast.success(`${displayName}님 환영합니다`, {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -204,9 +222,11 @@ export default function Join() {
   return (
     <div className="flex justify-center items-center w-full my-[60px]">
       <div className="w-[360px]">
-        <div className="mb-[52px]">
-          <h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left">회원가입</h1>
-          <span>
+        <div className="mb-[52px] flex flex-col gap-[16px]">
+          <h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left text-[#212121]">
+            회원가입
+          </h1>
+          <span className="text-[#5C5C5C] text-[18px] leading-[26px] font-semibold">
             따뜻한 마음을 모아 당신에게 드려요 :)
             <br />
             모두의 음식점, 모음
@@ -271,7 +291,7 @@ export default function Join() {
               onChange={checkAll}
               checked={checkList.length === 4 ? true : false}
             />
-            <div>전체동의</div>
+            <div className="text-[#5C5C5C]">전체동의</div>
           </div>
           <div className="border border-gray-300"></div>
           <div className="flex items-center">
@@ -283,7 +303,7 @@ export default function Join() {
               checked={checkList.includes("age") ? true : false}
             />
             <div className="flex justify-between items-center w-full">
-              <span>(필수) 만 14세 이상입니다</span>
+              <span className="text-[#5C5C5C]">(필수) 만 14세 이상입니다</span>
               <Image
                 src={rightIcon}
                 alt="nextPage"
@@ -303,7 +323,7 @@ export default function Join() {
               checked={checkList.includes("terms") ? true : false}
             />
             <div className="flex justify-between items-center w-full">
-              <span>(필수) 이용약관 동의 </span>
+              <span className="text-[#5C5C5C]">(필수) 이용약관 동의 </span>
               <Image
                 src={rightIcon}
                 alt="nextPage"
@@ -323,7 +343,7 @@ export default function Join() {
               checked={checkList.includes("collect") ? true : false}
             />
             <div className="flex justify-between items-center w-full">
-              <span>(필수) 개인정보 수집 및 이용 동의 </span>
+              <span className="text-[#5C5C5C]">(필수) 개인정보 수집 및 이용 동의 </span>
               <Image
                 src={rightIcon}
                 alt="nextPage"
@@ -343,7 +363,7 @@ export default function Join() {
               checked={checkList.includes("choice") ? true : false}
             />
             <div className="flex justify-between items-center w-full">
-              <span>(선택) 마케팅 개인정보 제3자 제공 동의 </span>
+              <span className="text-[#5C5C5C]">(선택) 마케팅 개인정보 제3자 제공 동의 </span>
               <Image
                 src={rightIcon}
                 alt="nextPage"

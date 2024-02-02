@@ -17,7 +17,7 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
   const dispatch = useDispatch();
   // const shops = useSelector((state: any) => state.shops);
   const router = useRouter();
-  const [addr, setAddr] = useState({ addrRoad: "", addrBuilding: "" });
+  // const [addr, setAddr] = useState({ addrRoad: "", addrBuilding: "" });
   const moveDetailPageBtn = (event: React.MouseEvent<HTMLElement, MouseEvent>, phoneNum: string) => {
     // console.log(router);
 
@@ -32,33 +32,33 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
     queryKey: [`hoogis${shop.연락처}`],
     queryFn: () => getHoogis(shop.연락처)
   });
-  useEffect(() => {
-    if (window.kakao) {
-      let geocoder = new window.kakao.maps.services.Geocoder();
-      geocoder.addressSearch(shop.주소, function (result, status) {
-        // console.log(
-        //   result[0].address_name,
-        //   result[0].road_address.building_name,
-        //   "이것좀봅세"
-        // );
-        if (result[0]) {
-          setAddr({
-            addrRoad: result[0].address_name,
-            addrBuilding: result[0].road_address.building_name ? result[0].road_address.building_name : ""
-          });
-        }
-      });
+  // useEffect(() => {
+  //   if (window.kakao) {
+  //     let geocoder = new window.kakao.maps.services.Geocoder();
+  //     geocoder.addressSearch(shop.주소, function (result, status) {
+  //       // console.log(
+  //       //   result[0].address_name,
+  //       //   result[0].road_address.building_name,
+  //       //   "이것좀봅세"
+  //       // );
+  //       if (result[0]) {
+  //         setAddr({
+  //           addrRoad: result[0].address_name,
+  //           addrBuilding: result[0].road_address.building_name ? result[0].road_address.building_name : ""
+  //         });
+  //       }
+  //     });
 
-      // const ps = new window.kakao.maps.services.Places();
-      // ps.keywordSearch("라페스타", function (result, status) {
-      //   console.log(result, "이것좀봅세2");
-      // });
-    }
-  }, []);
+  //     // const ps = new window.kakao.maps.services.Places();
+  //     // ps.keywordSearch("라페스타", function (result, status) {
+  //     //   console.log(result, "이것좀봅세2");
+  //     // });
+  //   }
+  // }, []);
   return (
     <>
       <section
-        className="flex gap-[20px] h-[148px] w-[440px] px-[20px] py-[24px] bg-[#fff] rounded-[16px] items-center hover:scale-[1.04] transition-transform ease duration-300 "
+        className="flex gap-[20px] h-[148px] w-[400px] max-sm:w-full p-[20px] bg-[#fff] rounded-[16px] items-center hover:scale-[1.04] transition-transform ease duration-300"
         key={nanoid()}
         onClick={(e) => moveDetailPageBtn(e, shop.연락처)}
       >
@@ -70,7 +70,7 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
         </section>
         <section className="flex flex-row border-opacity-60 rounded-lg gap-[9px]">
           <div>
-            <div className="text-[18px] font-semibold text-[#212121] leadding-[26px]">{shop.업소명}</div>{" "}
+            <div className="text-[18px] font-semibold text-[#212121] leadding-[26px]">{shop.업소명}</div>
             {/* <div className="flex justify-between">
 							{type === "no" ? (
 								<></>
@@ -83,20 +83,18 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
 								</button>
 							)}
 						</div> */}
-            <Ddabong name="thumbup" shopId={shop.연락처} type="small" />
+            {/* <Ddabong name="thumbup" shopId={shop.연락처} type="small" /> */}
             {/* <div className="flex justify-round gap-5"> */}
             <div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
               <Image src={spoon_fork} alt="위치" className=" w-[18px] h-[18px]" />
               {shop.업종}
             </div>
-            <p className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
+            {/* <p className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
               후기 :{hoogis?.length}
-            </p>
+            </p> */}
             <div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
               <Image src={place} alt="스푼포크" className="w-[20px] h-[20px]" />
-              <span className="w-[250px] text-left block whitespace-nowrap truncate text-ellipsis">
-                {addr.addrRoad} {addr.addrBuilding}
-              </span>
+              <span className="w-[250px] text-left block whitespace-nowrap truncate text-ellipsis">{shop.주소}</span>
             </div>
           </div>
         </section>

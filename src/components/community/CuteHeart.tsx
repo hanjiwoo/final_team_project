@@ -1,13 +1,15 @@
-'use client';
-import HeartEmpty from '../../app/assets/images/icon/heart_off.png';
-import HeartFull from '../../app/assets/images/icon/heart_on.png';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { addHeart, deleteHeart, getHearts } from './Fns';
-import { typeOfHeart } from '@/app/assets/types/types';
-import Image from 'next/image';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/config/configStore';
+"use client";
+import HeartEmpty from "../../app/assets/images/icon/heart_off.png";
+import HeartFull from "../../app/assets/images/icon/heart_on.png";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { addHeart, deleteHeart, getHearts } from "./Fns";
+import { typeOfHeart } from "@/app/assets/types/types";
+import Image from "next/image";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
+import { toast } from "react-toastify";
+
 export default function CuteHeart({ postId, type }: { postId: string | undefined; type: string }) {
   const { isLogin, uid } = useSelector((state: RootState) => state.login);
   const [disable, setDisable] = useState(false);
@@ -77,9 +79,9 @@ export default function CuteHeart({ postId, type }: { postId: string | undefined
   });
   const selectedId = filterdheart?.id;
   const HeartUpHandler = () => {
-    if (type === 'small') return;
+    if (type === "small") return;
     if (disable) return;
-    if (!isLogin) return alert('로그인 후에 이용이 가능합니다.');
+    if (!isLogin) return toast.warning("로그인 후에 이용이 가능합니다.");
     // setLIke(!like);
 
     if (filterdheart) {
@@ -91,7 +93,7 @@ export default function CuteHeart({ postId, type }: { postId: string | undefined
     }
   };
   if (isLoading) {
-    return <>로딩중...</>;
+    return <>로딩중</>;
   }
   return (
     <>
@@ -101,13 +103,23 @@ export default function CuteHeart({ postId, type }: { postId: string | undefined
       <div className="flex items-center gap-[4px]">
         <div onClick={HeartUpHandler}>
           {filterdheart ? (
-            <Image className="w-[20px] h-[20px]" id="이미지" src={HeartFull} alt="빨간따봉"></Image>
+            <Image
+              className="w-[20px] h-[20px] max-sm:w-[16px] max-sm:h-[16px]"
+              id="이미지"
+              src={HeartFull}
+              alt="빨간따봉"
+            ></Image>
           ) : (
-            <Image className="w-[20px] h-[20px]" id="이미지" src={HeartEmpty} alt="빈따봉"></Image>
+            <Image
+              className="w-[20px] h-[20px] max-sm:w-[16px] max-sm:h-[16px]"
+              id="이미지"
+              src={HeartEmpty}
+              alt="빈따봉"
+            ></Image>
           )}
         </div>
         <div>
-          <p className="text-[16px] text-[#FF8145]">공감해요 {filteredhearts?.length}</p>
+          <p className="text-[16px] text-[#FF8145] max-sm:text-[12px]">공감해요 {filteredhearts?.length}</p>
         </div>
       </div>
     </>

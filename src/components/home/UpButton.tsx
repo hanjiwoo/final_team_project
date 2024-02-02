@@ -1,14 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import up from "../../app/assets/images/icon/arrow_up.png";
 
 export default function UpButton() {
   const [showButton, setShowButton] = useState(false);
 
-  const scrollToTop = () => {
+  const moveToTop = () => {
     window.scroll({
       top: 0,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   };
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function UpButton() {
       }
     };
 
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
     window.addEventListener("scroll", handleShowButton);
     return () => {
       window.removeEventListener("scroll", handleShowButton);
@@ -31,11 +32,11 @@ export default function UpButton() {
     showButton && (
       <div className="fixed bottom-[100px] right-[100px] z-[100]">
         <button
-          className="text-[15px] w-[52px] h-[52px] bg-[#fff] rounded-full shadow hover:scale-105"
-          onClick={scrollToTop}
+          className="flex flex-col items-center justify-center w-[52px] h-[52px] bg-[#fff] rounded-full shadow hover:scale-105"
+          onClick={moveToTop}
           type="button"
         >
-          Top
+          <Image src={up} alt="업" className="w-[25px] h-[25px]" />
         </button>
       </div>
     )

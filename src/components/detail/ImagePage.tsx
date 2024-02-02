@@ -10,13 +10,14 @@ import MapTest from "./MapTest";
 import { getShare } from "@/redux/modules/shareSlice";
 import { Roadview } from "react-kakao-maps-sdk";
 import moeumLoading from "../../app/assets/images/moeumLoading.gif";
+import { nanoid } from "nanoid";
 
 export default function ImagePage() {
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
-  const { 시군, 업소명, 주소 } = useSelector((state: any) => state.detailShop);
+  const shop = useSelector((state: any) => state.detailShop);
   const dispatch = useDispatch();
-
+  const { 시군, 업소명, 주소 } = shop;
   useEffect(() => {
     if (window.kakao) {
       const ps = new window.kakao.maps.services.Places();
@@ -29,7 +30,7 @@ export default function ImagePage() {
         }
       });
     }
-  }, []);
+  }, [shop]);
 
   return (
     // <div className="flex flex-row rounded-lg justify-center items-center bg-green-300 w-[720px] h-[530px] gap-5">
@@ -56,28 +57,31 @@ export default function ImagePage() {
     //   </div>
     // </div>
 
-    <div className="w-[720px] h-[530px] justify-center items-start gap-4 inline-flex rounded-lg overflow-hidden">
-      {/* <div className="w-[530px] h-[530px] relative bg-zinc-100 rounded-xl" /> */}
-      <div style={{ pointerEvents: "auto", width: "100%", height: "100%" }}>
-        <Roadview
-          position={{
-            // 지도의 중심좌표
-            lat,
-            lng,
-            radius: 50
-          }}
-          style={{
-            // 지도의 크기
-            width: "100%",
-            height: "100%"
-          }}
-        />
-      </div>
-      {/* <div className="w-[170px] self-stretch flex-col justify-start items-center gap-4 inline-flex">
+    <div className="w-full flex justify-center items-center">
+      <div className="w-[720px] h-[530px] justify-center items-center gap-4 rounded-lg overflow-hidden max-sm:w-full max-sm:h-[360px]">
+        {/* <div className="w-[530px] h-[530px] relative bg-zinc-100 rounded-xl" /> */}
+        <div style={{ pointerEvents: "auto", width: "100%", height: "100%" }}>
+          <Roadview
+            panoId={1}
+            position={{
+              // 지도의 중심좌표
+              lat,
+              lng,
+              radius: 50
+            }}
+            style={{
+              // 지도의 크기
+              width: "100%",
+              height: "100%"
+            }}
+          />
+        </div>
+        {/* <div className="w-[170px] self-stretch flex-col justify-start items-center gap-4 inline-flex">
         <div className="w-[170px] h-[170px] relative bg-zinc-100 rounded-xl" />
         <div className="w-[170px] h-[170px] relative bg-zinc-100 rounded-xl" />
         <div className="w-[170px] h-[170px] relative bg-zinc-100 rounded-xl" />
       </div> */}
+      </div>
     </div>
   );
 }

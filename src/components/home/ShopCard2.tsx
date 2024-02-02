@@ -11,11 +11,12 @@ import place from "../../app/assets/images/icon/place.png";
 import spoon_fork from "../../app/assets/images/icon/spoon_fork.png";
 import { toast } from "react-toastify";
 import PhotoOfShop from "./PhotoOfShop";
+import { useQuery } from "@tanstack/react-query";
 export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shops?: typeOfShop[]; type?: string }) {
   const dispatch = useDispatch();
   // const shops = useSelector((state: any) => state.shops);
   const router = useRouter();
-  const [addr, setAddr] = useState({ addrRoad: "", addrBuilding: "" });
+  // const [addr, setAddr] = useState({ addrRoad: "", addrBuilding: "" });
   const moveDetailPageBtn = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, phoneNum: string) => {
     // console.log(router);
 
@@ -26,29 +27,7 @@ export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shop
     dispatch(getShop(shop));
     router.push(`/detail/${shop.연락처}`);
   };
-  useEffect(() => {
-    if (window.kakao) {
-      let geocoder = new window.kakao.maps.services.Geocoder();
-      geocoder.addressSearch(shop.주소, function (result, status) {
-        // console.log(
-        //   result[0].address_name,
-        //   result[0].road_address.building_name,
-        //   "이것좀봅세"
-        // );
-        if (result[0]) {
-          setAddr({
-            addrRoad: result[0].address_name,
-            addrBuilding: result[0].road_address.building_name ? result[0].road_address.building_name : ""
-          });
-        }
-      });
 
-      // const ps = new window.kakao.maps.services.Places();
-      // ps.keywordSearch("라페스타", function (result, status) {
-      //   console.log(result, "이것좀봅세2");
-      // });
-    }
-  }, []);
   return (
     <button onClick={(e) => moveDetailPageBtn(e, shop.연락처)}>
       <section className="flex w-[344px] bg-[#fff] rounded-lg justify-center items-center" key={nanoid()}>
@@ -70,7 +49,7 @@ export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shop
           </div> */}
           <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center">
             <Image src={place} alt="위치" className="w-[20px] h-[20px]" />
-            {addr.addrRoad} {addr.addrBuilding && addr.addrBuilding}
+            {shop.주소}
           </div>
           {/* </div> */}
         </div>

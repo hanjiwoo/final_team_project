@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect, useRef } from "react";
 import {
   signInWithEmailAndPassword,
   getAuth,
@@ -18,6 +18,7 @@ import GoogleLogo from "../assets/images/icon/google.png";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/redux/modules/loginSlice";
+import { getProviders, signIn } from "next-auth/react";
 
 import { toast, ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -46,18 +47,18 @@ export default function Login() {
   }, [user]);
 
   // 카카오 로그인 부분 토스티파이
-  const notify = () =>
-    toast.error("카카오 로그인은 추후 지원 예정입니다", {
-      transition: Slide,
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored"
-    });
+  // const notify = () =>
+  //   toast.error("카카오 로그인은 추후 지원 예정입니다", {
+  //     transition: Slide,
+  //     position: "top-center",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "colored"
+  //   });
 
   // 카카오 로그인
   useEffect(() => {
@@ -137,7 +138,7 @@ export default function Login() {
     const isEmailValid = emailRegEx.test(email);
 
     if (!isEmailValid) {
-      setEmailError("유효하지 않은 이메일 형식입니다");
+      setEmailError("유효하지 않은 이메일 형식입니다.");
       return false;
     }
 
@@ -145,7 +146,7 @@ export default function Login() {
     const isPasswordValid = password.length >= 5;
 
     if (!isPasswordValid) {
-      setPasswordError("비밀번호는 6자 이상 사용해야 합니다");
+      setPasswordError("비밀번호는 6자 이상 사용해야 합니다.");
 
       return false;
     }
@@ -179,7 +180,7 @@ export default function Login() {
       toast.success(`${user.displayName}님 안녕하세요`, {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -189,7 +190,17 @@ export default function Login() {
       });
       router.replace("/");
     } catch (error) {
-      alert("로그인에 실패했습니다");
+      toast.error("로그인에 실패했습니다", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
       console.error(error);
     }
   };
@@ -225,7 +236,7 @@ export default function Login() {
       toast.success(`${displayName}님 안녕하세요`, {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -272,12 +283,51 @@ export default function Login() {
   // 	signInWithKakao();
   // };
 
+  // 추가된 부분
+  const [providers, setProviders] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const res: any = await getProviders();
+      console.log(res);
+      setProviders(res);
+    })();
+  }, []);
+  // 추가된 부분
+
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  const handleSubmit = async () => {
+    // console.log(emailRef.current);
+    // console.log(passwordRef.current);
+    const result = await signIn("credentials", {
+      username: emailRef.current,
+      password: passwordRef.current,
+      redirect: true,
+      callbackUrl: "/"
+    });
+    console.log(result);
+  };
+
+  // 추가된 부분
+  const handleKakao = async () => {
+    const result = await signIn("kakao", {
+      redirect: true,
+      callbackUrl: "/"
+    });
+    console.log(`result는` + result);
+  };
+  // 추가된 부분
+
   return (
-    <div className="flex justify-center items-center w-full my-[60px]">
+    <div className="flex justify-center items-center w-full my-[60px] bg-[#fff]">
       <div className="w-[360px]">
-        <div className="mb-[52px]">
-          <h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left">로그인</h1>
-          <span>
+        <div className="mb-[52px] flex gap-[16px] flex-col">
+          <h1 className="flex justify-left text-[32px] font-bold leading-42px w-full text-left text-[#212121]">
+            로그인
+          </h1>
+          <span className="text-[#5C5C5C] text-[18px] leading-[26px] font-semibold">
             따뜻한 마음을 모아 당신에게 드려요 :)
             <br />
             모두의 음식점, 모음
@@ -355,9 +405,10 @@ export default function Login() {
 							카카오로 로그인
 						</Link> */}
             <button
-              onClick={() => {
-                notify();
-              }}
+              // onClick={() => {
+              //   notify();
+              // }}
+              onClick={handleKakao}
               className=" flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FEE500]"
             >
               카카오로 로그인

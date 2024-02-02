@@ -24,7 +24,7 @@ export default function NowLocationBtn() {
       return toast.error("잠시만 기다려주세요", {
         transition: Slide,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -74,11 +74,11 @@ export default function NowLocationBtn() {
   return (
     <>
       <button
-        className="bg-[#FF8145] text-white font-[500] py-[14px] px-[27px] rounded-[8px]"
+        className="bg-[#FF8145] hover:bg-[#E5743E] text-white font-[500] py-[14px] px-[27px] rounded-[8px]"
         onClick={findNowLoacation}
       >
-        내 주변 모-음 검색하기
-      </button>{" "}
+        내 주변 모음 검색하기
+      </button>
       {/*  <div>
         <h2>Your Location:</h2>
         {latitude !== null && longitude !== null ? (

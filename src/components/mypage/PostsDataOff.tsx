@@ -1,16 +1,17 @@
-'use client';
-import React, { useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import postIcon from '../../app/assets/images/icon/pencilIcon.png';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/config/configStore';
-import { useRouter } from 'next/navigation';
-import { getHearts } from '../community/Fns';
-import { useQuery } from '@tanstack/react-query';
-import { getPosts } from '../community/queryFn';
-import { nanoid } from 'nanoid';
-import PostCard from './PostCard';
+"use client";
+import React, { useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import postIcon from "../../app/assets/images/icon/pencilIcon.png";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
+import { useRouter } from "next/navigation";
+import { getHearts } from "../community/Fns";
+import { useQuery } from "@tanstack/react-query";
+import { getPosts } from "../community/queryFn";
+import { nanoid } from "nanoid";
+import PostCard from "./PostCard";
+import { toast } from "react-toastify";
 
 export default function PostDataOff() {
   const user = useSelector((state: RootState) => state.login);
@@ -28,16 +29,15 @@ export default function PostDataOff() {
     return post.uid === uid;
   });
 
-  useEffect(() => {
-    if (!user.isLogin) {
-      router.push('/');
-    }
-  }, []);
-
+  useEffect(() => {}, []);
+  if (!user.isLogin) {
+    toast.warning("로그인시 이용가능합니다.");
+    return <>로그인 하셔야 합니다.</>;
+  }
   return (
-    <div className="flex justify-center items-center w-screen mt-[60px] mb-[60px]">
-      <div className="w-[880px] h-[568px]">
-        <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px]">게시물 모음</h1>
+    <div className="flex justify-center items-center w-full my-[60px] px-[20px] max-sm:my-[32px] max-lg:my-[60px]">
+      <div className="w-[880px]">
+        <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px] ">게시물 모음</h1>
         {!myPosts && (
           <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
             <Image src={postIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
@@ -53,7 +53,7 @@ export default function PostDataOff() {
             if (post) {
               return (
                 <React.Fragment key={nanoid()}>
-                  <PostCard post={post} />{' '}
+                  <PostCard post={post} />{" "}
                 </React.Fragment>
               );
             }
