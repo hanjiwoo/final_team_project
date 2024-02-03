@@ -6,14 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getShare } from "@/redux/modules/shareSlice";
 import { getShop } from "@/redux/modules/detailShopSlice";
 import ShareBtn from "@/components/detail/ShareBtn";
+import { RootState } from "@/redux/config/configStore";
 
 export default function MapTest() {
   useKakaoLoader();
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
-  const { 시군, 업소명, 주소 } = useSelector((state: any) => state.detailShop);
+  const shop = useSelector((state: RootState) => state.detailShop);
   const dispatch = useDispatch();
-
+  const { 시군, 업소명, 주소 } = shop;
   useEffect(() => {
     if (window.kakao) {
       const ps = new window.kakao.maps.services.Places();
@@ -40,7 +41,7 @@ export default function MapTest() {
         }
       });
     }
-  }, []);
+  }, [shop]);
 
   return (
     <div className="z-[100] relative left-0 mt-[60px] max-lg:hidden">

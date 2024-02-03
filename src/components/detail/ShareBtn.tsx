@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast, ToastContainer, Slide } from "react-toastify";
@@ -9,14 +9,14 @@ import Image from "next/image";
 import share from "../../app/assets/images/icon/share.png";
 export default function ShareBtn() {
   const { url } = useSelector((state: any) => state.share);
-  const router = useRouter();
+  const { id } = useParams();
   const [checkClip, setCheckClip] = useState(false);
   let urlOrigin;
   const clipboardHandler = async () => {
     try {
       if (!window) return alert("url이 없어요");
       urlOrigin = window.location.origin;
-      await navigator.clipboard.writeText(urlOrigin);
+      await navigator.clipboard.writeText(urlOrigin + "/detail/" + id);
       setCheckClip(true);
       setTimeout(() => {
         setCheckClip(false);
@@ -51,7 +51,7 @@ export default function ShareBtn() {
   const moveTokakao = () => {
     if (!url) return alert("url이 없어요");
     window.open(url, "_blank");
-    console.log(url, " 이거 없나");
+    // console.log(url, " 이거 없나");
   };
 
   return (

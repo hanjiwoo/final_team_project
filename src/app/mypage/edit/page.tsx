@@ -25,9 +25,15 @@ export default function Page() {
   // console.log(photoURL, ImageURL, displayName, "이게 어떻게 찍히길래");
   const router = useRouter();
   const imgChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files?.[0].size, "사이즈확인");
+    if (e.target.files) {
+      if (e.target.files[0].size > 1000000) {
+        return toast.warning("파일이 너무 큽니다.");
+      }
+    }
     if (e.target.files) {
       const fileURL = URL.createObjectURL(e.target.files[0]);
-      console.log(fileURL, "오케");
+      // console.log(fileURL, "오케");
       setImageURL(fileURL);
       setImagFile(e.target.files[0]);
     }
@@ -65,19 +71,9 @@ export default function Page() {
 
         dispatch(updateNickname(text.nickName));
         dispatch(updatePhoto(downloadURL));
-        return toast.success("적용완료", {
-          transition: Slide,
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored"
-        });
+        toast.success("적용완료");
       } catch (error) {
-        alert(error);
+        toast.error(`${error} 변경을 위해서 재로그인이 필요합니다.`);
       }
 
       // console.log(downloadURL, "요거좀 궁금하다.");
@@ -87,14 +83,7 @@ export default function Page() {
     }
   };
   useEffect(() => {
-    // console.log(
-    //   "뒤",
-    //   photoURL,
-    //   ImageURL,
-    //   displayName,
-    //   uid,
-    //   "이게 어떻게 찍히길래"
-    // );
+    // console.log("확인중", auth.currentUser?.getIdToken(), "토큰 있나?", auth.currentUser, " 흐음");
   }, []);
   if (!isLogin) {
     return <div>로그인을 해주세요.</div>;
@@ -109,7 +98,7 @@ export default function Page() {
             <label>
               <div className="w-[100px] h-[100px] overflow-hidden rounded-full cursor-pointer">
                 {isLogin ? (
-                  <img src={photoURL} className="w-full h-full rounded-full" alt="흐음" />
+                  <img src={ImageURL ? ImageURL : photoURL} className="w-full h-full rounded-full" alt="흐음" />
                 ) : (
                   <Image src={profileImage} alt="more" className="w-full h-full" />
                 )}

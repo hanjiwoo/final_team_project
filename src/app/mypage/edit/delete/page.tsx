@@ -36,16 +36,19 @@ export default function DeleteUser() {
     if (auth.currentUser) {
       deleteUser(auth.currentUser)
         .then(() => {
-          alert("회원탈퇴가 완료되었습니다.");
+          toast.success("회원탈퇴가 완료되었습니다.");
 
           dispatch(logout("로그아웃"));
           router.push("/");
         })
         .catch((error) => {
-          alert(error);
+          toast.error(`${error}, 탈퇴를 위해 재로그인이 필요합니다.`);
         });
     }
   };
+  if (!auth.currentUser?.uid) {
+    return <>로그인을 해주세요</>;
+  }
   return (
     <section className="flex justify-center my-[60px] px-[20px] w-full">
       <div className="w-[880px]">

@@ -30,15 +30,13 @@ export default function PostDataOff() {
     return post.uid === uid;
   });
 
-  useEffect(() => {
-    if (!user.isLogin) {
-      toast.warning("로그인시 이용가능합니다.");
-      router.push("/");
-    }
-  }, []);
-
+  useEffect(() => {}, []);
+  if (!user.isLogin) {
+    toast.warning("로그인시 이용가능합니다.");
+    return <>로그인 하셔야 합니다.</>;
+  }
   return (
-    <div className="flex justify-center items-center w-full my-[60px] px-[20px] max-sm:my-[32px] max-lg:my-[60px]">
+    <div className="flex justify-center items-center w-full mt-[60px] mb-[60px] px-[20px] max-sm:mt-[32px]">
       <div className="w-[880px]">
         <div className="flex flex-row gap-[5px] mb-[40px] max-sm:mb-[32px]">
           <span
@@ -52,7 +50,9 @@ export default function PostDataOff() {
           <Image src={right} alt="right" className="w-[18px] h-[18px]" />
           <span className="text-[14px] leading-[20px] text-[#7A7A7A]">게시물 모음</span>
         </div>
-        <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px] ">게시물 모음</h1>
+        <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px] max-sm:mb-[32px]">
+          게시물 모음
+        </h1>
         {!myPosts && (
           <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
             <Image src={postIcon} alt="mainIcon" className="w-[48px] h-[48px]" />

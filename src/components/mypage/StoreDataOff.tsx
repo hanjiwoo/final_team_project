@@ -2,23 +2,44 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import storeMainIcon from "../../app/assets/images/icon/SFIcon.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
 import { useQuery } from "@tanstack/react-query";
 import { getThumbs } from "../home/Fns";
 import ShopCard from "../home/ShopCard";
 import { useRouter } from "next/navigation";
 import { nanoid } from "nanoid";
+import { typeOfShop } from "@/app/assets/types/types";
+import { getGoodShop } from "../home/QueryFn";
+import { getAllShops } from "@/redux/modules/allShops";
 import right from "../../app/assets/images/icon/myRight.png";
 
 export default function StoreDataOff() {
   const user = useSelector((state: RootState) => state.login);
-  const shops = useSelector((state: RootState) => state.allShops);
+  // const shops = useSelector((state: RootState) => state.allShops);
+  const dispatch = useDispatch();
   const { displayName, email, uid, photoURL } = user;
   const router = useRouter();
   const { data: thumbs, isLoading } = useQuery({
     queryKey: [`thumbs`],
     queryFn: getThumbs
+  });
+  const { data: shops } = useQuery({
+    queryKey: ["allshops"],
+    queryFn: () => {
+      return getGoodShop().then((res: typeOfShop[]) => {
+        const filteredRes = res.filter((shop) => {
+          return (
+            shop.업종.slice(0, 2) !== "기타" &&
+            shop.업종.slice(0, 2) !== "이미" &&
+            shop.업종.slice(0, 2) !== "목욕" &&
+            shop.업종.slice(0, 2) !== "세탁"
+          );
+        });
+        dispatch(getAllShops(filteredRes));
+        return filteredRes;
+      });
+    }
   });
 
   const myShops = thumbs
@@ -26,17 +47,15 @@ export default function StoreDataOff() {
       return thumb.uid === uid;
     })
     .map((thumb) => {
-      return shops.find((shop) => {
+      return shops?.find((shop) => {
         return shop.연락처 === thumb.shopId;
       });
     });
 
-  useEffect(() => {
-    if (!shops[0] || !user.isLogin) {
-      router.push("/");
-    }
-  }, []);
-
+  useEffect(() => {}, []);
+  if (!user.isLogin) {
+    return <>로그인후 이용가능합니다.</>;
+  }
   return (
     <div className="flex justify-center items-center w-full mt-[60px] mb-[60px] px-[20px] max-sm:mt-[32px]">
       <div className="w-[880px]">
@@ -52,9 +71,7 @@ export default function StoreDataOff() {
           <Image src={right} alt="right" className="w-[18px] h-[18px]" />
           <span className="text-[14px] leading-[20px] text-[#7A7A7A]">매장 모음</span>
         </div>
-        <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px] max-sm:mb-[32px]">
-          매장 모음
-        </h1>
+        <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px]">매장 모음</h1>
         {!myShops && (
           <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
             <Image src={storeMainIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
