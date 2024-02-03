@@ -15,6 +15,7 @@ import axios from "axios";
 import { Router } from "next/router";
 import Image from "next/image";
 import GoogleLogo from "../assets/images/icon/google.png";
+import KakaoLogo from "../assets/images/icon/kakaotalk.png";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/redux/modules/loginSlice";
@@ -109,15 +110,24 @@ export default function Login() {
     }
   };
 
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      // 엔터 키를 눌렀을 때 로그인 동작 수행
+      handleClickSignIn(event);
+    }
+  };
+
   const handleClickOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value }
     } = event;
     if (name === "email") {
       setEmail(value);
+      handleBlur(event);
     }
     if (name === "password") {
       setPassword(value);
+      handleBlur(event);
     }
   };
 
@@ -333,7 +343,7 @@ export default function Login() {
             모두의 음식점, 모음
           </span>
         </div>
-        <form className="flex justify-center flex-col items-center mb-[40px] gap-[16px]">
+        <form className="flex justify-center flex-col items-center mb-[40px] gap-[16px]" onKeyDown={handleKeyDown}>
           <div className="flex flex-col w-full">
             <label className="test-[14px] leading-20px text-[#999]">이메일</label>
             <input
@@ -357,7 +367,7 @@ export default function Login() {
               name="password"
               onChange={handleClickOnChange}
               required
-              placeholder="영문 + 숫자 조합으로 6자 이상 입력해주세요 :)"
+              placeholder="비밀번호를 입력해주세요"
               onBlur={handleBlur}
             ></input>
           </div>
@@ -389,7 +399,7 @@ export default function Login() {
 
           <div className="flex flex-col gap-[12px]">
             <div
-              className="cursor-pointer  flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FFF] gap-[12px] border-solid border border-gray-400"
+              className="cursor-pointer  flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FFF] gap-[12px] border-solid border border-gray-300"
               onClick={handleClickGoogle}
             >
               <Image src={GoogleLogo} alt="googleLogo" className="w-[20px] h-[20px]" />
@@ -404,15 +414,16 @@ export default function Login() {
 						>
 							카카오로 로그인
 						</Link> */}
-            <button
+            <div
               // onClick={() => {
               //   notify();
               // }}
               onClick={handleKakao}
-              className=" flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FEE500]"
+              className="cursor-pointer flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FEE500] gap-[12px]"
             >
+              <Image src={KakaoLogo} alt="KakaoLogo" className="w-[20px] h-[20px]" />
               카카오로 로그인
-            </button>
+            </div>
           </div>
         </div>
       </div>

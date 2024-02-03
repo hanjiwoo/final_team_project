@@ -16,8 +16,31 @@ import PostCard from "@/components/mypage/PostCard";
 import BestPost from "@/components/community/BestPost";
 import { getHearts } from "@/components/community/Fns";
 import moeumLoading from "../assets/images/moeumLoading.gif";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/config/configStore";
+// 토스티 import
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ListPage() {
+  const { uid, displayName, isLogin, photoURL } = useSelector((state: RootState) => state.login);
+  const handleWriteBtn = () => {
+    if (!isLogin) {
+      return toast.error("로그인을 해주세요", {
+        transition: Slide,
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
+    } else {
+      router.push("/community/write");
+    }
+  };
   const [newPost, setNewPost] = useState<Post>({
     id: "",
     uid: "",
@@ -179,16 +202,14 @@ export default function ListPage() {
             </div>
           </div>
 
-          <div className="w-full flex justify-center">
+          <div className="w-full flex justify-center" onClick={handleWriteBtn}>
             <div className="w-[680px] flex justify-end">
-              <Link href="community/write">
-                <button className=" flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[8px] rounded-[8px]   text-[white] bg-[#FF8145] hover:bg-[#E5743E] ">
-                  <div className="w-[20px] h-[20px]">
-                    <Image src={writeImage} alt="write"></Image>
-                  </div>
-                  <p className="text-[14px] leading-[20px] font-medium ">작성하기</p>
-                </button>
-              </Link>
+              <button className=" flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[8px] rounded-[8px]   text-[white] bg-[#FF8145] hover:bg-[#E5743E] ">
+                <div className="w-[20px] h-[20px]">
+                  <Image src={writeImage} alt="write"></Image>
+                </div>
+                <p className="text-[14px] leading-[20px] font-medium ">작성하기</p>
+              </button>
             </div>
           </div>
           <div className="flex w-full flex-col items-center gap-[40px]">

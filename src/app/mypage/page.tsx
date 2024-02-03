@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { auth } from "@/shared/firebase";
 import { logout } from "@/redux/modules/loginSlice";
 import { toast, ToastContainer, Slide } from "react-toastify";
+import basicProfileImage from "../../../public/Favicon_32_32.png";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Mypage() {

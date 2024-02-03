@@ -285,7 +285,7 @@ export default function Join() {
           <label className="test-[16px] text-[#212121] font-[600]">약관 동의</label>
           <div className="flex items-center">
             <input
-              className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px]"
+              className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px] "
               type="checkbox"
               name="all"
               onChange={checkAll}

@@ -65,7 +65,17 @@ export default function Page() {
 
         dispatch(updateNickname(text.nickName));
         dispatch(updatePhoto(downloadURL));
-        alert("적용완료");
+        return toast.success("적용완료", {
+          transition: Slide,
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored"
+        });
       } catch (error) {
         alert(error);
       }

@@ -9,6 +9,7 @@ import { getThumbs } from "../home/Fns";
 import ShopCard from "../home/ShopCard";
 import { useRouter } from "next/navigation";
 import { nanoid } from "nanoid";
+import right from "../../app/assets/images/icon/myRight.png";
 
 export default function StoreDataOff() {
   const user = useSelector((state: RootState) => state.login);
@@ -17,7 +18,7 @@ export default function StoreDataOff() {
   const router = useRouter();
   const { data: thumbs, isLoading } = useQuery({
     queryKey: [`thumbs`],
-    queryFn: getThumbs,
+    queryFn: getThumbs
   });
 
   const myShops = thumbs
@@ -37,18 +38,26 @@ export default function StoreDataOff() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center w-screen mt-[60px] mb-[60px]">
-      <div className="w-[880px] h-[568px]">
-        <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px]">
+    <div className="flex justify-center items-center w-full mt-[60px] mb-[60px] px-[20px] max-sm:mt-[32px]">
+      <div className="w-[880px]">
+        <div className="flex flex-row gap-[5px] mb-[40px] max-sm:mb-[32px]">
+          <span
+            className="text-[14px] leading-[20px] text-[#C2C2C2] cursor-pointer"
+            onClick={() => {
+              router.push("/mypage");
+            }}
+          >
+            마이 모음
+          </span>
+          <Image src={right} alt="right" className="w-[18px] h-[18px]" />
+          <span className="text-[14px] leading-[20px] text-[#7A7A7A]">매장 모음</span>
+        </div>
+        <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px] max-sm:mb-[32px]">
           매장 모음
         </h1>
         {!myShops && (
           <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
-            <Image
-              src={storeMainIcon}
-              alt="mainIcon"
-              className="w-[48px] h-[48px]"
-            />
+            <Image src={storeMainIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
             <span className="text-center text-neutral-400 text-base font-medium leading-normal">
               저장된 모음이 따로 없습니다
               <br />
@@ -56,17 +65,34 @@ export default function StoreDataOff() {
             </span>
           </section>
         )}
-        <section className="flex  gap-1">
-          {myShops?.map((shop) => {
-            if (shop) {
-              return (
-                <React.Fragment key={nanoid()}>
-                  <ShopCard shop={shop} />
-                </React.Fragment>
-              );
-            }
-          })}
-        </section>
+        <div className="block max-sm:hidden justify-center items-center">
+          <section className="gird gird-col-3 w-full">
+            {myShops?.map((shop) => {
+              if (shop) {
+                return (
+                  <React.Fragment key={nanoid()}>
+                    <ShopCard shop={shop} />
+                  </React.Fragment>
+                );
+              }
+            })}
+          </section>
+        </div>
+        <div className="hidden max-sm:block w-[360px]">
+          <section className="flex w-[390px] overflow-x-scroll">
+            {myShops?.map((shop) => {
+              if (shop) {
+                return (
+                  <React.Fragment key={nanoid()}>
+                    <div className="w-full">
+                      <ShopCard shop={shop} />
+                    </div>
+                  </React.Fragment>
+                );
+              }
+            })}
+          </section>
+        </div>
       </div>
     </div>
   );
