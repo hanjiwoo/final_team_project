@@ -119,7 +119,7 @@ export default function CuteHeart({ postId, type }: { postId: string | undefined
           )}
         </div>
         <div>
-          <p className="text-[16px] text-[#FF8145] max-sm:text-[12px]">공감해요 {filteredhearts?.length}</p>
+          <p className="text-[12px] text-[#FF8145] max-sm:text-[12px]">공감해요 {filteredhearts?.length}</p>
         </div>
       </div>
     </>

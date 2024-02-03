@@ -143,7 +143,6 @@ export default function ListPage() {
         <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
       </div>
     );
-
   return (
     <>
       {/* 전체 컨테이너 */}

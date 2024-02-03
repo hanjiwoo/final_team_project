@@ -118,7 +118,7 @@ export default function Daetgle({ post }: { post: Post }) {
           onClick={daetgleSubmitHandler}
           className=" text-[14px] leading-[20px] text-[#FFFFFF] py-[8px] px-[16px] rounded-[8px] bg-[#FF8145] hover:bg-[#E5743E] h-[48px] w-[120px]"
         >
-          댓글남기기
+          댓글 작성
         </button>
       </div>
 

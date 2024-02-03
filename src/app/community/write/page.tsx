@@ -247,7 +247,7 @@ export default function WritePage() {
                       </label>
                       <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">*</p>
                     </div>
-                    <div className="flex gap-[40px] w-full max-sm:gap-[14px]">
+                    <div className="flex gap-[16px] w-full max-sm:gap-[14px]">
                       <CategoryBtn text="일상이야기" type="" setNewPost={setNewPost} newPost={newPost} />
                       <CategoryBtn text="맛집추천" type="" setNewPost={setNewPost} newPost={newPost} />
                       <CategoryBtn text="취미생활" type="" setNewPost={setNewPost} newPost={newPost} />
@@ -296,7 +296,7 @@ export default function WritePage() {
                 <div className="flex justify-end gap-[24px] ">
                   <button
                     type="button"
-                    className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                    className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-grey bg-[white]"
                     onClick={handleCancel}
                   >
                     취소하기
