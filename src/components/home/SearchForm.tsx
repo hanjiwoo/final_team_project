@@ -135,7 +135,7 @@ export default function SearchForm() {
           name="sido"
           onChange={onchangeHandler}
           value={form.sido}
-          className="h-full w-full border-[1px] border-[#7A7A7A] rounded-lg text-center  text-[#999] py-[14px]"
+          className="h-full w-full border-[1px] border-[#C2C2C2] rounded-lg  text-[#999] py-[14px] justify-start flex px-[12px]"
         >
           <option id="none">광역시/도</option>
 
@@ -165,7 +165,7 @@ export default function SearchForm() {
           name="upzong"
           onChange={onchangeHandler}
           value={form.upzong}
-          className="h-full w-full border-[1px] border-[#7A7A7A] rounded-lg text-center  text-[#999] py-[14px]"
+          className="h-full w-full border-[1px] border-[#C2C2C2] rounded-lg  text-[#999] py-[14px] justify-start flex px-[12px]"
         >
           <option id="none">업종</option>
           <option>한식</option>

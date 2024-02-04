@@ -75,6 +75,27 @@ const Navbar = () => {
     }
   }, []);
 
+  // mobile 버튼 함수들
+  const aboutBtn = () => {
+    router.push("/about");
+    setMenuToggle(!menuToggle);
+  };
+
+  const mapBtn = () => {
+    router.push("/map");
+    setMenuToggle(!menuToggle);
+  };
+
+  const communityBtn = () => {
+    router.push("/community");
+    setMenuToggle(!menuToggle);
+  };
+
+  const mypageBtn = () => {
+    router.push("/mypage");
+    setMenuToggle(!menuToggle);
+  };
+
   const router = useRouter();
   const buttonStyle = "py-5 px-3 text-gray-700 hover:text-gray-400 cursor-pointer";
   return (
@@ -203,6 +224,7 @@ const Navbar = () => {
                     className=""
                     onClick={() => {
                       router.push("/login");
+                      setMenuToggle(!menuToggle);
                     }}
                   >
                     <Image src={right} alt="more" className="w-[24px] h-[24px] max-sm:w-[24px] max-sm:h-[24px]" />
@@ -211,24 +233,24 @@ const Navbar = () => {
               )}
             </div>
           </div>
-          <Link href="/about" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+          <div onClick={aboutBtn} className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
             <Image className="w-[24px] h-[24px]" src={about} alt="소개"></Image>
             <div className="ml-2 text-[16px]">모음소개</div>
-          </Link>
-          <Link href="/map" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+          </div>
+          <div onClick={mapBtn} className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
             <Image className="w-[24px] h-[24px]" src={map} alt="지도"></Image>
             <div className="ml-2 text-[16px]">지도모음</div>
-          </Link>
-          <Link href="/community" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+          </div>
+          <div onClick={communityBtn} className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
             <Image className="w-[24px] h-[24px]" src={community} alt="커뮤"></Image>
             <div className="ml-2 text-[16px]">커뮤니티</div>
-          </Link>
+          </div>
           {uid ? (
             <>
-              <Link href="/mypage" className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+              <div onClick={mypageBtn} className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
                 <Image className="w-[24px] h-[24px]" src={my} alt="마이"></Image>
                 <div className="ml-2 text-[16px]">마이모음</div>
-              </Link>
+              </div>
             </>
           ) : (
             <></>

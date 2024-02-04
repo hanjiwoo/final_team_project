@@ -15,7 +15,7 @@ export default function PostModal({ setModal }: { setModal: React.Dispatch<React
       style={{ background: "rgba(0, 0, 0, 0.5)" }}
     >
       <div className="w-[600px] h-[800px] flex flex-col items-center max-sm:h-full max-sm:w-full bg-[#fff] rounded-[16px] max-sm:overflow-y-scroll max-sm:rounded-none p-[32px]">
-        <div className="flex justify-between w-full font-black top-[60px] items-center max-sm:top-0">
+        <div className="flex justify-between w-full font-black top-[60px] items-center max-sm:top-0 max-sm:mb-[32px]">
           <h1 className="text-[24px] leading-[32px] font-semibold text-[#212121]">오늘 방문한 매장은 어떤가요?</h1>
           <Image
             src={closeBtn}
