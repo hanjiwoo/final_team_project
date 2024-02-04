@@ -146,7 +146,7 @@ export default function UpdateModal({
               <input
                 className="border-2 border-gray-[400] w-[972px] h-[48px] rounded-[10px] outline-none"
                 type="text"
-                placeholder="제목을 입력해주세요"
+                placeholder="제목을 입력해주세요."
                 name="title"
                 value={newPost.title}
                 onChange={handleInputChange}
@@ -161,7 +161,7 @@ export default function UpdateModal({
 
               <textarea
                 className="border-2 border-gray-[400] w-[972px] h-[200px] resize-none rounded-[10px] outline-none"
-                placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
+                placeholder="커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
                 name="content"
                 value={newPost.content}
                 onChange={handleInputChange}

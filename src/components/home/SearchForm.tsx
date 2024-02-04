@@ -120,7 +120,7 @@ export default function SearchForm() {
           name="sido"
           onChange={onchangeHandler}
           value={form.sido}
-          className="h-full w-full border-[1px] border-[#7A7A7A] rounded-lg text-center  text-[#999] py-[14px]"
+          className="h-full w-full border-[1px] border-[#7A7A7A] rounded-lg text-center text-[#999] py-[14px]"
         >
           <option id="none">광역시/도</option>
 

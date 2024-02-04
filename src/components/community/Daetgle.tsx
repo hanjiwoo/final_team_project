@@ -99,7 +99,7 @@ export default function Daetgle({ post }: { post: Post }) {
       <div className="flex justify-start w-full items-center mb-[32px]">
         <CuteHeart type="normal" postId={post?.id} />
         <Image src={message} className="w-[18px] h-[18px] ml-[16px] mr-[6px]" alt="댓글" />
-        <div className="text-[#999] justify-start items-center gap-[4px] flex">
+        <div className="text-[#999] text-[14px] justify-start items-center gap-[4px] flex">
           <div>댓글</div>
           <div>{daetgles?.length}</div>
         </div>
@@ -109,7 +109,7 @@ export default function Daetgle({ post }: { post: Post }) {
         <input
           value={daetgle}
           onChange={(e) => onChangeHandler(e)}
-          className="border-[1px] border-gray-[400] w-full h-[48px] rounded-[8px] outline-none px-[16px]"
+          className="text-[14px] border-[1px] border-gray-[400] w-full h-[48px] rounded-[8px] outline-none px-[16px]"
           placeholder="댓글을 작성해주세요."
           maxLength={50}
         />
@@ -127,33 +127,36 @@ export default function Daetgle({ post }: { post: Post }) {
         <div className="flex flex-col w-full">
           {daetgles?.map((item) => {
             return (
-              <div className="flex gap-[16px] items-center" key={nanoid()}>
-                <div className="flex items-center justify-start w-full my-[12px] gap-[16px]">
-                  <div className="flex items-center gap-[8px]">
-                    {item.profile ? (
-                      <img className="w-[32px] h-[32px] rounded-full" src={item.profile} alt="profile" />
-                    ) : (
-                      <Image className="w-[32px] h-[32px] rounded-full" src={userIcon} alt="빈유저" />
-                    )}
-                    <div className="text-[12px] text-center text-[#999]">
-                      <p className="w-[50px] text-left">{item.nickName}</p>
+              <>
+                {/* <hr className="my-[32px] w-full" /> */}
+                <div className="flex gap-[16px] items-center" key={nanoid()}>
+                  <div className="flex items-center justify-start w-full my-[13px] gap-[16px]">
+                    <div className="flex items-center gap-[8px]">
+                      {item.profile ? (
+                        <img className="w-[32px] h-[32px] rounded-full" src={item.profile} alt="profile" />
+                      ) : (
+                        <Image className="w-[32px] h-[32px] rounded-full" src={userIcon} alt="빈유저" />
+                      )}
+                      <div className="text-[12px] text-center text-[#999]">
+                        <p className="w-[50px] text-left">{item.nickName}</p>
+                      </div>
+                    </div>
+                    <div className="text-[14px] text-center text-[black]">
+                      <p className="text-left">{item.content}</p>
                     </div>
                   </div>
-                  <div className="text-[14px] text-center text-[black]">
-                    <p className="text-left">{item.content}</p>
+                  <div>
+                    {uid === item.uid && (
+                      <button
+                        onClick={() => deleteHandler(item.id)}
+                        className="text-[14px] text-[#999999] hover:text-[#E5743E] w-[25px]"
+                      >
+                        삭제
+                      </button>
+                    )}
                   </div>
                 </div>
-                <div>
-                  {uid === item.uid && (
-                    <button
-                      onClick={() => deleteHandler(item.id)}
-                      className="text-[14px] text-[#999999] hover:text-[#E5743E] w-[25px]"
-                    >
-                      삭제
-                    </button>
-                  )}
-                </div>
-              </div>
+              </>
             );
           })}
         </div>
