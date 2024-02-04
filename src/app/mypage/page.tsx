@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import rightIcon from "../assets/images/icon/right.png";
@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { auth } from "@/shared/firebase";
 import { logout } from "@/redux/modules/loginSlice";
 import { toast, ToastContainer, Slide } from "react-toastify";
+import basicProfileImage from "../../../public/Favicon_32_32.png";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Mypage() {
@@ -22,7 +23,7 @@ export default function Mypage() {
 
   const handleClickProfileEdit = () => {
     router.push("/mypage/edit");
-    console.log("edit으로 이동합니다");
+    // console.log("edit으로 이동합니다");
   };
   const handleClickStores = () => {
     router.push("/mypage/stores");
@@ -61,6 +62,14 @@ export default function Mypage() {
         console.error("로그아웃 실패:", error);
       });
   };
+  useEffect(() => {
+    if (!isLogin) {
+      return router.push("/");
+    }
+  }, []);
+  if (!isLogin) {
+    return <>로그인을 해주세요</>;
+  }
   return (
     <div className="flex justify-center items-center w-full my-[60px] px-[20px] max-sm:my-[32px] max-lg:my-[60px]">
       <div className="w-[880px]">

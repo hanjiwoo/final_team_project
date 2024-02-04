@@ -58,7 +58,7 @@ export default function ShopList() {
           </div>
         </div>
         <div className="w-full flex justify-center flex-col items-center">
-          <div className="swiper-container w-[1080px] max-lg:w-full max-lg:overflow-x-scroll max-lg:hidden ">
+          <div className="swiper-container w-[1080px] max-lg:w-full max-lg:overflow-x-scroll max-lg:hidden">
             <Swiper
               loop={true} // 슬라이드 루프
               spaceBetween={10} // 슬라이스 사이 간격
@@ -92,7 +92,7 @@ export default function ShopList() {
           {shops[0] && (
             <button
               onClick={moveToFullMap}
-              className="w-[52px] h-[52px] bg-[#ff8145] rounded-full shadow hover:scale-105 fixed bottom-[160px] right-[100px] z-[100]"
+              className="w-[52px] h-[52px] bg-[#ff8145] rounded-full shadow hover:scale-105 fixed bottom-[160px] right-[100px] z-[100] max-lg:bottom-[110px] max-lg:right-[50px]"
             >
               <Image
                 className="w-10 h-10 p-[2.50px] justify-center items-center inline-flex"

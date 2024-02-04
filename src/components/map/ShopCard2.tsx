@@ -68,10 +68,9 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
             <PhotoOfShop shop={shop} type="map" />
           </div>
         </section>
-        <section className="flex flex-row border-opacity-60 rounded-lg gap-[9px]">
-          <div>
-            <div className="text-[18px] font-semibold text-[#212121] leadding-[26px]">{shop.업소명}</div>
-            {/* <div className="flex justify-between">
+        <section className="flex flex-col border-opacity-60 gap-[16px] ">
+          <div className="text-[18px] font-semibold text-[#212121] leadding-[26px]">{shop.업소명}</div>
+          {/* <div className="flex justify-between">
 							{type === "no" ? (
 								<></>
 							) : (
@@ -83,8 +82,9 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
 								</button>
 							)}
 						</div> */}
-            {/* <Ddabong name="thumbup" shopId={shop.연락처} type="small" /> */}
-            {/* <div className="flex justify-round gap-5"> */}
+          {/* <Ddabong name="thumbup" shopId={shop.연락처} type="small" /> */}
+          {/* <div className="flex justify-round gap-5"> */}
+          <div className="flex flex-col gap-[8px]">
             <div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
               <Image src={spoon_fork} alt="위치" className=" w-[18px] h-[18px]" />
               {shop.업종}

@@ -30,9 +30,9 @@ export default function UpButton() {
 
   return (
     showButton && (
-      <div className="fixed bottom-[100px] right-[100px] z-[100]">
+      <div className="fixed bottom-[100px] right-[100px] z-[100] max-sm:bottom-[20px] max-sm:right-[20px] max-lg:bottom-[50px] max-lg:right-[50px]">
         <button
-          className="flex flex-col items-center justify-center w-[52px] h-[52px] bg-[#fff] rounded-full shadow hover:scale-105"
+          className="flex flex-col items-center justify-center w-[52px] h-[52px] bg-[#fff] rounded-full shadow hover:scale-105 max-sm:w-[46px] max-sm:h-[46px]"
           onClick={moveToTop}
           type="button"
         >

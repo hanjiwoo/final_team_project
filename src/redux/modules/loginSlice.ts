@@ -5,7 +5,7 @@ const initialState = {
   displayName: "",
   uid: "",
   photoURL: "",
-  email: "",
+  email: ""
 };
 
 const loginSlice = createSlice({
@@ -17,9 +17,7 @@ const loginSlice = createSlice({
       localStorage.setItem("displayName", displayName);
       localStorage.setItem("uid", uid);
       localStorage.setItem("photoURL", photoURL);
-      email
-        ? localStorage.setItem("email", email)
-        : localStorage.setItem("email", email1);
+      email ? localStorage.setItem("email", email) : localStorage.setItem("email", email1);
       state.isLogin = true;
       state.displayName = displayName;
       state.uid = uid;
@@ -42,10 +40,9 @@ const loginSlice = createSlice({
     updatePhoto: (state, action) => {
       localStorage.setItem("photoURL", action.payload);
       state.photoURL = action.payload;
-    },
-  },
+    }
+  }
 });
 
-export const { login, logout, updateNickname, updatePhoto } =
-  loginSlice.actions;
+export const { login, logout, updateNickname, updatePhoto } = loginSlice.actions;
 export default loginSlice.reducer;
