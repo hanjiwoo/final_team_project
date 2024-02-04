@@ -103,7 +103,7 @@ export default function SearchForm() {
         theme: "colored"
       });
     dispatch(getShops(filteredShops));
-    toast.success("내 주변 모음을 알려드릴게요.", {
+    toast.success("검색된 모음을 알려드릴게요.", {
       transition: Slide,
       position: "top-center",
       autoClose: 3000,
