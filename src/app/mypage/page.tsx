@@ -112,7 +112,7 @@ export default function Mypage() {
               <Image src={rightIcon} alt="more" className="w-[20px] h-[20px] max-sm:w-[16px] max-sm:h-[16px]"></Image>
             </div>
             <div
-              onClick={handleClickStores}
+              onClick={handleClickPosts}
               className=" cursor-pointer flex justify-between items-center pt-[12px] pb-[12px]"
             >
               <span className="text-[18px] font-medium leading-[26px] text-[#5c5c5c] max-sm:text-[14px] max-sm:leading-[20px]">
@@ -126,7 +126,7 @@ export default function Mypage() {
               />
             </div>
             <div
-              onClick={handleClickStores}
+              onClick={handleClickComments}
               className=" cursor-pointer flex justify-between items-center pt-[12px] pb-[12px]"
             >
               <span className="text-[18px] font-medium leading-[26px] text-[#5c5c5c] max-sm:text-[14px] max-sm:leading-[20px]">
