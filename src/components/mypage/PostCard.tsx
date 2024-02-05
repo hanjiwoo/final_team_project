@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import userIcon from "../../app/assets/images/icon/userIcon.png";
+import userIcon from "../../../public/Favicon_32_32.png";
 import mockImage from "../../app/assets/images/mockImage.jpg";
 import CuteHeart from "../community/CuteHeart";
 import { useRouter } from "next/navigation";

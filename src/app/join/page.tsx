@@ -196,7 +196,9 @@ export default function Join() {
 
       // Firebase 프로필 업데이트
       await updateProfile(user, {
-        displayName: displayName
+        displayName: displayName,
+        photoURL:
+          "https://firebasestorage.googleapis.com/v0/b/final-team-project-7f44d.appspot.com/o/Favicon_32_32.png?alt=media&token=ad812272-8f64-44d2-b230-89badd14baa5"
       });
 
       console.log("회원가입 완료");
