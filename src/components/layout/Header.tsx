@@ -97,7 +97,7 @@ const Navbar = () => {
   };
 
   const router = useRouter();
-  const buttonStyle = "py-5 px-3 text-gray-700 hover:text-gray-400 cursor-pointer";
+  const buttonStyle = "text-[16px] py-5 px-3 text-gray-700 hover:text-gray-400 cursor-pointer";
   return (
     <nav className="bg-gray-00 w-full bg-[#fff]">
       <div className="max-w-6xl mx-auto px-4">
@@ -162,11 +162,11 @@ const Navbar = () => {
                   onClick={() => {
                     router.push("/join");
                   }}
-                  className="w-[100px] h-10 py-3 px-2 bg-[#FF8145] hover:bg-[#E5743E] rounded-lg transition duration-300 justify-center items-center gap-1 inline-flex"
+                  className="w-[100px] h-10 border-[1px] border-[#ff8145] hover:bg-[#ff8145] rounded-lg transition duration-300 justify-center items-center gap-1 inline-flex"
                 >
-                  <div className="text-right text-white text-sm font-medium font-['Pretendard'] leading-tight">
-                    시작하기
-                  </div>
+                  <span className="text-[20px] max-sm:text-[12px] text-[#ff8145] hover:text-[white] text-sm leading-tight">
+                    모음 시작하기
+                  </span>
                 </div>
               </>
             )}
