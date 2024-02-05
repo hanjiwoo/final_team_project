@@ -240,14 +240,14 @@ export default function WritePage() {
                 </div>
 
                 <div className="flex flex-col gap-[32px] ">
-                  <div className="flex gap-[40px] w-full items-center max-sm:gap-[15px]">
+                  <div className="flex gap-[28px] w-full max-sm:gap-0">
                     <div className="flex w-[90px]">
                       <label className="text-[16px] text-[#212121] font-semibold leading-[24px] max-sm:text-[14px] max-sm:leading-[20px]">
                         카테고리&nbsp;
                       </label>
                       <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">*</p>
                     </div>
-                    <div className="flex gap-[16px] w-full max-sm:gap-[14px]">
+                    <div className="sm:flex sm:flex-row gap-[12px] max-sm:grid max-sm:grid-cols-2">
                       <CategoryBtn text="일상이야기" type="" setNewPost={setNewPost} newPost={newPost} />
                       <CategoryBtn text="맛집추천" type="" setNewPost={setNewPost} newPost={newPost} />
                       <CategoryBtn text="취미생활" type="" setNewPost={setNewPost} newPost={newPost} />

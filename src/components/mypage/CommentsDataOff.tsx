@@ -62,7 +62,7 @@ export default function CommentsDataOff() {
             댓글 모음
           </h1>
 
-          <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
+          <section className="w-full flex flex-col justify-center gap-[16px]">
             {filterdDaetgles ? (
               filterdDaetgles?.map((item) => {
                 return (
