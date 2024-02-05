@@ -227,27 +227,44 @@ const Navbar = () => {
                       setMenuToggle(!menuToggle);
                     }}
                   >
-                    <Image src={right} alt="more" className="w-[24px] h-[24px] max-sm:w-[24px] max-sm:h-[24px]" />
+                    {/* <Image src={right} alt="more" className="w-[24px] h-[24px] max-sm:w-[24px] max-sm:h-[24px]" /> */}
+                    <Image
+                      src={right}
+                      alt="more"
+                      className="w-[20px] h-[20px] cursor-pointer max-sm:w-[16px] max-sm:h-[16px]"
+                    />
                   </div>
                 </>
               )}
             </div>
           </div>
-          <div onClick={aboutBtn} className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+          <div
+            onClick={aboutBtn}
+            className="cursor-pointer flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]"
+          >
             <Image className="w-[24px] h-[24px]" src={about} alt="소개"></Image>
             <div className="ml-2 text-[16px]">모음소개</div>
           </div>
-          <div onClick={mapBtn} className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+          <div
+            onClick={mapBtn}
+            className="cursor-pointer flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]"
+          >
             <Image className="w-[24px] h-[24px]" src={map} alt="지도"></Image>
             <div className="ml-2 text-[16px]">지도모음</div>
           </div>
-          <div onClick={communityBtn} className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+          <div
+            onClick={communityBtn}
+            className="cursor-pointer flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]"
+          >
             <Image className="w-[24px] h-[24px]" src={community} alt="커뮤"></Image>
             <div className="ml-2 text-[16px]">커뮤니티</div>
           </div>
           {uid ? (
             <>
-              <div onClick={mypageBtn} className="flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]">
+              <div
+                onClick={mypageBtn}
+                className="cursor-pointer flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]"
+              >
                 <Image className="w-[24px] h-[24px]" src={my} alt="마이"></Image>
                 <div className="ml-2 text-[16px]">마이모음</div>
               </div>
