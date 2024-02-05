@@ -151,7 +151,7 @@ export default function Hoogi({ setModal }: { setModal: React.Dispatch<React.Set
   return (
     <div className="w-full">
       <div className="w-full">
-        <div className="pointer-events-none flex jutify-start w-full">
+        <div className="pointer-events-none flex jutify-start w-full max-sm:hidden">
           <ShopCard2 shop={shop} type="no" />
         </div>
         <div className="flex flex-col w-full gap-[32px]">

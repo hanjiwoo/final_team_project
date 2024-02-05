@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { auth } from "@/shared/firebase";
 import { logout } from "@/redux/modules/loginSlice";
 import { toast, ToastContainer, Slide } from "react-toastify";
+import basicProfileImage from "../../../public/Favicon_32_32.png";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Mypage() {
@@ -101,18 +102,19 @@ export default function Mypage() {
             나의 모음
           </h2>
           <div className="flex flex-col gap-[16px]">
-            <div className="  flex justify-between items-center pt-[12px] pb-[12px]">
+            <div
+              onClick={handleClickStores}
+              className=" cursor-pointer flex justify-between items-center pt-[12px] pb-[12px]"
+            >
               <span className="text-[18px] font-medium leading-[26px] text-[#5c5c5c] max-sm:text-[14px] max-sm:leading-[20px]">
                 매장
               </span>
-              <Image
-                src={rightIcon}
-                alt="more"
-                className="w-[20px] h-[20px] cursor-pointer max-sm:w-[16px] max-sm:h-[16px]"
-                onClick={handleClickStores}
-              ></Image>
+              <Image src={rightIcon} alt="more" className="w-[20px] h-[20px] max-sm:w-[16px] max-sm:h-[16px]"></Image>
             </div>
-            <div className="  flex justify-between items-center pt-[12px] pb-[12px]">
+            <div
+              onClick={handleClickPosts}
+              className=" cursor-pointer flex justify-between items-center pt-[12px] pb-[12px]"
+            >
               <span className="text-[18px] font-medium leading-[26px] text-[#5c5c5c] max-sm:text-[14px] max-sm:leading-[20px]">
                 게시글
               </span>
@@ -123,7 +125,10 @@ export default function Mypage() {
                 onClick={handleClickPosts}
               />
             </div>
-            <div className="  flex justify-between items-center pt-[12px] pb-[12px]">
+            <div
+              onClick={handleClickComments}
+              className=" cursor-pointer flex justify-between items-center pt-[12px] pb-[12px]"
+            >
               <span className="text-[18px] font-medium leading-[26px] text-[#5c5c5c] max-sm:text-[14px] max-sm:leading-[20px]">
                 댓글
               </span>

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import userIcon from "../../app/assets/images/icon/userIcon.png";
+import userIcon from "../../../public/Favicon_32_32.png";
 import mockImage from "../../app/assets/images/mockImage.jpg";
 import CuteHeart from "../community/CuteHeart";
 import { useRouter } from "next/navigation";
@@ -42,7 +42,7 @@ export default function PostCard({ post }: { post: Post }) {
               <div className="w-[100px] h-[100px] bg-[#F1F1F1] rounded-[8px] max-sm:w-[80px] max-sm:h-[80px]">
                 {post.photos?.[0] ? (
                   <img
-                    className="w-[100px] h-[100px] max-sm:w-[80px] max-sm:h-[80px] rounded-[8px]"
+                    className="w-full h-full object-cover bg-cover max-sm:w-[80px] max-sm:h-[80px] rounded-[8px]"
                     src={post.photos?.[0]}
                     alt="되나?"
                   />

@@ -40,7 +40,7 @@ export default function Join() {
   };
   // 약관 동의 부분 토스티파이
   const notify = () =>
-    toast.error("약관을 동의 해주세요", {
+    toast.error("약관을 동의 해주세요.", {
       transition: Slide,
       position: "top-center",
       autoClose: 3000,
@@ -126,16 +126,16 @@ export default function Join() {
 
   const handleClickSignUp = async (event: FormEvent) => {
     event.preventDefault();
-    console.log("test");
+    // console.log("test");
     const nowDate = dayjs().format("YYYY년 MM월 DD일 HH:mm:ss");
 
     // 이메일 중복 확인
     const emailQuery = query(collection(db, "users"), where("email", "==", email));
-    console.log("emailQuery", emailQuery);
+    // console.log("emailQuery", emailQuery);
 
     const emailSnapshot = await getDocs(emailQuery);
-    console.log("emailSnapshot", emailSnapshot.docs);
-    console.log("이거이거", emailSnapshot.empty);
+    // console.log("emailSnapshot", emailSnapshot.docs);
+    // console.log("이거이거", emailSnapshot.empty);
 
     if (!emailSnapshot.empty) {
       toast.error("이미 사용 중인 이메일입니다", {
@@ -196,7 +196,9 @@ export default function Join() {
 
       // Firebase 프로필 업데이트
       await updateProfile(user, {
-        displayName: displayName
+        displayName: displayName,
+        photoURL:
+          "https://firebasestorage.googleapis.com/v0/b/final-team-project-7f44d.appspot.com/o/Favicon_32_32.png?alt=media&token=ad812272-8f64-44d2-b230-89badd14baa5"
       });
 
       console.log("회원가입 완료");
@@ -285,7 +287,7 @@ export default function Join() {
           <label className="test-[16px] text-[#212121] font-[600]">약관 동의</label>
           <div className="flex items-center">
             <input
-              className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px]"
+              className="mr-[12px] accent-[#FF8145] text-[#fff] w-[20px] h-[20px] "
               type="checkbox"
               name="all"
               onChange={checkAll}
@@ -380,7 +382,7 @@ export default function Join() {
           className={
             buttonColor
               ? "flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#fff] bg-[#FF8145]"
-              : "text-slate-200 flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#999] bg-[#d6d6d6]"
+              : "flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#999] bg-[#d6d6d6]"
           }
         >
           회원가입

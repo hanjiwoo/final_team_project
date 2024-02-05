@@ -71,7 +71,7 @@ export default function WritePage() {
 
   const handleAddPost = async () => {
     if (!isLogin)
-      return toast.error("로그인을 해주세요", {
+      return toast.error("로그인을 해주세요.", {
         transition: Slide,
         position: "top-center",
         autoClose: 3000,
@@ -85,7 +85,7 @@ export default function WritePage() {
 
     if (!newPost.content || !newPost.title || !newPost.category)
       // return toast.error("카테고리 타이틀 컨텐츠를 작성해 주세요");
-      return toast.error("카테고리 제목 내용을 작성해 주세요", {
+      return toast.error("카테고리 제목 내용을 작성해 주세요.", {
         transition: Slide,
         position: "top-center",
         autoClose: 3000,
@@ -98,7 +98,7 @@ export default function WritePage() {
       });
     const confirmResult = window.confirm("게시글 작성을 하시겠습니까?");
     if (confirmResult) {
-      toast.success("작성이 완료되었습니다", {
+      toast.success("작성이 완료되었습니다.", {
         transition: Slide,
         position: "top-center",
         autoClose: 3000,
@@ -122,7 +122,7 @@ export default function WritePage() {
     // console.log(e.target.files, "이거나 보자");
     if (e.target.files) {
       if (e.target.files?.length > 3) {
-        return toast.error("3개 까지 가능합니다", {
+        return toast.error("최대 3장까지 가능합니다.", {
           transition: Slide,
           position: "top-center",
           autoClose: 3000,
@@ -136,7 +136,7 @@ export default function WritePage() {
       }
       if (urlFiles) {
         if (urlFiles.length + e.target.files.length > 3) {
-          return toast.error("3개 까지 가능합니다", {
+          return toast.error("최대 3장까지 가능합니다.", {
             transition: Slide,
             position: "top-center",
             autoClose: 3000,
@@ -240,14 +240,14 @@ export default function WritePage() {
                 </div>
 
                 <div className="flex flex-col gap-[32px] ">
-                  <div className="flex gap-[40px] w-full items-center max-sm:gap-[15px]">
+                  <div className="flex gap-[28px] w-full max-sm:gap-0">
                     <div className="flex w-[90px]">
                       <label className="text-[16px] text-[#212121] font-semibold leading-[24px] max-sm:text-[14px] max-sm:leading-[20px]">
                         카테고리&nbsp;
                       </label>
                       <p className="text-[16px] font-semibold leading-[24px] text-[#FF8145]">*</p>
                     </div>
-                    <div className="flex gap-[40px] w-full max-sm:gap-[14px]">
+                    <div className="sm:flex sm:flex-row gap-[12px] max-sm:grid max-sm:grid-cols-2">
                       <CategoryBtn text="일상이야기" type="" setNewPost={setNewPost} newPost={newPost} />
                       <CategoryBtn text="맛집추천" type="" setNewPost={setNewPost} newPost={newPost} />
                       <CategoryBtn text="취미생활" type="" setNewPost={setNewPost} newPost={newPost} />
@@ -264,9 +264,9 @@ export default function WritePage() {
                     </div>
 
                     <input
-                      className="flex w-full h-[48px] px-[16px] py-[8px] gap-[4px] border-[1px] rounded-[8px] text-[#212121] text-[14px] font-medium leading-[20px]"
+                      className="flex w-full h-[48px] px-[16px] py-[8px] gap-[4px] border-[1px] rounded-[8px] text-[#212121] text-[14px] font-medium leading-[20px] focus:outline-none focus:ring-0 focus:border-[#ff8145]"
                       type="text"
-                      placeholder="제목을 입력해주세요"
+                      placeholder="제목을 입력해주세요."
                       name="title"
                       value={newPost.title}
                       onChange={handleInputChange}
@@ -283,12 +283,12 @@ export default function WritePage() {
                     </div>
 
                     <textarea
-                      className=" resize-none flex flex-col w-full h-[200px] p-[12px]  justify-between gap-[4px] border-[1px] rounded-[8px] text-[#212121] outline-none text-[14px] font-medium leading-[20px]"
-                      placeholder="*커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
+                      className=" resize-none flex flex-col w-full h-[200px] p-[12px]  justify-between gap-[4px] border-[1px] rounded-[8px] text-[#212121] outline-none text-[14px] font-medium leading-[20px] focus:outline-none focus:ring-0 focus:border-[#ff8145]"
+                      placeholder=" 커뮤니티 공간은 모두가 함께 하는 공간입니다. 남을 비방하는 말 또는 특정 욕설이 섞인 글은 신고의 대상이 됩니다."
                       name="content"
                       value={newPost.content}
                       onChange={handleInputChange}
-                      maxLength={40}
+                      maxLength={400}
                     />
                   </div>
                 </div>
@@ -296,13 +296,14 @@ export default function WritePage() {
                 <div className="flex justify-end gap-[24px] ">
                   <button
                     type="button"
-                    className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
+                    className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-grey bg-[white]"
                     onClick={handleCancel}
                   >
                     취소하기
                   </button>
 
                   <button
+                    // disabled={!newPost.title || !newPost.content}
                     type="button"
                     className="flex w-[120px] h-[48px] py-0 px-[16px] justify-center items-center gap-[12px] rounded-[8px] text-[14px] font-medium leading-[20px] border-[1px] border-white text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
                     onClick={handleAddPost}

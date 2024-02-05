@@ -15,6 +15,7 @@ import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import gps from "../../app/assets/images/icon/placeW.png";
 export default function ShopList() {
   const shops = useSelector((state: RootState) => state.shops);
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ export default function ShopList() {
           </div>
         </div>
         <div className="w-full flex justify-center flex-col items-center">
-          <div className="swiper-container w-[1080px] max-lg:w-full max-lg:overflow-x-scroll max-lg:hidden ">
+          <div className="swiper-container w-[1080px] max-lg:w-full max-lg:overflow-x-scroll max-lg:hidden">
             <Swiper
               loop={true} // 슬라이드 루프
               spaceBetween={10} // 슬라이스 사이 간격
@@ -88,18 +89,17 @@ export default function ShopList() {
             </div>
           </div>
         </div>
-        <section className="flex bg-blue-300 justify-around max-md:hidden">
+        <section className="max-sm:hidden">
           {shops[0] && (
-            <button
-              onClick={moveToFullMap}
-              className="w-[52px] h-[52px] bg-[#ff8145] rounded-full shadow hover:scale-105 fixed bottom-[160px] right-[100px] z-[100]"
-            >
-              <Image
-                className="w-10 h-10 p-[2.50px] justify-center items-center inline-flex"
-                src={map}
-                alt="지도"
-              ></Image>
-            </button>
+            <div className="fixed z-[200] left-1/2 bottom-[100px] transform -translate-x-1/2">
+              <button
+                onClick={moveToFullMap}
+                className="w-[160px] h-[48px] bg-[#ff8145] rounded-full shadow hover:scale-105 ease-out transition-[1] text-[14px] text-[#fff] flex justify-center items-center gap-[12px] leading-[20px] "
+              >
+                지도로 살펴보기
+                <Image className="w-[20px] h-[20px]" src={gps} alt="지도"></Image>
+              </button>
+            </div>
           )}
         </section>
       </div>
