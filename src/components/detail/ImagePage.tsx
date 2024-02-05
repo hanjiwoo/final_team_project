@@ -62,7 +62,7 @@ export default function ImagePage() {
         {/* <div className="w-[530px] h-[530px] relative bg-zinc-100 rounded-xl" /> */}
         <div style={{ pointerEvents: "auto", width: "100%", height: "100%" }}>
           <Roadview
-            panoId={1}
+            panoId={+nanoid()}
             position={{
               // 지도의 중심좌표
               lat,
