@@ -22,7 +22,7 @@ export default function DaetgleCard({ item, uid }: { item: Daetgle; uid: string 
     mutateToDelete(daetgleId);
   };
   return (
-    <div className="flex gap-[16px] items-center">
+    <div className="flex gap-[16px] items-center w-full justify-between">
       <div className="flex items-center justify-start w-full my-[12px] gap-[16px]">
         <div className="flex items-center gap-[8px]">
           {item.profile ? (

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import userIcon from "../../../assets/images/icon/profile.png";
+import userIcon from "../../../../../public/Favicon_32_32.png";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { collection, getDocs } from "firebase/firestore";
@@ -79,7 +79,7 @@ export default function CommunityDetail() {
           {/* 프로필 컨테이너 */}
           <div className="flex justify-between items-center w-full h-[40px] mt-[20px]">
             <div className="flex items-center gap-[12px] ">
-              <div className="flex w-[40px] h-[40px]  justify-center items-center rounded-[30px] bg-[#F1F1F1]">
+              <div className="flex w-[40px] h-[40px]  justify-center items-center rounded-[30px]">
                 {foundPost?.profile ? (
                   <img src={foundPost?.profile} className="w-full h-full rounded-full" alt="사람 이미지" />
                 ) : (
