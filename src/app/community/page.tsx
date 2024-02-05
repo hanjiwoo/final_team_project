@@ -166,7 +166,6 @@ export default function ListPage() {
         <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
       </div>
     );
-
   return (
     <>
       {/* 전체 컨테이너 */}
@@ -231,12 +230,12 @@ export default function ListPage() {
             </div>
           </div>
         </div>
-        <section className="flex gap-1 ">
+        <section className="flex gap-4">
           {BtnArray.map((item) => {
             return (
               <button
                 key={nanoid()}
-                className="mb-[60px] flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[8px] rounded-[8px]   text-[white] bg-[#FF8145] hover:bg-[#E5743E] "
+                className="mb-[60px] flex h-[30px] w-[30px] justify-center items-center rounded-full text-[white] bg-[#FF8145] hover:bg-[#E5743E]"
                 onClick={(e) => pagenationHandler(e)}
               >
                 {item}

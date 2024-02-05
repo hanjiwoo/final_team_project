@@ -74,10 +74,10 @@ export default function NowLocationBtn() {
   return (
     <>
       <button
-        className="bg-[#FF8145] hover:bg-[#E5743E] text-white font-[500] py-[14px] px-[27px] rounded-[8px]"
+        className="bg-[#FF8145] hover:bg-[#E5743E] w-[180px] max-sm:w-[130px] text-white py-[14px] px-[10px] rounded-[8px]"
         onClick={findNowLoacation}
       >
-        내 주변 모음 검색하기
+        <span className="text-[15px] max-sm:text-[12px]">내 주변 모음 검색하기</span>
       </button>
       {/*  <div>
         <h2>Your Location:</h2>
