@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Page() {
   const auth = getAuth();
   const user = useSelector((state: RootState) => state.login);
-  const { displayName, email, uid, photoURL, isLogin } = user;
+  const { displayName, email, uid, photoURL, isLogin, isKakao } = user;
   const [ImageURL, setImageURL] = useState("");
   const [imgFile, setImagFile] = useState<File>();
   const [text, setText] = useState({ nickName: "", password: "" });
@@ -87,6 +87,9 @@ export default function Page() {
   }, []);
   if (!isLogin) {
     return <div>로그인을 해주세요.</div>;
+  }
+  if (isKakao) {
+    return <div> 카카오 접속자는 이용하실수 없습니다.</div>;
   }
   return (
     <>

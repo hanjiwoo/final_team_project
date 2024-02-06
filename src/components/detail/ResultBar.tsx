@@ -12,9 +12,10 @@ export default function ResultBar({ text, number, numbers }: { text: string; num
   return (
     <div className={tagCSS}>
       <p
-        className={`absolute bg-[#FF8145] bg-opacity-10 h-full w-${
-          number === 0 ? "" : number / numbers === 1 ? "full" : number + "/" + numbers
-        }`}
+        style={{
+          width: `${number === 0 ? "0" : number / numbers === 1 ? "100" : (number / numbers) * 100}%`
+        }}
+        className={`absolute bg-[#FF8145] bg-opacity-10 h-full `}
       ></p>
       <div className={textCSS}>
         <p>{text}</p> <p className={numberCSS}>{number} </p>

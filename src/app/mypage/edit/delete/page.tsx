@@ -1,9 +1,10 @@
 "use client";
+import { RootState } from "@/redux/config/configStore";
 import { logout } from "@/redux/modules/loginSlice";
 import { deleteUser, getAuth } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,7 +14,7 @@ export default function DeleteUser() {
   const checkHandeler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsCheck(e.target.checked);
   };
-
+  const user = useSelector((state: RootState) => state.login);
   const dispatch = useDispatch();
   const router = useRouter();
   const deleteUserHandler = () => {
@@ -48,6 +49,9 @@ export default function DeleteUser() {
   };
   if (!auth.currentUser?.uid) {
     return <>로그인을 해주세요</>;
+  }
+  if (user.isKakao) {
+    return <div> 카카오 접속자는 이용하실수 없습니다.</div>;
   }
   return (
     <section className="flex justify-center my-[60px] px-[20px] w-full">
