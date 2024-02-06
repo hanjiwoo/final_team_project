@@ -202,7 +202,7 @@ const Navbar = () => {
       </div>
 
       {/* mobile menu items */}
-      <div className="absolute z-[100] bg-[#fff] w-full">
+      <div className="absolute z-[100] bg-[#fff] w-full shadow-xl">
         <div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
           <div className="flex h-[80px] justify-between items-center px-[20px] py-[17px] border-[#D6D6D6] mb-[8px]">
             <div className="flex justify-center items-center gap-[12px]">
