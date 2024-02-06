@@ -6,6 +6,8 @@ import Footer from "@/components/layout/Footer";
 import NewProvider from "./NewProvider";
 import cheerio from "cheerio";
 import { ToastContainer } from "react-toastify";
+import { getServerSession } from "next-auth";
+import SessionProvider from "./NewProvider2";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,16 +23,19 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://mo-eum.vercel.app")
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await getServerSession();
   return (
     <html lang="en">
       <body className={inter.className}>
         <NewProvider>
-          <Header />
+          <SessionProvider session={session}>
+            <Header />
 
-          {children}
+            {children}
 
-          <Footer />
+            <Footer />
+          </SessionProvider>
         </NewProvider>
       </body>
     </html>

@@ -82,3 +82,9 @@ export type typeOfHeart = {
   id: string;
   postId?: string;
 };
+
+export type SessionUser = {
+  name: string;
+  email: string;
+  image: string;
+};

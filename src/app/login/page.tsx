@@ -19,18 +19,17 @@ import KakaoLogo from "../assets/images/icon/kakaotalk.png";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/redux/modules/loginSlice";
-import { getProviders, signIn } from "next-auth/react";
-import { Auth } from "@supabase/auth-ui-react";
+import { getProviders } from "next-auth/react";
+
 import { toast, ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { createClient } from "@supabase/supabase-js";
-import { initSupabase } from "./loginFn";
+
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Login() {
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API}&redirect_uri=http://localhost:3000/login&response_type=code`;
-  const supabase = initSupabase();
+  // const { data: session } = useSession();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [displayName, setDisplayName] = useState<string | null>(null);
@@ -307,7 +306,6 @@ export default function Login() {
       setProviders(res);
     })();
   }, []);
-  // 추가된 부분
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -326,55 +324,16 @@ export default function Login() {
 
   // 추가된 부분
   const handleKakao = async () => {
-    // const result = await signIn("kakao", {
-    //   redirect: true,
-    //   callbackUrl: "/"
-    // });
-    // console.log(`result는` + result);
-    // async function signInWithKakao() {
-    console.log("일단 누름");
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "kakao"
+    const result = await signIn("kakao", {
+      redirect: true,
+      callbackUrl: "/"
     });
-    console.log(error, "에러");
-    console.log(data, "데이터여 찍혀다오");
-    const {
-      data: { user }
-    } = await supabase.auth.getUser();
-    const {
-      data: { session }
-    } = await supabase.auth.getSession();
-    // console.log(user, session, "젭알 찍히라구");
-    // const urlParams = new URLSearchParams(data.url || "");
-    // const code = urlParams.get(data.url || "");
-    // // }
-    // if (code) {
-    //   // 코드가 존재하면 Kakao API로 사용자 정보 가져오기
-
-    //   try {
-    //     // Kakao API로 사용자 정보 가져오기
-    //     const response = await fetch("https://kapi.kakao.com/v2/user/me", {
-    //       method: "GET",
-    //       headers: {
-    //         Authorization: `Bearer ${code}`
-    //       }
-    //     });
-
-    //     if (response.ok) {
-    //       const userInfo = await response.json();
-    //       console.log("Kakao 사용자 정보:", userInfo);
-    //     } else {
-    //       console.error("Kakao 사용자 정보 가져오기 실패:", response.statusText);
-    //     }
-    //   } catch (error) {
-    //     console.error("Kakao 사용자 정보 가져오기 중 오류 발생:", error);
-    //   }
-    // }
+    // console.log(result, "로그인 결과");
   };
   // 추가된 부분
   const logoutHandle = async () => {
-    const gogo = await supabase.auth.signOut();
-    console.log(gogo, "로그아웃 ");
+    const res = await signOut();
+    console.log(res, "결과");
   };
   return (
     <div className="flex justify-center items-center w-full my-[60px] bg-[#fff]">
@@ -470,9 +429,9 @@ export default function Login() {
               <Image src={KakaoLogo} alt="KakaoLogo" className="w-[20px] h-[20px]" />
               카카오로 로그인
             </div>
-            <div className="bg-red-500" onClick={logoutHandle}>
+            {/* <button className="bg-red-500" onClick={logoutHandle}>
               로그아웃{" "}
-            </div>
+            </button> */}
             {/* <div className="h-full flex justify-center items-center">
               <Auth
                 supabaseClient={supabaseClient}

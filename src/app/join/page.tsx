@@ -196,7 +196,9 @@ export default function Join() {
 
       // Firebase 프로필 업데이트
       await updateProfile(user, {
-        displayName: displayName
+        displayName: displayName,
+        photoURL:
+          "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2Ff7%2F0d%2F31%2Ff70d312cf5bb9e9daaf7ef8a81a5d22d.jpg&type=a340"
       });
 
       console.log("회원가입 완료");

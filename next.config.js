@@ -6,12 +6,11 @@ module.exports = nextConfig;
 
 module.exports = {
   images: {
-    domains: [
-      "lh3.googleusercontent.com",
-      "firebasestorage.googleapis.com",
-      "your-image-domain.com",
-    ],
+    domains: ["lh3.googleusercontent.com", "firebasestorage.googleapis.com", "your-image-domain.com"]
   },
+  experimental: {
+    reactRoot: true
+  }
 };
 // module.exports = {
 //   images: {
