@@ -53,7 +53,7 @@ export default function PostDataOff() {
         <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px] max-sm:mb-[32px]">
           게시물 모음
         </h1>
-        {!myPosts && (
+        {!myPosts?.[0] && (
           <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
             <Image src={postIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
             <span className="text-center text-neutral-400 text-base font-medium leading-normal">

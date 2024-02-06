@@ -102,6 +102,20 @@ export default function ShopList() {
             </div>
           )}
         </section>
+        {/* 모바일 맵으로보기 */}
+        <section className=" max-sm:block sm:hidden">
+          {shops[0] && (
+            <div className="fixed z-[200] left-1/2 bottom-[20px] transform -translate-x-1/2">
+              <button
+                onClick={moveToFullMap}
+                className="px-[8px] w-[120px] h-[38px] bg-[#ff8145] rounded-full shadow hover:scale-105 ease-out transition-[1] text-[12px] text-[#fff] flex justify-center items-center gap-[6px] leading-[20px] "
+              >
+                지도로 살펴보기
+                <Image className="w-[16px] h-[16px]" src={gps} alt="지도"></Image>
+              </button>
+            </div>
+          )}
+        </section>
       </div>
     </>
   );
