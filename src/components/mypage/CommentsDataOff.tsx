@@ -63,7 +63,7 @@ export default function CommentsDataOff() {
           </h1>
 
           <section className="w-full flex flex-col justify-center gap-[16px]">
-            {filterdDaetgles ? (
+            {filterdDaetgles?.[0] ? (
               filterdDaetgles?.map((item) => {
                 return (
                   <React.Fragment key={nanoid()}>
@@ -72,14 +72,14 @@ export default function CommentsDataOff() {
                 );
               })
             ) : (
-              <>
+              <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
                 <Image src={pencilIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
                 <span className="text-center text-neutral-400 text-base font-medium leading-normal">
                   작성한 댓글이 따로 없습니다
                   <br />
                   댓글을 작성해주세요 :)
                 </span>
-              </>
+              </section>
             )}
           </section>
         </div>
