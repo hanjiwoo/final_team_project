@@ -30,13 +30,13 @@ export default function UpButton() {
 
   return (
     showButton && (
-      <div className="fixed bottom-[100px] right-[100px] z-[100] max-sm:bottom-[20px] max-sm:right-[20px] max-lg:bottom-[50px] max-lg:right-[50px]">
+      <div className="fixed bottom-[100px] right-[100px] z-[100] max-sm:bottom-[20px] max-sm:right-[20px] max-lg:bottom-[50px] max-lg:right-[50px] ease-out duration-300">
         <button
-          className="flex flex-col items-center justify-center w-[52px] h-[52px] bg-[#fff] rounded-full shadow hover:scale-105 max-sm:w-[46px] max-sm:h-[46px]"
+          className="flex flex-col items-center justify-center w-[52px] h-[52px] bg-[#fff] rounded-full shadow hover:scale-105 max-sm:w-[46px] max-sm:h-[46px] "
           onClick={moveToTop}
           type="button"
         >
-          <Image src={up} alt="업" className="w-[25px] h-[25px]" />
+          <Image src={up} alt="위로" className="w-[25px] h-[25px]" />
         </button>
       </div>
     )

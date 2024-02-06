@@ -5,7 +5,7 @@ import { auth } from "@/shared/firebase";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
-import { login, logout } from "@/redux/modules/loginSlice";
+import { login, loginKakao, logout } from "@/redux/modules/loginSlice";
 import Image from "next/image";
 import moeumLogo from "../../app/assets/images/moeumLogo.png";
 import { useRouter } from "next/navigation";
@@ -17,11 +17,12 @@ import about from "../../app/assets/images/menu/store.png";
 import my from "../../app/assets/images/menu/my.png";
 import profileImage from "../../app/assets/images/icon/profile.png";
 import right from "../../app/assets/images/icon/right.png";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
-  const { isLogin, uid, email, photoURL, displayName } = useSelector((state: RootState) => state.login);
-  // console.log(isLogin, uid, email, photoURL, " 일단 잘들어오냐?");
+  const { isLogin, uid, email, photoURL, displayName, isKakao } = useSelector((state: RootState) => state.login);
+  const { data: session } = useSession();
   const dispatch = useDispatch();
   // 로그인 상태 확인 테스트 버튼 함수
   const checkLoginStatus = () => {
@@ -33,34 +34,47 @@ const Navbar = () => {
       console.log("로그인되어 있지 않습니다.");
     }
   };
-
+  // console.log(session, "세션을 보아용");
+  useEffect(() => {
+    if (session) {
+      dispatch(loginKakao(session.user));
+    }
+  }, [session]);
   // 로그아웃 버튼 함수
   const handleSignOut = () => {
     // Firebase Authentication을 사용하여 로그아웃 수행
     dispatch(logout("한지우가 다녀감 ㅋㅋ"));
-    auth
-      .signOut()
-      .then(() => {
-        // 로그아웃 성공 시 로컬 스토리지에서 사용자 정보 삭제
-        localStorage.removeItem("user");
-        // alert("로그아웃 성공");
-        toast.success(`로그아웃 성공`, {
-          transition: Slide,
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored"
-        });
-        router.replace("/");
-      })
+    if (!isKakao) {
+      auth
+        .signOut()
+        .then(() => {
+          // 로그아웃 성공 시 로컬 스토리지에서 사용자 정보 삭제
+          localStorage.removeItem("user");
+          // alert("로그아웃 성공");
+          toast.success(`로그아웃 성공`, {
+            transition: Slide,
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+          });
+          router.replace("/");
+        })
 
-      .catch((error) => {
-        console.error("로그아웃 실패:", error);
+        .catch((error) => {
+          console.error("로그아웃 실패:", error);
+        });
+    }
+    if (isKakao) {
+      signOut().then(() => {
+        toast.success("로그아웃 성공");
+        router.replace("/");
       });
+    }
   };
   useEffect(() => {
     if (window && localStorage.getItem("uid")) {
@@ -202,7 +216,7 @@ const Navbar = () => {
       </div>
 
       {/* mobile menu items */}
-      <div className="absolute z-[100] bg-[#fff] w-full">
+      <div className="absolute z-[100] bg-[#fff] w-full shadow-xl">
         <div className={`md:hidden ${!menuToggle ? "hidden" : ""}`}>
           <div className="flex h-[80px] justify-between items-center px-[20px] py-[17px] border-[#D6D6D6] mb-[8px]">
             <div className="flex justify-center items-center gap-[12px]">

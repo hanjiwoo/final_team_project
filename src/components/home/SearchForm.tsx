@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import moeumLoading from "../../../src/app/assets/images/moeumLoading.gif";
 import { useQuery } from "@tanstack/react-query";
 import { getGoodShop } from "./QueryFn";
+import { useSession } from "next-auth/react";
 
 export default function SearchForm() {
   const dispatch = useDispatch();
@@ -51,19 +52,9 @@ export default function SearchForm() {
   });
 
   // useEffect(() => {
-  //   let data = getGoodShop().then((res: typeOfShop[]) => {
-  //     const filteredRes = res.filter((shop) => {
-  //       return (
-  //         shop.업종.slice(0, 2) !== "기타" &&
-  //         shop.업종.slice(0, 2) !== "이미" &&
-  //         shop.업종.slice(0, 2) !== "목욕" &&
-  //         shop.업종.slice(0, 2) !== "세탁"
-  //       );
-  //     });
-  //     dispatch(getAllShops(filteredRes));
-  //   });
-  //   // setshops(data)
-  //   // console.log(datas, "데이타스");
+  // const { data: session } = useSession();
+  // const userEmail = session?.user?.email || "";
+  // console.log(userEmail, "들어있나?");
   // }, []);
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (!sido || !sigoon || !upzong) {

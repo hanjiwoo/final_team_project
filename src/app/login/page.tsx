@@ -19,14 +19,17 @@ import KakaoLogo from "../assets/images/icon/kakaotalk.png";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/redux/modules/loginSlice";
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders } from "next-auth/react";
 
 import { toast, ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Login() {
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API}&redirect_uri=http://localhost:3000/login&response_type=code`;
-
+  // const { data: session } = useSession();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [displayName, setDisplayName] = useState<string | null>(null);
@@ -37,7 +40,7 @@ export default function Login() {
   const dispatch = useDispatch();
   // const auth = getAuth();
   const user = auth.currentUser;
-
+  const supabaseClient = useSupabaseClient();
   // 화면 이동을 위한 useRouter()
   const router = useRouter();
 
@@ -299,11 +302,10 @@ export default function Login() {
   useEffect(() => {
     (async () => {
       const res: any = await getProviders();
-      console.log(res);
+      // console.log(res);
       setProviders(res);
     })();
   }, []);
-  // 추가된 부분
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -326,10 +328,13 @@ export default function Login() {
       redirect: true,
       callbackUrl: "/"
     });
-    console.log(`result는` + result);
+    // console.log(result, "로그인 결과");
   };
   // 추가된 부분
-
+  const logoutHandle = async () => {
+    const res = await signOut();
+    console.log(res, "결과");
+  };
   return (
     <div className="flex justify-center items-center w-full my-[60px] bg-[#fff]">
       <div className="w-[360px]">
@@ -424,6 +429,20 @@ export default function Login() {
               <Image src={KakaoLogo} alt="KakaoLogo" className="w-[20px] h-[20px]" />
               카카오로 로그인
             </div>
+            {/* <button className="bg-red-500" onClick={logoutHandle}>
+              로그아웃{" "}
+            </button> */}
+            {/* <div className="h-full flex justify-center items-center">
+              <Auth
+                supabaseClient={supabaseClient}
+                appearance={{
+                  theme: ThemeSupa,
+                  style: { container: { width: "300px" } }
+                }}
+                providers={["kakao"]}
+                localization={{}}
+              />
+            </div> */}
           </div>
         </div>
       </div>

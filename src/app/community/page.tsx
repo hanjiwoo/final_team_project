@@ -71,7 +71,7 @@ export default function ListPage() {
       return getPosts();
     }
   });
-  const [postsArray, setPostArray] = useState<Post[] | undefined>(posts);
+  const [postsArray, setPostArray] = useState<Post[] | undefined>();
   const { data: hearts } = useQuery({
     queryKey: [`hearts`],
     queryFn: getHearts
