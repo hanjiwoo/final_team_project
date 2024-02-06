@@ -103,9 +103,9 @@ export default function ShopList() {
           )}
         </section>
         {/* 모바일 맵으로보기 */}
-        {/* <section className=" max-sm:block sm:hidden">
+        <section className=" max-sm:block sm:hidden">
           {shops[0] && (
-            <div className="fixed z-[200] left-1/2 bottom-[30px] transform -translate-x-1/2">
+            <div className="fixed z-[200] left-1/2 bottom-[20px] transform -translate-x-1/2">
               <button
                 onClick={moveToFullMap}
                 className="px-[8px] w-[120px] h-[38px] bg-[#ff8145] rounded-full shadow hover:scale-105 ease-out transition-[1] text-[12px] text-[#fff] flex justify-center items-center gap-[6px] leading-[20px] "
@@ -115,7 +115,7 @@ export default function ShopList() {
               </button>
             </div>
           )}
-        </section> */}
+        </section>
       </div>
     </>
   );
