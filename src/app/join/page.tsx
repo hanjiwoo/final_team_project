@@ -198,7 +198,7 @@ export default function Join() {
       await updateProfile(user, {
         displayName: displayName,
         photoURL:
-          "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2Ff7%2F0d%2F31%2Ff70d312cf5bb9e9daaf7ef8a81a5d22d.jpg&type=a340"
+          "https://firebasestorage.googleapis.com/v0/b/final-team-project-7f44d.appspot.com/o/Favicon_32_32.png?alt=media&token=ad812272-8f64-44d2-b230-89badd14baa5"
       });
 
       console.log("회원가입 완료");
