@@ -103,7 +103,13 @@ export default function CommunityDetail() {
               {foundPost?.photos?.map((photo) => {
                 return (
                   <div key={nanoid()} className="h-[320px] flex justify-center items-center mt-[16px]">
-                    <img className=" h-[320px] object-cover bg-contain" src={photo} />
+                    <Image
+                      width={300}
+                      height={300}
+                      className=" h-[320px] object-cover bg-contain"
+                      src={photo}
+                      alt="포스트사진"
+                    />
                   </div>
                 );
               })}
