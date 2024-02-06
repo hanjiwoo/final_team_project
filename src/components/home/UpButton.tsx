@@ -36,7 +36,7 @@ export default function UpButton() {
           onClick={moveToTop}
           type="button"
         >
-          <Image src={up} alt="업" className="w-[25px] h-[25px]" />
+          <Image src={up} alt="위로" className="w-[25px] h-[25px]" />
         </button>
       </div>
     )
