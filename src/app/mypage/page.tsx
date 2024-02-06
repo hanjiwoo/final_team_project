@@ -12,12 +12,12 @@ import { logout } from "@/redux/modules/loginSlice";
 import { toast, ToastContainer, Slide } from "react-toastify";
 import basicProfileImage from "../../../public/Favicon_32_32.png";
 import "react-toastify/dist/ReactToastify.css";
-
+import kakao from "../assets/images/icon/kakao.png";
 export default function Mypage() {
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.login);
-  const { displayName, email, uid, photoURL, isLogin } = user;
+  const { displayName, email, uid, photoURL, isLogin, isKakao } = user;
   // 화면 이동을 위한 useRouter()
   const router = useRouter();
 
@@ -90,12 +90,17 @@ export default function Mypage() {
             )}
             <span className="text-[20px] leading-[36px] text-[#212121] max-sm:text-[14px]">{displayName}</span>
           </div>
-          <div
-            className="w-[auto] h-[48px] text-[#fff] bg-[#FF8145] pt-[8px] pr-[16px] pb-[8px] pl-[16px] text-[14px] font-medium rounded-[8px] leading-[20px] cursor-pointer flex justify-center items-center"
-            onClick={handleClickProfileEdit}
-          >
-            프로필 수정
-          </div>
+
+          {isKakao ? (
+            <Image src={kakao} alt="카카오" width={48}></Image>
+          ) : (
+            <div
+              className="w-[auto] h-[48px] text-[#fff] bg-[#FF8145] pt-[8px] pr-[16px] pb-[8px] pl-[16px] text-[14px] font-medium rounded-[8px] leading-[20px] cursor-pointer flex justify-center items-center"
+              onClick={handleClickProfileEdit}
+            >
+              프로필 수정
+            </div>
+          )}
         </div>
         <div>
           <h2 className="mb-[24px] text-[#212121] font-semibold text-[20px] max-sm:text-[16px] max-sm:leading-[24px]">

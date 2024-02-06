@@ -72,7 +72,7 @@ export default function StoreDataOff() {
           <span className="text-[14px] leading-[20px] text-[#7A7A7A]">매장 모음</span>
         </div>
         <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px]">매장 모음</h1>
-        {!myShops && (
+        {!myShops?.[0] && (
           <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
             <Image src={storeMainIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
             <span className="text-center text-neutral-400 text-base font-medium leading-normal">
