@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/config/configStore";
+import { toast } from "react-toastify";
 export default function Ddabong({ name, shopId, type }: { name?: string; shopId: string | string[]; type: string }) {
   // const fakeUser = {
   // 	isLogin: true,
@@ -84,7 +85,7 @@ export default function Ddabong({ name, shopId, type }: { name?: string; shopId:
   const ThumbUpHandler = () => {
     if (type === "small") return;
     if (disable) return;
-    if (!isLogin) return alert("로그인 후에 이용이 가능합니다.");
+    if (!isLogin) return toast.error("로그인 후에 이용이 가능합니다.");
     // setLIke(!like);
 
     if (filterdThumb) {
