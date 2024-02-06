@@ -53,7 +53,13 @@ export default function PhotoOfShop({ shop, type }: { shop: typeOfShop; type?: s
       } h-[252px] flex justify-center items-center bg-[#FFF2EC] rounded-[12px] mb-[20px] overflow-hidden`}
     >
       {foundIMG?.src ? (
-        <img src={foundIMG.src} className="h-full w-full object-cover bg-cover " />
+        <Image
+          src={foundIMG.src}
+          alt="크롤링한사진"
+          width={200}
+          height={200}
+          className="h-full w-full object-cover bg-cover "
+        />
       ) : (
         <Image
           src={이미지}
