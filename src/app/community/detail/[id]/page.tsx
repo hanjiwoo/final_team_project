@@ -44,7 +44,7 @@ export default function CommunityDetail() {
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full h-full">
-        <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
+        <Image width={300} height={300} src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
       </div>
     );
   return (
@@ -83,7 +83,7 @@ export default function CommunityDetail() {
                 {foundPost?.profile ? (
                   <img src={foundPost?.profile} className="w-full h-full rounded-full" alt="사람 이미지" />
                 ) : (
-                  <Image className="w-full h-full shrink-0" src={userIcon} alt="profile" />
+                  <Image width={100} height={100} className="w-full h-full shrink-0" src={userIcon} alt="profile" />
                 )}
               </div>
 
@@ -103,7 +103,13 @@ export default function CommunityDetail() {
               {foundPost?.photos?.map((photo) => {
                 return (
                   <div key={nanoid()} className="h-[320px] flex justify-center items-center mt-[16px]">
-                    <img className=" h-[320px] object-cover bg-contain" src={photo} />
+                    <Image
+                      width={300}
+                      height={300}
+                      className=" h-[320px] object-cover bg-contain"
+                      src={photo}
+                      alt="포스트사진"
+                    />
                   </div>
                 );
               })}

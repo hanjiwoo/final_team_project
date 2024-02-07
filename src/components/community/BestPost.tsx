@@ -17,13 +17,21 @@ export default function BestPost({ post }: { post: Post }) {
       <div className="flex flex-col gap-[8px]">
         <div className="w-[344px] h-[252px] object-cover bg-cover flex justify-center items-center">
           {post.photos?.[0] ? (
-            <img
+            <Image
               src={post.photos?.[0]}
+              width={300}
+              height={300}
               alt="bestImage"
               className="w-full h-full object-cover bg-cover rounded-[12px]"
             />
           ) : (
-            <Image className="w-full h-full object-cover bg-cover rounded-[12px]" src={mockImage} alt="profile" />
+            <Image
+              width={100}
+              height={100}
+              className="w-full h-full object-cover bg-cover rounded-[12px]"
+              src={mockImage}
+              alt="profile"
+            />
           )}
         </div>
         <div className="flex flex-col gap-[8px]">

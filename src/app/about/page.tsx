@@ -31,7 +31,7 @@ export default function AboutPage() {
             </span>
           </div>
           <div className="flex justify-center items-center">
-            <Image src={whatMoeum} alt="whatMoeum" className="w-[754px]" />
+            <Image width={700} height={700} src={whatMoeum} alt="whatMoeum" className="w-[754px]" />
           </div>
         </div>
       </section>
@@ -47,7 +47,7 @@ export default function AboutPage() {
             </span>
           </div>
           <div className="flex justify-center items-center">
-            <Image src={moeumCriteria} alt="moeumCriteria" className="w-[754px]" />
+            <Image width={700} height={700} src={moeumCriteria} alt="moeumCriteria" className="w-[754px]" />
           </div>
         </div>
       </section>
@@ -65,20 +65,20 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col justify-center items-center gap-[120px] max-sm:gap-[80px]">
             <div className="flex justify-center items-center flex-row-reverse gap-[80px] max-sm:gap-[24px] max-sm:flex-col">
-              <Image src={moeumDisplayInfor1} alt="moeumDisplayInfor1" className="w-[360px]" />
-              <Image src={moeumDisplay1} alt="moeumDisplay1" className="w-[600px]" />
+              <Image width={400} height={400} src={moeumDisplayInfor1} alt="moeumDisplayInfor1" className="w-[360px]" />
+              <Image width={700} height={700} src={moeumDisplay1} alt="moeumDisplay1" className="w-[600px]" />
             </div>
             <div className="flex justify-center items-center gap-[80px] max-sm:gap-[24px] max-sm:flex-col">
-              <Image src={moeumDisplay2} alt="moeumDisplay2" className="w-[360px]" />
-              <Image src={moeumDisplayInfor2} alt="moeumDisplayInfor2" className="w-[600px]" />
+              <Image width={400} height={400} src={moeumDisplay2} alt="moeumDisplay2" className="w-[360px]" />
+              <Image width={700} height={700} src={moeumDisplayInfor2} alt="moeumDisplayInfor2" className="w-[600px]" />
             </div>
             <div className="flex justify-center items-center flex-row-reverse gap-[80px] max-sm:gap-[24px] max-sm:flex-col">
-              <Image src={moeumDisplayInfor3} alt="moeumDisplayInfor3" className="w-[360px]" />
-              <Image src={moeumDisplay3} alt="moeumDisplay3" className="w-[600px]" />
+              <Image width={400} height={400} src={moeumDisplayInfor3} alt="moeumDisplayInfor3" className="w-[360px]" />
+              <Image width={700} height={700} src={moeumDisplay3} alt="moeumDisplay3" className="w-[600px]" />
             </div>
             <div className="flex justify-center items-center gap-[80px] max-sm:gap-[24px] max-sm:flex-col">
-              <Image src={moeumDisplay4} alt="moeumDisplay4" className="w-[360px]" />
-              <Image src={moeumDisplayInfor4} alt="moeumDisplayInfor4" className="w-[600px]" />
+              <Image width={400} height={400} src={moeumDisplay4} alt="moeumDisplay4" className="w-[360px]" />
+              <Image width={700} height={700} src={moeumDisplayInfor4} alt="moeumDisplayInfor4" className="w-[600px]" />
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function AboutPage() {
             모음 시작하기
           </button>
           <div className="flex justify-center items-center">
-            <Image src={moeumDevice} alt="moeumDevice" className="w-[698px]" />
+            <Image width={700} height={700} src={moeumDevice} alt="moeumDevice" className="w-[698px]" />
           </div>
         </div>
       </section>

@@ -48,7 +48,7 @@ export default function ShopCard({ shop, shops, type }: { shop: typeOfShop; shop
             {shop.업종}
           </div> */}
           <div className="flex gap-1 text-[12px] text-[#5C5C5C] mb-1 items-center">
-            <Image src={place} alt="위치" className="w-[20px] h-[20px]" />
+            <Image width={100} height={100} src={place} alt="위치" className="w-[20px] h-[20px]" />
             {shop.주소}
           </div>
           {/* </div> */}

@@ -125,7 +125,13 @@ const Navbar = () => {
                   router.push("/");
                 }}
               >
-                <Image src={moeumLogo} alt="logo" className="w-[72px] h-[24px] cursor-pointer" />
+                <Image
+                  width={300}
+                  height={300}
+                  src={moeumLogo}
+                  alt="logo"
+                  className="w-[72px] h-[24px] cursor-pointer"
+                />
               </div>
             </div>
           </div>
@@ -232,7 +238,13 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <Image src={profileImage} alt="more" className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px]" />
+                  <Image
+                    width={100}
+                    height={100}
+                    src={profileImage}
+                    alt="more"
+                    className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px]"
+                  />
                   <div className="text-[18px] leading-[36px]">로그인 후 이용해 주세요.</div>
                   <div
                     className=""
@@ -243,6 +255,8 @@ const Navbar = () => {
                   >
                     {/* <Image src={right} alt="more" className="w-[24px] h-[24px] max-sm:w-[24px] max-sm:h-[24px]" /> */}
                     <Image
+                      width={100}
+                      height={100}
                       src={right}
                       alt="more"
                       className="w-[20px] h-[20px] cursor-pointer max-sm:w-[16px] max-sm:h-[16px]"
@@ -256,21 +270,21 @@ const Navbar = () => {
             onClick={aboutBtn}
             className="cursor-pointer flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]"
           >
-            <Image className="w-[24px] h-[24px]" src={about} alt="소개"></Image>
+            <Image width={100} height={100} className="w-[24px] h-[24px]" src={about} alt="소개"></Image>
             <div className="ml-2 text-[16px]">모음소개</div>
           </div>
           <div
             onClick={mapBtn}
             className="cursor-pointer flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]"
           >
-            <Image className="w-[24px] h-[24px]" src={map} alt="지도"></Image>
+            <Image width={100} height={100} className="w-[24px] h-[24px]" src={map} alt="지도"></Image>
             <div className="ml-2 text-[16px]">지도모음</div>
           </div>
           <div
             onClick={communityBtn}
             className="cursor-pointer flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]"
           >
-            <Image className="w-[24px] h-[24px]" src={community} alt="커뮤"></Image>
+            <Image width={100} height={100} className="w-[24px] h-[24px]" src={community} alt="커뮤"></Image>
             <div className="ml-2 text-[16px]">커뮤니티</div>
           </div>
           {uid ? (
@@ -279,7 +293,7 @@ const Navbar = () => {
                 onClick={mypageBtn}
                 className="cursor-pointer flex items-center h-[55px] py-2 px-4 text-sm hover:bg-[#FFF2EC]"
               >
-                <Image className="w-[24px] h-[24px]" src={my} alt="마이"></Image>
+                <Image width={100} height={100} className="w-[24px] h-[24px]" src={my} alt="마이"></Image>
                 <div className="ml-2 text-[16px]">마이모음</div>
               </div>
             </>

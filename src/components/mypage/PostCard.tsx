@@ -41,13 +41,21 @@ export default function PostCard({ post }: { post: Post }) {
               {/* 사진컨테이너 */}
               <div className="w-[100px] h-[100px] bg-[#F1F1F1] rounded-[8px] max-sm:w-[80px] max-sm:h-[80px]">
                 {post.photos?.[0] ? (
-                  <img
+                  <Image
+                    width={100}
+                    height={100}
                     className="w-full h-full object-cover bg-cover max-sm:w-[80px] max-sm:h-[80px] rounded-[8px]"
                     src={post.photos?.[0]}
                     alt="되나?"
                   />
                 ) : (
-                  <Image className="w-full h-full rounded-[8px]" src={mockImage} alt="profile" />
+                  <Image
+                    width={100}
+                    height={100}
+                    className="w-full h-full rounded-[8px]"
+                    src={mockImage}
+                    alt="profile"
+                  />
                 )}
               </div>
             </div>

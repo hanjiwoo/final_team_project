@@ -6,7 +6,13 @@ module.exports = nextConfig;
 
 module.exports = {
   images: {
-    domains: ["lh3.googleusercontent.com", "firebasestorage.googleapis.com", "your-image-domain.com"]
+    domains: [
+      "lh3.googleusercontent.com",
+      "firebasestorage.googleapis.com",
+      "your-image-domain.com",
+      "maps.googleapis.com",
+      "search.pstatic.net"
+    ]
   },
   experimental: {
     reactRoot: true
@@ -29,3 +35,11 @@ module.exports = {
 //     ignoreBuildErrors: true,
 //   },
 // }
+// images: {
+//   domains: ['search.pstatic.net'],
+// },
+// module.exports = {
+//   images: {
+//     domains: ["maps.googleapis.com"]
+//   }
+// };

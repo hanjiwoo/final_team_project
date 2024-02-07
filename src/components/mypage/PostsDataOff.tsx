@@ -47,7 +47,7 @@ export default function PostDataOff() {
           >
             마이 모음
           </span>
-          <Image src={right} alt="right" className="w-[18px] h-[18px]" />
+          <Image width={100} height={100} src={right} alt="right" className="w-[18px] h-[18px]" />
           <span className="text-[14px] leading-[20px] text-[#7A7A7A]">게시물 모음</span>
         </div>
         <h1 className="text-[28px] font-semibold text-[#212121] leading-[36px] mb-[60px] max-sm:mb-[32px]">
@@ -55,7 +55,7 @@ export default function PostDataOff() {
         </h1>
         {!myPosts?.[0] && (
           <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
-            <Image src={postIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
+            <Image width={100} height={100} src={postIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
             <span className="text-center text-neutral-400 text-base font-medium leading-normal">
               작성한 게시글이 따로 없습니다
               <br />

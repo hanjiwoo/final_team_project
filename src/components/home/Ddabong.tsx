@@ -112,9 +112,16 @@ export default function Ddabong({ name, shopId, type }: { name?: string; shopId:
           onClick={ThumbUpHandler}
         >
           {filterdThumb ? (
-            <Image className="w-full h-full" id="이미지" src={fullheart} alt="빨간따봉"></Image>
+            <Image
+              width={100}
+              height={100}
+              className="w-full h-full"
+              id="이미지"
+              src={fullheart}
+              alt="빨간따봉"
+            ></Image>
           ) : (
-            <Image className="w-full h-full" id="이미지" src={emptyheart} alt="빈따봉"></Image>
+            <Image width={100} height={100} className="w-full h-full" id="이미지" src={emptyheart} alt="빈따봉"></Image>
           )}
         </div>
         <div className="text-red-500 text-sm text-center">{filteredThunmbs?.length}</div>

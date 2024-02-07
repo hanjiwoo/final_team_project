@@ -99,28 +99,28 @@ export default function Shopinfo() {
       <div className=" flex-col w-full justify-center gap-4 flex">
         <div className="items-center gap-[16px] flex">
           <div className="items-center gap-2 flex justify-center">
-            <Image className="w-6 h-6" src={spoon} alt="숟가락"></Image>
+            <Image width={100} height={100} className="w-6 h-6" src={spoon} alt="숟가락"></Image>
             <div className=" text-neutral-800 text-base font-semibold">업종</div>
           </div>
           <div className=" text-zinc-600 text-base font-medium">{shop?.업종}</div>
         </div>
         <div className="items-center gap-[16px] flex max-sm:items-start">
           <div className="items-center gap-2 flex justify-center">
-            <Image className="w-6 h-6" src={place} alt="위치"></Image>
+            <Image width={100} height={100} className="w-6 h-6" src={place} alt="위치"></Image>
             <div className=" text-neutral-800 text-base font-semibold max-sm:w-[35px]">위치</div>
           </div>
           <div className=" text-zinc-600 text-base font-medium">{shop?.주소}</div>
         </div>
         <div className="items-center gap-[16px] flex">
           <div className="items-center gap-2 flex justify-center">
-            <Image className="w-6 h-6" src={phone} alt="번호"></Image>
+            <Image width={100} height={100} className="w-6 h-6" src={phone} alt="번호"></Image>
             <div className="text-neutral-800 text-base font-semibold">전화번호</div>
           </div>
           <div className=" text-zinc-600 text-base font-medium">{shop?.연락처}</div>
         </div>
         <div className="items-start gap-[16px] flex">
           <div className="items-center gap-2 flex justify-center">
-            <Image className="w-6 h-6" src={menu} alt="메뉴"></Image>
+            <Image width={100} height={100} className="w-6 h-6" src={menu} alt="메뉴"></Image>
             <div className="text-neutral-800 text-base font-semibold">주요메뉴</div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-2 ">
@@ -136,7 +136,7 @@ export default function Shopinfo() {
         </div>
         <div className="items-start gap-[16px] flex">
           <div className="items-center gap-2 flex justify-center">
-            <Image className="w-6 h-6" src={inquiry} alt="문의하기"></Image>
+            <Image width={100} height={100} className="w-6 h-6" src={inquiry} alt="문의하기"></Image>
             <div className="text-neutral-800 text-base font-semibold">문의하기</div>
           </div>
           <div className="text-orange-400 text-base font-medium">폐업신고 및 가격변동</div>
