@@ -110,7 +110,7 @@ export default function Daetgle({ post }: { post: Post }) {
     <>
       <div className="flex justify-start w-full items-center mb-[32px]">
         <CuteHeart type="normal" postId={post?.id} />
-        <Image src={message} className="w-[18px] h-[18px] ml-[16px] mr-[6px]" alt="댓글" />
+        <Image width={100} height={100} src={message} className="w-[18px] h-[18px] ml-[16px] mr-[6px]" alt="댓글" />
         <div className="text-[#999] text-[14px] max-sm:text-[12px] justify-start items-center gap-[4px] flex">
           <div>댓글</div>
           <div>{filterdDaetgles?.length}</div>

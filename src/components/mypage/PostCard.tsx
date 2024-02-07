@@ -49,7 +49,13 @@ export default function PostCard({ post }: { post: Post }) {
                     alt="되나?"
                   />
                 ) : (
-                  <Image className="w-full h-full rounded-[8px]" src={mockImage} alt="profile" />
+                  <Image
+                    width={100}
+                    height={100}
+                    className="w-full h-full rounded-[8px]"
+                    src={mockImage}
+                    alt="profile"
+                  />
                 )}
               </div>
             </div>

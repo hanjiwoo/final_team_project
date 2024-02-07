@@ -18,6 +18,8 @@ export default function PostModal({ setModal }: { setModal: React.Dispatch<React
         <div className="flex justify-between w-full font-black top-[60px] items-center max-sm:top-0 max-sm:mb-[32px]">
           <h1 className="text-[24px] leading-[32px] font-semibold text-[#212121]">오늘 방문한 매장은 어떤가요?</h1>
           <Image
+            width={100}
+            height={100}
             src={closeBtn}
             alt="close"
             onClick={moveToBack}

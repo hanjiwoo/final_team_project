@@ -54,7 +54,7 @@ export default function CommentsDataOff() {
             >
               마이 모음
             </span>
-            <Image src={right} alt="right" className="w-[18px] h-[18px]" />
+            <Image width={100} height={100} src={right} alt="right" className="w-[18px] h-[18px]" />
             <span className="text-[14px] leading-[20px] text-[#7A7A7A]">댓글 모음</span>
           </div>
 
@@ -73,7 +73,7 @@ export default function CommentsDataOff() {
               })
             ) : (
               <section className="w-full flex flex-col justify-center items-center gap-[16px] pt-[80px] pb-[80px]">
-                <Image src={pencilIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
+                <Image width={100} height={100} src={pencilIcon} alt="mainIcon" className="w-[48px] h-[48px]" />
                 <span className="text-center text-neutral-400 text-base font-medium leading-normal">
                   작성한 댓글이 따로 없습니다
                   <br />

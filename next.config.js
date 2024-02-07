@@ -10,6 +10,7 @@ module.exports = {
       "lh3.googleusercontent.com",
       "firebasestorage.googleapis.com",
       "your-image-domain.com",
+      "maps.googleapis.com",
       "search.pstatic.net"
     ]
   },
@@ -37,3 +38,8 @@ module.exports = {
 // images: {
 //   domains: ['search.pstatic.net'],
 // },
+// module.exports = {
+//   images: {
+//     domains: ["maps.googleapis.com"]
+//   }
+// };

@@ -141,7 +141,7 @@ export default function UpdateModal({
               <CategoryBtn text="문의하기" type="" setNewPost={setNewPost} newPost={newPost} />
             </div>
           </section>
-          <form className="flex flex-col items-center justify-center gap-[32px] max-sm:w-full">
+          <section className="flex flex-col items-center justify-center gap-[32px] max-sm:w-full">
             <div className="flex gap-[10px] w-full">
               <div className="flex w-[60px] gap-[10px]">
                 <label>제목</label>
@@ -190,7 +190,7 @@ export default function UpdateModal({
                 취소하기
               </button>
             </div>
-          </form>
+          </section>
         </div>
       </div>
     </section>

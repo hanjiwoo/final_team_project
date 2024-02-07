@@ -44,7 +44,15 @@ export default function PhotoOfShop({ shop, type }: { shop: typeOfShop; type?: s
   //   console.log(foundIMG, "이것도 찍히기를");
   // }
   if (isLoading) {
-    return <>로딩중...</>;
+    return (
+      <div
+        className={`w-${
+          type === "best" ? "[344px]" : "[252px]"
+        } h-[252px] flex justify-center items-center bg-[#FFF2EC] rounded-[12px] mb-[20px] overflow-hidden`}
+      >
+        로딩중...
+      </div>
+    );
   }
   return (
     <div
@@ -56,14 +64,16 @@ export default function PhotoOfShop({ shop, type }: { shop: typeOfShop; type?: s
         <Image
           src={foundIMG.src}
           alt="크롤링한사진"
-          width={200}
-          height={200}
+          width={300}
+          height={300}
           className="h-full w-full object-cover bg-cover "
         />
       ) : (
         <Image
           src={이미지}
           alt="음식사진"
+          width={300}
+          height={300}
           className={`w-${type === "map" ? "[30px]" : "[60px]"} h-${type === "map" ? "[22px]" : "[72px]"}`}
         />
       )}

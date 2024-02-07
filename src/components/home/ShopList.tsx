@@ -49,7 +49,7 @@ export default function ShopList() {
             ) : (
               <div className="flex justify-center gap-2 font-[18px] leading-[26px]">
                 현재
-                <Image src={place} alt="위치마크" className="w-[24px] h-[24px]" />
+                <Image width={100} height={100} src={place} alt="위치마크" className="w-[24px] h-[24px]" />
                 <p className="font-bold text-[18px] leading-[26px]">
                   {shops[0]?.시도} {shops[0]?.시군}
                 </p>
@@ -97,7 +97,7 @@ export default function ShopList() {
                 className="w-[160px] h-[48px] bg-[#ff8145] rounded-full shadow hover:scale-105 ease-out transition-[1] text-[14px] text-[#fff] flex justify-center items-center gap-[12px] leading-[20px] "
               >
                 지도로 살펴보기
-                <Image className="w-[20px] h-[20px]" src={gps} alt="지도"></Image>
+                <Image width={100} height={100} className="w-[20px] h-[20px]" src={gps} alt="지도"></Image>
               </button>
             </div>
           )}
@@ -111,7 +111,7 @@ export default function ShopList() {
                 className="px-[8px] w-[120px] h-[38px] bg-[#ff8145] rounded-full shadow hover:scale-105 ease-out transition-[1] text-[12px] text-[#fff] flex justify-center items-center gap-[6px] leading-[20px] "
               >
                 지도로 살펴보기
-                <Image className="w-[16px] h-[16px]" src={gps} alt="지도"></Image>
+                <Image width={100} height={100} className="w-[16px] h-[16px]" src={gps} alt="지도"></Image>
               </button>
             </div>
           )}

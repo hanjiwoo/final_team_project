@@ -28,7 +28,7 @@ export default function DaetgleCard({ item, uid }: { item: Daetgle; uid: string 
           {item.profile ? (
             <img className="w-[32px] h-[32px] rounded-full" src={item.profile} alt="profile" />
           ) : (
-            <Image className="w-[32px] h-[32px] rounded-full" src={userIcon} alt="빈유저" />
+            <Image width={100} height={100} className="w-[32px] h-[32px] rounded-full" src={userIcon} alt="빈유저" />
           )}
           <div className="text-[12px] text-center text-[#999]">
             <p className="w-[50px] text-left">{item.nickName}</p>

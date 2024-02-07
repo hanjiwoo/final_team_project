@@ -407,7 +407,7 @@ export default function Login() {
               className="cursor-pointer  flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FFF] gap-[12px] border-solid border border-gray-300"
               onClick={handleClickGoogle}
             >
-              <Image src={GoogleLogo} alt="googleLogo" className="w-[20px] h-[20px]" />
+              <Image width={100} height={100} src={GoogleLogo} alt="googleLogo" className="w-[20px] h-[20px]" />
               구글로 시작하기
             </div>
             {/* <div className="cursor-pointer" onClick={handleClickKakao}>
@@ -426,7 +426,7 @@ export default function Login() {
               onClick={handleKakao}
               className="cursor-pointer flex justify-center w-full rounded-[8px] h-[48px] items-center text-[#212121] bg-[#FEE500] gap-[12px]"
             >
-              <Image src={KakaoLogo} alt="KakaoLogo" className="w-[20px] h-[20px]" />
+              <Image width={100} height={100} src={KakaoLogo} alt="KakaoLogo" className="w-[20px] h-[20px]" />
               카카오로 로그인
             </div>
             {/* <button className="bg-red-500" onClick={logoutHandle}>

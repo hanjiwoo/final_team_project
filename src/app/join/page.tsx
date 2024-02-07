@@ -234,7 +234,7 @@ export default function Join() {
             모두의 음식점, 모음
           </span>
         </div>
-        <form className="flex justify-center flex-col items-center mb-[40px] gap-[16px]">
+        <section className="flex justify-center flex-col items-center mb-[40px] gap-[16px]">
           <div className="flex flex-col w-full">
             <label className="test-[14px] leading-20px text-[#999]">이메일</label>
             <input
@@ -281,7 +281,7 @@ export default function Join() {
           {displayNameError && (
             <div className="text-[#FF8145] mt-[-18px] mb-[-19px] text-[14px] w-full">{displayNameError}</div>
           )}
-        </form>
+        </section>
         {/* 약관 동의 부분 */}
         <div className="flex flex-col w-full gap-[16px] mb-[32px]">
           <label className="test-[16px] text-[#212121] font-[600]">약관 동의</label>
@@ -307,6 +307,8 @@ export default function Join() {
             <div className="flex justify-between items-center w-full">
               <span className="text-[#5C5C5C]">(필수) 만 14세 이상입니다</span>
               <Image
+                width={100}
+                height={100}
                 src={rightIcon}
                 alt="nextPage"
                 className="w-[18px] h-[18px] cursor-pointer"
@@ -327,6 +329,8 @@ export default function Join() {
             <div className="flex justify-between items-center w-full">
               <span className="text-[#5C5C5C]">(필수) 이용약관 동의 </span>
               <Image
+                width={100}
+                height={100}
                 src={rightIcon}
                 alt="nextPage"
                 className="w-[18px] h-[18px] cursor-pointer"
@@ -347,6 +351,8 @@ export default function Join() {
             <div className="flex justify-between items-center w-full">
               <span className="text-[#5C5C5C]">(필수) 개인정보 수집 및 이용 동의 </span>
               <Image
+                width={100}
+                height={100}
                 src={rightIcon}
                 alt="nextPage"
                 className="w-[18px] h-[18px] cursor-pointer"
@@ -367,6 +373,8 @@ export default function Join() {
             <div className="flex justify-between items-center w-full">
               <span className="text-[#5C5C5C]">(선택) 마케팅 개인정보 제3자 제공 동의 </span>
               <Image
+                width={100}
+                height={100}
                 src={rightIcon}
                 alt="nextPage"
                 className="w-[18px] h-[18px] cursor-pointer"

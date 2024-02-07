@@ -104,6 +104,8 @@ export default function CuteHeart({ postId, type }: { postId: string | undefined
         <div onClick={HeartUpHandler}>
           {filterdheart ? (
             <Image
+              width={100}
+              height={100}
               className="w-[20px] h-[20px] max-sm:w-[16px] max-sm:h-[16px]"
               id="이미지"
               src={HeartFull}
@@ -111,6 +113,8 @@ export default function CuteHeart({ postId, type }: { postId: string | undefined
             ></Image>
           ) : (
             <Image
+              width={100}
+              height={100}
               className="w-[20px] h-[20px] max-sm:w-[16px] max-sm:h-[16px]"
               id="이미지"
               src={HeartEmpty}
