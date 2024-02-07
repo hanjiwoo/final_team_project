@@ -163,7 +163,7 @@ export default function ListPage() {
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full h-full">
-        <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
+        <Image width={300} height={300} src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
       </div>
     );
   return (
@@ -205,7 +205,7 @@ export default function ListPage() {
             <div className="w-[680px] flex justify-end">
               <button className=" flex h-[40px] px-[12px] py-[8px] justify-center items-center gap-[8px] rounded-[8px]   text-[white] bg-[#FF8145] hover:bg-[#E5743E] ">
                 <div className="w-[20px] h-[20px]">
-                  <Image src={writeImage} alt="write"></Image>
+                  <Image width={100} height={100} src={writeImage} alt="write"></Image>
                 </div>
                 <p className="text-[14px] leading-[20px] font-medium ">작성하기</p>
               </button>

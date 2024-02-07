@@ -30,7 +30,13 @@ export default function Footer() {
         </section>
         <section className="text-[32px] text-[#999] leading-normal font-bold flex md:justify-center items-center">
           {/* <span className="mt-[24px]">모음</span> */}
-          <Image src={footerMoeumLogo} alt="footerLogo" className="mt-[24px] w-[90px] h-[30px]" />
+          <Image
+            width={200}
+            height={200}
+            src={footerMoeumLogo}
+            alt="footerLogo"
+            className="mt-[24px] w-[90px] h-[30px]"
+          />
         </section>
       </div>
     </div>

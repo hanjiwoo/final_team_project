@@ -86,7 +86,7 @@ export default function DoneAssess() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center w-full h-full">
-        <Image src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
+        <Image width={300} height={300} src={moeumLoading} alt="loading" className="w-[300px] h-[300px]" />
       </div>
     );
   }
@@ -177,7 +177,7 @@ export default function DoneAssess() {
               onClick={modalOpenHandeler}
               className="bg-[#FF8145] w-[156px] h-[40px] rounded-[8px] text-[14px] text-[#fff] flex justify-center items-center gap-[8px] px-[12px] py-[8px] font-[Pretendard]"
             >
-              <Image src={pencilIcon} alt="writeReview" className="w-[20px] h-[20px]" />
+              <Image width={100} height={100} src={pencilIcon} alt="writeReview" className="w-[20px] h-[20px]" />
               리뷰 작성하기
             </button>
           </div>
@@ -187,7 +187,7 @@ export default function DoneAssess() {
             onClick={modalOpenHandeler}
             className="bg-[#FF8145] w-full h-[40px] rounded-[8px] text-[14px] text-[#fff] flex justify-center items-center gap-[8px] px-[12px] py-[8px] font-[Pretendard]"
           >
-            <Image src={pencilIcon} alt="writeReview" className="w-[20px] h-[20px]" />
+            <Image width={100} height={100} src={pencilIcon} alt="writeReview" className="w-[20px] h-[20px]" />
             리뷰 작성하기
           </button>
         </div>

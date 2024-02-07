@@ -13,6 +13,7 @@ import { toast, ToastContainer, Slide } from "react-toastify";
 import basicProfileImage from "../../../public/Favicon_32_32.png";
 import "react-toastify/dist/ReactToastify.css";
 import kakao from "../assets/images/icon/kakao.png";
+import { signOut } from "next-auth/react";
 export default function Mypage() {
   const dispatch = useDispatch();
 
@@ -39,28 +40,37 @@ export default function Mypage() {
   const handleSignOut = () => {
     // Firebase Authentication을 사용하여 로그아웃 수행
     dispatch(logout("한지우가 다녀감 ㅋㅋ"));
-    auth
-      .signOut()
-      .then(() => {
-        // 로그아웃 성공 시 로컬 스토리지에서 사용자 정보 삭제
-        localStorage.removeItem("user");
-        // alert("로그아웃 성공");
-        toast.success(`로그아웃 성공`, {
-          transition: Slide,
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored"
+    if (!isKakao) {
+      auth
+        .signOut()
+        .then(() => {
+          // 로그아웃 성공 시 로컬 스토리지에서 사용자 정보 삭제
+          localStorage.removeItem("user");
+          // alert("로그아웃 성공");
+          toast.success(`로그아웃 성공`, {
+            transition: Slide,
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+          });
+          router.replace("/");
+        })
+
+        .catch((error) => {
+          console.error("로그아웃 실패:", error);
         });
+    }
+    if (isKakao) {
+      signOut().then(() => {
+        toast.success("로그아웃 성공");
         router.replace("/");
-      })
-      .catch((error) => {
-        console.error("로그아웃 실패:", error);
       });
+    }
   };
   useEffect(() => {
     if (!isLogin) {
@@ -83,7 +93,7 @@ export default function Mypage() {
               <img
                 src={photoURL}
                 className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px] rounded-full"
-                alt="흐음"
+                alt="카카오"
               />
             ) : (
               <Image src={profileImage} alt="more" className="w-[60px] h-[60px] max-sm:w-[40px] max-sm:h-[40px]" />

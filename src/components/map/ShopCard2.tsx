@@ -86,14 +86,14 @@ export default function ShopCard2({ shop, shops, type }: { shop: typeOfShop; sho
           {/* <div className="flex justify-round gap-5"> */}
           <div className="flex flex-col gap-[8px]">
             <div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
-              <Image src={spoon_fork} alt="위치" className=" w-[18px] h-[18px]" />
+              <Image width={100} height={100} src={spoon_fork} alt="위치" className=" w-[18px] h-[18px]" />
               {shop.업종}
             </div>
             {/* <p className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
               후기 :{hoogis?.length}
             </p> */}
             <div className="flex gap-[4px] text-[14px] text-[#212121] text-semibold items-center">
-              <Image src={place} alt="스푼포크" className="w-[20px] h-[20px]" />
+              <Image width={100} height={100} src={place} alt="스푼포크" className="w-[20px] h-[20px]" />
               <span className="w-[250px] text-left block whitespace-nowrap truncate text-ellipsis">{shop.주소}</span>
             </div>
           </div>

@@ -25,7 +25,13 @@ export default function BestPost({ post }: { post: Post }) {
               className="w-full h-full object-cover bg-cover rounded-[12px]"
             />
           ) : (
-            <Image className="w-full h-full object-cover bg-cover rounded-[12px]" src={mockImage} alt="profile" />
+            <Image
+              width={100}
+              height={100}
+              className="w-full h-full object-cover bg-cover rounded-[12px]"
+              src={mockImage}
+              alt="profile"
+            />
           )}
         </div>
         <div className="flex flex-col gap-[8px]">
