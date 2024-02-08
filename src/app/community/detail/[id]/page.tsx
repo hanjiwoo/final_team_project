@@ -103,7 +103,7 @@ export default function CommunityDetail() {
               {foundPost?.photos?.map((photo) => {
                 return (
                   <div key={nanoid()} className="h-[320px] flex justify-center items-center mt-[16px]">
-                    <Image
+                    <img
                       width={300}
                       height={300}
                       className=" h-[320px] object-cover bg-contain"
