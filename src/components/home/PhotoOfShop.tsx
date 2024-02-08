@@ -11,18 +11,23 @@ import { useQuery } from "@tanstack/react-query";
 export default function PhotoOfShop({ shop, type }: { shop: typeOfShop; type?: string }) {
   const upzong = shop.업종.slice(0, 2);
   let 이미지 = 한식;
+  let 이미지주소 = "../../app/assets/images/foodIcons/Korea.png";
   switch (upzong) {
     case "한식":
       이미지 = 한식;
+      이미지주소 = "../../app/assets/images/foodIcons/Korea.png";
       break;
     case "일식":
       이미지 = 일식;
+      이미지주소 = "../../app/assets/images/foodIcons/Japan.png";
       break;
     case "중식":
       이미지 = 중식;
+      이미지주소 = "../../app/assets/images/foodIcons/China.png";
       break;
     case "양식":
       이미지 = 양식;
+      이미지주소 = "../../app/assets/images/foodIcons/USA.png";
       break;
   }
   const getImage = async () => {
@@ -54,6 +59,9 @@ export default function PhotoOfShop({ shop, type }: { shop: typeOfShop; type?: s
       </div>
     );
   }
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = 이미지주소;
+  };
   return (
     <div
       className={`w-${
@@ -61,12 +69,13 @@ export default function PhotoOfShop({ shop, type }: { shop: typeOfShop; type?: s
       } h-[252px] flex justify-center items-center bg-[#FFF2EC] rounded-[12px] mb-[20px] overflow-hidden`}
     >
       {foundIMG?.src ? (
-        <Image
+        <img
           src={foundIMG.src}
           alt="크롤링한사진"
           width={300}
           height={300}
           className="h-full w-full object-cover bg-cover "
+          onError={(e) => handleImageError(e)}
         />
       ) : (
         <Image
