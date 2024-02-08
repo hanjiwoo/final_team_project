@@ -169,7 +169,7 @@ export default function SearchForm() {
       </div>
       <section className="w-full flex justify-center items-center md:max-w-[110px]">
         <button
-          className="bg-[#FF8145] hover:bg-[#E5743E] text-[#fff] h-[48px] w-full py-[14px] px-[26px] rounded-[8px] font-[500] md:max-w-[110px] max-md:mt-[12px]"
+          className="bg-[#FF8145] hover:bg-[#E5743E] text-[#fff] h-[48px] w-full py-[14px] rounded-[8px] font-[500] md:max-w-[110px] max-md:mt-[12px]"
           onClick={onClickHandler}
         >
           검색하기
